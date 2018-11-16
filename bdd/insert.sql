@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`users` (
   `email` VARCHAR(45) NOT NULL,
   `phone` TINYINT(10) NULL,
   `photo` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(20) NOT NULL,
+  `password` VARCHAR(256) NOT NULL,
   `status` ENUM('company', 'employee') NOT NULL,
   `job` VARCHAR(45) NULL,
   `company` VARCHAR(45) NULL,
