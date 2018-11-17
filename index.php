@@ -1,15 +1,24 @@
 <?php
 session_start();
 require('controller/controller.php');
+if (isset($_SESSION['name'])) {
+    if (isset($_GET['action'])) {
+        switch ($_GET['action']) {
+            case 'connect':
+                login($_POST['nom'], $_POST['prenom']);
+                break;
 
-
-switch ($_GET['action']) {
-    case 'connect':
-        login($_POST['nom'], $_POST['prenom']);
-        break;
-
-    case 'disconnect':
-        disconnect();
-        break;
+            case 'disconnect':
+                disconnect();
+                break;
+            case 'home':
+                home($_SESSION['id']);
+                break;
+        }
+    } else {
+        header('Location:index.php?action=home');
+    } 
+} else {
+    require('view/connectView.php');
 }
 ?>
