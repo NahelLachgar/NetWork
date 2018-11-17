@@ -1,5 +1,6 @@
 <?php
 session_start();
+$db = dbConnect();
 require('controller/controller.php');
 if (isset($_SESSION['name'])) {
     if (isset($_GET['action'])) {
@@ -19,6 +20,9 @@ if (isset($_SESSION['name'])) {
         header('Location:index.php?action=home');
     } 
 } else {
-    require('view/connectView.php');
+    //require('view/connectView.php');
+    $_SESSION['name'] = "Nahel";
+    $_SESSION['lastname'] = "Lachgar";
+    $_SESSION['id'] = "1";
 }
 ?>

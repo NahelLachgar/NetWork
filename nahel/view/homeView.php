@@ -35,9 +35,8 @@ ob_start();
                 <div class="card">
                     <div class="card-body">
                         <div class="h5"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">
-						Nahel Lachgar</div>
-                        <div class="h7"> Developer of web applications, JavaScript, PHP, Java, Python, Ruby, Java, Node.js,
-                            etc.
+						<?=$_SESSION['name'].' '.$_SESSION['lastname']?></div>
+                        <div class="h7">EMPLOI ENTREPRISE
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">
@@ -257,28 +256,7 @@ ob_start();
 
 
             </div>
-            <div class="col-md-3">
-                <div class="card gedf-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                </div>
-                <div class="card gedf-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                card's content.</p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
-                    </div>
-            </div>
+            <
         </div>
     </div>
     <?php 
