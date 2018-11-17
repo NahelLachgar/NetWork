@@ -1,6 +1,5 @@
 <?php
 session_start();
-$db = dbConnect();
 require('controller/controller.php');
 if (isset($_SESSION['name'])) {
     if (isset($_GET['action'])) {
@@ -8,7 +7,6 @@ if (isset($_SESSION['name'])) {
             case 'connect':
                 login($_POST['nom'], $_POST['prenom']);
                 break;
-
             case 'disconnect':
                 disconnect();
                 break;

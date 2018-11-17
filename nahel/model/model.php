@@ -11,6 +11,8 @@ function dbConnect()
 }
 function getProfile($userId)
 {
+    $db = dbConnect();
+
     $profile = $db->prepare('SELECT * FROM users WHERE id =');
     $profile->execute(array($userId));
     return $profile;
@@ -18,6 +20,8 @@ function getProfile($userId)
 
 function getContacts($userId)
 {
+    $db = dbConnect();
+
     $contactsId = $db->prepare('SELECT user AS id FROM contacts WHERE contact LIKE :id 
             UNION
             SELECT contact AS id FROM contacts WHERE user LIKE :id');
@@ -28,6 +32,8 @@ function getContacts($userId)
 }
 function getContactPosts($userId)
 {
+    $db = dbConnect();
+
     $contactsFetch = getContacts($userId);
     $posts = $db->prepare('SELECT p.*,u.lastname AS lastname,u.name AS name FROM users u 
     JOIN post ON u.id = post.user
@@ -39,6 +45,7 @@ function getContactPosts($userId)
 
 function getEmployeeSuggests($userId)
 {
+    $db = dbConnect();
     $contactsFetch = getContacts($userId);
     $employeeSuggests = $db->prepare('SELECT u.lastName AS lastName, u.name AS name FROM contacts c
         JOIN users u ON u.id = c.user
@@ -46,11 +53,12 @@ function getEmployeeSuggests($userId)
         UNION 
         JOIN users u ON u.id = c.user
         WHERE c.user LIKE :id AND u.status LIKE "employee"');
-
     $employeeSuggests->execute(array("id"=>$contactsFetch['id']));
+    return $employeeSuggests; 
 }
 
 function getCompanySuggests($userId) {
+    $db = dbConnect();
     $contactsFetch = getContacts($userId);
     $companySuggests = $db->prepare('SELECT u.name AS name FROM contacts c
         JOIN users u ON u.id = c.user
@@ -58,22 +66,24 @@ function getCompanySuggests($userId) {
         UNION 
         JOIN users u ON u.id = c.user
         WHERE c.user LIKE :id AND u.status LIKE "company"');
-
-$companySuggests->execute(array("id"=>$contactsFetch['id']));
+        $companySuggests->execute(array("id"=>$contactsFetch['id']));
+        return  $companySuggests;
 }
 
 function getContactsCount($userId) {
+    $db = dbConnect();
     $contactCounts = $db->prepare('SELECT COUNT(*) FROM contacts
      JOIN users ON contacts.user = users.id 
-     WHERE users.status LIKE employee AND user=:id OR contact=:id
+     WHERE users.status LIKE "employee" AND user=:id OR contact=:id
     ');
     $contactCount->execute(array($userId));
     return $contactsCount;
 } 
 function getFollowedCompaniesCount($userId) {
+    $db = dbConnect();
     $FollowedCompaniesCount = $db->prepare('SELECT COUNT(*) FROM contacts
      JOIN users ON contacts.user = users.id 
-     WHERE users.status LIKE company AND user=:id OR contact=:id
+     WHERE users.status LIKE "company" AND user=:id OR contact=:id
     ');
     $FollowedCompaniesCount->execute(array($userId));
     return $FollowedCompaniesCount;
