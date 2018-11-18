@@ -13,8 +13,9 @@ function getProfile($userId)
 {
     $db = dbConnect();
 
-    $profile = $db->prepare('SELECT * FROM users WHERE id =');
+    $profile = $db->prepare('SELECT * FROM users WHERE id =?');
     $profile->execute(array($userId));
+   // $profileFetch = $profile->fetch();
     return $profile;
 }
 
@@ -25,7 +26,7 @@ function getContacts($userId)
     $contactsId = $db->prepare('SELECT user AS id FROM contacts WHERE contact LIKE :id 
             UNION
             SELECT contact AS id FROM contacts WHERE user LIKE :id');
-    $contactsId > execute(array(
+    $contactsId -> execute(array(
         "id" => $userId
     ));
     $contactsFetch = $contactsId->fetch();
@@ -72,20 +73,26 @@ function getCompanySuggests($userId) {
 
 function getContactsCount($userId) {
     $db = dbConnect();
-    $contactCounts = $db->prepare('SELECT COUNT(*) FROM contacts
-     JOIN users ON contacts.user = users.id 
-     WHERE users.status LIKE "employee" AND user=:id OR contact=:id
-    ');
-    $contactCount->execute(array($userId));
-    return $contactsCount;
+    $contactsCount = $db->prepare('SELECT COUNT(*) AS nbContacts FROM contacts 
+    JOIN users ON contacts.user = users.id 
+    WHERE users.status LIKE "employee" AND contact=:id
+    UNION 
+    SELECT COUNT(*) AS nbContacts 
+    FROM contacts 
+    JOIN users ON contacts.contact = users.id WHERE users.status LIKE "employee" AND user=:id
+');
+    $contactsCount->execute(array("id"=>$userId));
+    $contactsFetch = $contactsCount->fetch();
+    return $contactsFetch;
 } 
 function getFollowedCompaniesCount($userId) {
     $db = dbConnect();
-    $FollowedCompaniesCount = $db->prepare('SELECT COUNT(*) FROM contacts
+    $followedCompaniesCount = $db->prepare('SELECT COUNT(*) FROM contacts
      JOIN users ON contacts.user = users.id 
      WHERE users.status LIKE "company" AND user=:id OR contact=:id
     ');
-    $FollowedCompaniesCount->execute(array($userId));
-    return $FollowedCompaniesCount;
+    $followedCompaniesCount->execute(array("id"=>$userId));
+    $followedCompaniesFetch = $followedCompaniesCount ->fetch();
+    return $followedCompaniesFetch;
 } 
 ?>

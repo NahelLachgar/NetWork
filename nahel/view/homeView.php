@@ -15,7 +15,7 @@ ob_start();
         crossorigin="anonymous"></script>
         
 <nav class="navbar navbar-light bg-bleu">
-        <a href="#" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
+        <a href="index.php?action=home" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
         <form class="form-inline">
             <div class="input-group">
                 <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -35,18 +35,22 @@ ob_start();
                 <div class="card">
                     <div class="card-body">
                         <div class="h5"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">
-						<?=$_SESSION['name'].' '.$_SESSION['lastname']?></div>
-                        <div class="h7">EMPLOI ENTREPRISE
+						abc</div>
+                        <div class="h7"><?php while ($profileFetch = $profile->fetch()) {
+                            echo ($profileFetch['job'].' à '.$profileFetch['company']);
+                        }
+                        ?>
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="h6 text-muted">Entreprises suivies</div>
-                            <div class="h5">5.2342</div>
+                            <div class="h5"><?=$followedCompaniesNb['nbContacts']?></div>
                         </li>
                         <li class="list-group-item">
                             <div class="h6 text-muted">Contacts</div>
-                            <div class="h5">6758</div>
+                            <div class="h5"><?=$contactsNb['nbContacts']?></div>
+        
                         </li>
                     </ul>
                 </div>
@@ -256,7 +260,28 @@ ob_start();
 
 
             </div>
-            <
+            <div class="col-md-3">
+                <div class="card gedf-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                            card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        <a href="#" class="card-link">Another link</a>
+                    </div>
+                </div>
+                <div class="card gedf-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                                card's content.</p>
+                            <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a>
+                        </div>
+                    </div>
+            </div>
         </div>
     </div>
     <?php 
