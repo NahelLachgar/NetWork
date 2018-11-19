@@ -115,6 +115,7 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`publications` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `content` VARCHAR(255) NULL,
   `postDate` DATETIME NULL,
+  `type` ENUM('texte', 'image') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
 ENGINE = InnoDB;
