@@ -19,6 +19,6 @@ if (isset($_SESSION['name'])) {
         header('Location:index.php?action=home');
     } 
 } else {
-    require('view/connectView.php');
+    require('view/signInView.php');
 }
 ?>
