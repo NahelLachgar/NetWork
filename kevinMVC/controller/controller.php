@@ -1,24 +1,6 @@
 <?php
 require('./model/model.php');
 
-//////////
-// VIEW //
-//////////
-
-// INSCRIPTION
-function showInscription(){
-	require('./view/signIn.html');
-}
-
-// CONNECTION
-function showConnection(){
-	require('./view/connexion.html');
-}
-
-//////////////
-// CONTROLS //
-//////////////
-
 // CHECK SI LE COMPTE EXISTE
 function checkUserExists($email, $password){
 	$userPassword = checkUser($email);

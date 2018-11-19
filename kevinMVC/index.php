@@ -13,11 +13,11 @@ switch ($_GET['action']) {
         break;
 
     case 'signIn':
-        showInscription();
+        require('./view/signIn.html');
         break;
 
     case 'connexion':
-        showConnection();
+        require('./view/connexion.html');
         break;
 }
 

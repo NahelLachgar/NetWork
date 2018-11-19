@@ -1,5 +1,6 @@
 <?php
 
+// CONNECTION BDD
 function dbConnect() {
     try {
         $db = new PDO('mysql:host=localhost;dbname=network;charset=utf8', 'root', '');
@@ -10,6 +11,7 @@ function dbConnect() {
     return $db;
 }
 
+// DETECTION SI L'UTILISATEUR EXSITE
 function checkUser($mail) {
 
 	// ON SE CONNECTE
@@ -25,6 +27,7 @@ function checkUser($mail) {
 	return $UserPassword;
 }
 
+// AJOUTER L'UTILISATEUR DANS LA BDD
 function addUser($lastName, $firstName, $email, $phone, $photo, $password, $status, $job, $company, $town) {
 
 	// ON SE CONNECTE
@@ -34,7 +37,6 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
 	$insertUser = $db->prepare('INSERT INTO users (lastName, name, email, phone, photo, password, status, job, company, town)VALUES (?,?,?,?,?,?,?,?,?,?)');
 	$insertUser->execute(array($lastName, $firstName, $email, $phone, $photo, $password, $status, $job, $company, $town));
 
-	echo "vous etes inscrit!";
 }
 
 
