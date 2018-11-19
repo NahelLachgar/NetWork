@@ -15,7 +15,7 @@ ob_start();
         crossorigin="anonymous"></script>
         
 <nav class="navbar navbar-light bg-bleu">
-        <a href="#" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
+        <a href="index.php?action=home" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
         <form class="form-inline">
             <div class="input-group">
                 <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
@@ -35,19 +35,20 @@ ob_start();
                 <div class="card">
                     <div class="card-body">
                         <div class="h5"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">
-						Nahel Lachgar</div>
-                        <div class="h7"> Developer of web applications, JavaScript, PHP, Java, Python, Ruby, Java, Node.js,
-                            etc.
+						<?=$profile['name'].' '.$profile['lastName']?></div>
+                        <div class="h7">
+                            <?=$profile['job'].' à '.$profile['company']?>
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="h6 text-muted">Entreprises suivies</div>
-                            <div class="h5">5.2342</div>
+                            <div class="h5"><?=$followedCompaniesNb?></div>
                         </li>
                         <li class="list-group-item">
                             <div class="h6 text-muted">Contacts</div>
-                            <div class="h5">6758</div>
+                            <div class="h5"><?=$contactsNb?></div>
+        
                         </li>
                     </ul>
                 </div>

@@ -128,19 +128,19 @@ function comment($content,$userId,$postId) {
 
 
 // DETECTION SI L'UTILISATEUR EXSITE
-function checkUser($mail) {
+function checkUser($email) {
 
 	// ON SE CONNECTE
 	$db = dbConnect();
 
 	// ON SELECT LE MOT DE PASSE CORESPONDANT AU MAIL
-	$selectUser = $db->prepare('SELECT password FROM users WHERE email = ?');
-	$selectUser->execute(array($mail));
+	$selectUser = $db->prepare('SELECT * FROM users WHERE email = ?');
+	$selectUser->execute(array($email));
 	$fetchSelectUser = $selectUser->fetch();
-	$UserPassword = $fetchSelectUser['password'];
+	
 
 	// ON RETURN LE MOT DE PASSE
-	return $UserPassword;
+	return $fetchSelectUser;
 }
 
 // AJOUTER L'UTILISATEUR DANS LA BDD

@@ -26,10 +26,11 @@ require('controller/controller.php');
                 break;
         }
     }
-    //header('Location:index.php?action=home');
 else {
     if (!isset($_SESSION['name'])) {
-    require('view/signUpView.html');
+    require('view/signInView.html');
+    } else {
+        header('Location:index.php?action=home');
     }
 }
 ?>
