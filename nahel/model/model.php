@@ -3,22 +3,24 @@
 function dbConnect()
 {
     try {
-        $db = new PDO('mysql:host=localhost;dbname=bddEval;charset=utf8', 'root', 'root');
+        $db = new PDO('mysql:host=localhost;dbname=NetWork;charset=utf8', 'root', 'root');
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
     return $db;
 }
+//RÉCUPÉRATION DES INFOS SUR L'UTILISATEUR 
 function getProfile($userId)
 {
     $db = dbConnect();
 
     $profile = $db->prepare('SELECT * FROM users WHERE id =?');
     $profile->execute(array($userId));
-   // $profileFetch = $profile->fetch();
-    return $profile;
+    $profileFetch = $profile->fetch();
+    return $profileFetch;
 }
 
+//RÉCUPÉRATION DES CONTACTS DE L'UTILISATEUR
 function getContacts($userId)
 {
     $db = dbConnect();
@@ -31,6 +33,8 @@ function getContacts($userId)
     ));
     $contactsFetch = $contactsId->fetch();
 }
+
+//RÉCUPÉRATION DES PUBLICATIONS DES CONTACTS ET ENTREPRISES SUIVIES PAR L'UTILISATEUR (FIL D'ACUTALITÉ)
 function getContactPosts($userId)
 {
     $db = dbConnect();
@@ -44,6 +48,7 @@ function getContactPosts($userId)
     return $posts;
 }
 
+//SUGGESTIONS D'EMPLOYÉS POUR L'UTILISATEUR 
 function getEmployeeSuggests($userId)
 {
     $db = dbConnect();
@@ -58,6 +63,7 @@ function getEmployeeSuggests($userId)
     return $employeeSuggests; 
 }
 
+//SUGGESTIONS D'ENTREPRISES
 function getCompanySuggests($userId) {
     $db = dbConnect();
     $contactsFetch = getContacts($userId);
@@ -71,28 +77,51 @@ function getCompanySuggests($userId) {
         return  $companySuggests;
 }
 
+//NOMBRE DE CONTACTS
 function getContactsCount($userId) {
     $db = dbConnect();
-    $contactsCount = $db->prepare('SELECT COUNT(*) AS nbContacts FROM contacts 
+    $contactsCount1 = $db->prepare('SELECT COUNT(*) AS contactsNb FROM contacts 
     JOIN users ON contacts.user = users.id 
-    WHERE users.status LIKE "employee" AND contact=:id
-    UNION 
-    SELECT COUNT(*) AS nbContacts 
+    WHERE users.status LIKE "employee" AND contact=:id');
+    $contactsCount1->execute(array("id"=>$userId));
+    $contactsFetch1 = $contactsCount1->fetch();
+
+    $contactsCount2 = $db->prepare('SELECT COUNT(*) AS contactsNb
     FROM contacts 
-    JOIN users ON contacts.contact = users.id WHERE users.status LIKE "employee" AND user=:id
-');
-    $contactsCount->execute(array("id"=>$userId));
-    $contactsFetch = $contactsCount->fetch();
-    return $contactsFetch;
+    JOIN users ON contacts.contact = users.id WHERE users.status LIKE "employee" AND user=:id');
+    $contactsCount2->execute(array("id"=>$userId));
+    $contactsFetch2 = $contactsCount2->fetch();
+
+    $contactsCount = $contactsFetch1['contactsNb'] + $contactsFetch2['contactsNb'];
+    return $contactsCount;
 } 
+
+//NOMBRE D'ENTREPRISES SUIVIES
 function getFollowedCompaniesCount($userId) {
     $db = dbConnect();
-    $followedCompaniesCount = $db->prepare('SELECT COUNT(*) FROM contacts
-     JOIN users ON contacts.user = users.id 
-     WHERE users.status LIKE "company" AND user=:id OR contact=:id
-    ');
-    $followedCompaniesCount->execute(array("id"=>$userId));
-    $followedCompaniesFetch = $followedCompaniesCount ->fetch();
-    return $followedCompaniesFetch;
+    $followedCompaniesCount1 = $db->prepare('SELECT COUNT(*) AS companiesNb FROM contacts 
+    JOIN users ON contacts.user = users.id 
+    WHERE users.status LIKE "company" AND contact=:id');
+    $followedCompaniesCount1->execute(array("id"=>$userId));
+    $followedCompaniesFetch1 = $followedCompaniesCount1->fetch();
+
+    $followedCompaniesCount2 = $db->prepare('SELECT COUNT(*) AS companiesNb
+    FROM contacts 
+    JOIN users ON contacts.contact = users.id WHERE users.status LIKE "company" AND user=:id');
+    $followedCompaniesCount2->execute(array("id"=>$userId));
+    $followedCompaniesFetch2 = $followedCompaniesCount2->fetch();
+
+    $followedCompaniesCount = $followedCompaniesFetch1['companiesNb'] + $followedCompaniesFetch2['companiesNb'];
+    return $followedCompaniesCount;
 } 
+
+//COMMENTER UNE PUBLICATION
+function comment($content,$userId,$postId) {
+    $db = dbConnect();
+    $insertCom = $db->prepare('INSERT INTO coms (content,comDate,user) VALUES (:content,NOW(),:user)');
+    $insertCom->execute(array(
+        "content"=>$content,
+        "user"=>$userId
+    ));
+}
 ?>

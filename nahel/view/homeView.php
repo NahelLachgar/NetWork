@@ -35,21 +35,19 @@ ob_start();
                 <div class="card">
                     <div class="card-body">
                         <div class="h5"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">
-						abc</div>
-                        <div class="h7"><?php while ($profileFetch = $profile->fetch()) {
-                            echo ($profileFetch['job'].' à '.$profileFetch['company']);
-                        }
-                        ?>
+						<?=$profile['name'].' '.$profile['lastName']?></div>
+                        <div class="h7">
+                            <?=$profile['job'].' à '.$profile['company']?>
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="h6 text-muted">Entreprises suivies</div>
-                            <div class="h5"><?=$followedCompaniesNb['nbContacts']?></div>
+                            <div class="h5"><?=$followedCompaniesNb?></div>
                         </li>
                         <li class="list-group-item">
                             <div class="h6 text-muted">Contacts</div>
-                            <div class="h5"><?=$contactsNb['nbContacts']?></div>
+                            <div class="h5"><?=$contactsNb?></div>
         
                         </li>
                     </ul>

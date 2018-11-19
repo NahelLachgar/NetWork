@@ -10,4 +10,3 @@ $contactsNb = getContactsCount($userId);
 $followedCompaniesNb = getFollowedCompaniesCount($userId);
 require('view/homeView.php');
 }
-?>
