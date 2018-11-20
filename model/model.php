@@ -179,6 +179,17 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
 
         return $req;
     }
+    
+    //RECHERCHE D'UN USER OU UNE COMPANY AVEC SON NOM OU SON PRENOM
+    function getSearch($name)
+    {
+        $bdd =  dbConnect();
+        $res  = "%".$name."%" ;
+        $req =  $bdd->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town FROM users WHERE users.lastname LIKE ?  OR users.name LIKE ? ');
+        $req->execute(array($res,$res));
+
+        return $req;
+    }
 
 
 ?>
