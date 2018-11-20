@@ -47,3 +47,15 @@ function checkAddUser($firstName, $lastName,$email, $phone, $photo, $password, $
     addUser($firstName, $lastName, $email, $phone, $photo, $hashpassword, $status, $job, $company, $town);
     require('view/signInView.html');
 }
+
+	//FUNCTION RECHERCHE
+	function search($data)
+	{
+		$res = getSearch($data);
+		if($res == TRUE){
+			require('./view/resultatSearchView.php');
+		} else {
+			//ON REVERIFIE SI $RES N'EST PAS VIDE DANS LA PAGE CI-DESSOUS 
+			require('./view/resultatSearchView.php');
+		}
+	}

@@ -20,7 +20,9 @@ require('controller/controller.php');
             case 'addUser':
                 checkAddUser($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['phone'], $_POST['photo'], $_POST['password'], $_POST['status'], $_POST['job'], $_POST['company'], $_POST['town']);
                 break;
-
+            case 'search':
+                search($_POST['research']);
+                break;
             case 'signUp':
                 require('view/signUpView.html');
                 break;
