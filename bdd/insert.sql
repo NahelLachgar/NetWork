@@ -66,10 +66,6 @@ CREATE TABLE IF NOT EXISTS `contacts` (
 -- Déchargement des données de la table `contacts`
 --
 
-INSERT INTO `contacts` (`id`, `contact`, `user`) VALUES
-(1, 2, 1),
-(2, 3, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -226,12 +222,16 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `lastName`, `email`, `phone`, `photo`, `password`, `status`, `job`, `company`, `town`) VALUES
-(1, 'Nahel', 'Lachgar', 'nahellachgar@hotmail.fr', '0623221148', '', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'employee', 'PDG', 'NetWork', 'Paris'),
-(2, 'Fred', 'Mba', 'fred@gmail.com', '0612324561', '', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'employee', 'Ingénieur', 'NetWork', 'Paris'),
-(3, 'Google', NULL, 'admin@google.com', NULL, '', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'company', NULL, NULL, 'New York'),
-(4, NULL, 'kévin', 'kevin@gmail.com', '0623457689', '', '$2y$12$m4ZDAKnUYV4DSzAasTdNouXz.qLU/lNtWTKa1bP5RpgLEady2fJbO', 'employee', 'a', 'a', 'a');
+INSERT INTO `users` ( `name`, `lastName`, `email`, `phone`, `photo`, `password`, `status`, `job`, `company`, `town`) VALUES
+('Nahel', 'Lachgar', 'nahellachgar@hotmail.fr', '0623221148', '', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'employee', 'employee', 'NetWork', 'Paris'),
+('Fred', 'Mba', 'fred@gmail.com', '0612324561', '', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'employee', 'Ingénieur', 'NetWork', 'Paris'),
+('Google', NULL, 'admin@google.com', '02166636', '', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'company', NULL, NULL, 'New York'),
+('idee', 'kévin', 'kevin@gmail.com', '0623457689', '', '$2y$12$m4ZDAKnUYV4DSzAasTdNouXz.qLU/lNtWTKa1bP5RpgLEady2fJbO', 'employee', 'a', 'a', 'a');
 
+
+INSERT INTO `contacts` (`id`, `contact`, `user`) VALUES
+(1, 2, 1),
+(2, 3, 1);
 --
 -- Contraintes pour les tables déchargées
 --
