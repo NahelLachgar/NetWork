@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`users` (
   `company` VARCHAR(45) NULL,
   `town` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  UNIQUE INDEX `mail_UNIQUE` (`email` ASC) VISIBLE)
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
+  UNIQUE INDEX `mail_UNIQUE` (`email` ASC) )
 ENGINE = InnoDB;
 
 
@@ -46,8 +46,8 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`contacts` (
   `contact` INT NULL,
   `user` INT NOT NULL,
   PRIMARY KEY (`id`, `user`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `fk_contacts_users1_idx` (`user` ASC) VISIBLE,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
+  INDEX `fk_contacts_users1_idx` (`user` ASC) ,
   CONSTRAINT `fk_contacts_users1`
     FOREIGN KEY (`user`)
     REFERENCES `NetWork`.`users` (`id`)
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`privateMessages` (
   `reicever` INT NULL,
   `sendDate` DATETIME NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB;
 
 
@@ -78,9 +78,9 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`sendPrivate` (
   `user` INT NOT NULL,
   `privateMessage` INT NOT NULL,
   PRIMARY KEY (`id`, `user`, `privateMessage`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `fk_sendPrivate_users1_idx` (`user` ASC) VISIBLE,
-  INDEX `fk_sendPrivate_privateMessages1_idx` (`privateMessage` ASC) VISIBLE,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
+  INDEX `fk_sendPrivate_users1_idx` (`user` ASC) ,
+  INDEX `fk_sendPrivate_privateMessages1_idx` (`privateMessage` ASC) ,
   CONSTRAINT `fk_sendPrivate_users1`
     FOREIGN KEY (`user`)
     REFERENCES `NetWork`.`users` (`id`)
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`events` (
   `place` VARCHAR(45) NULL,
   `admin` INT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB;
 
 
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`publications` (
   `postDate` DATETIME NULL,
   `type` ENUM('texte', 'image') NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB;
 
 
@@ -129,9 +129,9 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`post` (
   `publication` INT NOT NULL,
   `user` INT NOT NULL,
   PRIMARY KEY (`id`, `publication`, `user`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `fk_post_publications1_idx` (`publication` ASC) VISIBLE,
-  INDEX `fk_post_users1_idx` (`user` ASC) VISIBLE,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
+  INDEX `fk_post_publications1_idx` (`publication` ASC) ,
+  INDEX `fk_post_users1_idx` (`user` ASC) ,
   CONSTRAINT `fk_post_publications1`
     FOREIGN KEY (`publication`)
     REFERENCES `NetWork`.`publications` (`id`)
@@ -153,9 +153,9 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`participate` (
   `user` INT NOT NULL,
   `event` INT NOT NULL,
   PRIMARY KEY (`id`, `user`, `event`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `fk_participate_users1_idx` (`user` ASC) VISIBLE,
-  INDEX `fk_participate_events1_idx` (`event` ASC) VISIBLE,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
+  INDEX `fk_participate_users1_idx` (`user` ASC) ,
+  INDEX `fk_participate_events1_idx` (`event` ASC) ,
   CONSTRAINT `fk_participate_users1`
     FOREIGN KEY (`user`)
     REFERENCES `NetWork`.`users` (`id`)
@@ -178,8 +178,8 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`groups` (
   `createDate` DATE NULL,
   `admin` INT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  UNIQUE INDEX `titre_UNIQUE` (`title` ASC) VISIBLE)
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
+  UNIQUE INDEX `titre_UNIQUE` (`title` ASC) )
 ENGINE = InnoDB;
 
 
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`coms` (
   `comDate` DATETIME NOT NULL,
   `user` INT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) )
 ENGINE = InnoDB;
 
 
@@ -204,9 +204,9 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`comment` (
   `com` INT NOT NULL,
   `publication` INT NOT NULL,
   PRIMARY KEY (`id`, `com`, `publication`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `fk_comment_coms1_idx` (`com` ASC) VISIBLE,
-  INDEX `fk_comment_publications1_idx` (`publication` ASC) VISIBLE,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
+  INDEX `fk_comment_coms1_idx` (`com` ASC) ,
+  INDEX `fk_comment_publications1_idx` (`publication` ASC) ,
   CONSTRAINT `fk_comment_coms1`
     FOREIGN KEY (`com`)
     REFERENCES `NetWork`.`coms` (`id`)
@@ -231,9 +231,9 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`groupAdd` (
   `status` ENUM('message', 'member') NULL,
   `group` INT NOT NULL,
   PRIMARY KEY (`id`, `user`, `group`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `fk_groupMessages_users1_idx` (`user` ASC) VISIBLE,
-  INDEX `fk_groupAdd_groups1_idx` (`group` ASC) VISIBLE,
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
+  INDEX `fk_groupMessages_users1_idx` (`user` ASC) ,
+  INDEX `fk_groupAdd_groups1_idx` (`group` ASC) ,
   CONSTRAINT `fk_groupMessages_users1`
     FOREIGN KEY (`user`)
     REFERENCES `NetWork`.`users` (`id`)
