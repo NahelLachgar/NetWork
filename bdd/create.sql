@@ -22,8 +22,8 @@ USE `NetWork` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NetWork`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `lastName` VARCHAR(45) NULL,
   `name` VARCHAR(45) NOT NULL,
+  `lastName` VARCHAR(45) NULL,
   `email` VARCHAR(45) NOT NULL,
   `phone` VARCHAR(10) NULL,
   `photo` VARCHAR(255) NULL,
