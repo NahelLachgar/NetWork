@@ -3,7 +3,7 @@
 function dbConnect()
 {
     try {
-        $db = new PDO('mysql:host=localhost;dbname=NetWork;charset=utf8', 'root', 'root');
+        $db = new PDO('mysql:host=localhost;dbname=NetWork;charset=utf8', 'root', '');
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
@@ -169,6 +169,16 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
 
 }
 
+    // MODIFICATION DES CHAMPS DU PROFIL EXCEPTE LES CHAMPS password ET photo
+    function updateProfiles($lastname,$name,$email,$phone,$pass,$job,$company,$town,$id)
+    {
+        $bdd =  dbConnect();
+        $req = $bdd->prepare('UPDATE users SET users.lastname = ?, users.name = ?, users.email = ?, users.phone = ?,users.password = ?,users.job = ?,users.company = ?,users.town = ?  WHERE users.id = ?');
+        $password = password_hash($pass, PASSWORD_BCRYPT);
+        $req->execute(array($lastname,$name,$email,$phone,$password,$job,$company,$town,$id));
+
+        return $req;
+    }
 
 
 ?>
