@@ -13,7 +13,6 @@ function dbConnect()
 function getProfile($userId)
 {
     $db = dbConnect();
-
     $profile = $db->prepare('SELECT * FROM users WHERE id =?');
     $profile->execute(array($userId));
     $profileFetch = $profile->fetch();

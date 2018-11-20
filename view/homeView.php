@@ -37,12 +37,12 @@ ob_start();
                         <div class="h5"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">
 						<?=$profile['name'].' '.$profile['lastName']?></div>
                         <div class="h7">
-                            <?=$profile['job'].' à '.$profile['company']?>
+                            <?=$profile['job'].' chez '.$profile['company']?>
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <div class="h6 text-muted">Entreprises suivies</div>
+                            <div class="h6 text-muted">Entreprises</div>
                             <div class="h5"><?=$followedCompaniesNb?></div>
                         </li>
                         <li class="list-group-item">
