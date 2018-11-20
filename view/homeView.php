@@ -16,11 +16,11 @@ ob_start();
         
 <nav class="navbar navbar-light bg-bleu">
         <a href="index.php?action=home" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
-        <form class="form-inline">
+        <form class="form-inline" action="index.php?action=search" method="POST">
             <div class="input-group">
-                <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <input type="text" name="research" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="button" id="button-addon2">
+                    <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
                         <i class="fa fa-search"></i>
                     </button>
                 </div>
@@ -244,7 +244,7 @@ ob_start();
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam sunt fugit reprehenderit consectetur exercitationem odio,
                             quam nobis? Officiis, similique, harum voluptate, facilis voluptas pariatur dolorum tempora sapiente
                             eius maxime quaerat.
-                            <a href="https://mega.nz/#!1J01nRIb!lMZ4B_DR2UWi9SRQK5TTzU1PmQpDtbZkMZjAIbv97hU" target="_blank">https://mega.nz/#!1J01nRIb!lMZ4B_DR2UWi9SRQK5TTzU1PmQpDtbZkMZjAIbv97hU</a>
+9                            <a href="https://mega.nz/#!1J01nRIb!lMZ4B_DR2UWi9SRQK5TTzU1PmQpDtbZkMZjAIbv97hU" target="_blank">https://mega.nz/#!1J01nRIb!lMZ4B_DR2UWi9SRQK5TTzU1PmQpDtbZkMZjAIbv97hU</a>
                         </p>
                     </div>
                     <div class="card-footer">
