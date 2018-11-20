@@ -55,6 +55,7 @@ function checkAddUser($firstName, $lastName,$email, $phone, $photo, $password, $
 		if($res == TRUE){
 			require('./view/resultatSearchView.php');
 		} else {
+			$return = "Aucun resultat trouve";
 			//ON REVERIFIE SI $RES N'EST PAS VIDE DANS LA PAGE CI-DESSOUS 
 			require('./view/resultatSearchView.php');
 		}

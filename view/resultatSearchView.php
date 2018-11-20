@@ -27,11 +27,15 @@ ob_start();
             </div>
         </form>
     </nav>
-    <br><br>       
-    <?php foreach ($res as $resultat): ?>
-        <a href="index.php?action=profilepage&id=<?= $resultat['idContact'] ?>"> <?= $resultat['lastname'] ?>
-        <?= $resultat['name'] ?> </a> <br>
-    <?php endforeach; ?>
+    <br><br>
+        <?php if($res == true): ?>       
+        <?php foreach ($res as $resultat): ?>
+            <a href="index.php?action=profilepage&id=<?= $resultat['idContact'] ?>"> <?= $resultat['lastname'] ?>
+            <?= $resultat['name'] ?> </a> <br>
+        <?php endforeach; ?>
+        <?php else:?>
+        <?= $return ?>
+        <?php endif; ?>
 
             <div class="card gedf-card">
                         <div class="card-body">
