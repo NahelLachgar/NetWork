@@ -31,6 +31,7 @@ function getContacts($userId)
         "id" => $userId
     ));
     $contactsFetch = $contactsId->fetch();
+    return $contactsFetch;
 }
 
 //RÉCUPÉRATION DES PUBLICATIONS DES CONTACTS ET ENTREPRISES SUIVIES PAR L'UTILISATEUR (FIL D'ACUTALITÉ)
