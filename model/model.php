@@ -34,15 +34,15 @@ function getContacts($userId)
 }
 
 //RÉCUPÉRATION DES PUBLICATIONS DES CONTACTS ET ENTREPRISES SUIVIES PAR L'UTILISATEUR (FIL D'ACUTALITÉ)
-function getContactPosts($userId)
+function getContactsPosts($userId)
 {
     $db = dbConnect();
-
     $contactsFetch = getContacts($userId);
     $posts = $db->prepare('SELECT p.*,u.lastname AS lastname,u.name AS name FROM users u 
     JOIN post ON u.id = post.user
     JOIN publications p ON post.publication = p.id
-    WHERE post.user = ? OR post.user = ?');
+    WHERE post.user = ? OR post.user = ?
+    ORDER BY p.postDate DESC');
     $posts->execute(array($contactsFetch['id'],$userId));
     return $posts;
 }
