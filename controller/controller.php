@@ -80,6 +80,6 @@ function checkAddUser($firstName, $lastName,$email, $phone, $photo, $password, $
 		$validate = updateProfiles($lastName,$Name,$Email,$pass,$Phone,$Job,$Company,$Town,$id);
 		if( $validate == TRUE )
 		{
-			echo "bon !";
+			header('Location:index.php?action=home');
 		}
 	}
