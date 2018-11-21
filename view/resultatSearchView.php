@@ -30,8 +30,8 @@ ob_start();
     <br><br>
         <?php if($res == true): ?>       
         <?php foreach ($res as $resultat): ?>
-            <a href="index.php?action=profilepage&id=<?= $resultat['idContact'] ?>"> <?= $resultat['lastname'] ?>
-            <?= $resultat['name'] ?> </a> <br>
+            <a href="index.php?action=profilepage&id=<?= $resultat['idContact'] ?>"> <?= $resultat['name'] ?> <?= $resultat['lastname'] ?>
+            </a> <br>
         <?php endforeach; ?>
         <?php else:?>
         <?= $return ?>
