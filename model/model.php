@@ -172,7 +172,7 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
     // MODIFICATION DES CHAMPS DU PROFIL EXCEPTE LES CHAMPS password ET photo
     function updateProfiles($lastname,$name,$email,$phone,$pass,$job,$company,$town,$id)
     {
-        $bdd =  dbConnect();
+        $db =  dbConnect();
         $req = $bdd->prepare('UPDATE users SET users.lastname = ?, users.name = ?, users.email = ?, users.phone = ?,users.password = ?,users.job = ?,users.company = ?,users.town = ?  WHERE users.id = ?');
         $password = password_hash($pass, PASSWORD_BCRYPT);
         $req->execute(array($lastname,$name,$email,$phone,$password,$job,$company,$town,$id));
@@ -183,7 +183,7 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
     //RECHERCHE D'UN USER OU UNE COMPANY AVEC SON NOM OU SON PRENOM
     function getSearch($name)
     {
-        $bdd =  dbConnect();
+        $db =  dbConnect();
         $res  = "%".$name."%" ;
         $req =  $bdd->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town FROM users WHERE users.lastname LIKE ?  OR users.name LIKE ? ');
         $req->execute(array($res,$res));

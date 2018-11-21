@@ -23,8 +23,14 @@ require('controller/controller.php');
             case 'search':
                 search($_POST['research']);
                 break;
+            case 'updateprofile':
+                require('./view/profilUpdateView.php');
+                break;
+            case 'profilemodif':
+                updateToProfile();
+                break;
             case 'signUp':
-                require('view/signUpView.html');
+                require('./view/signUpView.html');
                 break;
         }
     }
