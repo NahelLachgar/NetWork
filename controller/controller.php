@@ -12,6 +12,11 @@ function home($userId) {
 	require('view/homeView.php');
 }
 
+function addPost($content,$type,$userId) {
+	post($content,$type,$userId);
+    header('Location:index.php?action=home');
+}
+
 // CHECK SI LE COMPTE EXISTE
 function checkUserExists($email, $password){
 	$user= checkUser($email);

@@ -42,8 +42,8 @@ function getContactPosts($userId)
     $posts = $db->prepare('SELECT p.*,u.lastname AS lastname,u.name AS name FROM users u 
     JOIN post ON u.id = post.user
     JOIN publications p ON post.publication = p.id
-    WHERE post.user = ?');
-    $posts->execute(array($contactsFetch['id']));
+    WHERE post.user = ? OR post.user = ?');
+    $posts->execute(array($contactsFetch['id'],$userId));
     return $posts;
 }
 
@@ -118,12 +118,12 @@ function getFollowedCompaniesCount($userId) {
 function post($content,$type,$userId)
 {
     $db = dbConnect();
-    $insertPub=$db->prepare('INSERT INTO (content,postDate,type) VALUES (:content,NOW(),:type');
+    $insertPub=$db->prepare('INSERT INTO publications (content,postDate,type) VALUES (:content,NOW(),:type)');
     $insertPub->execute(array(
         "content"=>$content,
         "type"=>$type
     ));
-    $insertPost=$db->prepare('INSERT INTO post (publication,user) VALUES (PDO::lastInsertId(),:userId) ');
+    $insertPost=$db->prepare('INSERT INTO post (publication,user) VALUES (LAST_INSERT_ID(),?) ');
     $insertPost->execute(array($userId));
 }
 
@@ -135,7 +135,7 @@ function comment($content,$userId,$postId) {
         "content"=>$content,
         "user"=>$userId
     ));
-    $insertComment = $db->prepare('INSERT INTO comment(com,publication) VALUES (PDO::lastInsertId(),:postId');
+    $insertComment = $db->prepare('INSERT INTO comment(com,publication) VALUES (LAST_INSERT_ID(),:postId');
     $insertComment->execute(array($postId));
 }
 

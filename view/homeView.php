@@ -75,8 +75,9 @@ ob_start();
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                 <div class="form-group">
-                                    <label class="sr-only" for="message">post</label>
-                                    <textarea class="form-control" id="message" rows="3" placeholder="What are you thinking?"></textarea>
+                                    <label class="sr-only" for="message">Post</label>
+                                    <form action="index.php?action=post" method="POST">
+                                    <textarea name="content" class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?" required></textarea>
                                 </div>
 
                             </div>
@@ -92,7 +93,9 @@ ob_start();
                         </div>
                         <div class="btn-toolbar justify-content-between">
                             <div class="btn-group">
-                                <button type="submit" class="btn btn-primary">share</button>
+                                <input type="hidden" name="type" value="text">
+                                <button type="submit" class="btn btn-primary">Publier</button>
+                                </form>
                             </div>
                             <div class="btn-group">
                                 </button>

@@ -15,7 +15,6 @@ require('controller/controller.php');
             case 'checkUser':
                 checkUserExists($_POST['email'], $_POST['password']);
                 break;
-
             case 'addUser':
                 checkAddUser($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['phone'], $_POST['photo'], $_POST['password'], $_POST['status'], $_POST['job'], $_POST['company'], $_POST['town']);
                 break;
@@ -30,6 +29,9 @@ require('controller/controller.php');
                 break;
             case 'signUp':
                 require('./view/signUpView.html');
+                break;
+            case 'post':
+                addPost($_POST['content'],$_POST['type'],$_SESSION['id']);
                 break;
         }
     }
