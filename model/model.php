@@ -31,18 +31,19 @@ function getContacts($userId)
         "id" => $userId
     ));
     $contactsFetch = $contactsId->fetch();
+    return $contactsFetch;
 }
 
 //RÉCUPÉRATION DES PUBLICATIONS DES CONTACTS ET ENTREPRISES SUIVIES PAR L'UTILISATEUR (FIL D'ACUTALITÉ)
-function getContactPosts($userId)
+function getContactsPosts($userId)
 {
     $db = dbConnect();
-
     $contactsFetch = getContacts($userId);
     $posts = $db->prepare('SELECT p.*,u.lastname AS lastname,u.name AS name FROM users u 
     JOIN post ON u.id = post.user
     JOIN publications p ON post.publication = p.id
-    WHERE post.user = ? OR post.user = ?');
+    WHERE post.user = ? OR post.user = ?
+    ORDER BY p.postDate DESC');
     $posts->execute(array($contactsFetch['id'],$userId));
     return $posts;
 }
@@ -185,7 +186,7 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
     {
         $db =  dbConnect();
         $res  = "%".$name."%" ;
-        $req =  $db->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town FROM users WHERE users.lastname LIKE ?  OR users.name LIKE ? ');
+        $req =  $db->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.lastname LIKE ?  OR users.name LIKE ? ');
         $req->execute(array($res,$res));
 
         return $req;
