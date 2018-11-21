@@ -50,6 +50,9 @@ ob_start();
                             <div class="h5"><?=$contactsNb?></div>
         
                         </li>
+                        <li class="list-group-item">
+                            <div class="h6 text-muted"><a href="index.php?action=updateprofile">Modifier le profil</a></div>
+                        </li>
                     </ul>
                 </div>
             </div>
