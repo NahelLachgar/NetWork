@@ -31,7 +31,7 @@ require('controller/controller.php');
                 require('./view/signUpView.html');
                 break;
             case 'post':
-                addPost($_POST['content'],$_POST['type'],$_SESSION['id']);
+                addPost(htmlspecialchars($_POST['content']),$_POST['type'],$_SESSION['id']);
                 break;
         }
     }
