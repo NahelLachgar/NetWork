@@ -3,7 +3,7 @@
 function dbConnect()
 {
     try {
-        $db = new PDO('mysql:host=localhost;dbname=NetWork;charset=utf8', 'root', '');
+        $db = new PDO('mysql:host=localhost;dbname=NetWork;charset=utf8', 'root', 'root');
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
@@ -185,7 +185,7 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
     {
         $db =  dbConnect();
         $res  = "%".$name."%" ;
-        $req =  $bdd->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town FROM users WHERE users.lastname LIKE ?  OR users.name LIKE ? ');
+        $req =  $db->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town FROM users WHERE users.lastname LIKE ?  OR users.name LIKE ? ');
         $req->execute(array($res,$res));
 
         return $req;
