@@ -27,35 +27,49 @@ ob_start();
                         <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">
                     </div>
                     <div class="ml-2">
-                        <div class="h5 m-0">Kévin Barao Da Silva</div>
+                        <div class="h5 m-0"><?= $recup['lastname'] ?> <?= $recup['name'] ?></div>
                         </div>
                     </div>                    
 
-            <form class="form-signin" action="index.php?action=profilemodif&id=<?= $_SESSION['id'] ?>" method="POST">
+            <form class="form-signin" action="index.php?action=profilemodif" method="POST">
                 <div class="form-label-group">
                     <label for="">Nom</label>
-                    <input type="text"  name="newname" placeholder="<?= $recup['nom'] ?>" required >
+                    <input type="text"  name="newname" value="<?= $recup['lastname'] ?>" required >
                 </div>
 
                 <div class="form-label-group">
                     <label for="">Prenom</label>
-                    <input type="text"  name="newsurname" placeholder="<?= $recup['prenom'] ?>" required >
+                    <input type="text"  name="newsurname" value="<?= $recup['name'] ?>" required >
                 </div>
 
                 <div class="form-label-group">
                     <label for="">email</label>
-                    <input type="mail"  name="newmail" placeholder="<?= $recup['naissance'] ?>" required >
+                    <input type="mail"  name="newmail" value="<?= $recup['email'] ?>" required >
+                </div>
+
+                <div class="form-label-group">
+                    <label for="">Mot de passe</label>
+                    <input type="password"  name="newpass" required >
                 </div>
 
                 <div class="form-label-group">
                     <label for="">Telephone</label>
-                    <input type="text"  name="newphone" placeholder="<?= $recup['prenom'] ?>" required >
+                    <input type="text"  name="newphone" value="<?= $recup['phone'] ?>" required >
                 </div>
-                
+
+                 <div class="form-label-group">
+                    <label for="">Job</label>
+                    <input type="text"  name="newjob" value="<?= $recup['job'] ?>" required >
+                </div>
+
                 <div class="form-label-group">
-                    <label for="">Role  : </label>
-                    <input type="radio"  name="newrole" value="1"required>Chef
-                    <input type="radio"  name="newrole" value="2"required>Delegue
+                    <label for="">Company</label>
+                    <input type="text"  name="newcompany" value="<?= $recup['company'] ?>" required >
+                </div>
+
+                <div class="form-label-group">
+                    <label for="">Town</label>
+                    <input type="text"  name="newtown" value="<?= $recup['town'] ?>" required >
                 </div>
 
                 <input class="btn btn-lg btn-primary btn-block" type="submit" value="Modifier" >

@@ -24,10 +24,10 @@ require('controller/controller.php');
                 search($_POST['research']);
                 break;
             case 'updateprofile':
-                require('./view/profilUpdateView.php');
+                updateToProfile($_SESSION['id']);
                 break;
             case 'profilemodif':
-                updateToProfile();
+                validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newpass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
                 break;
             case 'signUp':
                 require('./view/signUpView.html');

@@ -3,7 +3,7 @@
 function dbConnect()
 {
     try {
-        $db = new PDO('mysql:host=localhost;dbname=NetWork;charset=utf8', 'root', 'root');
+        $db = new PDO('mysql:host=localhost;dbname=NetWork;charset=utf8', 'root', '');
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
@@ -170,12 +170,12 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
 }
 
     // MODIFICATION DES CHAMPS DU PROFIL EXCEPTE LES CHAMPS password ET photo
-    function updateProfiles($lastname,$name,$email,$phone,$pass,$job,$company,$town,$id)
+    function updateProfiles($lastname,$name,$email,$pass,$phone,$job,$company,$town,$id)
     {
         $db =  dbConnect();
-        $req = $bdd->prepare('UPDATE users SET users.lastname = ?, users.name = ?, users.email = ?, users.phone = ?,users.password = ?,users.job = ?,users.company = ?,users.town = ?  WHERE users.id = ?');
+        $req = $db->prepare('UPDATE users SET users.lastname = ?, users.name = ?, users.email = ?,users.password = ?, users.phone = ?,users.job = ?,users.company = ?,users.town = ?  WHERE users.id = ?');
         $password = password_hash($pass, PASSWORD_BCRYPT);
-        $req->execute(array($lastname,$name,$email,$phone,$password,$job,$company,$town,$id));
+        $req->execute(array($lastname,$name,$email,$password,$phone,$job,$company,$town,$id));
 
         return $req;
     }
@@ -189,6 +189,16 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
         $req->execute(array($res,$res));
 
         return $req;
+    }
+
+    function getProfileUpdate($ids)
+    {
+        $db =  dbConnect();
+        $req = $db->prepare('SELECT users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town FROM users WHERE users.id = ?');
+        $post = $req->execute(array($ids));
+        $post = $req->fetch();
+
+        return $post;
     }
 
 

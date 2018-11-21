@@ -60,8 +60,26 @@ function checkAddUser($firstName, $lastName,$email, $phone, $photo, $password, $
 		}
 	}
 
-	//
-	function updateToProfile()
+	//FUNCTION AFFICHE LES INFOS A MODIFIER
+	function updateToProfile($id)
 	{
-		
+		$recup = getProfileUpdate($id);
+		require('./view/profilUpdateView.php');
+	}
+
+	//
+	function validateProfile($lastname,$name,$email,$pass,$phone,$job,$company,$town,$id)
+	{
+		$lastName = htmlspecialchars($lastname);
+		$Name = htmlspecialchars($name);
+		$Email = htmlspecialchars($email);
+		$Phone = htmlspecialchars($phone);
+		$Job = htmlspecialchars($job);
+		$Company = htmlspecialchars($company);
+		$Town = htmlspecialchars($town);
+		$validate = updateProfiles($lastName,$Name,$Email,$pass,$Phone,$Job,$Company,$Town,$id);
+		if( $validate == TRUE )
+		{
+			echo "bon !";
+		}
 	}
