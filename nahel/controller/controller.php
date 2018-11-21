@@ -21,7 +21,6 @@ function checkUserExists($email, $password){
 	} else {
 		if(password_verify($password, $user['password'])){
 			$_SESSION['id'] = $user['id'];
-			echo $user['id'];
 			header('Location:index.php?action=home');
 		} else {
 			require('view/signInView.html');
@@ -47,3 +46,22 @@ function checkAddUser($firstName, $lastName,$email, $phone, $photo, $password, $
     addUser($firstName, $lastName, $email, $phone, $photo, $hashpassword, $status, $job, $company, $town);
     require('view/signInView.html');
 }
+
+	//FUNCTION RECHERCHE
+	function search($data)
+	{
+		$res = getSearch($data);
+		if($res == TRUE){
+			require('./view/resultatSearchView.php');
+		} else {
+			$return = "Aucun resultat trouve";
+			//ON REVERIFIE SI $RES N'EST PAS VIDE DANS LA PAGE CI-DESSOUS 
+			require('./view/resultatSearchView.php');
+		}
+	}
+
+	//
+	function updateToProfile()
+	{
+		
+	}

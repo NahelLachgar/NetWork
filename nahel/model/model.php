@@ -13,7 +13,6 @@ function dbConnect()
 function getProfile($userId)
 {
     $db = dbConnect();
-
     $profile = $db->prepare('SELECT * FROM users WHERE id =?');
     $profile->execute(array($userId));
     $profileFetch = $profile->fetch();
@@ -81,15 +80,16 @@ function getCompanySuggests($userId) {
 function getContactsCount($userId) {
     $db = dbConnect();
     $contactsCount1 = $db->prepare('SELECT COUNT(*) AS contactsNb FROM contacts 
-    JOIN users ON contacts.user = users.id 
+    JOIN users ON contacts.user = users.id
     WHERE users.status LIKE "employee" AND contact=:id');
-    $contactsCount1->execute(array("id"=>$userId));
+    $contactsCount1->execute(array("id"=>$userId,"id"=>$userId));
     $contactsFetch1 = $contactsCount1->fetch();
+
 
     $contactsCount2 = $db->prepare('SELECT COUNT(*) AS contactsNb
     FROM contacts 
-    JOIN users ON contacts.contact = users.id WHERE users.status LIKE "employee" AND user=:id');
-    $contactsCount2->execute(array("id"=>$userId));
+    JOIN users ON contacts.contact = users.id WHERE status LIKE "employee" AND user=:id');
+    $contactsCount2->execute(array("id"=>$userId,"id"=>$userId));
     $contactsFetch2 = $contactsCount2->fetch();
 
     $contactsCount = $contactsFetch1['contactsNb'] + $contactsFetch2['contactsNb'];
@@ -100,20 +100,33 @@ function getContactsCount($userId) {
 function getFollowedCompaniesCount($userId) {
     $db = dbConnect();
     $followedCompaniesCount1 = $db->prepare('SELECT COUNT(*) AS companiesNb FROM contacts 
-    JOIN users ON contacts.user = users.id 
-    WHERE users.status LIKE "company" AND contact=:id');
-    $followedCompaniesCount1->execute(array("id"=>$userId));
+    JOIN users ON contacts.user = user.id 
+    WHERE status LIKE "company" AND contact=:id');
+    $followedCompaniesCount1->execute(array("id"=>$userId,"id"=>$userId));
     $followedCompaniesFetch1 = $followedCompaniesCount1->fetch();
 
     $followedCompaniesCount2 = $db->prepare('SELECT COUNT(*) AS companiesNb
     FROM contacts 
-    JOIN users ON contacts.contact = users.id WHERE users.status LIKE "company" AND user=:id');
-    $followedCompaniesCount2->execute(array("id"=>$userId));
+    JOIN users ON contacts.contact = users.id WHERE status LIKE "company" AND user=:id');
+    $followedCompaniesCount2->execute(array("id"=>$userId,"id"=>$userId));
     $followedCompaniesFetch2 = $followedCompaniesCount2->fetch();
 
     $followedCompaniesCount = $followedCompaniesFetch1['companiesNb'] + $followedCompaniesFetch2['companiesNb'];
     return $followedCompaniesCount;
 } 
+
+// PUBLIER DU CONTENU
+function post($content,$type,$userId)
+{
+    $db = dbConnect();
+    $insertPub=$db->prepare('INSERT INTO (content,postDate,type) VALUES (:content,NOW(),:type');
+    $insertPub->execute(array(
+        "content"=>$content,
+        "type"=>$type
+    ));
+    $insertPost=$db->prepare('INSERT INTO post (publication,user) VALUES (PDO::lastInsertId(),:userId) ');
+    $insertPost->execute(array($userId));
+}
 
 //COMMENTER UNE PUBLICATION
 function comment($content,$userId,$postId) {
@@ -123,8 +136,9 @@ function comment($content,$userId,$postId) {
         "content"=>$content,
         "user"=>$userId
     ));
+    $insertComment = $db->prepare('INSERT INTO comment(com,publication) VALUES (PDO::lastInsertId(),:postId');
+    $insertComment->execute(array($postId));
 }
-
 
 
 // DETECTION SI L'UTILISATEUR EXSITE
@@ -154,6 +168,28 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
 	$insertUser->execute(array( $firstName,$lastName,$email, $phone, $photo, $password, $status, $job, $company, $town));
 
 }
+
+    // MODIFICATION DES CHAMPS DU PROFIL EXCEPTE LES CHAMPS password ET photo
+    function updateProfiles($lastname,$name,$email,$phone,$pass,$job,$company,$town,$id)
+    {
+        $db =  dbConnect();
+        $req = $bdd->prepare('UPDATE users SET users.lastname = ?, users.name = ?, users.email = ?, users.phone = ?,users.password = ?,users.job = ?,users.company = ?,users.town = ?  WHERE users.id = ?');
+        $password = password_hash($pass, PASSWORD_BCRYPT);
+        $req->execute(array($lastname,$name,$email,$phone,$password,$job,$company,$town,$id));
+
+        return $req;
+    }
+    
+    //RECHERCHE D'UN USER OU UNE COMPANY AVEC SON NOM OU SON PRENOM
+    function getSearch($name)
+    {
+        $db =  dbConnect();
+        $res  = "%".$name."%" ;
+        $req =  $db->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town FROM users WHERE users.lastname LIKE ?  OR users.name LIKE ? ');
+        $req->execute(array($res,$res));
+
+        return $req;
+    }
 
 
 ?>
