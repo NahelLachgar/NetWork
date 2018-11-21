@@ -186,7 +186,7 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
     {
         $db =  dbConnect();
         $res  = "%".$name."%" ;
-        $req =  $db->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town FROM users WHERE users.lastname LIKE ?  OR users.name LIKE ? ');
+        $req =  $db->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.lastname LIKE ?  OR users.name LIKE ? ');
         $req->execute(array($res,$res));
 
         return $req;

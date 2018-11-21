@@ -28,27 +28,32 @@ ob_start();
         </form>
     </nav>
     <br><br>
-        <?php if($res == true): ?>       
-        <?php foreach ($res as $resultat): ?>
-            <a href="index.php?action=profilepage&id=<?= $resultat['idContact'] ?>"> <?= $resultat['name'] ?> <?= $resultat['lastname'] ?> <a href=""><img src="./img/icon/users.png"> </a>
-            </a> <br>
-        <?php endforeach; ?>
-        <?php else:?>
-            <?= $return ?>
-        <?php endif; ?>
-
-            <div class="card gedf-card">
+        <?php if ($res == true) :
+            foreach ($res as $resultat) : ?>
+           <div class="card gedf-card">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                card's content.</p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
+            <?php if ($resultat['status'] == 'employee') : ?>
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil"><a href="index.php?action=profilepage&id=<?= $resultat['idContact'] ?>"><?= $resultat['name'] . ' ' . $resultat['lastname'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>
+                            <p class="card-text"><?= $resultat['job'] . ' chez ' . $resultat['company'] ?></p>
+                            <a href="#" class="card-link">Ajouter à mon réseau</a>
+             <?php else : ?>
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://bit.ly/22hadqw" alt="Photo de profil"><a href="index.php?action=profilepage&id=<?= $resultat['idContact'] ?>"><?= $resultat['name'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>
+                            <a href="#" class="card-link">Suivre cette entreprise</a>
+                
+                        <?php endif;?>
+
                         </div>
                     </div>
             </div>
 
+            </a> <br>
+        <?php
+        endforeach;
+        else :
+            echo $return;
+        endif; ?>
+
+            
     <?php 
     $content = ob_get_clean();
     require('view/template.php');
