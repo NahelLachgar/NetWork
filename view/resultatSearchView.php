@@ -30,11 +30,11 @@ ob_start();
     <br><br>
         <?php if($res == true): ?>       
         <?php foreach ($res as $resultat): ?>
-            <a href="index.php?action=profilepage&id=<?= $resultat['idContact'] ?>"> <?= $resultat['name'] ?> <?= $resultat['lastname'] ?>
+            <a href="index.php?action=profilepage&id=<?= $resultat['idContact'] ?>"> <?= $resultat['name'] ?> <?= $resultat['lastname'] ?> <a href=""><img src="./img/icon/users.png"> </a>
             </a> <br>
         <?php endforeach; ?>
         <?php else:?>
-        <?= $return ?>
+            <?= $return ?>
         <?php endif; ?>
 
             <div class="card gedf-card">
