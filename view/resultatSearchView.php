@@ -33,12 +33,12 @@ ob_start();
            <div class="card gedf-card">
                         <div class="card-body">
             <?php if ($resultat['status'] == 'employee') : ?>
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil"><a href="index.php?action=profilepage&id=<?= $resultat['idContact'] ?>"><?= $resultat['name'] . ' ' . $resultat['lastname'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<a href="index.php?action=profilepage&id=<?= $resultat['idContact'] ?>"><?= $resultat['name'] . ' ' . $resultat['lastname'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>
                             <p class="card-text"><?= $resultat['job'] . ' chez ' . $resultat['company'] ?></p>
-                            <a href="#" class="card-link">Ajouter à mon réseau</a>
+                            <a href="#" class="card-link">Ajouter</a>
              <?php else : ?>
                             <h5 class="card-title"><img class="rounded-circle" width="45" src="https://bit.ly/22hadqw" alt="Photo de profil"><a href="index.php?action=profilepage&id=<?= $resultat['idContact'] ?>"><?= $resultat['name'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>
-                            <a href="#" class="card-link">Suivre cette entreprise</a>
+                            <a href="#" class="card-link">Suivre</a>
                 
                         <?php endif;?>
 
