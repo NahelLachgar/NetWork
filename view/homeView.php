@@ -46,7 +46,7 @@ ob_start();
                             <div class="h5"><?=$followedCompaniesNb?></div>
                         </li>
                         <li class="list-group-item">
-                            <div class="h6 text-muted">Contacts</div>
+                            <div class="h6 text-muted"><a href="index.php?action=contactlist">Contacts</a></div>
                             <div class="h5"><?=$contactsNb?></div>
         
                         </li>

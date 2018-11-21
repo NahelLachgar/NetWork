@@ -19,7 +19,10 @@ require('controller/controller.php');
                 checkAddUser($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['phone'], $_POST['photo'], $_POST['password'], $_POST['status'], $_POST['job'], $_POST['company'], $_POST['town']);
                 break;
             case 'search':
-                search($_POST['research']);
+                search($_SESSION['id'],$_POST['research']);
+                break;
+            case 'addcontacts':
+                addToContact($_GET['id'],$_SESSION['id']);
                 break;
             case 'updateprofile':
                 updateToProfile($_SESSION['id']);

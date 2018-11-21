@@ -119,11 +119,8 @@ function getFollowedCompaniesCount($userId) {
 function post($content,$type,$userId)
 {
     $db = dbConnect();
-    $insertPub=$db->prepare('INSERT INTO publications (content,postDate,type) VALUES (:content,NOW(),:type)');
-    $insertPub->execute(array(
-        "content"=>$content,
-        "type"=>$type
-    ));
+    $insertPub=$db->prepare('INSERT INTO publications VALUES (?,NOW(),?)');
+    $insertPub->execute(array($content,$type));
     $insertPost=$db->prepare('INSERT INTO post (publication,user) VALUES (LAST_INSERT_ID(),?) ');
     $insertPost->execute(array($userId));
 }
@@ -170,7 +167,7 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
 
 }
 
-    // MODIFICATION DES CHAMPS DU PROFIL EXCEPTE LES CHAMPS password ET photo
+    // MODIFICATION DES CHAMPS DU PROFIL EXCEPTE LE CHAMP photo
     function updateProfiles($lastname,$name,$email,$pass,$phone,$job,$company,$town,$id)
     {
         $db =  dbConnect();
@@ -182,16 +179,27 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
     }
     
     //RECHERCHE D'UN USER OU UNE COMPANY AVEC SON NOM OU SON PRENOM
-    function getSearch($name)
+    function getSearch($sid,$name)
     {
         $db =  dbConnect();
         $res  = "%".$name."%" ;
-        $req =  $db->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.lastname LIKE ?  OR users.name LIKE ? ');
-        $req->execute(array($res,$res));
+        $req =  $db->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.id != ? AND (users.lastname LIKE ?  OR users.name LIKE ?) ');
+        $req->execute(array($sid,$res,$res));
 
         return $req;
     }
 
+    //AJOUT D"UN CONTACT
+    function addContact($idContact,$idUser)
+    {
+        $db =  dbConnect();
+        $req = $db->prepare('INSERT INTO contacts(contact,user) VALUES(?,?)');
+        $req->execute(array($idContact,$idUser));
+    
+        return $req; 
+    }
+
+    //RECUPERATION DES INFOS DU PROFIL
     function getProfileUpdate($ids)
     {
         $db =  dbConnect();
