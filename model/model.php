@@ -3,7 +3,7 @@
 function dbConnect()
 {
     try {
-        $db = new PDO('mysql:host=localhost;dbname=NetWork;charset=utf8', 'root', '');
+        $db = new PDO('mysql:host=localhost;dbname=NetWork;charset=utf8', 'root', 'root');
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
@@ -80,14 +80,14 @@ function getCompanySuggests($userId) {
 function getContactsCount($userId) {
     $db = dbConnect();
     $contactsCount1 = $db->prepare('SELECT COUNT(*) AS contactsNb FROM contacts 
-    JOIN users ON contacts.user = id 
+    JOIN users ON contacts.user = users.id 
     WHERE status LIKE "employee" AND contact=:id');
     $contactsCount1->execute(array("id"=>$userId));
     $contactsFetch1 = $contactsCount1->fetch();
 
     $contactsCount2 = $db->prepare('SELECT COUNT(*) AS contactsNb
     FROM contacts 
-    JOIN users ON contacts.contact = id WHERE status LIKE "employee" AND user=:id');
+    JOIN users ON contacts.contact = users.id WHERE status LIKE "employee" AND user=:id');
     $contactsCount2->execute(array("id"=>$userId));
     $contactsFetch2 = $contactsCount2->fetch();
 
@@ -99,14 +99,14 @@ function getContactsCount($userId) {
 function getFollowedCompaniesCount($userId) {
     $db = dbConnect();
     $followedCompaniesCount1 = $db->prepare('SELECT COUNT(*) AS companiesNb FROM contacts 
-    JOIN users ON contacts.user = id 
+    JOIN users ON contacts.user = users.id 
     WHERE status LIKE "company" AND contact=:id');
     $followedCompaniesCount1->execute(array("id"=>$userId));
     $followedCompaniesFetch1 = $followedCompaniesCount1->fetch();
 
     $followedCompaniesCount2 = $db->prepare('SELECT COUNT(*) AS companiesNb
     FROM contacts 
-    JOIN users ON contacts.contact = id WHERE status LIKE "company" AND user=:id');
+    JOIN users ON contacts.contact = users.id WHERE status LIKE "company" AND user=:id');
     $followedCompaniesCount2->execute(array("id"=>$userId));
     $followedCompaniesFetch2 = $followedCompaniesCount2->fetch();
 
