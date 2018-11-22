@@ -1,4 +1,3 @@
-
 <?php 
 $title = "Accueil";
 ob_start();
@@ -155,9 +154,14 @@ ob_start();
                             </div> -->
                         </div>
                         <div class="card-footer">
-                            
-                            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                        
+                            <div class="input-group">
+                        <input type="text" name="research" placeholder="Écrivez un commentaire" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
+                            <i class="fa fa-comment"></i>
+                    </button>
+                </div>
+                </div>
                         </div>
                     </div>
                     <?php endwhile; ?>
