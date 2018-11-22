@@ -17,7 +17,7 @@ ob_start();
         <a href="index.php?action=home" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
         <form class="form-inline" action="index.php?action=search" method="POST">
             <div class="input-group">
-                <input type="text" name="research" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <input type="text" name="research" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" required>
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
                         <i class="fa fa-search"></i>
@@ -27,7 +27,7 @@ ob_start();
         </form>
     </nav>
 
-
+<!-- PROFIL-->
     <div class="container-fluid gedf-wrapper">
         <div class="row">
             <div class="col-md-3">
@@ -56,8 +56,9 @@ ob_start();
                 </div>
             </div>
             <div class="col-md-6 gedf-main">
+            <!------------------->
 
-                <!--- \\\\\\\Post-->
+                <!--- PUBLICATION-->
                 <div class="card gedf-card">
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -102,7 +103,7 @@ ob_start();
                         </div>
                     </div>
                 </div>
-                <!-- Post /////-->
+                <!----------------->
 
                
 
@@ -164,20 +165,22 @@ ob_start();
                 </div>
                         </div>
                     </div>
-                    <?php endwhile; ?>
+                    <?php endwhile; 
+                           $contactsPosts->closeCursor(); 
+                    ?>
                 </div>
-                <!-- ---------FIL D'ACTUALITÉ------------->
+                <!--------------------------------->
 
 
                
 
-
+    <?php while ($contactsPostsFetch = $contactsPosts->fetch()):?>
             </div>
             <div class="col-md-3">
                 <div class="card gedf-card">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                        <h6 class="card-subtitle mb-2 text-muted"><?=$contactsPostsFetch?></h6>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                             card's content.</p>
                         <a href="#" class="card-link">Card link</a>
@@ -195,6 +198,7 @@ ob_start();
                         </div>
                     </div>
             </div>
+                    <?php endwhile;?>
         </div>
     </div>
     <?php 
