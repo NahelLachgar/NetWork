@@ -82,6 +82,12 @@ function checkAddUser($firstName, $lastName,$email, $phone, $photo, $password, $
 		require('./view/profilUpdateView.php');
 	}
 
+	function getProfileSearch($id)
+	{
+		$recup = getProfileUpdate($id);
+		require('./view/profilepageView.php');
+	}
+
 	//
 	function validateProfile($lastname,$name,$email,$pass,$phone,$job,$company,$town,$id)
 	{
