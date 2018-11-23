@@ -12,8 +12,8 @@ function home($userId) {
 	require('view/homeView.php');
 }
 
-function addPost($Content,$Type,$UserId) {
-	post($Content,$Type,$UserId);
+function addPost($content,$type,$userId) {
+	post($content,$type,$userId);
 	header('Location:index.php?action=home');
 }
 
