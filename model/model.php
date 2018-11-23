@@ -119,7 +119,7 @@ function getFollowedCompaniesCount($userId) {
 function post($content,$type,$userId)
 {
     $db = dbConnect();
-    $insertPub=$db->prepare('INSERT INTO publications VALUES (?,NOW(),?)');
+    $insertPub=$db->prepare('INSERT INTO publications (content,postDate,type) VALUES (?,NOW(),?)');
     $insertPub->execute(array($content,$type));
     $insertPost=$db->prepare('INSERT INTO post (publication,user) VALUES (LAST_INSERT_ID(),?) ');
     $insertPost->execute(array($userId));

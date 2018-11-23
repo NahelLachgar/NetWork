@@ -108,7 +108,7 @@ ob_start();
                
 
                 <!--- ---------FIL D'ACTUALITÉ--------- -->
-                <div class="newsFeed">
+                <div>
                     <?php 
                     while ($contactsPostsFetch = $contactsPosts->fetch()) :
                         ?>
