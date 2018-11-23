@@ -165,16 +165,14 @@ ob_start();
                 </div>
                         </div>
                     </div>
-                    <?php endwhile; 
-                           $contactsPosts->closeCursor(); 
-                    ?>
+                    <?php endwhile;?>
                 </div>
                 <!--------------------------------->
 
 
                
 
-    <?php while ($contactsPostsFetch = $contactsPosts->fetch()):?>
+
             </div>
             <div class="col-md-3">
                 <div class="card gedf-card">
@@ -198,7 +196,6 @@ ob_start();
                         </div>
                     </div>
             </div>
-                    <?php endwhile;?>
         </div>
     </div>
     <?php 
