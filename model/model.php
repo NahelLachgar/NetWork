@@ -182,7 +182,7 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
     function getSearch($sid,$name)
     {
         $db =  dbConnect();
-        $res  = "%".$name."%" ;
+        $res  = "%".trim($name)."%" ;
         $req =  $db->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.id != ? AND (users.lastname LIKE ?  OR users.name LIKE ?) ');
         $req->execute(array($sid,$res,$res));
 
