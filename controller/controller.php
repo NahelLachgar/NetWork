@@ -11,7 +11,7 @@ function home($userId) {
 	$followedCompaniesNb = getFollowedCompaniesCount($userId);
 	require('view/homeView.php');
 }
-
+// PUBLIER
 function addPost($Content,$Type,$UserId) {
 	post($Content,$Type,$UserId);
 	header('Location:index.php?action=home');
