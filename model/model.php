@@ -30,9 +30,8 @@ function getContacts($userId)
     $contactsId -> execute(array(
         "id" => $userId
     ));
-   /* $contactsFetch = $contactsId->fetch();
-    return $contactsFetch;*/
-    return $contactsId;
+    $contactsIdFetch = $contactsId->fetch();
+    return $contactsIdFetch;
 }
 
 //RÉCUPÉRATION DES PUBLICATIONS DES CONTACTS ET ENTREPRISES SUIVIES PAR L'UTILISATEUR (FIL D'ACUTALITÉ)
