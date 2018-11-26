@@ -1,0 +1,1 @@
+Toutes les publications images seront stockées ici
