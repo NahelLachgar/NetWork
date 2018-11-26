@@ -110,6 +110,7 @@ ob_start();
                 <!--- ---------FIL D'ACTUALITÉ--------- -->
                 <div>
                     <?php 
+                    while ($contactsIdFetch = $contactsId->fetch()) :
                     while ($contactsPostsFetch = $contactsPosts->fetch()) :
                         ?>
                     <div class="card gedf-card">
@@ -165,7 +166,10 @@ ob_start();
                 </div>
                         </div>
                     </div>
-                    <?php endwhile;?>
+                    <?php 
+                endwhile; 
+                endwhile;
+                    ?>
                 </div>
                 <!--------------------------------->
 

@@ -30,8 +30,9 @@ function getContacts($userId)
     $contactsId -> execute(array(
         "id" => $userId
     ));
-    $contactsFetch = $contactsId->fetch();
-    return $contactsFetch;
+   /* $contactsFetch = $contactsId->fetch();
+    return $contactsFetch;*/
+    return $contactsId;
 }
 
 //RÉCUPÉRATION DES PUBLICATIONS DES CONTACTS ET ENTREPRISES SUIVIES PAR L'UTILISATEUR (FIL D'ACUTALITÉ)
@@ -182,7 +183,7 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
     function getSearch($sid,$name)
     {
         $db =  dbConnect();
-        $res  = "%".trim($name)."%" ;
+        $res  = "%".$name."%" ;
         $req =  $db->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.id != ? AND (users.lastname LIKE ?  OR users.name LIKE ?) ');
         $req->execute(array($sid,$res,$res));
 

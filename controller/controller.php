@@ -4,6 +4,7 @@ require('model/model.php');
 // AFFICHE LA PAGE D'ACCUEIL ET EXÉCUTE LES FONCTIONS
 function home($userId) {
 	$profile = getProfile($userId);
+	$contacts = getContacts($userId);
 	$contactsPosts = getContactsPosts($userId);
 	$companySuggests = getCompanySuggests($userId);
 	$employeeSuggests = getEmployeeSuggests($userId);
