@@ -17,7 +17,7 @@ ob_start();
         <a href="index.php?action=home" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
         <form class="form-inline" action="index.php?action=search" method="POST">
             <div class="input-group">
-                <input type="text" placeholder= "le nom ou le prenom" name="research" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" required>
+                <input type="text" placeholder= "Rechercher un membre " name="research" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" required>
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
                         <i class="fa fa-search"></i>
