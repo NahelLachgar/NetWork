@@ -35,25 +35,34 @@ function checkUserExists($email, $password){
 }
 
 // CHECK LES INFOS D'INSCRIPTION
-function checkAddUser($firstName, $lastName,$email, $phone, $photo, $password, $confirmPassword, $status, $job, $company, $town){
+function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirmPassword, $status, $job, $company, $town){
 
 	// ON CHECK SI LE MOT DE PASSE ET LA CONFIRAMTION DU MOT DE PASSE SONT DIFFERENTE
 	if($password != $confirmPassword){
 		header('Location:index.php?action=signUp');
 	}
-
 	// ON CHECK SI LES DONNEÉS SONT BONNES
 	if(!empty($password)){	
 	// OPTIONS APPORTES AU HASH	
 		$options = ['cost' => 12];
-
 	// ON HASH LE MOT DE PASSE 
 		$hashpassword = password_hash($password, PASSWORD_BCRYPT, $options);
 	}
-
+	// PHOTO
+	$profilePhoto = $_FILES['photo']['name'];
+	// ON RECUPERE L'EXTENSION DE LA PHOTO 
+		// ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
+   	list($name, $ext) = explode(".", $profilePhoto);    
+   		// ON RAJOUTE UN . DEVANT L'EXTENSION 
+  	$ext=".".$ext; 
+	// ON MET LA PHOTO DANS UN DOSSIER IMG
+	$path = "img/profile/".$email.$ext;
+	move_uploaded_file($_FILES['photo']['tmp_name'],$path);
+	$profilePhoto = $email.$ext;
 	// ON ENVOIE LES DONNES DANS LA BDD
-    addUser($firstName, $lastName, $email, $phone, $photo, $hashpassword, $status, $job, $company, $town);
+    addUser($firstName, $lastName, $email, $phone, $profilePhoto, $hashpassword, $status, $job, $company, $town);
     require('view/signInView.html');
+
 }
 
 	//FUNCTION RECHERCHE

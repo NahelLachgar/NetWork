@@ -16,7 +16,7 @@ require('controller/controller.php');
                 checkUserExists($_POST['email'], $_POST['password']);
                 break;
             case 'addUser':
-                checkAddUser($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['phone'], $_POST['photo'], $_POST['password'], $_POST['confirmPassword'], $_POST['status'], $_POST['job'], $_POST['company'], $_POST['town']);
+                checkAddUser($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['phone'], $_POST['password'], $_POST['confirmPassword'], $_POST['status'], $_POST['job'], $_POST['company'], $_POST['town']);
                 break;
             case 'search':
                 search($_SESSION['id'],$_POST['research']);
