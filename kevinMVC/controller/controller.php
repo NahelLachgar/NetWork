@@ -125,7 +125,24 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	// MONTRER LES CONTACTS
 	function showContacts($id){
 		$contacts = getContacts($id);
-		$contact = getProfile($contacts['id']);
-		var_dump($contact);
-		//require("./view/resultatSearchView.php");
+	/*	var_dump($contacts);
+		for($i = 0; $i < count($contacts); $i++){
+			$contact = getProfile($contacts[$i]['id']);
+			var_dump($contact);
+		} */
+
+		foreach ($contacts as $contact) {
+			$res[] = getProfile($contact['id']);
+			
+		}
+
+// var_dump($profile);
+
+/*
+foreach ($profiles as $profile) {
+			$res = getProfile($profile['id']);
+			var_dump($res);
+		}*/
+
+		require("./view/showContacts.php");
 	}

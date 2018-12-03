@@ -30,7 +30,7 @@ function getContacts($userId)
     $contactsId -> execute(array(
         "id" => $userId
     ));
-    $contactsFetch = $contactsId->fetch();
+    $contactsFetch = $contactsId->fetchAll();
     return $contactsFetch;
 }
 
