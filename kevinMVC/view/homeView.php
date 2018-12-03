@@ -110,7 +110,7 @@ ob_start();
                 <!--- ---------FIL D'ACTUALITÉ--------- -->
                 <div>
                     <?php 
-                    while ($contactsPostsFetch = $contactsPosts->fetch()) :
+                    while ($contactsPosts[$i]Fetch = $contactsPosts[$i]->fetch()) :
                         ?>
                     <div class="card gedf-card">
                         <div class="card-header">
@@ -120,7 +120,7 @@ ob_start();
                                         <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                                     </div>
                                     <div class="ml-2">
-                                        <div class="h5 m-0"><?=$contactsPostsFetch['name'].' '.$contactsPostsFetch['lastname']?></div>
+                                        <div class="h5 m-0"><?=$contactsPosts[$i]Fetch['name'].' '.$contactsPosts[$i]Fetch['lastname']?></div>
                                     </div>
                                 </div>
                                 <div>
@@ -140,10 +140,10 @@ ob_start();
 
                         </div>
                         <div class="card-body">
-                            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> <?=$contactsPostsFetch['postDate']?></div>
+                            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> <?=$contactsPosts[$i]Fetch['postDate']?></div>
 
                             <p class="card-text">
-                                <?=$contactsPostsFetch['content']?>
+                                <?=$contactsPosts[$i]Fetch['content']?>
                             </p>
                             <!--<div>
                                 <span class="badge badge-primary">JavaScript</span>
@@ -178,7 +178,7 @@ ob_start();
                 <div class="card gedf-card">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><?=$contactsPostsFetch?></h6>
+                        <h6 class="card-subtitle mb-2 text-muted"><?=$contactsPosts[$i]Fetch?></h6>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
                             card's content.</p>
                         <a href="#" class="card-link">Card link</a>

@@ -6,8 +6,8 @@ function home($userId) {
 	$profile = getProfile($userId);
 	$contacts = getContacts($userId);
 	$contactsPosts = getContactsPosts($userId);
-	$companySuggests = getCompanySuggests($userId);
-	$employeeSuggests = getEmployeeSuggests($userId);
+	//$companySuggests = getCompanySuggests($userId);
+	//$employeeSuggests = getEmployeeSuggests($userId);
 	$contactsNb = getContactsCount($userId);
 	$followedCompaniesNb = getFollowedCompaniesCount($userId);
 	require('view/homeView.php');
