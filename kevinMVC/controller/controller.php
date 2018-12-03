@@ -4,9 +4,10 @@ require('model/model.php');
 // AFFICHE LA PAGE D'ACCUEIL ET EXÉCUTE LES FONCTIONS
 function home($userId) {
 	$profile = getProfile($userId);
+	$contacts = getContacts($userId);
 	$contactsPosts = getContactsPosts($userId);
-	$companySuggests = getCompanySuggests($userId);
-	$employeeSuggests = getEmployeeSuggests($userId);
+	//$companySuggests = getCompanySuggests($userId);
+	//$employeeSuggests = getEmployeeSuggests($userId);
 	$contactsNb = getContactsCount($userId);
 	$followedCompaniesNb = getFollowedCompaniesCount($userId);
 	require('view/homeView.php');
@@ -42,12 +43,13 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		header('Location:index.php?action=signUp');
 	}
 	// ON CHECK SI LES DONNEÉS SONT BONNES
-	if(!empty($password)){	
+	if(!empty($password && $password == $confirmPassword)){	
 	// OPTIONS APPORTES AU HASH	
 		$options = ['cost' => 12];
 	// ON HASH LE MOT DE PASSE 
 		$hashpassword = password_hash($password, PASSWORD_BCRYPT, $options);
-	}
+	
+
 	// PHOTO
 	$profilePhoto = $_FILES['photo']['name'];
 	// ON RECUPERE L'EXTENSION DE LA PHOTO 
@@ -58,25 +60,14 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	// ON MET LA PHOTO DANS UN DOSSIER IMG
 	$path = "img/profile/".$email.$ext;
 	move_uploaded_file($_FILES['photo']['tmp_name'],$path);
-	$profilePhoto = $email.$ext;
+	$profilePhoto = $email.$ext; 
 	// ON ENVOIE LES DONNES DANS LA BDD
-    addUser($firstName, $lastName, $email, $phone, $profilePhoto, $hashpassword, $status, $job, $company, $town);
+    addUser($firstName, $lastName, $email, $phone, $profilePhoto, $hashpassword, $status, $job, $company, $town); 
     require('view/signInView.html');
 
+	}
 }
 
-	//FUNCTION RECHERCHE
-	function search($ids,$data)
-	{
-		$res = getSearch($ids,$data);
-		if($res == TRUE){
-			require('./view/resultatSearchView.php');
-		} else {
-			$return = "Aucun resultat trouve";
-			//ON REVERIFIE SI $RES N'EST PAS VIDE DANS LA PAGE CI-DESSOUS 
-			require('./view/resultatSearchView.php');
-		}
-	}
 
 	//FUNCTION AJOUT DE CONTACT
 	function addToContact($idcontact,$sid)
@@ -115,14 +106,15 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 			header('Location:index.php?action=updateprofile');
 		}else{
 			$validate = updateProfiles($lastName,$Name,$Email,$pass,$Phone,$Job,$Company,$Town,$id);
-		}
-		if( $validate == TRUE )
-		{
+			if( $validate == TRUE )
+			{
 			header('Location:index.php?action=home');
+			}
 		}
+		
 	}
 
-	// MONTRER LES CONTACTS
+		// MONTRER LES CONTACTS
 	function showContacts($id){
 		$contacts = getContacts($id);
 	/*	var_dump($contacts);
