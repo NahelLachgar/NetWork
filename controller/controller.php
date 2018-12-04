@@ -78,7 +78,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	}
 
 	//FUNCTION AJOUT DE CONTACT
-	function addToContact($idcontact,$sid)
+	function addToContacts($idcontact,$sid)
 	{
 		$add = addContact($idcontact,$sid);
 		if($add == TRUE) 

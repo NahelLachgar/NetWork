@@ -110,6 +110,7 @@ ob_start();
                 <!--- ---------FIL D'ACTUALITÉ--------- -->
                 <div>
                     <?php 
+                    if ($contactsPosts) :
                     for ($i = 0; $i < count($contactsPosts); $i++) :
                     ?>
                     <div class="card gedf-card">
@@ -131,18 +132,9 @@ ob_start();
                         </div>
                         <div class="card-body">
                             <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> <?= $contactsPosts[$i]['postDate'] ?></div>
-
                             <p class="card-text">
                                 <?= $contactsPosts[$i]['content'] ?>
                             </p>
-                            <!--<div>
-                                <span class="badge badge-primary">JavaScript</span>
-                                <span class="badge badge-primary">Android</span>
-                                <span class="badge badge-primary">PHP</span>
-                                <span class="badge badge-primary">Node.js</span>
-                                <span class="badge badge-primary">Ruby</span>
-                                <span class="badge badge-primary">Paython</span>
-                            </div> -->
                         </div>
                         <div class="card-footer">
                             <div class="input-group">
@@ -157,6 +149,9 @@ ob_start();
                     </div>
                     <?php 
                     endfor;
+                 else :
+                    echo("Vous n'avez aucune publication a afficher");
+                 endif;
                     ?>
                 </div>
             </div>
@@ -168,6 +163,8 @@ ob_start();
 
 
 <!--------- SUGGESTIONS DE CONTACTS----------->
+<?php if (count($employeesSuggests)>1) :?>
+
 <div class="col-md-3">
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
@@ -175,19 +172,21 @@ ob_start();
     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
   </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
+  <div class="carousel-innitemer">
+    <div class="carousel- active">
     <div class="card gedf-card">
             <div class="card-body">
                         <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                         <h5 class="card-title"><?= $employeesSuggests[0]['name'] . ' ' . $employeesSuggests[0]['lastName'] ?></h5>
                         <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[0]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
-                        <a href="#" class="card-link"> <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a></a>
+                        <form action="index.php?addContact" method="POST">
+                        <input type="hidden">
+                            <button type="button" class="btn btn-link" name="contactId" value="<?= $employeesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
+                        </form>
             </div>
         </div>
     </div>
     <?php 
-    if (count($employeesSuggests) > 1) :
     for ($i = 1; $i < count($employeesSuggests)-1; $i++) : ?>
     <div class="carousel-item">
     <div class="card gedf-card">
@@ -217,7 +216,7 @@ ob_start();
 <!--------------------------> 
 
 <!--------- SUGGESTIONS D'ENTREPRISE----------->
-<?php if (count($companiesSuggests) > 1) :?>
+<?php if (count($companiesSuggests)>1) :?>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

@@ -1,7 +1,6 @@
 <?php 
 $title = "Recherche";
 ob_start();
-$token = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
 ?>
 
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
