@@ -50,7 +50,7 @@ ob_start();
         
                         </li>
                         <li class="list-group-item">
-                            <div class="h6 text-muted"><a href="index.php?action=updateprofile">Modifier le profil</a></div>
+                            <div class="h6 text-muted"><a href="index.php?action=updateProfile">Modifier le profil</a></div>
                         </li>
                     </ul>
                 </div>

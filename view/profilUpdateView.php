@@ -39,7 +39,7 @@ ob_start();
                 </div>
                 <div class="form-label-group">
                     <label for="newName">Nom</label>
-                    <input type="text"  name="newname" id="newName" value="<?= $recup['lastname'] ?>" required >
+                    <input type="text"  name="newname" id="newName" value="<?= $recup['lastName'] ?>" required >
                 </div>
 
                 <div class="form-label-group">
