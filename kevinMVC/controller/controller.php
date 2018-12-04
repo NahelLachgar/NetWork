@@ -20,6 +20,11 @@ function addPost($content,$type,$userId) {
 
 // CHECK SI LE COMPTE EXISTE
 function checkUserExists($email, $password){
+
+	// ON SECURISE LES DONNEES 
+	$email = htmlspecialchars($email);
+	$password = htmlspecialchars($password);
+
 	$user= checkUser($email);
 
 	if($user['email'] === false){
@@ -38,7 +43,24 @@ function checkUserExists($email, $password){
 // CHECK LES INFOS D'INSCRIPTION
 function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirmPassword, $status, $job, $company, $town){
 
-	// ON CHECK SI LE MOT DE PASSE ET LA CONFIRAMTION DU MOT DE PASSE SONT DIFFERENTE
+	// ON VERIFIE QUE LES DONNEES NE SOIT PAS VIDE
+	if(empty($firstName) || empty($lastName) || empty($email) || empty($phone) || empty($password) || empty($confirmPassword) || empty($status) || empty($job) || empty($company) || empty($town)){
+		require('view/signUpView.html');
+	}
+
+	// ON SECURISE LES DONNEES 
+	$firstName = htmlspecialchars($firstName);
+	$lastName = htmlspecialchars($lastName);
+	$email = htmlspecialchars($email);
+	$phone = htmlspecialchars($phone);
+	$password = htmlspecialchars($password);
+	$confirmPassword = htmlspecialchars($confirmPassword);
+	$status = htmlspecialchars($status);
+	$job = htmlspecialchars($job);
+	$company = htmlspecialchars($company);
+	$town = htmlspecialchars($town);
+
+	// ON CHECK SI LE MOT DE PASSE ET LA CONFIRMATION DU MOT DE PASSE SONT DIFFERENTE
 	if($password != $confirmPassword){
 		header('Location:index.php?action=signUp');
 	}
@@ -48,17 +70,15 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		$options = ['cost' => 12];
 	// ON HASH LE MOT DE PASSE 
 		$hashpassword = password_hash($password, PASSWORD_BCRYPT, $options);
-	
 
 	// PHOTO
 	$profilePhoto = $_FILES['photo']['name'];
-	// ON RECUPERE L'EXTENSION DE LA PHOTO 
-		// ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
+	// ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
    	list($name, $ext) = explode(".", $profilePhoto);    
-   		// ON RAJOUTE UN . DEVANT L'EXTENSION 
+   	// ON RAJOUTE UN . DEVANT L'EXTENSION 
   	$ext=".".$ext; 
 	// ON MET LA PHOTO DANS UN DOSSIER IMG
-	$path = "img/profile/".$email.$ext;
+	$path = "./img/profile/".$email.$ext;
 	move_uploaded_file($_FILES['photo']['tmp_name'],$path);
 	$profilePhoto = $email.$ext; 
 	// ON ENVOIE LES DONNES DANS LA BDD
@@ -67,7 +87,6 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 
 	}
 }
-
 
 	//FUNCTION AJOUT DE CONTACT
 	function addToContact($idcontact,$sid)
@@ -117,24 +136,11 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		// MONTRER LES CONTACTS
 	function showContacts($id){
 		$contacts = getContacts($id);
-	/*	var_dump($contacts);
-		for($i = 0; $i < count($contacts); $i++){
-			$contact = getProfile($contacts[$i]['id']);
-			var_dump($contact);
-		} */
 
 		foreach ($contacts as $contact) {
 			$res[] = getProfile($contact['id']);
 			
 		}
-
-// var_dump($profile);
-
-/*
-foreach ($profiles as $profile) {
-			$res = getProfile($profile['id']);
-			var_dump($res);
-		}*/
 
 		require("./view/showContacts.php");
 	}
