@@ -34,7 +34,7 @@ ob_start();
                 <div class="card">
                     <div class="card-body">
                         <div class="h5"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
-						<?=$recup['name'].' '.$recup['lastname']?></div>
+						<?=$recup['name'].' '.$recup['lastName']?></div>
                         <div class="h7">
                             <?=$recup['job'].' chez '.$recup['company']?>
                         </div>
