@@ -30,6 +30,27 @@ require('controller/controller.php');
             case 'signUp':
                 require('./view/signUpView.html');
                 break;
+            case 'post':
+                addPost(htmlspecialchars($_POST['content']),$_POST['type'],$_SESSION['id']);
+                break;
+            case 'contactList':
+                showContacts($_SESSION['id']);
+                break;
+                case 'updateProfile':
+                updateToProfile($_SESSION['id']);
+                break;
+            case 'profileModif':
+                validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newpass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
+                break;
+            case 'signUp':
+                require('./view/signUpView.html');
+                break;
+            case 'post':
+                addPost(htmlspecialchars($_POST['content']),$_POST['type'],$_SESSION['id']);
+                break;
+            default:
+                home($_SESSION['id']);
+            
         }
     }
 else {

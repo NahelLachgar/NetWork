@@ -64,15 +64,19 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	//FUNCTION RECHERCHE
 	function search($ids,$data)
 	{
+		$ids = htmlspecialchars($ids);
+		$data = htmlspecialchars($data);
 		$res = getSearch($ids,$data);
-		if($res == TRUE){
+		$contact = getContactToUser($ids);
+		if(($res == TRUE) && (empty($contact))){
 			require('./view/resultatSearchView.php');
-		} else {
-			$return = "Aucun resultat trouve";
-			//ON REVERIFIE SI $RES N'EST PAS VIDE DANS LA PAGE CI-DESSOUS 
-			require('./view/resultatSearchView.php');
+		} else if( ($res == TRUE) && (!empty($contact)) ){
+			 require('./view/resultatDetailSearchView.php');
+		} else{
+			echo "Aucun resultat";
 		}
 	}
+
 	//FUNCTION AJOUT DE CONTACT
 	function addToContact($idcontact,$sid)
 	{
@@ -94,7 +98,29 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		$recup = getProfileUpdate($id);
 		require('./view/profilepageView.php');
 	}
-	//
+	
+	function contactList($sid)
+	{
+		$list = getContacts($sid);
+		if($list == TRUE) 
+		{
+			require('./view/contactsListView.php');		
+		}
+	}
+
+	//FUNCTION AFFICHE LES INFOS A MODIFIER
+	function updateToProfile($id)
+	{
+		$recup = getProfileUpdate($id);
+		require('./view/profilUpdateView.php');
+	}
+
+	function getProfileSearch($id)
+	{
+		$recup = getProfileUpdate($id);
+		require('./view/profilepageView.php');
+	}
+
 	function validateProfile($lastName,$name,$email,$pass,$phone,$job,$company,$town,$id)
 	{
 		$lastName = htmlspecialchars($lastName);

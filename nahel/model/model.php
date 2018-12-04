@@ -255,6 +255,19 @@ function addContact($idContact, $idUser)
     $req->execute(array($idContact, $idUser));
     return $req;
 }
+
+function getContactToUser($idUser)
+{
+    $db = dbConnect();
+    $req  = $db->prepare('SELECT user AS id FROM contacts WHERE contact LIKE ? 
+    UNION
+    SELECT contact AS id FROM contacts WHERE user LIKE ?');
+    $req->execute(array($idUser,$idUser));
+    $post = $req->fetchAll();
+
+    return $post;
+}
+
     //RECUPERATION DES INFOS DU PROFIL
 function getProfileUpdate($ids)
 {
