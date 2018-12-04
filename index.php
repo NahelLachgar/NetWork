@@ -11,7 +11,6 @@ require('controller/controller.php');
                 break;
             case 'home':
                 var_dump($_SESSION);
-                home($_SESSION['id']);
                 break;
             case 'checkUser':
                 checkUserExists($_POST['email'], $_POST['password']);
