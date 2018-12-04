@@ -29,7 +29,7 @@ require('controller/controller.php');
                 updateToProfile();
                 break;
             case 'profilePage':
-                getProfileSearch($_GET['id']);
+                getProfileSearch($_POST['id']);
                 break;
             case 'signUp':
                 require('./view/signUpView.html');
