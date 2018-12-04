@@ -10,6 +10,7 @@ require('controller/controller.php');
                 disconnect();
                 break;
             case 'home':
+                var_dump($_SESSION);
                 home($_SESSION['id']);
                 break;
             case 'checkUser':
@@ -19,7 +20,7 @@ require('controller/controller.php');
                 checkAddUser($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['phone'], $_POST['photo'], $_POST['password'], $_POST['status'], $_POST['job'], $_POST['company'], $_POST['town']);
                 break;
             case 'search':
-                search($_POST['research']);
+                search($_SESSION['id'],$_POST['research']);
                 break;
             case 'updateprofile':
                 require('./view/profilUpdateView.php');
