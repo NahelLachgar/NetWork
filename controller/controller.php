@@ -87,17 +87,8 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		}
 	}
 	
-	//FUNCTION AFFICHE LES INFOS A MODIFIER
-	function updateToProfile($id)
-	{
-		$recup = getProfileUpdate($id);
-		require('./view/profilUpdateView.php');
-	}
-	function getProfileSearch($id)
-	{
-		$recup = getProfileUpdate($id);
-		require('./view/profilepageView.php');
-	}
+
+	
 	
 	function contactList($sid)
 	{
