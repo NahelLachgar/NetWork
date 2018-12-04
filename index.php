@@ -28,7 +28,7 @@ require('controller/controller.php');
             case 'profilemodif':
                 updateToProfile();
                 break;
-            case 'profilepage':
+            case 'profilePage':
                 getProfileSearch($_GET['id']);
                 break;
             case 'signUp':
