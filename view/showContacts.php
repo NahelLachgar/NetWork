@@ -37,10 +37,8 @@ ob_start();
                             <a href="index.php?action=addcontacts&id=<?= $resultat['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
              <?php else : ?>
                             <h5 class="card-title"><img class="rounded-circle" width="45" src="https://bit.ly/22hadqw" alt="Photo de profil">&nbsp&nbsp&nbsp<a href="index.php?action=profilepage&id=<?= $resultat['id'] ?>"><?= $resultat['name'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>
-                            <a href="#" class="card-link">Suivre</a>
-                
+                            <a href="#" class="card-link">Suivre</a>              
                         <?php endif;?>
-
                         </div>
                     </div>
             </div>
