@@ -120,7 +120,6 @@ function getEmployeeSuggests($userId) {
             }
             $employees = array_merge($employees[$i], $employees[0]);
         } 
-        var_dump($employees);
     return $employees; 
 }
 //SUGGESTIONS D'ENTREPRISE POUR L'UTILISATEUR 
@@ -148,7 +147,6 @@ function getCompanySuggests($userId) {
             }
             $companies = array_merge($companies[$i], $companies[0]);
         } 
-        var_dump($companies);
     return $companies; 
 }
 //NOMBRE DE CONTACTS
