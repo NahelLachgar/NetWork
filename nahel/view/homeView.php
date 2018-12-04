@@ -1,4 +1,3 @@
-
 <?php 
 $title = "Accueil";
 ob_start();
@@ -18,7 +17,7 @@ ob_start();
         <a href="index.php?action=home" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
         <form class="form-inline" action="index.php?action=search" method="POST">
             <div class="input-group">
-                <input type="text" name="research" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <input type="text" placeholder= "Rechercher un membre " name="research" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" required>
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
                         <i class="fa fa-search"></i>
@@ -28,34 +27,38 @@ ob_start();
         </form>
     </nav>
 
-
+<!-- PROFIL-->
     <div class="container-fluid gedf-wrapper">
         <div class="row">
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="h5"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">
-						<?=$profile['name'].' '.$profile['lastName']?></div>
+                        <div class="h5"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
+						<?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                         <div class="h7">
-                            <?=$profile['job'].' chez '.$profile['company']?>
+                            <?= $profile['job'] . ' chez ' . $profile['company'] ?>
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="h6 text-muted">Entreprises</div>
-                            <div class="h5"><?=$followedCompaniesNb?></div>
+                            <div class="h5"><?= $followedCompaniesNb ?></div>
                         </li>
                         <li class="list-group-item">
-                            <div class="h6 text-muted">Contacts</div>
-                            <div class="h5"><?=$contactsNb?></div>
+                            <div class="h6 text-muted"><a href="index.php?action=contactlist">Contacts</a></div>
+                            <div class="h5"><?= $contactsNb ?></div>
         
+                        </li>
+                        <li class="list-group-item">
+                            <div class="h6 text-muted"><a href="index.php?action=updateprofile">Modifier le profil</a></div>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-6 gedf-main">
+            <!------------------->
 
-                <!--- \\\\\\\Post-->
+                <!--- PUBLICATION-->
                 <div class="card gedf-card">
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
@@ -72,8 +75,9 @@ ob_start();
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                 <div class="form-group">
-                                    <label class="sr-only" for="message">post</label>
-                                    <textarea class="form-control" id="message" rows="3" placeholder="What are you thinking?"></textarea>
+                                    <label class="sr-only" for="message">Post</label>
+                                    <form action="index.php?action=post" method="POST">
+                                    <textarea name="content" class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?" required></textarea>
                                 </div>
 
                             </div>
@@ -89,7 +93,9 @@ ob_start();
                         </div>
                         <div class="btn-toolbar justify-content-between">
                             <div class="btn-group">
-                                <button type="submit" class="btn btn-primary">share</button>
+                                <input type="hidden" name="type" value="text">
+                                <button type="submit" class="btn btn-primary">Publier</button>
+                                </form>
                             </div>
                             <div class="btn-group">
                                 </button>
@@ -97,190 +103,155 @@ ob_start();
                         </div>
                     </div>
                 </div>
-                <!-- Post /////-->
+                <!----------------->
 
-                <!--- \\\\\\\Post-->
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
+               
+
+                <!--- ---------FIL D'ACTUALITÉ--------- -->
+                <div>
+                    <?php 
+                    for ($i = 0; $i < count($contactsPosts); $i++) :
+                    ?>
+                    <div class="card gedf-card">
+                        <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">
-                                </div>
-                                <div class="ml-2">
-                                    <div class="h5 m-0">Kévin Barao Da Silva</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="dropdown">
-                                    <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-h"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                        <div class="h6 dropdown-header">Configuration</div>
-                                        <a class="dropdown-item" href="#">Save</a>
-                                        <a class="dropdown-item" href="#">Hide</a>
-                                        <a class="dropdown-item" href="#">Report</a>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="mr-2">
+                                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                    </div>
+                                    <div class="ml-2">
+                                        <div class="h5 m-0"><?= $contactsPosts[$i]['name'] . ' ' . $contactsPosts[$i]['lastName'] ?></div>
                                     </div>
                                 </div>
+                                <div>
+
+                                </div>
                             </div>
+
                         </div>
-
-                    </div>
-                    <div class="card-body">
-                        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>10 min ago</div>
-                       
-
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor
-                            sequi fuga quia quaerat cum, obcaecati hic, molestias minima iste voluptates.
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                    </div>
-                </div>
-                <!-- Post /////-->
-
-
-                <!--- \\\\\\\Post-->
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                </div>
-                                <div class="ml-2">
-                                    <div class="h5 m-0">Freddy Mba</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="dropdown">
-                                    <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-h"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                        <div class="h6 dropdown-header">Configuration</div>
-                                        <a class="dropdown-item" href="#">Save</a>
-                                        <a class="dropdown-item" href="#">Hide</a>
-                                        <a class="dropdown-item" href="#">Report</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="card-body">
-                        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> 10 min ago</div>
-                        <a class="card-link" href="#">
-                            <h5 class="card-title"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit consectetur
-                                deserunt illo esse distinctio.</h5>
-                        </a>
-
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam omnis nihil, aliquam est, voluptates officiis iure soluta
-                            alias vel odit, placeat reiciendis ut libero! Quas aliquid natus cumque quae repellendus. Lorem
-                            ipsum dolor sit amet consectetur adipisicing elit. Ipsa, excepturi. Doloremque, reprehenderit!
-                            Quos in maiores, soluta doloremque molestiae reiciendis libero expedita assumenda fuga quae.
-                            Consectetur id molestias itaque facere? Hic!
-                        </p>
-                        <div>
-                            <span class="badge badge-primary">JavaScript</span>
-                            <span class="badge badge-primary">Android</span>
-                            <span class="badge badge-primary">PHP</span>
-                            <span class="badge badge-primary">Node.js</span>
-                            <span class="badge badge-primary">Ruby</span>
-                            <span class="badge badge-primary">Paython</span>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                    </div>
-                </div>
-                <!-- Post /////-->
-
-
-                <!--- \\\\\\\Post-->
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                </div>
-                                <div class="ml-2">
-                                    <div class="h5 m-0">Freddy Mba</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="dropdown">
-                                    <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-h"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                        <div class="h6 dropdown-header">Configuration</div>
-                                        <a class="dropdown-item" href="#">Save</a>
-                                        <a class="dropdown-item" href="#">Hide</a>
-                                        <a class="dropdown-item" href="#">Report</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="card-body">
-                        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> Hace 40 min</div>
-                        <a class="card-link" href="#">
-                            <h5 class="card-title">Totam non adipisci hic! Possimus ducimus amet, dolores illo ipsum quos
-                                cum.</h5>
-                        </a>
-
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam sunt fugit reprehenderit consectetur exercitationem odio,
-                            quam nobis? Officiis, similique, harum voluptate, facilis voluptas pariatur dolorum tempora sapiente
-                            eius maxime quaerat.
-9                            <a href="https://mega.nz/#!1J01nRIb!lMZ4B_DR2UWi9SRQK5TTzU1PmQpDtbZkMZjAIbv97hU" target="_blank">https://mega.nz/#!1J01nRIb!lMZ4B_DR2UWi9SRQK5TTzU1PmQpDtbZkMZjAIbv97hU</a>
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                        <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
-                    </div>
-                </div>
-                <!-- Post /////-->
-
-
-
-            </div>
-            <div class="col-md-3">
-                <div class="card gedf-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                            card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                </div>
-                <div class="card gedf-card">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                                card's content.</p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
+                            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> <?= $contactsPosts[$i]['postDate'] ?></div>
+
+                            <p class="card-text">
+                                <?= $contactsPosts[$i]['content'] ?>
+                            </p>
+                            <!--<div>
+                                <span class="badge badge-primary">JavaScript</span>
+                                <span class="badge badge-primary">Android</span>
+                                <span class="badge badge-primary">PHP</span>
+                                <span class="badge badge-primary">Node.js</span>
+                                <span class="badge badge-primary">Ruby</span>
+                                <span class="badge badge-primary">Paython</span>
+                            </div> -->
+                        </div>
+                        <div class="card-footer">
+                            <div class="input-group">
+                        <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
+                            <i class="fa fa-comment"></i>
+                    </button>
+                </div>
+                </div>
                         </div>
                     </div>
+                    <?php 
+                    endfor;
+                    ?>
+                </div>
+            </div>
+                <!--------------------------------->
+
+
+               
+
+
+
+<!--------- SUGGESTIONS DE CONTACTS----------->
+<div class="col-md-3">
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+    <div class="card gedf-card">
+            <div class="card-body">
+                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                        <h5 class="card-title"><?= $employeesSuggests[0]['name'] . ' ' . $employeesSuggests[0]['lastName'] ?></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[0]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
+                        <a href="#" class="card-link"> <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a></a>
             </div>
         </div>
+    </div>
+    <?php 
+    if (count($employeesSuggests) > 1) :
+    for ($i = 1; $i < count($employeesSuggests)-1; $i++) : ?>
+    <div class="carousel-item">
+    <div class="card gedf-card">
+                        <div class="card-body">
+                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                        <h5 class="card-title"><?= $employeesSuggests[$i]['name'] . ' ' . $employeesSuggests[$i]['lastName'] ?></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[$i]['job'] . ' chez ' . $employeesSuggests[$i]['company'] ?></h6>
+                        <a href="#" class="card-link"> <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[$i]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a></a>
+                    </div>
+                </div>     </div>
+    <?php endfor; 
+           endif; ?>
+    
+
+    
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<!--------------------------> 
+
+<!--------- SUGGESTIONS D'ENTREPRISE----------->
+<?php if (count($companiesSuggests) > 1) :?>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+    <div class="card gedf-card">
+            <div class="card-body">
+                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                        <h5 class="card-title"><?= $companiesSuggests[0]['name']?></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[0]['town'] ?></h6>
+                        <a class="card-link" href="index.php?action=addcontacts&id=<?= $companiesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+            </div>
+        </div>
+    </div>
+    <?php 
+    
+    for ($i = 1; $i < count($companiesSuggests); $i++) : ?>
+    <div class="carousel-item">
+    <div class="card gedf-card">
+                    <div class="card-body">
+                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                        <h5 class="card-title"><?= $companiesSuggests[$i]['name'] . ' ' . $companiesSuggests[$i]['lastName'] ?></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[0]['town'] ?></h6>
+                        <a class="card-link" href="index.php?action=addcontacts&id=<?= $companiesSuggests[$i]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                    </div>
+                </div>     </div>
+    <?php endfor; 
+           endif; ?>
+<!--------------------------> 
+
+ 
     </div>
     <?php 
     $content = ob_get_clean();

@@ -1,5 +1,4 @@
 <?php
-
 function dbConnect()
 {
     try {
@@ -18,178 +17,251 @@ function getProfile($userId)
     $profileFetch = $profile->fetch();
     return $profileFetch;
 }
-
 //RÉCUPÉRATION DES CONTACTS DE L'UTILISATEUR
 function getContacts($userId)
 {
     $db = dbConnect();
-
-    $contactsId = $db->prepare('SELECT user AS id FROM contacts WHERE contact LIKE :id 
+    $contactsId = $db->prepare('SELECT user AS id FROM contacts WHERE contact = :id 
             UNION
-            SELECT contact AS id FROM contacts WHERE user LIKE :id');
-    $contactsId -> execute(array(
+            SELECT contact AS id FROM contacts WHERE user = :id');
+    $contactsId->execute(array(
         "id" => $userId
     ));
-    $contactsFetch = $contactsId->fetch();
+    return $contactsId;
 }
-
 //RÉCUPÉRATION DES PUBLICATIONS DES CONTACTS ET ENTREPRISES SUIVIES PAR L'UTILISATEUR (FIL D'ACUTALITÉ)
-function getContactPosts($userId)
+function getContactsPosts($userId)
 {
     $db = dbConnect();
-
-    $contactsFetch = getContacts($userId);
-    $posts = $db->prepare('SELECT p.*,u.lastname AS lastname,u.name AS name FROM users u 
-    JOIN post ON u.id = post.user
-    JOIN publications p ON post.publication = p.id
-    WHERE post.user = ?');
-    $posts->execute(array($contactsFetch['id']));
-    return $posts;
+    $contacts = getContacts($userId);
+    $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
+    $posts = $db->prepare('SELECT p.*,u.lastName AS lastName,u.name AS name, u.job AS job, u.company AS company, u.id AS contactId FROM users u 
+        JOIN post ON u.id = post.user
+        JOIN publications p ON post.publication = p.id
+        WHERE post.user = ? OR post.user = ?  
+        ORDER BY p.postDate DESC');
+    for ($i = 0; $i < count($contactsFetch); $i++) {
+        $posts->execute(array($contactsFetch[$i]['id'], $userId));
+        $postsFetch = $posts->fetchAll(PDO::FETCH_ASSOC);
+        $contactsPosts[$i] = $postsFetch;
+    }
+    if (count($contactsPosts) > 1) {
+        for ($i = 1; $i < (count($contactsPosts) - 1); $i++) {
+            $contactsPosts[0] = array_merge($contactsPosts[$i], $contactsPosts[0]);
+        }
+        $contactsPosts = array_merge($contactsPosts[$i], $contactsPosts[0]);
+    } 
+    function deleteDouble($array)
+    {
+        $i = 0;
+        while ($i < count($array) - 1) {
+            $j = $i + 1;
+            while ($j < count($array)) {
+                if (!isset($array[$i])) {
+                    $i++;
+                }
+                if (!isset($array[$j])) {
+                    $j++;
+                } else if (isset($array[$j])) {
+                    if ($array[$i]['id'] == $array[$j]['id']) {
+                        unset($array[$j]);
+                        $j++;
+                    } else if ($array[$i]['id'] != $array[$j]['id']) {
+                        $j++;
+                    }
+                }
+            }
+            $i++;
+        }
+        $array = array_values($array);
+        return $array;
+    }
+    $contactsPosts = deleteDouble($contactsPosts);
+    function arraySortId($array)
+    {
+        $i = 0;
+            while ($i < count($array)-1) {
+                if ($array[$i]['postDate'] <= $array[$i + 1]['postDate']) {
+                    $tmp = $array[$i]['postDate'];
+                    $array[$i+1]['postDate'] = $array[$i]['postDate'];
+                    $array[$i + 1]['postDate'] = $tmp;
+                    $i++;
+                } 
+                    $i++;
+            }
+            return $array;
+    }      
+   // echo(count($contactsPosts));
+    $contactsPosts = arraySortId($contactsPosts);
+    return $contactsPosts;
 }
-
 //SUGGESTIONS D'EMPLOYÉS POUR L'UTILISATEUR 
-function getEmployeeSuggests($userId)
-{
+function getEmployeeSuggests($userId) {
     $db = dbConnect();
-    $contactsFetch = getContacts($userId);
-    $employeeSuggests = $db->prepare('SELECT u.lastName AS lastName, u.name AS name FROM contacts c
-        JOIN users u ON u.id = c.user
-        WHERE c.contact LIKE :id AND u.status LIKE "employee"
-        UNION 
-        JOIN users u ON u.id = c.user
-        WHERE c.user LIKE :id AND u.status LIKE "employee"');
-    $employeeSuggests->execute(array("id"=>$contactsFetch['id']));
-    return $employeeSuggests; 
+    $contacts = getContacts($userId);
+    $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
+    $employeeSuggests = $db->prepare('SELECT DISTINCT u.* 
+    FROM users u JOIN contacts c ON u.id = c.user WHERE c.contact = :id AND c.user NOT LIKE :userId AND u.status LIKE "employee"
+    UNION
+    SELECT DISTINCT u.* 
+    FROM users u JOIN contacts c  ON u.id = c.contact WHERE c.user = :id AND c.contact NOT LIKE :userId AND u.status LIKE "employee"');
+        for ($i = 0; $i < count($contactsFetch)-1; $i++) {
+               $employeeSuggests->execute(array(
+                   "id"=>$contactsFetch[$i]['id'],
+                   "userId"=>$userId
+                ));
+               $employeeSuggestsFetch = $employeeSuggests->fetchAll(PDO::FETCH_ASSOC);
+               $employees[$i] = $employeeSuggestsFetch;
+        }
+        if (count($employees) > 0) {
+            for ($i = 0; $i < (count($employees) - 1); $i++) {
+                $employees[0] = array_merge($employees[$i], $employees[0]);
+    
+            }
+            $employees = array_merge($employees[$i], $employees[0]);
+        } 
+        var_dump($employees);
+    return $employees; 
 }
-
-//SUGGESTIONS D'ENTREPRISES
+//SUGGESTIONS D'ENTREPRISE POUR L'UTILISATEUR 
 function getCompanySuggests($userId) {
     $db = dbConnect();
-    $contactsFetch = getContacts($userId);
-    $companySuggests = $db->prepare('SELECT u.name AS name FROM contacts c
-        JOIN users u ON u.id = c.user
-        WHERE c.contact LIKE :id AND u.status LIKE "company"
-        UNION 
-        JOIN users u ON u.id = c.user
-        WHERE c.user LIKE :id AND u.status LIKE "company"');
-        $companySuggests->execute(array("id"=>$contactsFetch['id']));
-        return  $companySuggests;
+    $contacts = getContacts($userId);
+    $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
+    $companySuggests = $db->prepare('SELECT DISTINCT u.* 
+    FROM users u JOIN contacts c ON u.id = c.user WHERE c.contact = :id AND c.user NOT LIKE :userId AND u.status LIKE "company"
+    UNION
+    SELECT DISTINCT u.* 
+    FROM users u JOIN contacts c  ON u.id = c.contact WHERE c.user = :id AND c.contact NOT LIKE :userId AND u.status LIKE "company"');
+        for ($i = 0; $i < count($contactsFetch)-1; $i++) {
+               $companySuggests->execute(array(
+                   "id"=>$contactsFetch[$i]['id'],
+                   "userId"=>$userId
+                ));
+               $companySuggestsFetch = $companySuggests->fetchAll(PDO::FETCH_ASSOC);
+               $companies[$i] = $companySuggestsFetch;
+        }
+        if (count($companies) > 0) {
+            for ($i = 0; $i < (count($companies) - 1); $i++) {
+                $companies[0] = array_merge($companies[$i], $companies[0]);
+    
+            }
+            $companies = array_merge($companies[$i], $companies[0]);
+        } 
+        var_dump($companies);
+    return $companies; 
 }
-
 //NOMBRE DE CONTACTS
-function getContactsCount($userId) {
+function getContactsCount($userId)
+{
     $db = dbConnect();
     $contactsCount1 = $db->prepare('SELECT COUNT(*) AS contactsNb FROM contacts 
-    JOIN users ON contacts.user = users.id
-    WHERE users.status LIKE "employee" AND contact=:id');
-    $contactsCount1->execute(array("id"=>$userId,"id"=>$userId));
+    JOIN users ON contacts.user = users.id 
+    WHERE status LIKE "employee" AND contact=:id');
+    $contactsCount1->execute(array("id" => $userId));
     $contactsFetch1 = $contactsCount1->fetch();
-
-
     $contactsCount2 = $db->prepare('SELECT COUNT(*) AS contactsNb
     FROM contacts 
     JOIN users ON contacts.contact = users.id WHERE status LIKE "employee" AND user=:id');
-    $contactsCount2->execute(array("id"=>$userId,"id"=>$userId));
+    $contactsCount2->execute(array("id" => $userId));
     $contactsFetch2 = $contactsCount2->fetch();
-
     $contactsCount = $contactsFetch1['contactsNb'] + $contactsFetch2['contactsNb'];
     return $contactsCount;
 } 
-
 //NOMBRE D'ENTREPRISES SUIVIES
-function getFollowedCompaniesCount($userId) {
+function getFollowedCompaniesCount($userId)
+{
     $db = dbConnect();
     $followedCompaniesCount1 = $db->prepare('SELECT COUNT(*) AS companiesNb FROM contacts 
-    JOIN users ON contacts.user = user.id 
+    JOIN users ON contacts.user = users.id 
     WHERE status LIKE "company" AND contact=:id');
-    $followedCompaniesCount1->execute(array("id"=>$userId,"id"=>$userId));
+    $followedCompaniesCount1->execute(array("id" => $userId));
     $followedCompaniesFetch1 = $followedCompaniesCount1->fetch();
-
     $followedCompaniesCount2 = $db->prepare('SELECT COUNT(*) AS companiesNb
     FROM contacts 
     JOIN users ON contacts.contact = users.id WHERE status LIKE "company" AND user=:id');
-    $followedCompaniesCount2->execute(array("id"=>$userId,"id"=>$userId));
+    $followedCompaniesCount2->execute(array("id" => $userId));
     $followedCompaniesFetch2 = $followedCompaniesCount2->fetch();
-
     $followedCompaniesCount = $followedCompaniesFetch1['companiesNb'] + $followedCompaniesFetch2['companiesNb'];
     return $followedCompaniesCount;
 } 
-
 // PUBLIER DU CONTENU
-function post($content,$type,$userId)
+function post($content, $type, $userId)
 {
     $db = dbConnect();
-    $insertPub=$db->prepare('INSERT INTO (content,postDate,type) VALUES (:content,NOW(),:type');
-    $insertPub->execute(array(
-        "content"=>$content,
-        "type"=>$type
-    ));
-    $insertPost=$db->prepare('INSERT INTO post (publication,user) VALUES (PDO::lastInsertId(),:userId) ');
+    $insertPub = $db->prepare('INSERT INTO publications (content,postDate,type) VALUES (?,NOW(),?)');
+    $insertPub->execute(array($content, $type));
+    $insertPost = $db->prepare('INSERT INTO post (publication,user) VALUES (LAST_INSERT_ID(),?) ');
     $insertPost->execute(array($userId));
 }
-
 //COMMENTER UNE PUBLICATION
-function comment($content,$userId,$postId) {
+function comment($content, $userId, $postId)
+{
     $db = dbConnect();
     $insertCom = $db->prepare('INSERT INTO coms (content,comDate,user) VALUES (:content,NOW(),:user)');
     $insertCom->execute(array(
-        "content"=>$content,
-        "user"=>$userId
+        "content" => $content,
+        "user" => $userId
     ));
-    $insertComment = $db->prepare('INSERT INTO comment(com,publication) VALUES (PDO::lastInsertId(),:postId');
+    $insertComment = $db->prepare('INSERT INTO comment(com,publication) VALUES (LAST_INSERT_ID(),:postId');
     $insertComment->execute(array($postId));
 }
-
-
 // DETECTION SI L'UTILISATEUR EXSITE
-function checkUser($email) {
-
+function checkUser($email)
+{
 	// ON SE CONNECTE
-	$db = dbConnect();
-
+    $db = dbConnect();
 	// ON SELECT LE MOT DE PASSE CORESPONDANT AU MAIL
-	$selectUser = $db->prepare('SELECT * FROM users WHERE email = ?');
-	$selectUser->execute(array($email));
-	$fetchSelectUser = $selectUser->fetch();
+    $selectUser = $db->prepare('SELECT * FROM users WHERE email = ?');
+    $selectUser->execute(array($email));
+    $fetchSelectUser = $selectUser->fetch();
 	
-
 	// ON RETURN LE MOT DE PASSE
-	return $fetchSelectUser;
+    return $fetchSelectUser;
 }
-
 // AJOUTER L'UTILISATEUR DANS LA BDD
-function addUser($lastName, $firstName, $email, $phone, $photo, $password, $status, $job, $company, $town) {
-
+function addUser($lastName, $firstName, $email, $phone, $photo, $password, $status, $job, $company, $town)
+{
 	// ON SE CONNECTE
-	$db = dbConnect();
-
+    $db = dbConnect();
 	// ON INSERT LES DONNES DANS LA BDD
-	$insertUser = $db->prepare('INSERT INTO users (name, lastName, email, phone, photo, password, status, job, company, town) VALUES (?,?,?,?,?,?,?,?,?,?)');
-	$insertUser->execute(array( $firstName,$lastName,$email, $phone, $photo, $password, $status, $job, $company, $town));
-
+    $insertUser = $db->prepare('INSERT INTO users (name, lastName, email, phone, photo, password, status, job, company, town) VALUES (?,?,?,?,?,?,?,?,?,?)');
+    $insertUser->execute(array($firstName, $lastName, $email, $phone, $photo, $password, $status, $job, $company, $town));
 }
-
-    // MODIFICATION DES CHAMPS DU PROFIL EXCEPTE LES CHAMPS password ET photo
-    function updateProfiles($lastname,$name,$email,$phone,$pass,$job,$company,$town,$id)
-    {
-        $db =  dbConnect();
-        $req = $bdd->prepare('UPDATE users SET users.lastname = ?, users.name = ?, users.email = ?, users.phone = ?,users.password = ?,users.job = ?,users.company = ?,users.town = ?  WHERE users.id = ?');
-        $password = password_hash($pass, PASSWORD_BCRYPT);
-        $req->execute(array($lastname,$name,$email,$phone,$password,$job,$company,$town,$id));
-
-        return $req;
-    }
+    // MODIFICATION DES CHAMPS DU PROFIL EXCEPTE LE CHAMP photo
+function updateProfiles($lastName, $name, $email, $pass, $phone, $job, $company, $town, $id)
+{
+    $db = dbConnect();
+    $req = $db->prepare('UPDATE users SET users.lastName = ?, users.name = ?, users.email = ?,users.password = ?, users.phone = ?,users.job = ?,users.company = ?,users.town = ?  WHERE users.id = ?');
+    $password = password_hash($pass, PASSWORD_BCRYPT);
+    $req->execute(array($lastName, $name, $email, $password, $phone, $job, $company, $town, $id));
+    return $req;
+}
     
     //RECHERCHE D'UN USER OU UNE COMPANY AVEC SON NOM OU SON PRENOM
-    function getSearch($name)
-    {
-        $db =  dbConnect();
-        $res  = "%".$name."%" ;
-        $req =  $db->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town FROM users WHERE users.lastname LIKE ?  OR users.name LIKE ? ');
-        $req->execute(array($res,$res));
-
-        return $req;
-    }
-
-
+function getSearch($sid, $name)
+{
+    $db = dbConnect();
+    $res = "%" . $name . "%";
+    $req = $db->prepare('SELECT users.id as idContact,users.lastName,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.id != ? AND (users.lastName LIKE ?  OR users.name LIKE ?) ');
+    $req->execute(array($sid, $res, $res));
+    return $req;
+}
+    //AJOUT D'UN CONTACT
+function addContact($idContact, $idUser)
+{
+    $db = dbConnect();
+    $req = $db->prepare('INSERT INTO contacts(contact,user) VALUES(?,?)');
+    $req->execute(array($idContact, $idUser));
+    return $req;
+}
+    //RECUPERATION DES INFOS DU PROFIL
+function getProfileUpdate($ids)
+{
+    $db = dbConnect();
+    $req = $db->prepare('SELECT users.lastName,users.name,users.email,users.phone,users.job,users.company,users.town FROM users WHERE users.id = ?');
+    $post = $req->execute(array($ids));
+    $post = $req->fetch();
+    return $post;
+}
 ?>
