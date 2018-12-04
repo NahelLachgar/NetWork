@@ -226,7 +226,7 @@ INSERT INTO `users` ( `name`, `lastName`, `email`, `phone`, `photo`, `password`,
 ('Nahel', 'Lachgar', 'nahellachgar@hotmail.fr', '0623221148', '', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'employee', 'employee', 'NetWork', 'Paris'),
 ('Fred', 'Mba', 'fred@gmail.com', '0612324561', '', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'employee', 'Ingénieur', 'NetWork', 'Paris'),
 ('Google', NULL, 'admin@google.com', '02166636', '', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'company', NULL, NULL, 'New York'),
-('idee', 'kévin', 'kevin@gmail.com', '0623457689', '', '$2y$12$m4ZDAKnUYV4DSzAasTdNouXz.qLU/lNtWTKa1bP5RpgLEady2fJbO', 'employee', 'a', 'a', 'a');
+('Barao Da Silva', 'kévin', 'kevin@gmail.com', '0623457689', '', '$2y$12$m4ZDAKnUYV4DSzAasTdNouXz.qLU/lNtWTKa1bP5RpgLEady2fJbO', 'employee', 'a', 'a', 'a');
 
 
 INSERT INTO `contacts` (`id`, `contact`, `user`) VALUES

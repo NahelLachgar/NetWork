@@ -1,7 +1,7 @@
-
 <?php 
 $title = "Recherche";
 ob_start();
+$token = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
 ?>
 
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
@@ -25,19 +25,19 @@ ob_start();
                     </button>
                 </div>
             </div>
-        </form>
     </nav>
+    </form>
     <br><br>
         <?php if ($res == true) :
             foreach ($res as $resultat) : ?>
            <div class="card gedf-card">
                         <div class="card-body">
             <?php if ($resultat['status'] == 'employee') : ?>
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<a href="index.php?action=profilepage&id=<?= $resultat['idContact'] ?>"><?= $resultat['name'] . ' ' . $resultat['lastname'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form method="POST" action="index.php?action=profilePage"> <input type="hidden" name="id" value="<?= $resultat['idContact'] ?>"> <button type="button" class="btn btn-light"><?= $resultat['name'] . ' ' . $resultat['lastname'] ?></button>  </form></h5>
                             <p class="card-text"><?= $resultat['job'] . ' chez ' . $resultat['company'] ?></p>
-                            <a href="index.php?action=addcontacts&id=<?= $resultat['idContact'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                            <a href="index.php?action=addContacts&id=<?= $resultat['idContact'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
              <?php else : ?>
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://bit.ly/22hadqw" alt="Photo de profil">&nbsp&nbsp&nbsp<a href="index.php?action=profilepage&id=<?= $resultat['idContact'] ?>"><?= $resultat['name'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://bit.ly/22hadqw" alt="Photo de profil">&nbsp&nbsp&nbsp<a href="index.php?action=profilePage&id=<?= $resultat['idContact'] ?>"><?= $resultat['name'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>
                             <a href="#" class="card-link">Suivre</a>
                 
                         <?php endif;?>
@@ -52,7 +52,7 @@ ob_start();
         else :
             echo $return;
         endif; ?>
-
+    
             
     <?php 
     $content = ob_get_clean();

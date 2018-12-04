@@ -1,27 +1,23 @@
 <?php
 require('model/model.php');
-
 // AFFICHE LA PAGE D'ACCUEIL ET EXÉCUTE LES FONCTIONS
 function home($userId) {
 	$profile = getProfile($userId);
 	$contacts = getContacts($userId);
 	$contactsPosts = getContactsPosts($userId);
-	//$companySuggests = getCompanySuggests($userId);
-	//$employeeSuggests = getEmployeeSuggests($userId);
+	$companiesSuggests = getCompanySuggests($userId);
+	$employeesSuggests = getEmployeeSuggests($userId);
 	$contactsNb = getContactsCount($userId);
 	$followedCompaniesNb = getFollowedCompaniesCount($userId);
 	require('view/homeView.php');
 }
-
 function addPost($content,$type,$userId) {
 	post($content,$type,$userId);
 	header('Location:index.php?action=home');
 }
-
 // CHECK SI LE COMPTE EXISTE
 function checkUserExists($email, $password){
 	$user= checkUser($email);
-
 	if($user['email'] === false){
 		echo "votre compte n'existe pas!";
 	} else {
@@ -36,33 +32,48 @@ function checkUserExists($email, $password){
 }
 
 // CHECK LES INFOS D'INSCRIPTION
-function checkAddUser($firstName, $lastName,$email, $phone, $photo, $password, $status, $job, $company, $town){
+function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirmPassword, $status, $job, $company, $town){
 
+	// ON CHECK SI LE MOT DE PASSE ET LA CONFIRAMTION DU MOT DE PASSE SONT DIFFERENTE
+	if($password != $confirmPassword){
+		header('Location:index.php?action=signUp');
+	}
 	// ON CHECK SI LES DONNEÉS SONT BONNES
-	if(!empty($password)){
-	
+	if(!empty($password)){	
 	// OPTIONS APPORTES AU HASH	
 		$options = ['cost' => 12];
-
 	// ON HASH LE MOT DE PASSE 
 		$hashpassword = password_hash($password, PASSWORD_BCRYPT, $options);
 	}
-
+	// PHOTO
+	$profilePhoto = $_FILES['photo']['name'];
+	// ON RECUPERE L'EXTENSION DE LA PHOTO 
+		// ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
+   	list($name, $ext) = explode(".", $profilePhoto);    
+   		// ON RAJOUTE UN . DEVANT L'EXTENSION 
+  	$ext=".".$ext; 
+	// ON MET LA PHOTO DANS UN DOSSIER IMG
+	$path = "img/profile/".$email.$ext;
+	move_uploaded_file($_FILES['photo']['tmp_name'],$path);
+	$profilePhoto = $email.$ext;
 	// ON ENVOIE LES DONNES DANS LA BDD
-    addUser($firstName, $lastName, $email, $phone, $photo, $hashpassword, $status, $job, $company, $town);
+    addUser($firstName, $lastName, $email, $phone, $profilePhoto, $hashpassword, $status, $job, $company, $town);
     require('view/signInView.html');
-}
 
+}
 	//FUNCTION RECHERCHE
 	function search($ids,$data)
 	{
+		$ids = htmlspecialchars($ids);
+		$data = htmlspecialchars($data);
 		$res = getSearch($ids,$data);
-		if($res == TRUE){
+		$contact = getContactToUser($ids);
+		if(($res == TRUE) && (empty($contact))){
 			require('./view/resultatSearchView.php');
-		} else {
-			$return = "Aucun resultat trouve";
-			//ON REVERIFIE SI $RES N'EST PAS VIDE DANS LA PAGE CI-DESSOUS 
-			require('./view/resultatSearchView.php');
+		} else if( ($res == TRUE) && (!empty($contact)) ){
+			 require('./view/resultatDetailSearchView.php');
+		} else{
+			echo "Aucun resultat";
 		}
 	}
 
@@ -73,6 +84,27 @@ function checkAddUser($firstName, $lastName,$email, $phone, $photo, $password, $
 		if($add == TRUE) 
 		{
 			header('Location:index.php?action=home');	
+		}
+	}
+	
+	//FUNCTION AFFICHE LES INFOS A MODIFIER
+	function updateToProfile($id)
+	{
+		$recup = getProfileUpdate($id);
+		require('./view/profilUpdateView.php');
+	}
+	function getProfileSearch($id)
+	{
+		$recup = getProfileUpdate($id);
+		require('./view/profilepageView.php');
+	}
+	
+	function contactList($sid)
+	{
+		$list = getContacts($sid);
+		if($list == TRUE) 
+		{
+			require('./view/contactsListView.php');		
 		}
 	}
 
@@ -89,10 +121,9 @@ function checkAddUser($firstName, $lastName,$email, $phone, $photo, $password, $
 		require('./view/profilepageView.php');
 	}
 
-	//
-	function validateProfile($lastname,$name,$email,$pass,$phone,$job,$company,$town,$id)
+	function validateProfile($lastName,$name,$email,$pass,$phone,$job,$company,$town,$id)
 	{
-		$lastName = htmlspecialchars($lastname);
+		$lastName = htmlspecialchars($lastName);
 		$Name = htmlspecialchars($name);
 		$Email = htmlspecialchars($email);
 		$Phone = htmlspecialchars($phone);
@@ -104,4 +135,14 @@ function checkAddUser($firstName, $lastName,$email, $phone, $photo, $password, $
 		{
 			header('Location:index.php?action=home');
 		}
+	}
+
+	// MONTRER LES CONTACTS
+	function showContacts($id){
+		$contacts = getContacts($id);
+		foreach ($contacts as $contact) {
+			$res[] = getProfile($contact['id']);
+			
+		}
+		require("./view/showContacts.php");
 	}

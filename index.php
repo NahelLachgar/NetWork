@@ -19,18 +19,27 @@ require('controller/controller.php');
                 checkAddUser($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['phone'], $_POST['photo'], $_POST['password'], $_POST['status'], $_POST['job'], $_POST['company'], $_POST['town']);
                 break;
             case 'search':
-                search($_SESSION['id'],$_POST['research']);
-                break;
-            case 'addcontacts':
-                addToContact($_GET['id'],$_SESSION['id']);
-                break;
-            case 'profilepage':
-                getProfileSearch($_GET['id']);
+                search($_POST['research']);
                 break;
             case 'updateprofile':
-                updateToProfile($_SESSION['id']);
+                require('./view/profilUpdateView.php');
                 break;
             case 'profilemodif':
+                updateToProfile();
+                break;
+            case 'signUp':
+                require('./view/signUpView.html');
+                break;
+            case 'post':
+                addPost(htmlspecialchars($_POST['content']),$_POST['type'],$_SESSION['id']);
+                break;
+            case 'contactList':
+                showContacts($_SESSION['id']);
+                break;
+                case 'updateProfile':
+                updateToProfile($_SESSION['id']);
+                break;
+            case 'profileModif':
                 validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newpass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
                 break;
             case 'signUp':
@@ -39,6 +48,9 @@ require('controller/controller.php');
             case 'post':
                 addPost(htmlspecialchars($_POST['content']),$_POST['type'],$_SESSION['id']);
                 break;
+            default:
+                home($_SESSION['id']);
+            
         }
     }
 else {
