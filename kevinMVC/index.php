@@ -42,6 +42,9 @@ require('controller/controller.php');
             case 'contactList':
                 showContacts($_SESSION['id']);
                 break;
+            case 'companyList':
+                showCompanies($_SESSION['id']);
+                break;
         }
     }
 else {

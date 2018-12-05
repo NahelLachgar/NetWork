@@ -133,14 +133,24 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		
 	}
 
-		// MONTRER LES CONTACTS
+	// AFFICHER LES CONTACTS
 	function showContacts($id){
 		$contacts = getContacts($id);
 
 		foreach ($contacts as $contact) {
 			$res[] = getProfile($contact['id']);
-			
+		
 		}
-
 		require("./view/showContacts.php");
+	}
+
+	// MONTRER LES ENTREPRISES
+	function showCompanies($id){
+		$contacts = getContacts($id);
+
+		foreach ($contacts as $contact) {
+			$res[] = getProfile($contact['id']);
+		
+		}
+		require("./view/showCompanies.php");
 	}
