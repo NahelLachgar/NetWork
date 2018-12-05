@@ -13,7 +13,7 @@ require('controller/controller.php');
                 checkUserExists(htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']));
                 break;
             case 'addUser':
-                checkAddUser(htmlspecialchars($_POST['firstName']), htmlspecialchars($_POST['lastName']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['phone']), htmlspecialchars($_POST['photo']), htmlspecialchars($_POST['password']), htmlspecialchars($_POST['status']), htmlspecialchars($_POST['job']), htmlspecialchars($_POST['company']), htmlspecialchars($_POST['town']));
+                checkAddUser($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['phone'], $_POST['password'], $_POST['confirmPassword'], $_POST['status'], $_POST['job'], $_POST['company'], $_POST['town']);
                 break;
             case 'search':
                 search(htmlspecialchars($_SESSION['id']),htmlspecialchars($_POST['research']));
