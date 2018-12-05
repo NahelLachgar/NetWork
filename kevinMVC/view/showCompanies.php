@@ -1,5 +1,5 @@
 <?php 
-$title = "Contacts";
+$title = "Entreprises";
 ob_start();
 ?>
 
