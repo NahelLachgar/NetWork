@@ -71,8 +71,11 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	// ON HASH LE MOT DE PASSE 
 		$hashpassword = password_hash($password, PASSWORD_BCRYPT, $options);
 
+	
 	// PHOTO
 	$profilePhoto = $_FILES['photo']['name'];
+	
+	if($profilePhoto){
 	// ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
    	list($name, $ext) = explode(".", $profilePhoto);    
    	// ON RAJOUTE UN . DEVANT L'EXTENSION 
@@ -81,10 +84,11 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	$path = "./img/profile/".$email.$ext;
 	move_uploaded_file($_FILES['photo']['tmp_name'],$path);
 	$profilePhoto = $email.$ext; 
+	}
 	// ON ENVOIE LES DONNES DANS LA BDD
-    addUser($firstName, $lastName, $email, $phone, $profilePhoto, $hashpassword, $status, $job, $company, $town); 
+	addUser($firstName, $lastName, $email, $phone, $profilePhoto, $hashpassword, $status, $job, $company, $town); 
     require('view/signInView.html');
-
+	
 	}
 }
 
