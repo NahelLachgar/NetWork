@@ -1,28 +1,174 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Inscription</title>
-</head>
 
-<body>
-	<center>
-		<form action="index.php?action=addUser" method="POST">
-			<input type="text" name="firstName" placeholder="Prénom" required ><br>
-			<input type="text" name="lastName" placeholder="Nom" required ><br>
-			<input type="email" name="email" placeholder="Adresse email" required ><br>
-			<input type="text" name="phone" placeholder="Numéro de téléphone" required ><br>
-			<input type="file" name="photo" placeholder="photo" ><br>
-			<input type="password" name="password" placeholder="Mot de passe" required ><br>
-			<select name="status">
-				<option value="1">entreprise</option>
-				<option value="2" selected>employé</option>
-			</select><br>
-			<input type="text" name="job" placeholder="Emploi" required ><br>
-			<input type="text" name="company" placeholder="Entreprise" required ><br>
-			<input type="text" name="town" placeholder="Ville" required ><br>
-			<input type="submit" name="SignIn" value="S'inscire"><br>
-		</form>
-	</center>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="">
 
+    <title>Inscription</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.1/examples/checkout/form-validation.css" rel="stylesheet">
+  </head>
+
+  <body class="bg-light">
+
+    <div class="container">
+      <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="" alt="" width="72" height="72">
+        <h2>Inscription</h2>
+        <p class="lead"></p>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+
+        </div>
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">Billing address</h4>
+        
+          <form enctype="multipart/form-data" action="index.php?action=addUser" method="POST">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="firstName">Prenom</label>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" required>
+                <div class="invalid-feedback">
+                  Entrez votre prenom .
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="lastName">Nom</label>
+                <input type="text" class="form-control" id="lastName" placeholder="" name="lastName" required>
+                <div class="invalid-feedback">
+                  Entrez votre nom.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="email">Adresse email</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
+                </div>
+                <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email" required>
+                <div class="invalid-feedback" style="width: 100%;">
+                  Entrez votre adresse mail.
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="telephone">Numero de telephone</label>
+              <input type="text" class="form-control" id="telephone" name="phone" required>
+              <div class="invalid-feedback">
+                Entrez votre numero de telephone.
+              </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="file">Avatar</label>
+                <input type="file" class="form-control-file" name="photo" id="file">
+            </div>
+            <hr class="mb-4">
+            <div class="row">
+              <div class="col-md-5 mb-3">
+                <label for="mdp">Mot de passe</label>
+                <input type="password" class="form-control" id="mdp" name="password" required>
+                <div class="invalid-feedback">
+                  Entrez un mot de passe.
+                </div>
+              </div>
+              
+              <div class="col-md-5 mb-3">
+               <label for="mdp2">Confirmation du mot de passe</label>
+                <input type="password" class="form-control" id="mdp2" name="confirmPassword" required>
+                <div class="invalid-feedback">
+                  Entrez votre mot de passe.
+                </div>
+              </div>
+            </div>
+            <hr class="mb-4">
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="Status">Status</label>
+                <select name="status" class="custom-select d-block w-100" id="Status" required>
+                  <option value="">Choose...</option>
+                  <option value="1">entreprise</option>
+                  <option value="2">employe</option>
+                </select>
+                <div class="invalid-feedback">
+                  Selectionnez votre status.
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="emploi">Emploi</label>
+              <input type="text" class="form-control" id="emploi" name="job" required>
+              <div class="invalid-feedback">
+                Entrez votre profession.
+              </div>
+              </div>
+              <div class="col-md-5 mb-3">
+                <label for="entreprise">Entreprise</label>
+                <input type="text" name="company" class="form-control" id="entreprise" required>
+                <div class="invalid-feedback">
+                  Entrez votre d'entreprise de travail.
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="ville">Ville</label>
+              <input type="text" class="form-control" id="ville" name="town" required>
+              <div class="invalid-feedback">
+                Entrez votre ville.
+              </div>
+            </div>
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">S'inscire</button>
+          </form>
+        </div>
+      </div>
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2018-2019 NetWork Company</p>
+      </footer>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+    </script>
+  </body>
 </html>

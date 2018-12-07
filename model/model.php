@@ -243,7 +243,7 @@ function getSearch($sid, $name)
 {
     $db = dbConnect();
     $res = "%" . $name . "%";
-    $req = $db->prepare('SELECT users.id as idContact,users.lastname,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.id != ? AND (users.lastname LIKE ?  OR users.name LIKE ?) ');
+    $req = $db->prepare('SELECT users.id as idContact,users.lastName,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.id != ? AND (users.lastname LIKE ?  OR users.name LIKE ?) ');
     $req->execute(array($sid, $res, $res));
 
     return $req;
@@ -257,6 +257,20 @@ function addContact($idContact, $idUser)
     $req->execute(array($idContact, $idUser));
 
     return $req;
+}
+
+function getContactToUser($idUser)
+{
+    $db = dbConnect();
+    $req  = $db->prepare('SELECT user AS id FROM contacts WHERE contact LIKE ? 
+    UNION
+    SELECT contact AS id FROM contacts WHERE user LIKE ?');
+    $req->execute(array($idUser,$idUser));
+    $post = $req->fetchAll();
+    foreach($post as $res){
+        $array[] = $res['id'];
+    }
+    return $array ;       
 }
 
     //RECUPERATION DES INFOS DU PROFIL

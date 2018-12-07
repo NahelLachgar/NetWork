@@ -57,12 +57,13 @@ function checkAddUser($firstName, $lastName,$email, $phone, $photo, $password, $
 	function search($ids,$data)
 	{
 		$res = getSearch($ids,$data);
-		if($res == TRUE){
+		$contact = getContactToUser($ids);
+		if($res == TRUE && empty($contact)){
 			require('./view/resultatSearchView.php');
-		} else {
+		} else if($res == TRUE && !empty($contact)) {
 			$return = "Aucun resultat trouve";
 			//ON REVERIFIE SI $RES N'EST PAS VIDE DANS LA PAGE CI-DESSOUS 
-			require('./view/resultatSearchView.php');
+			require('./view/resultatDetailSearchView.php');
 		}
 	}
 
