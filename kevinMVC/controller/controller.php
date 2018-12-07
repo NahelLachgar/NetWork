@@ -31,14 +31,15 @@ function checkUserExists($email, $password){
 	$user= checkUser($email);
 
 	if($user['email'] === false){
-		echo "votre compte n'existe pas!";
+		require('view/signInView.html');
+		die("votre compte n'existe pas!");
 	} else {
 		if(password_verify($password, $user['password'])){
 			$_SESSION['id'] = $user['id'];
 			header('Location:index.php?action=home');
 		} else {
 			require('view/signInView.html');
-			die ("Les indentifiants saisis sont incorrects");
+			die ("Les indentifiants saisis sont incorrects.");
 		}
 	}
 }
