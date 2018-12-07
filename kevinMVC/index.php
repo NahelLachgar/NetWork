@@ -49,7 +49,7 @@ require('controller/controller.php');
     }
 else {
     if (!isset($_SESSION['name'])) {
-    require('view/signInView.html');
+    require('view/signInView.php');
     } else {
         header('Location:index.php?action=home');
     }

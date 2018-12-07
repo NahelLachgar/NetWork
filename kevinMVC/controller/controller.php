@@ -27,19 +27,20 @@ function checkUserExists($email, $password){
 	// ON SECURISE LES DONNEES 
 	$email = htmlspecialchars($email);
 	$password = htmlspecialchars($password);
+	$errors = array();
 
 	$user= checkUser($email);
 
-	if($user['email'] === false){
-		require('view/signInView.html');
-		die("votre compte n'existe pas!");
+	if($user === false){
+		$errors['compte'] = "votre compte n'existe pas !";
+		require('view/signInView.php');		
 	} else {
 		if(password_verify($password, $user['password'])){
 			$_SESSION['id'] = $user['id'];
 			header('Location:index.php?action=home');
-		} else {
-			require('view/signInView.html');
-			die ("Les indentifiants saisis sont incorrects.");
+		} else { 
+			$errors['wrongPassWord'] = "Les indentifiants saisis sont incorrects.";
+			require('view/signInView.php');			
 		}
 	}
 }

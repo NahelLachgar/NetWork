@@ -43,6 +43,15 @@
     <form class="form-signin" action="?action=checkUser" method="POST">
       <img class="lg-4" src="./img/logo/logo.png" alt="" width="250" height="250">
       <h1 class="h3 mb-3 font-weight-normal">Connectez-vous !</h1>
+
+      <?php if(!empty($errors)) : ?>
+        <div class="alert alert-danger">
+           <?php foreach($errors as $error): ?>
+              <p><?= $error ; ?></p>
+            <?php endforeach ; ?>
+        </div>     
+      <?php endif; ?>
+
       <label for="inputEmail" class="sr-only">Adresse mail</label>
       <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Adresse mail" required autofocus>
       <label for="inputPassword" class="sr-only">Mot de passe</label>
