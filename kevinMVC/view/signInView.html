@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
 	<title>Connection</title>
@@ -16,4 +16,40 @@
 	</center>
 </body>
 
+</html>
+
+-->
+
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Connexion</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.0/examples/sign-in/signin.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin" action="?action=checkUser" method="POST">
+      <img class="lg-4" src="./img/logo/logo.png" alt="" width="250" height="250">
+      <h1 class="h3 mb-3 font-weight-normal">Connectez-vous !</h1>
+      <label for="inputEmail" class="sr-only">Adresse mail</label>
+      <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Adresse mail" required autofocus>
+      <label for="inputPassword" class="sr-only">Mot de passe</label>
+      <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Mot de passe" required>
+	  <button class="btn btn-lg btn-primary btn-block" name="SignUp" type="submit">Se connecter</button>
+	  <a href="index.php?action=signUp">Inscrivez-vous</a>
+	</form>
+	
+  </body>
 </html>
