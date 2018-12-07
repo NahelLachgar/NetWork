@@ -21,6 +21,9 @@ function addPost($content,$type,$userId) {
 // CHECK SI LE COMPTE EXISTE
 function checkUserExists($email, $password){
 
+	// ON UTILISE SLEEP POUR EVITER UNE ATTAQUE PAR FORCE BRUTE
+	sleep(1);
+
 	// ON SECURISE LES DONNEES 
 	$email = htmlspecialchars($email);
 	$password = htmlspecialchars($password);
