@@ -43,7 +43,7 @@ require('controller/controller.php');
                 validateProfile(htmlspecialchars($_POST['newname']),htmlspecialchars($_POST['newsurname']),htmlspecialchars($_POST['newmail']),htmlspecialchars($_POST['newpass']),htmlspecialchars($_POST['newphone']),htmlspecialchars($_POST['newjob']),htmlspecialchars($_POST['newcompay']),htmlspecialchars($_POST['newtown']),htmlspecialchars($_SESSION['id']));
                 break;
             case 'signUp':
-                require('./view/signUpView.php');
+                require('./view/signUpView.html');
                 break;
             case 'post':
                 addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));

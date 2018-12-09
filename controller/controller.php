@@ -15,18 +15,30 @@ function addPost($content,$type,$userId) {
 	post($content,$type,$userId);
 	header('Location:index.php?action=home');
 }
+
 // CHECK SI LE COMPTE EXISTE
 function checkUserExists($email, $password){
+
+	// ON UTILISE SLEEP POUR EVITER UNE ATTAQUE PAR FORCE BRUTE
+	sleep(1);
+
+	// ON SECURISE LES DONNEES 
+	$email = htmlspecialchars($email);
+	$password = htmlspecialchars($password);
+	$errors = array();
+
 	$user= checkUser($email);
-	if($user['email'] === false){
-		echo "votre compte n'existe pas!";
+
+	if($user === false){
+		$errors['compte'] = "votre compte n'existe pas !";
+		require('view/signInView.php');		
 	} else {
 		if(password_verify($password, $user['password'])){
 			$_SESSION['id'] = $user['id'];
 			header('Location:index.php?action=home');
-		} else {
-			require('view/signInView.html');
-			die ("Les indentifiants saisis sont incorrects");
+		} else { 
+			$errors['wrongPassWord'] = "Les indentifiants saisis sont incorrects.";
+			require('view/signInView.php');			
 		}
 	}
 }
@@ -62,8 +74,11 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	// ON HASH LE MOT DE PASSE 
 		$hashpassword = password_hash($password, PASSWORD_BCRYPT, $options);
 
+	
 	// PHOTO
 	$profilePhoto = $_FILES['photo']['name'];
+	
+	if($profilePhoto){
 	// ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
    	list($name, $ext) = explode(".", $profilePhoto);    
    	// ON RAJOUTE UN . DEVANT L'EXTENSION 
@@ -72,10 +87,11 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	$path = "./img/profile/".$email.$ext;
 	move_uploaded_file($_FILES['photo']['tmp_name'],$path);
 	$profilePhoto = $email.$ext; 
+	}
 	// ON ENVOIE LES DONNES DANS LA BDD
-    addUser($firstName, $lastName, $email, $phone, $profilePhoto, $hashpassword, $status, $job, $company, $town); 
-    require('view/signInView.html');
-
+	addUser($firstName, $lastName, $email, $phone, $profilePhoto, $hashpassword, $status, $job, $company, $town); 
+	require('view/signInView.php');
+	
 	}
 }
 	//FUNCTION RECHERCHE
