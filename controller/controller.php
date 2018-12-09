@@ -3,11 +3,12 @@ require('model/model.php');
 // AFFICHE LA PAGE D'ACCUEIL ET EXÉCUTE LES FONCTIONS
 function home($userId) {
 	$profile = getProfile($userId);
-	$contacts = getContacts($userId);
+	$contactsNb = getContactsCount($userId);
+	if ($contactsNb>0) {
 	$contactsPosts = getContactsPosts($userId);
 	$companiesSuggests = getCompanySuggests($userId);
 	$employeesSuggests = getEmployeeSuggests($userId);
-	$contactsNb = getContactsCount($userId);
+	}
 	$followedCompaniesNb = getFollowedCompaniesCount($userId);
 	require('view/homeView.php');
 }

@@ -108,6 +108,7 @@ ob_start();
                 </div>
                 <!----------------->
 
+            <?php if ($contactsNb>0) :?>
                
 
                 <!--- ---------FIL D'ACTUALITÉ--------- -->
@@ -292,7 +293,9 @@ ob_start();
                         <a href="index.php?action=addcontacts&id=<?= $companiesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
                         </div>
     </div>    
-                <?php endif; ?>
+                <?php endif; 
+                        endif;
+                ?>
 <!--------------------------> 
 
  
