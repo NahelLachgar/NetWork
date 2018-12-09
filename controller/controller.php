@@ -11,8 +11,21 @@ function home($userId) {
 	$followedCompaniesNb = getFollowedCompaniesCount($userId);
 	require('view/homeView.php');
 }
+
+function contactHome($contactId) {
+	$profile = getProfile($contactId);
+	$contactPosts = getContactPosts($contactId);
+	$contactsNb = getContactsCount($contactId);
+	$followedCompaniesNb = getFollowedCompaniesCount($contactId);
+	require('view/profilepageView.php');	
+}
 function addPost($content,$type,$userId) {
 	post($content,$type,$userId);
+	header('Location:index.php?action=home');
+}
+
+function addComment($content,$userId,$postId) {
+	comment($content,$userId,$postId);
 	header('Location:index.php?action=home');
 }
 // CHECK SI LE COMPTE EXISTE
@@ -143,6 +156,11 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		{
 			header('Location:index.php?action=home');
 		}
+	}
+
+	function disconnect() {
+		session_destroy();
+		header('Location:index.php');
 	}
 
 	// MONTRER LES CONTACTS

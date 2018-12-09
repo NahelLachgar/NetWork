@@ -25,7 +25,8 @@ require('controller/controller.php');
                 updateToProfile();
                 break;
             case 'profilePage':
-                getProfileSearch(htmlspecialchars($_POST['id']));
+                contactHome($_POST['id']);
+                //getProfileSearch(htmlspecialchars($_POST['id']));
                 break;
             case 'signUp':
                 require('./view/signUpView.html');
@@ -50,6 +51,9 @@ require('controller/controller.php');
                 break;
             case 'addContact':
                 addToContacts(htmlspecialchars($_POST['ID']),$_session['id']);
+                break; 
+            case 'comment':
+                addcomment(htmlspecialchars($_POST['comment']),$_SESSION['id'],$_POST['postId']);
                 break; 
             default:
                 home(htmlspecialchars($_SESSION['id']));

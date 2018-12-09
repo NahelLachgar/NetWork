@@ -52,6 +52,9 @@ ob_start();
                         <li class="list-group-item">
                             <div class="h6 text-muted"><a href="index.php?action=updateProfile">Modifier le profil</a></div>
                         </li>
+                        <li class="list-group-item">
+                            <div class="h6 text-muted"><a href="index.php?action=disconnect">Déconnexion</a></div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -137,12 +140,15 @@ ob_start();
                             </p>
                         </div>
                         <div class="card-footer">
-                            <div class="input-group">
-                        <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
-                            <i class="fa fa-comment"></i>
-                    </button>
+                        <form action="index.php?action=comment" method="post">
+                        <div class="input-group">
+                            <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">
+                            <input type="hidden" name="postId" value="<?=$contactsPosts[$i]['id']?>">
+                            <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
+                                <i class="fa fa-comment"></i>
+                            </button>
+                         </form>
                 </div>
                 </div>
                         </div>
