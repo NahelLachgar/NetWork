@@ -41,7 +41,7 @@ ob_start();
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <div class="h6 text-muted">Entreprises</div>
+                            <div class="h6 text-muted"><a href="index.php?action=companyList">Entreprises</a></div>
                             <div class="h5"><?= $followedCompaniesNb ?></div>
                         </li>
                         <li class="list-group-item">
