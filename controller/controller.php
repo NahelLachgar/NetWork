@@ -154,20 +154,26 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		require('./view/profilepageView.php');
 	}
 
-	function validateProfile($lastName,$name,$email,$pass,$phone,$job,$company,$town,$id)
+	// MODIFIER SON PROFIL
+	function validateProfile($lastname,$name,$email,$pass,$confirmPass,$phone,$job,$company,$town,$id)
 	{
-		$lastName = htmlspecialchars($lastName);
+		$lastName = htmlspecialchars($lastname);
 		$Name = htmlspecialchars($name);
 		$Email = htmlspecialchars($email);
 		$Phone = htmlspecialchars($phone);
 		$Job = htmlspecialchars($job);
 		$Company = htmlspecialchars($company);
 		$Town = htmlspecialchars($town);
-		$validate = updateProfiles($lastName,$Name,$Email,$pass,$Phone,$Job,$Company,$Town,$id);
-		if( $validate == TRUE )
-		{
+		if($pass != $confirmPass){
+			header('Location:index.php?action=updateProfile');
+		}else{
+			$validate = updateProfiles($lastName,$Name,$Email,$pass,$Phone,$Job,$Company,$Town,$id);
+			if( $validate == TRUE )
+			{
 			header('Location:index.php?action=home');
+			}
 		}
+		
 	}
 
 	// MONTRER LES CONTACTS

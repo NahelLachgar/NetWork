@@ -18,12 +18,6 @@ require('controller/controller.php');
             case 'search':
                 search(htmlspecialchars($_SESSION['id']),htmlspecialchars($_POST['research']));
                 break;
-            case 'updateprofile':
-                require('./view/profilUpdateView.php');
-                break;
-            case 'profilemodif':
-                updateToProfile();
-                break;
             case 'profilePage':
                 getProfileSearch(htmlspecialchars($_POST['id']));
                 break;
@@ -37,10 +31,10 @@ require('controller/controller.php');
                 showCompanies(htmlspecialchars($_SESSION['id']));
                 break;
             case 'updateProfile':
-                updateToProfile(htmlspecialchars($_SESSION['id']));
+                updateToProfile($_SESSION['id']);
                 break;
-            case 'profileModif':
-                validateProfile(htmlspecialchars($_POST['newname']),htmlspecialchars($_POST['newsurname']),htmlspecialchars($_POST['newmail']),htmlspecialchars($_POST['newpass']),htmlspecialchars($_POST['newphone']),htmlspecialchars($_POST['newjob']),htmlspecialchars($_POST['newcompay']),htmlspecialchars($_POST['newtown']),htmlspecialchars($_SESSION['id']));
+            case 'profilemodif':
+               validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newPass'],$_POST['confirmNewPass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
                 break;
             case 'signUp':
                 require('./view/signUpView.html');
