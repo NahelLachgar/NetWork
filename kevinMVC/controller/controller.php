@@ -82,13 +82,21 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	
 	if($profilePhoto){
 	// ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
-   	list($name, $ext) = explode(".", $profilePhoto);    
+	   list($name, $ext) = explode(".", $profilePhoto);   
+	   
+	if($ext != "jpeg" || $ext != "png"){
+		die("mauvaise exension");
+		header('Location:index.php?action=signUp');
+	} else {
+
    	// ON RAJOUTE UN . DEVANT L'EXTENSION 
   	$ext=".".$ext; 
 	// ON MET LA PHOTO DANS UN DOSSIER IMG
 	$path = "./img/profile/".$email.$ext;
 	move_uploaded_file($_FILES['photo']['tmp_name'],$path);
 	$profilePhoto = $email.$ext; 
+	}
+
 	}
 	// ON ENVOIE LES DONNES DANS LA BDD
 	addUser($firstName, $lastName, $email, $phone, $profilePhoto, $hashpassword, $status, $job, $company, $town); 
