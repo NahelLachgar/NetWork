@@ -92,7 +92,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	}
 	// ON ENVOIE LES DONNES DANS LA BDD
 	addUser($firstName, $lastName, $email, $phone, $profilePhoto, $hashpassword, $status, $job, $company, $town); 
-    require('view/signInView.html');
+	require('view/signInView.php');
 	
 	}
 }
