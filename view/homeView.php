@@ -187,18 +187,18 @@ ob_start();
         </div>
     </div>
     <?php 
-    for ($i = 1; $i < count($employeesSuggests)-1; $i++) : ?>
+    for ($i = 0; $i < count($employeesSuggests); $i++) : ?>
     <div class="carousel-item">
     <div class="card gedf-card">
                         <div class="card-body">
                         <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                         <h5 class="card-title"><?= $employeesSuggests[$i]['name'] . ' ' . $employeesSuggests[$i]['lastName'] ?></h5>
                         <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[$i]['job'] . ' chez ' . $employeesSuggests[$i]['company'] ?></h6>
-                        <a href="#" class="card-link"> <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[$i]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a></a>
-                    </div>
-                </div>     </div>
-    <?php endfor; 
-           endif; ?>
+                        <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[$i]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                        </div>
+    </div>    
+    </div> 
+    <?php endfor; ?>
     
 
     
@@ -212,42 +212,81 @@ ob_start();
     <span class="sr-only">Next</span>
   </a>
 </div>
+                <?php elseif (count($employeeSuggest)==1): ?>
+                <div class="card gedf-card">
+                        <div class="card-body">
+                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                        <h5 class="card-title"><?= $employeesSuggests[0]['name'] . ' ' . $employeesSuggests[0]['lastName'] ?></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[$i]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
+                        <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                        </div>
+    </div>    
+                <?php endif; ?>
+
 
 <!--------------------------> 
 
 <!--------- SUGGESTIONS D'ENTREPRISE----------->
 <?php if (count($companiesSuggests)>1) :?>
+
+<div class="col-md-3">
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    <?php for ($i = 0; $i < count($companiesSuggests); $i++) : ?>
+    <li data-target="#carouselExampleIndicators" data-slide-to="<?=$companiesSuggests[$i]?>"></li>
+    <?php endfor ?>
   </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
+  <div class="carousel-innitemer">
+    <div class="carousel- active">
     <div class="card gedf-card">
             <div class="card-body">
                         <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                        <h5 class="card-title"><?= $companiesSuggests[0]['name']?></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[0]['town'] ?></h6>
-                        <a class="card-link" href="index.php?action=addcontacts&id=<?= $companiesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                        <h5 class="card-title"><?= $companiesSuggests[0]['name'] . ' ' . $companiesSuggests[0]['lastName'] ?></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[0]['job'] . ' chez ' . $companiesSuggests[0]['company'] ?></h6>
+                        <form action="index.php?addContact" method="POST">
+                        <input type="hidden">
+                            <button type="button" class="btn btn-link" name="contactId" value="<?= $companiesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
+                        </form>
             </div>
         </div>
     </div>
     <?php 
-    
-    for ($i = 1; $i < count($companiesSuggests); $i++) : ?>
+    for ($i = 0; $i < count($companiesSuggests); $i++) : ?>
     <div class="carousel-item">
     <div class="card gedf-card">
-                    <div class="card-body">
+                        <div class="card-body">
                         <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                         <h5 class="card-title"><?= $companiesSuggests[$i]['name'] . ' ' . $companiesSuggests[$i]['lastName'] ?></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[0]['town'] ?></h6>
-                        <a class="card-link" href="index.php?action=addcontacts&id=<?= $companiesSuggests[$i]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
-                    </div>
-                </div>     </div>
-    <?php endfor; 
-           endif; ?>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[$i]['job'] . ' chez ' . $companiesSuggests[$i]['company'] ?></h6>
+                        <a href="index.php?action=addcontacts&id=<?= $companiesSuggests[$i]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                        </div>
+    </div>    
+    </div> 
+    <?php endfor; ?>
+    
+
+    
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+                <?php elseif (count($companiesSuggests)==1): ?>
+                <div class="card gedf-card">
+                        <div class="card-body">
+                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                        <h5 class="card-title"><?= $companiesSuggests[0]['name'] . ' ' . $companiesSuggests[0]['lastName'] ?></h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[$i]['job'] . ' chez ' . $companiesSuggests[0]['company'] ?></h6>
+                        <a href="index.php?action=addcontacts&id=<?= $companiesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                        </div>
+    </div>    
+                <?php endif; ?>
 <!--------------------------> 
 
  

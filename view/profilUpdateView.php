@@ -35,7 +35,8 @@ ob_start();
         <div class="col-md-5">
             <form class="form-label-group" action="index.php?action=profilemodif" method="POST">
                 <div>
-                    <img class="rounded-circle" width="100" src="https://picsum.photos/50/50" alt="Photo de profil">
+               <p> <img class="rounded-circle" width="100" src="https://picsum.photos/50/50" alt="Photo de profil"></p>        
+                <p>Changez votre photo de profil :<input type="file" name="newPhoto" ></p>
                 </div>
                 <div class="form-label-group">
                     <label for="newName">Nom</label>
