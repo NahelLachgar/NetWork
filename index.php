@@ -27,23 +27,23 @@ require('controller/controller.php');
             case 'profilePage':
                 getProfileSearch(htmlspecialchars($_POST['id']));
                 break;
-            case 'signUp':
-                require('./view/signUpView.html');
-                break;
             case 'post':
                 addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
                 break;
             case 'contactList':
                 showContacts(htmlspecialchars($_SESSION['id']));
                 break;
-                case 'updateProfile':
+            case 'companyList':
+                showCompanies(htmlspecialchars($_SESSION['id']));
+                break;
+            case 'updateProfile':
                 updateToProfile(htmlspecialchars($_SESSION['id']));
                 break;
             case 'profileModif':
                 validateProfile(htmlspecialchars($_POST['newname']),htmlspecialchars($_POST['newsurname']),htmlspecialchars($_POST['newmail']),htmlspecialchars($_POST['newpass']),htmlspecialchars($_POST['newphone']),htmlspecialchars($_POST['newjob']),htmlspecialchars($_POST['newcompay']),htmlspecialchars($_POST['newtown']),htmlspecialchars($_SESSION['id']));
                 break;
             case 'signUp':
-                require('./view/signUpView.html');
+                require('./view/signUpView.php');
                 break;
             case 'post':
                 addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
@@ -57,7 +57,7 @@ require('controller/controller.php');
         }
     } else {
         if (!isset($_SESSION['name'])) {
-        require('view/signInView.html');
+        require('view/signInView.php');
         } else {
             header('Location:index.php?action=home');
     }

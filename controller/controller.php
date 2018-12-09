@@ -104,9 +104,18 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		}
 	}
 	
+	// AFFICHER LES ENTREPRISES
+	function showCompanies($id){
+		$contacts = getContacts($id);
 
+		foreach ($contacts as $contact) {
+			$res[] = getProfile($contact['id']);
+		
+		}
+		require("./view/showCompanies.php");
+	}
 	
-	
+	// AFFICHER LES CONTACTS
 	function contactList($sid)
 	{
 		$list = getContacts($sid);
