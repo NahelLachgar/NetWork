@@ -60,11 +60,13 @@ function checkAddUser($firstName, $lastName,$email, $phone, $photo, $password, $
 		$contact = getContactToUser($ids);
 		if($res == TRUE && empty($contact)){
 			require('./view/resultatSearchView.php');
-		} else if($res == TRUE && !empty($contact)) {
-			$return = "Aucun resultat trouve";
+		} else 
+			if($res == TRUE && !empty($contact)) {
 			//ON REVERIFIE SI $RES N'EST PAS VIDE DANS LA PAGE CI-DESSOUS 
 			require('./view/resultatDetailSearchView.php');
-		}
+			} else{
+				require('./view/resultatDetailSearchView.php');
+			}
 	}
 
 	//FUNCTION AJOUT DE CONTACT

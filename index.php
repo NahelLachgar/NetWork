@@ -24,6 +24,9 @@ require('controller/controller.php');
             case 'addcontacts':
                 addToContact($_GET['id'],$_SESSION['id']);
                 break;
+            case 'removeContacts':
+                removeContacts($_GET['id'],$_SESSION['id']);
+                break;
             case 'profilepage':
                 getProfileSearch($_GET['id']);
                 break;

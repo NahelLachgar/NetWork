@@ -27,7 +27,8 @@ ob_start();
         </form>
     </nav>
     <br><br>
-        <?php
+        <?php 
+        if(!empty($res)):
             foreach ($res as $resultat) : 
                     if(in_array($resultat['idContact'],$contact)):
                         if($resultat['status'] == 'employee') :
@@ -55,7 +56,7 @@ ob_start();
                     <div class="card-body">
                         <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form action="index.php?action=profilePage" method="POST"><input type="hidden" name="id" value="<?= $resultat['idContact'] ?>"> <input type="submit" class="btn btn-link" value="<?= $resultat['name'] . ' ' . $resultat['lastName'] ?>"> </form></h5>
                         <p class="card-text"><?= $resultat['job'] . ' chez ' . $resultat['company'] ?></p>
-                        <a href="index.php?action=removeContacts&id=<?= $resultat['idContact'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                        <a href="index.php?action=addContacts&id=<?= $resultat['idContact'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
                     </div>
             </div>
             </a> <br>
@@ -69,6 +70,13 @@ ob_start();
             <?php endif;
             endif;
             endforeach;
+        else: ?>
+                <center><div class="card gedf-card">
+                    <div class="card-body">       
+                   <b> Aucun resultat trouve </b>
+                    </div></center>
+   <?php
+        endif;
     $content = ob_get_clean();
     require('view/template.php');
     ?>

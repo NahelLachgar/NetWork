@@ -245,8 +245,9 @@ function getSearch($sid, $name)
     $res = "%" . $name . "%";
     $req = $db->prepare('SELECT users.id as idContact,users.lastName,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.id != ? AND (users.lastname LIKE ?  OR users.name LIKE ?) ');
     $req->execute(array($sid, $res, $res));
+    $post = $req->fetchAll();
 
-    return $req;
+    return $post;
 }
 
     //AJOUT D"UN CONTACT
