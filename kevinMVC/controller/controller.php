@@ -84,9 +84,9 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	// ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
 	   list($name, $ext) = explode(".", $profilePhoto);   
 	   
-	if($ext != "jpeg" || $ext != "png"){
-		die("mauvaise exension");
-		header('Location:index.php?action=signUp');
+	if($ext != "png" || $ext != "jpeg"){
+		require('view/signUpView.html');
+		die("mauvaise extension");
 	} else {
 
    	// ON RAJOUTE UN . DEVANT L'EXTENSION 
