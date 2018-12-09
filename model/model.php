@@ -29,6 +29,17 @@ function getContacts($userId)
     ));
     return $contactsId;
 }
+
+function getContactPosts($contactId) {
+    $db = dbConnect();
+    $posts = $db->prepare('SELECT p.*,u.lastName AS lastName,u.name AS name, u.job AS job, u.company AS company, u.id AS contactId FROM users u 
+        JOIN post ON u.id = post.user
+        JOIN publications p ON post.publication = p.id
+        WHERE post.user = ? 
+        ORDER BY p.postDate DESC');
+    $posts->execute(array($contactId));   
+    return $posts;
+}
 //RÉCUPÉRATION DES PUBLICATIONS DES CONTACTS ET ENTREPRISES SUIVIES PAR L'UTILISATEUR (FIL D'ACUTALITÉ)
 function getContactsPosts($userId)
 {
@@ -201,7 +212,7 @@ function comment($content, $userId, $postId)
         "content" => $content,
         "user" => $userId
     ));
-    $insertComment = $db->prepare('INSERT INTO comment(com,publication) VALUES (LAST_INSERT_ID(),:postId');
+    $insertComment = $db->prepare('INSERT INTO comment (com,publication) VALUES (LAST_INSERT_ID(),?)');
     $insertComment->execute(array($postId));
 }
 // DETECTION SI L'UTILISATEUR EXSITE
