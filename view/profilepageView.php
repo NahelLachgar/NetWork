@@ -45,11 +45,17 @@ ob_start();
                             <div class="h5"><?= $followedCompaniesNb ?></div>
                         </li>
                         <li class="list-group-item">
-                            <div class="h6 text-muted">Contacts</div>
+                            <form action="index.php?action=contactContacts" action="POST">
+                            <input type="hidden" name="id" value="<?=$profile['id']?>">
+                            <button type="submit" class="btn btn-link">Contacts</button>
+                            </form>
                             <div class="h5"><?= $contactsNb ?></div>
                         </li>
                         <li class="list-group-item">
-                            <div class="h6 text-muted"><a href="index.php?action=disconnect">Déconnexion</a></div>
+                        <form action="index.php?action=addContact" method="POST">
+                            <input type="hidden" name="contactId" value="<?=$profile['id']?>">
+                            <button type="submit" class="btn btn-link"><img src="./img/icon/users.png"></button>
+                        </form>
                         </li>
                     </ul>
                 </div>
