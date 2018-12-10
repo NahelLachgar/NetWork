@@ -1,1 +1,0 @@
-Toutes les photos de profil seront rangées ici
