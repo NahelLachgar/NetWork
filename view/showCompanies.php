@@ -31,11 +31,11 @@ ob_start();
             echo "vous ne suivez aucune entreprise!";
             ?>
         <?php elseif ($res == true) :
-            foreach ($res as $resultat) : ?>
-            <?php if ($resultat['status'] == 'company') : ?>
+            foreach ($res as $result) : ?>
+            <?php if ($result['status'] == 'company') : ?>
             <div class="card gedf-card">
                         <div class="card-body">
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<a href="index.php?action=profilepage&id=<?= $resultat['id'] ?>"><?= $resultat['name'] . ' ' . $resultat['lastName'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>      
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<a href="index.php?action=profilepage&id=<?= $result['id'] ?>"><?= $result['name'] . ' ' . $result['lastName'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>      
                         <?php endif;?>
 
                         </div>

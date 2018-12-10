@@ -30,46 +30,46 @@ ob_start();
     <br><br>
         <?php
            if(!empty($res)):
-            foreach ($res as $resultat) : 
-                    if(in_array($resultat['idContact'],$contact)):
-                        if($resultat['status'] == 'employee') :
+            foreach ($res as $result) : 
+                    if(in_array($result['idContact'],$contact)):
+                        if($result['status'] == 'employee') :
             ?>
             <div class="card gedf-card">
                     <div class="card-body">
                         <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form action="index.php?action=profilePage" method="POST">
-                            <input type="hidden" name="contactId" value="<?= $resultat['idContact'] ?>"> 
+                            <input type="hidden" name="contactId" value="<?= $result['idContact'] ?>"> 
                             <input type="hidden" name="token" value="0">
-                            <input type="submit" class="btn btn-link" value="<?= $resultat['name'] . ' ' . $resultat['lastName'] ?>"> 
+                            <input type="submit" class="btn btn-link" value="<?= $result['name'] . ' ' . $result['lastName'] ?>"> 
                         </form></h5>
-                        <p class="card-text"><?= $resultat['job'] . ' chez ' . $resultat['company'] ?></p>
-                        <a href="index.php?action=removeContact&id=<?= $resultat['idContact'] ?>" class="card-link"> <img src="./img/icon/unfriend.png"> </a>
+                        <p class="card-text"><?= $result['job'] . ' chez ' . $result['company'] ?></p>
+                        <a href="index.php?action=removeContact&id=<?= $result['idContact'] ?>" class="card-link"> <img src="./img/icon/unfriend.png"> </a>
                     </div>
             </div>
             </a> <br>
             <?php else: ?>
             <div class="card gedf-card">
                     <div class="card-body">       
-                        <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form action="index.php?action=profilePage" method="POST"><input type="hidden" name="contactId" value="<?= $resultat['idContact'] ?>"><input type="hidden" name="token" value="0"> <input type="submit" class="btn btn-link" value="<?= $resultat['name'] . ' ' . $resultat['lastName'] ?>"> </form></h5>
-                        <a href="index.php?action=removeContact&id=<?= $resultat['idContact'] ?>" class="card-link">Ne plus suivre</a>
+                        <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form action="index.php?action=profilePage" method="POST"><input type="hidden" name="contactId" value="<?= $result['idContact'] ?>"><input type="hidden" name="token" value="0"> <input type="submit" class="btn btn-link" value="<?= $result['name'] . ' ' . $result['lastName'] ?>"> </form></h5>
+                        <a href="index.php?action=removeContact&id=<?= $result['idContact'] ?>" class="card-link">Ne plus suivre</a>
                     </div>
             </div></a> <br>
                 <?php endif; 
                     else:  
-                    if($resultat['status'] == 'employee') :
+                    if($result['status'] == 'employee') :
                         ?>
                 <div class="card gedf-card">
                     <div class="card-body">
-                        <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form action="index.php?action=profilePage" method="POST"><input type="hidden" name="contactId" value="<?= $resultat['idContact'] ?>"><input type="hidden" name="token" value="1"> <input type="submit" class="btn btn-link" value="<?= $resultat['name'] . ' ' . $resultat['lastName'] ?>"> </form></h5>
-                        <p class="card-text"><?= $resultat['job'] . ' chez ' . $resultat['company'] ?></p>
-                        <a href="index.php?action=addContact&id=<?= $resultat['idContact'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                        <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form action="index.php?action=profilePage" method="POST"><input type="hidden" name="contactId" value="<?= $result['idContact'] ?>"><input type="hidden" name="token" value="1"> <input type="submit" class="btn btn-link" value="<?= $result['name'] . ' ' . $result['lastName'] ?>"> </form></h5>
+                        <p class="card-text"><?= $result['job'] . ' chez ' . $result['company'] ?></p>
+                        <a href="index.php?action=addContact&id=<?= $result['idContact'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
                     </div>
             </div>
             </a> <br>
             <?php else: ?>
             <div class="card gedf-card">
                     <div class="card-body">       
-                        <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form action="index.php?action=profilePage" method="POST"><input type="hidden" name="contactId" value="<?= $resultat['idContact'] ?>"><input type="hidden" name="token" value="1"> <input type="submit" class="btn btn-link" value="<?= $resultat['name'] . ' ' . $resultat['lastName'] ?>"> </form></h5>
-                        <a href="index.php?action=addContact&id=<?= $resultat['idContact'] ?>" class="card-link"> Suivre </a>
+                        <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form action="index.php?action=profilePage" method="POST"><input type="hidden" name="contactId" value="<?= $result['idContact'] ?>"><input type="hidden" name="token" value="1"> <input type="submit" class="btn btn-link" value="<?= $result['name'] . ' ' . $result['lastName'] ?>"> </form></h5>
+                        <a href="index.php?action=addContact&id=<?= $result['idContact'] ?>" class="card-link"> Suivre </a>
                     </div>
             </div></a> <br>
             <?php endif;
@@ -78,7 +78,7 @@ ob_start();
         else: ?>
         <center><div class="card gedf-card">
             <div class="card-body">       
-           <b> Aucun resultat trouve </b>
+           <b> Aucun result trouve </b>
             </div></center>
 <?php
 endif;

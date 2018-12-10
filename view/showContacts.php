@@ -32,14 +32,14 @@ ob_start();
             ?>
 
         <?php elseif ($res == true) :
-            foreach ($res as $resultat) : ?>
+            foreach ($res as $result) : ?>
 
-            <?php if ($resultat['status'] == 'employee') : ?>
+            <?php if ($result['status'] == 'employee') : ?>
             <div class="card gedf-card">
                         <div class="card-body">
                             <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
-                            <a href="index.php?action=profilePage&contactId=<?= $resultat['id'] ?>"><?= $resultat['name'] . ' ' . $resultat['lastName'] ?></a></h5>
-                            <p class="card-text"><?= $resultat['job'] . ' chez ' . $resultat['company'] ?></p>       
+                            <a href="index.php?action=profilePage&contactId=<?= $result['id'] ?>"><?= $result['name'] . ' ' . $result['lastName'] ?></a></h5>
+                            <p class="card-text"><?= $result['job'] . ' chez ' . $result['company'] ?></p>       
                         <?php endif;?>
                         </div>
                     </div>
