@@ -52,10 +52,16 @@ ob_start();
                             <div class="h5"><?= $contactsNb ?></div>
                         </li>
                         <li class="list-group-item">
-                        <form action="index.php?action=addContact" method="POST">
-                            <input type="hidden" name="contactId" value="<?=$profile['id']?>">
-                            <button type="submit" class="btn btn-link"><img src="./img/icon/users.png"></button>
-                        </form>
+                           <?php if($_POST['token'] == 0): ?>
+                        <a href="index.php?action=removeContact&id=<?=$profile['id']?>">
+                            <button type="submit" class="btn btn-link"><img src="./img/icon/unfriend.png"></a>
+                            <?php elseif($_POST['token'] == 1): ?>
+                         <a href="index.php?action=addContact&id=<?=$profile['id']?>">
+                        <button type="submit" class="btn btn-link"><img src="./img/icon/users.png"></a>
+                        <?php elseif($_POST['token'] == 2):  ?>
+                        <a href="index.php?action=removeContact&id=<?=$profile['id']?>">
+                            <button type="submit" class="btn btn-link"><img src="./img/icon/unfriend.png"></a>
+                        <?php endif;  ?>
                         </li>
                     </ul>
                 </div>

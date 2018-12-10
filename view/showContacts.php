@@ -33,7 +33,7 @@ ob_start();
             <?php if ($resultat['status'] == 'employee') : ?>
             <div class="card gedf-card">
                         <div class="card-body">
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form action="index.php?action=profilePage" method="POST"><input type="hidden" name="contactId" value="<?= $resultat['id'] ?>"> <input type="submit" class="btn btn-link" value="<?= $resultat['name'] . ' ' . $resultat['lastName'] ?>">  </form></h5>
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form action="index.php?action=profilePage" method="POST"><input type="hidden" name="contactId" value="<?= $resultat['id'] ?>"><input type="hidden" name="token" value="2"> <input type="submit" class="btn btn-link" value="<?= $resultat['name'] . ' ' . $resultat['lastName'] ?>">  </form></h5>
                             <p class="card-text"><?= $resultat['job'] . ' chez ' . $resultat['company'] ?></p>       
                         <?php endif;?>
 

@@ -118,7 +118,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		} else if( ($res == TRUE) && (!empty($contact)) ){
 			 require('./view/resultatDetailSearchView.php');
 		} else{
-			echo "Aucun resultat";
+			require('./view/resultatDetailSearchView.php');
 		}
 	}
 
@@ -132,6 +132,15 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		}
 	}
 	
+		//FUNCTION UNFOLLOW UN CONTACT
+		function removeContact($idcontact,$sid)
+		{
+			$unf = unfollow($idcontact,$sid);
+			if($unf == TRUE) 
+			{
+				header('Location:index.php?action=home');	
+			}
+		}
 	// AFFICHER LES ENTREPRISES
 	function showCompanies($id){
 		$contacts = getContacts($id);
