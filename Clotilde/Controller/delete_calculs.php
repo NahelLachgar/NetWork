@@ -2,7 +2,7 @@
 //PAGE DE SUPPRESSION DE COMPTE 2
 	session_start();
 	if(isset($_SESSION['id']) && empty($_SESSION['id'])!==true) {
-		require('../Model/bdd.php');
+		require('../Model/dbconnect.php');
 		$bdd=database();
 		require('../Model/functions_delete.php');
 		//SUPPRIMER COMPTE
