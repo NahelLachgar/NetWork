@@ -3,8 +3,8 @@
 	session_start();
 	if(isset($_SESSION['id']) && empty($_SESSION['id'])!==true)
 	{
-		require('../Model/bdd.php');
-		$bdd=database();
+		require('../Model/model.php');
+		$bdd=dbconnect();
 		require('../Model/functions_delete.php');
 		//SUPPRIMER COMPTE
 		//supprimer commentaires
@@ -21,7 +21,7 @@
 		delete_all_contacts($bdd, $_SESSION['id']);
 		//supprimer l'utilisateur
 		delete_user($bdd, $_SESSION['id']);
-		header('location: ../index.php?page=logout');
+		header('location: ../index.php?page=disconnect');
 	}
 	else
     {
