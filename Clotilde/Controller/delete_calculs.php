@@ -1,8 +1,9 @@
 <?php
 //PAGE DE SUPPRESSION DE COMPTE 2
 	session_start();
-	if(isset($_SESSION['id']) && empty($_SESSION['id'])!==true) {
-		require('../Model/dbconnect.php');
+	if(isset($_SESSION['id']) && empty($_SESSION['id'])!==true)
+	{
+		require('../Model/bdd.php');
 		$bdd=database();
 		require('../Model/functions_delete.php');
 		//SUPPRIMER COMPTE
@@ -14,7 +15,7 @@
 		delete_all_messages($bdd, $_SESSION['id']);
 		//supprimer evenements
 		delete_all_events($bdd, $_SESSION['id']);
-		//supprime groupes
+		//supprimer groupes
 		delete_all_groups($bdd, $_SESSION['id']);
 		//supprimer contacts
 		delete_all_contacts($bdd, $_SESSION['id']);
@@ -22,7 +23,8 @@
 		delete_user($bdd, $_SESSION['id']);
 		header('location: ../index.php?page=logout');
 	}
-	else {
+	else
+    {
         header('location: ../index.php');
     }
 ?>

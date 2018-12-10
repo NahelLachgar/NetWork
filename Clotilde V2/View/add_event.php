@@ -7,9 +7,11 @@
 ?>
 	<h1>Ajouter des participants à l'événement</h1>
 <?php
-	if($contact!=false) {
+	if($contact!=false)
+	{
 		echo "<form action='Controller/evenement_calculs.php' method='POST'>";
-			for($i=0;$i<sizeof($contact);$i++) {
+			for($i=0;$i<sizeof($contact);$i++)
+			{
 				echo "<input type='checkbox' name='contact[]' value='".$contact[$i][0]."'>".$contact[$i][1]." ".$contact[$i][2]."<br/>";
 			}
 			echo "<input type='hidden' name='id' value='".$_GET['id']."'>
@@ -17,14 +19,17 @@
 			<br/><input type='submit' name='submit' value='Envoyer'>
 		</form>";
 	}
-	else {
+	else
+	{
 		echo "Vous ne possédez aucun contact à inviter à votre événement.";
 	}
-	if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="") {
+	if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="")
+    {
         echo $_SESSION['erreur']."<br/><br/>";
         $_SESSION['erreur']="";
     }
-    else {
+    else
+    {
         echo "<br/><br/>";
     }
 ?>

@@ -12,20 +12,24 @@
     <p id="place"></p>
 
     <script>
-    function functionDate() {
+    function functionDate()
+    {
         document.getElementById("date").innerHTML="<?php echo $event[1]; ?>";
     }
-    function functionPlace() {
+    function functionPlace()
+    {
         document.getElementById("place").innerHTML='<?php if(empty($event[2])==true){echo "Aucun lieu n&apos;a été désigné.";}else{echo $event[2];} ?>';
     }
     </script>
 
 <?php
-    if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="") {
+    if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="")
+    {
         echo "<br/>".$_SESSION['erreur']."<br/><br/>";
         $_SESSION['erreur']="";
     }
-    if($_GET['role']=='admin') {
+    if($_GET['role']=='admin')
+    {
         //modifier l'événement
         echo "<form action='index.php' method='GET'>
             <input type='hidden' name='page' value='update_event'>
@@ -46,7 +50,8 @@
             <input type='submit' name='submit' value='Ajouter des participants'>
         </form>";
     }
-    else if($_GET['role']=='participate') {
+    else if($_GET['role']=='participate')
+    {
         //PRENDRE EN COMPTE LES INVITATIONS
         /*
         echo "<form action='Controller/evenement_calculs.php' method='POST'>
@@ -80,12 +85,15 @@
 ?>
     <h2>Participants</h2>
 <?php
-    if($participate!=false) {
-        for($i=0;$i<sizeof($participate);$i++) {
+    if($participate!=false)
+    {
+        for($i=0;$i<sizeof($participate);$i++)
+        {
             //afficher profil du participant
 //METTRE PROFIL DANS HYPERLIEN
             echo "<a href='index.php?page='>".$participate[$i][1]." ".$participate[$i][2]."</a><br/>";
-            if($_GET['role']=='admin') {
+            if($_GET['role']=='admin')
+            {
                 //supprimer le participant
                 echo "<form action='Controller/evenement_calculs.php' method='POST'>
                     <input type='hidden' name='ID' value='".$participate[$i][0]."'>
@@ -98,7 +106,8 @@
         }
         echo "<br/>";
     }
-    else {
+    else
+    {
         echo "Personne ne participe à cet événement.<br/><br/>";
     }
 ?>

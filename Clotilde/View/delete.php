@@ -11,7 +11,8 @@
          <input type="submit" name ="submit" value="Non">
     </form>
 <?php
-	if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="") {
+	if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="")
+    {
         echo $_SESSION['erreur']."<br/><br/>";
         $_SESSION['erreur']="";
     }

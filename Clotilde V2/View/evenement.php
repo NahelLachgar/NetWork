@@ -7,11 +7,13 @@
         <input type="submit" name="submit" value="Créer un événement">
     </form>
 <?php
-    if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="") {
+    if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="")
+    {
         echo "<br/>".$_SESSION['erreur']."<br/>";
         $_SESSION['erreur']="";
     }
-    else {
+    else
+    {
         echo "<br/>";
     }
     //PRENDRE EN COMPTE LES INVITATIONS
@@ -32,10 +34,12 @@
     require('Model/functions_events.php');
     $role=2;
     $admin=selectAdmin($bdd, $_SESSION['id']);
-    if($admin!=false) {
+    if($admin!=false)
+    {
         echo "<h2>J'organise</h2>";
         //afficher les événéments que l'utilisateur organise
-        for($i=0;$i<sizeof($admin);$i++) { 
+        for($i=0;$i<sizeof($admin);$i++)
+        { 
             echo $admin[$i][1];
             echo "<form action='index.php' method='GET'>
                 <input type='hidden' name='page' value='show_event'>
@@ -45,14 +49,17 @@
             </form>";
         }
     }
-    else {
+    else
+    {
         $role--;
     }
     $event=selectMember($bdd, $_SESSION['id']);
-    if($event!=false) {
+    if($event!=false)
+    {
         echo "<br/><h2>Je participe</h2>";
         //afficher les événéments où l'utilisateur participe mais dont il n'est pas l'administrateur
-        for($j=0;$j<sizeof($event);$j++) {
+        for($j=0;$j<sizeof($event);$j++)
+        {
             echo $event[$j][1];
             echo "<form action='index.php' method='GET'>
                 <input type='hidden' name='page' value='show_event'>
@@ -62,10 +69,12 @@
             </form>";
         }
     }
-    else {
+    else
+    {
         $role--;
     }
-    if($role==0) {
+    if($role==0)
+    {
         echo "Vous ne participez à aucun événement.";
     }
 ?>

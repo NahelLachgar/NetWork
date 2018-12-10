@@ -10,11 +10,13 @@
         <input type="submit" name="submit" value="Envoyer">
     </form>
 <?php
-    if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="") {
+    if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="")
+    {
         echo "<br/>".$_SESSION['erreur']."<br/><br/>";
         $_SESSION['erreur']="";
     }
-    else {
+    else
+    {
         echo "<br/><br/>";
     }
 ?>
