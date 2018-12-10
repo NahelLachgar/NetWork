@@ -27,9 +27,11 @@ ob_start();
         </form>
     </nav>
     <br>
-        <?php if ($res == true) :
+    <?php if (empty($res)) :
+            echo "vous ne suivez aucune entreprise!";
+            ?>
+        <?php elseif ($res == true) :
             foreach ($res as $resultat) : ?>
-
             <?php if ($resultat['status'] == 'company') : ?>
             <div class="card gedf-card">
                         <div class="card-body">
@@ -41,8 +43,8 @@ ob_start();
             </div>
         <?php
         endforeach;
-        else :
-            echo $return;
+
+        
         endif; ?>
 
             
