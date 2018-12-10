@@ -27,7 +27,11 @@ ob_start();
         </form>
     </nav>
     <br>
-        <?php if ($res == true) :
+    <?php if (empty($res)) :
+            echo "vous n'avez pas de contact!";
+            ?>
+
+        <?php elseif ($res == true) :
             foreach ($res as $resultat) : ?>
 
             <?php if ($resultat['status'] == 'employee') : ?>
