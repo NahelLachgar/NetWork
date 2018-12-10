@@ -33,9 +33,9 @@ ob_start();
                         <div class="card-body">
             <?php if ($resultat['status'] == 'employee') : ?>
                             <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
-                            <form method="POST" action="index.php?action=profilePage"> 
+                            <form action="index.php?action=profilePage" method="POST" > 
                             <input type="hidden" name="contactId" value="<?= $resultat['idContact'] ?>"> 
-                            <button type="button" class="btn btn-light"><?= $resultat['name'] . ' ' . $resultat['lastName'] ?></button> 
+                            <a href="index.php?action=profilePage&contactId=<?= $resultat['idContact']?>&token=1s"  class="btn btn-link"><?= $resultat['name'] . ' ' . $resultat['lastName'] ?></a>
                              </form></h5>
                             <p class="card-text"><?= $resultat['job'] . ' chez ' . $resultat['company'] ?></p>
                             <a href="index.php?action=addContact&id=<?= $resultat['idContact'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>

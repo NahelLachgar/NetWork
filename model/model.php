@@ -61,7 +61,6 @@ function getContactsPosts($userId)
             $contactsPosts[0] = array_merge($contactsPosts[$i], $contactsPosts[0]);
         }
         $contactsPosts = array_merge($contactsPosts[$i], $contactsPosts[0]);
-    } 
     function deleteDouble($array)
     {
         $i = 0;
@@ -104,6 +103,7 @@ function getContactsPosts($userId)
     }      
    // echo(count($contactsPosts));
     $contactsPosts = arraySortId($contactsPosts);
+}
     return $contactsPosts;
 }
 //SUGGESTIONS D'EMPLOYÉS POUR L'UTILISATEUR 
