@@ -283,10 +283,12 @@ function getContactToUser($idUser)
     SELECT contact AS id FROM contacts WHERE user LIKE ?');
     $req->execute(array($idUser,$idUser));
     $post = $req->fetchAll();
+    if($post){
     foreach($post as $res){
         $array[] = $res['id'];
     }
     return $array;
+    }
 }
 
     //RECUPERATION DES INFOS DU PROFIL
