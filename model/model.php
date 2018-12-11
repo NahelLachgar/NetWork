@@ -40,6 +40,13 @@ function getContactPosts($contactId) {
     $posts->execute(array($contactId));   
     return $posts;
 }
+
+function getMessages($userId) {
+    $db = dbConnect();
+    $messages = $db->prepare('SELECT * FROM sendPrivate JOIN privateMessages 
+    ON 
+    WHERE reicever');
+}
 //RÉCUPÉRATION DES PUBLICATIONS DES CONTACTS ET ENTREPRISES SUIVIES PAR L'UTILISATEUR (FIL D'ACUTALITÉ)
 function getContactsPosts($userId)
 {
@@ -248,12 +255,16 @@ function updateProfiles($lastName, $name, $email, $pass, $phone, $job, $company,
 }
     
     //RECHERCHE D'UN USER OU UNE COMPANY AVEC SON NOM OU SON PRENOM
-function getSearch($sid, $name)
+function getSearch($userId, $name)
 {
     $db = dbConnect();
     $res = "%" . $name . "%";
     $req = $db->prepare('SELECT users.id as contactId,users.lastName,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.id != ? AND (users.lastName LIKE ?  OR users.name LIKE ?) ');
+<<<<<<< HEAD
     $req->execute(array($sid, $res, $res));
+=======
+    $req->execute(array($userId, $res, $res));
+>>>>>>> master
     $req = $req->fetchAll();
     return $req;
 }
