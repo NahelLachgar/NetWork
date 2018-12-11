@@ -38,7 +38,10 @@ ob_start();
             <div class="card gedf-card">
                         <div class="card-body">
                             <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
-                            <a href="index.php?action=profilePage&contactId=<?= $result['id'] ?>"><?= $result['name'] . ' ' . $result['lastName'] ?></a></h5>
+                            <form action="index.php?action=profilePage" method="POST">
+                                <input type="hidden" value="<?=$result['idContact'] ?>">
+                                <button type="submit" class="btn btn-link"><?= $result['name'] . ' ' . $result['lastName']?></button> 
+                            </form>
                             <p class="card-text"><?= $result['job'] . ' chez ' . $result['company'] ?></p>       
                         <?php endif;?>
                         </div>

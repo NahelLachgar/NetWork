@@ -19,13 +19,7 @@ require('controller/controller.php');
                 search(htmlspecialchars($_SESSION['id']),htmlspecialchars($_POST['research']));
                 break;
             case 'profilePage':
-            if (isset($_GET['contactId']))
-                {
-                contactHome($_GET['contactId']);
-                } else {
                     contactHome($_POST['contactId']);
-                } 
-                //getProfileSearch(htmlspecialchars($_POST['id']));
                 break;
             case 'post':
                 addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
@@ -49,16 +43,16 @@ require('controller/controller.php');
                 addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
                 break;
             case 'addContact':
-                addToContacts(htmlspecialchars($_GET['id']),$_SESSION['id']);
+                addToContacts(htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break; 
             case 'removeContact':
-                removeContact(htmlspecialchars($_GET['id']),$_SESSION['id']);
+                removeContact(htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break; 
             case 'comment':
                 addcomment(htmlspecialchars($_POST['comment']),$_SESSION['id'],$_POST['postId']);
                 break; 
             case 'contactContacts':
-                showContacts($_POST['id']);
+                showContacts($_POST['contactId']);
             default:
                 home($_SESSION['id']);
             
