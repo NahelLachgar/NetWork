@@ -252,26 +252,26 @@ function getSearch($sid, $name)
 {
     $db = dbConnect();
     $res = "%" . $name . "%";
-    $req = $db->prepare('SELECT users.id as idContact,users.lastName,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.id != ? AND (users.lastName LIKE ?  OR users.name LIKE ?) ');
+    $req = $db->prepare('SELECT users.id as contactId,users.lastName,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.id != ? AND (users.lastName LIKE ?  OR users.name LIKE ?) ');
     $req->execute(array($sid, $res, $res));
     $req = $req->fetchAll();
     return $req;
 }
     //AJOUT D'UN CONTACT
-function addContact($idContact, $idUser)
+function addContact($contactId, $idUser)
 {
     $db = dbConnect();
     $req = $db->prepare('INSERT INTO contacts(contact,user) VALUES(?,?)');
-    $req->execute(array($idContact, $idUser));
+    $req->execute(array($contactId, $idUser));
     return $req;
 }
 
     //UNFOLLOW UN CONTACT
-    function unfollow($idContact, $idUser)
+    function unfollow($contactId, $idUser)
     {
         $db = dbConnect();
         $req = $db->prepare('DELETE FROM contacts WHERE contacts.contact = ? AND contacts.user = ?');
-        $req->execute(array($idContact, $idUser));
+        $req->execute(array($contactId, $idUser));
         return $req;
     }
 
