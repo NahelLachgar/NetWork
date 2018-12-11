@@ -260,11 +260,7 @@ function getSearch($userId, $name)
     $db = dbConnect();
     $res = "%" . $name . "%";
     $req = $db->prepare('SELECT users.id as contactId,users.lastName,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.id != ? AND (users.lastName LIKE ?  OR users.name LIKE ?) ');
-<<<<<<< HEAD
-    $req->execute(array($sid, $res, $res));
-=======
     $req->execute(array($userId, $res, $res));
->>>>>>> master
     $req = $req->fetchAll();
     return $req;
 }
