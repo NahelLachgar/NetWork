@@ -114,11 +114,11 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		$res = getSearch($ids,$data);
 		$contact = getContactToUser($ids);
 		if(($res == TRUE) && (empty($contact))){
-			require('./view/resultatSearchView.php');
+			require('./view/resultSearchView.php');
 		} else if( ($res == TRUE) && (!empty($contact)) ){
-			 require('./view/resultatDetailSearchView.php');
+			 require('./view/resultDetailSearchView.php');
 		} else{
-			require('./view/resultatDetailSearchView.php');
+			require('./view/resultDetailSearchView.php');
 		}
 	}
 

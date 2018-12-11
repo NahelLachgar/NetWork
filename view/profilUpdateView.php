@@ -68,17 +68,17 @@ ob_start();
                 </div>
 
                  <div class="form-label-group">
-                    <label for="">Job</label>
+                    <label for="">Emploi</label>
                     <input type="text"  name="newjob" value="<?= $recup['job'] ?>" required >
                 </div>
 
                 <div class="form-label-group">
-                    <label for="">Company</label>
+                    <label for="">Entreprise</label>
                     <input type="text"  name="newcompany" value="<?= $recup['company'] ?>" required >
                 </div>
 
                 <div class="form-label-group">
-                    <label for="">Town</label>
+                    <label for="">Ville</label>
                     <input type="text"  name="newtown" value="<?= $recup['town'] ?>" required >
                 </div>
 

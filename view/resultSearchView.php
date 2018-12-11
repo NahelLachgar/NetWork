@@ -28,21 +28,32 @@ ob_start();
     </form>
     <br><br>
         <?php if ($res == true) :
-            foreach ($res as $resultat) : ?>
+            foreach ($res as $result) : ?>
            <div class="card gedf-card">
                         <div class="card-body">
-            <?php if ($resultat['status'] == 'employee') : ?>
+            <?php if ($result['status'] == 'employee') : ?>
                             <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
                             <form action="index.php?action=profilePage" method="POST" > 
-                            <input type="hidden" name="contactId" value="<?= $resultat['idContact'] ?>"> 
-                            <a href="index.php?action=profilePage&contactId=<?= $resultat['idContact']?>&token=1s"  class="btn btn-link"><?= $resultat['name'] . ' ' . $resultat['lastName'] ?></a>
+                                <input type="hidden" name="contactId" value="<?= $result['idContact'] ?>">
+                                <input type="hidden" name="token" value="1">
+                                <button type="submit" class="btn btn-link"><?= $result['name'] . ' ' . $result['lastName'] ?></button> 
                              </form></h5>
-                            <p class="card-text"><?= $resultat['job'] . ' chez ' . $resultat['company'] ?></p>
-                            <a href="index.php?action=addContact&id=<?= $resultat['idContact'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                             <form action="index.php?action=addContact" method="POST" > 
+                                <input type="hidden" name="contactId" value="<?= $result['idContact'] ?>">
+                                <button type="submit" class="btn btn-link"><img src="./img/icon/users.png"></button> 
+                            </form>
+                            <p class="card-text"><?= $result['job'] . ' chez ' . $result['company'] ?></p>
+                            
              <?php else : ?>
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://bit.ly/22hadqw" alt="Photo de profil">&nbsp&nbsp&nbsp<a href="index.php?action=profilePage&id=<?= $resultat['idContact'] ?>"><?= $resultat['name'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>
-                            <a href="index.php?action=addContact&id=<?= $resultat['idContact'] ?>" class="card-link">Suivre</a>
-                
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://bit.ly/22hadqw" alt="Photo de profil">&nbsp&nbsp&nbsp
+                            <form action="index.php?action=profilePage" method="POST">
+                                <input type="hidden" value="<?=$result['idContact'] ?>">
+                                <button type="submit" class="btn btn-link"><?= $result['name'] ?></button> 
+                            </form>
+                            <form action="index.php?action=addContact" method="POST">
+                                <input type="hidden" value="<?=$result['idContact'] ?>">
+                                <button type="submit" class="btn btn-link">Suivre</button> 
+                            </form>
                         <?php endif;?>
 
                         </div>

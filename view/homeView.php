@@ -124,8 +124,15 @@ ob_start();
                                     <div class="mr-2">
                                         <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
                                     </div>
-                                    <div class="ml-2">
+                                    <div class="ml-2"> 
+                                        <?php if ($contactsPosts[$i]['contactId'] !== $_SESSION['id']): ?>
+                                        <form action="index.php?action=profilePage" method="POST">
+                                            <div class="h5 m-0"><button type="submit" class="btn btn-link"><?= $contactsPosts[$i]['name'] . ' ' . $contactsPosts[$i]['lastName'] ?></button></div>
+                                            <input type="hidden" name="contactId" value="<?= $contactsPosts[$i]['id']?>">
+                                        </form>
+                                        <?php else : ?>
                                         <div class="h5 m-0"><?= $contactsPosts[$i]['name'] . ' ' . $contactsPosts[$i]['lastName'] ?></div>
+                                        <?php endif ?>
                                     </div>
                                 </div>
                                 <div>
@@ -142,14 +149,14 @@ ob_start();
                         </div>
                         <div class="card-footer">
                         <form action="index.php?action=comment" method="post">
-                        <div class="input-group">
-                            <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">
-                            <input type="hidden" name="postId" value="<?=$contactsPosts[$i]['id']?>">
-                            <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
-                                <i class="fa fa-comment"></i>
-                            </button>
-                         </form>
+                            <div class="input-group">
+                                <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">
+                                <input type="hidden" name="postId" value="<?=$contactsPosts[$i]['id']?>">
+                                <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
+                                    <i class="fa fa-comment"></i>
+                                </button>
+                        </form>
                 </div>
                 </div>
                         </div>

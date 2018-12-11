@@ -52,16 +52,17 @@ ob_start();
                             <div class="h5"><?= $contactsNb ?></div>
                         </li>
                         <li class="list-group-item">
-                         <!--  <?php /*if($_GET['token'] == 0): ?>
-                        <a href="index.php?action=removeContact&id=<?=$profile['id']?>">
-                            <button type="submit" class="btn btn-link"><img src="./img/icon/unfriend.png"></a>
+                           <?php if($_GET['token'] == 0 || $_GET['token'] == 2): ?>
+                         <form action="index.php?action=removeContact">
+                            <input type="hidden" name="contactId" value="<?=$profile['id']?>">
+                            <button type="submit" class="btn btn-link" ><img src="./img/icon/unfriend.png"></button>
+                         </form>
                             <?php elseif($_GET['token'] == 1): ?>
-                         <a href="index.php?action=addContact&id=<?=$profile['id']?>">
-                        <button type="submit" class="btn btn-link"><img src="./img/icon/users.png"></a>
-                        <?php elseif($_GET['token'] == 2):  ?>
-                        <a href="index.php?action=removeContact&id=<?=$profile['id']?>">
-                            <button type="submit" class="btn btn-link"><img src="./img/icon/unfriend.png"></a>
-                        <?php endif;  */?>-->
+                        <form action="index.php?action=addContact">
+                            <input type="hidden" name="contactId" value="<?=$profile['id']?>">
+                            <button type="submit" class="btn btn-link" ><img src="./img/icon/users.png"></button>
+                        </form>
+                        <?php endif; ?>
                         </li>
                     </ul>
                 </div>
@@ -103,13 +104,13 @@ ob_start();
                         </div>
                         <div class="card-footer">
                         <form action="index.php?action=comment" method="post">
-                        <div class="input-group">
-                            <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">
-                            <input type="hidden" name="postId" value="<?=$postsFetch['id']?>">
-                            <div class="input-group-append">
-                            <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
-                                <i class="fa fa-comment"></i>
-                            </button>
+                            <div class="input-group">
+                                <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">
+                                <input type="hidden" name="postId" value="<?=$postsFetch['id']?>">
+                                <div class="input-group-append">
+                                <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
+                                    <i class="fa fa-comment"></i>
+                                </button>
                          </form>
                 </div>
                 </div>
