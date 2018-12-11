@@ -126,9 +126,9 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	}
 
 	//FUNCTION AJOUT DE CONTACT
-	function addToContacts($idcontact,$sid)
+	function addToContacts($contactId,$userId)
 	{
-		$add = addContact($idcontact,$sid);
+		$add = addContact($contactId,$userId);
 		if($add == TRUE) 
 		{
 			header('Location:index.php?action=home');	
@@ -136,9 +136,9 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	}
 	
 		//FUNCTION UNFOLLOW UN CONTACT
-		function removeContact($idcontact,$sid)
+		function removeContact($contactId,$userId)
 		{
-			$unf = unfollow($idcontact,$sid);
+			$unf = unfollow($contactId,$userId);
 			if($unf == TRUE) 
 			{
 				header('Location:index.php?action=home');	
@@ -156,9 +156,9 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	}
 	
 	// AFFICHER LES CONTACTS
-	function contactList($sid)
+	function contactList($userId)
 	{
-		$list = getContacts($sid);
+		$list = getContacts($userId);
 		if($list == TRUE) 
 		{
 			require('./view/contactsListView.php');		

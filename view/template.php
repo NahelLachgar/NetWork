@@ -20,8 +20,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
   </head>
-  
-  <body class="text-center">
+  <body>
   <nav class="navbar navbar-light bg-bleu">
         <a href="index.php?action=home" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
         <a href="index.php?action=showMessages"> 
