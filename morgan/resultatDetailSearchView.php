@@ -1,7 +1,6 @@
 <?php 
 $title = "Recherche";
 ob_start();
-$token = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
 ?>
 
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
@@ -36,7 +35,7 @@ $token = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
                 <div class="card gedf-card">
                         <div class="card-body">
                     
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form class="form-inline" action="index.php?action=profilePage" method="POST"><input type="hidden" name="id" value="<?= $resultat['idContact'] ?>"> <input type="submit" class="btn btn-link" value="<?= $resultat['name'] . ' ' . $resultat['lastname'] ?>"> </form></h5>
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form class="form-inline" action="index.php?action=profilePage" method="POST"><input type="hidden" name="contactId" value="<?= $resultat['idContact'] ?>"> <input type="submit" class="btn btn-link" value="<?= $resultat['name'] . ' ' . $resultat['lastname'] ?>"> </form></h5>
                             <p class="card-text"><?= $resultat['job'] . ' chez ' . $resultat['company'] ?></p>
                             <a href="index.php?action=removeContacts&id=<?= $resultat['idContact'] ?>" class="card-link"> <img src="./img/icon/unfriend.png"> </a>
                         </div>
@@ -47,7 +46,7 @@ $token = bin2hex(mcrypt_create_iv(32, MCRYPT_DEV_URANDOM));
                  <div class="card gedf-card">
                         <div class="card-body">
         
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form action="index.php?action=profilePage" method="POST"><input type="hidden" name="id" value="<?= $resultat['idContact'] ?>"> <input type="submit" class="btn btn-link" value="<?= $resultat['name'] . ' ' . $resultat['lastname'] ?>">  </form></h5>
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp<form action="index.php?action=profilePage" method="POST"><input type="hidden" name="contactId" value="<?= $resultat['idContact'] ?>"> <input type="submit" class="btn btn-link" value="<?= $resultat['name'] . ' ' . $resultat['lastname'] ?>">  </form></h5>
                             <p class="card-text"><?= $resultat['job'] . ' chez ' . $resultat['company'] ?></p>
                             <a href="index.php?action=addContacts&id=<?= $resultat['idContact'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
                 

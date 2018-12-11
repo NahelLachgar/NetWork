@@ -3,52 +3,71 @@ session_start();
 require('controller/controller.php');
     if (isset($_GET['action'])) {
         switch ($_GET['action']) {
-            case 'connect':
-                login($_POST['nom'], $_POST['prenom']);
-                break;
-            case 'disconnect':
+           case 'disconnect':
                 disconnect();
                 break;
             case 'home':
-                home($_SESSION['id']);
+                home(htmlspecialchars($_SESSION['id']));
                 break;
             case 'checkUser':
-                checkUserExists($_POST['email'], $_POST['password']);
+                checkUserExists(htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']));
                 break;
             case 'addUser':
-                checkAddUser($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['phone'], $_POST['photo'], $_POST['password'], $_POST['status'], $_POST['job'], $_POST['company'], $_POST['town']);
+                checkAddUser(htmlspecialchars($_POST['firstName']), htmlspecialchars($_POST['lastName']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['phone']), htmlspecialchars($_POST['password']), htmlspecialchars($_POST['confirmPassword']), htmlspecialchars($_POST['status']), htmlspecialchars($_POST['job']), htmlspecialchars($_POST['company']), htmlspecialchars($_POST['town']));
                 break;
             case 'search':
-                search($_SESSION['id'],$_POST['research']);
+                search(htmlspecialchars($_SESSION['id']),htmlspecialchars($_POST['research']));
                 break;
-            case 'addcontacts':
-                addToContact($_GET['id'],$_SESSION['id']);
+            case 'profilePage':
+            if (isset($_GET['contactId']))
+                {
+                contactHome($_GET['contactId']);
+                } else {
+                    contactHome($_POST['contactId']);
+                } 
+                //getProfileSearch(htmlspecialchars($_POST['id']));
                 break;
-            case 'removeContacts':
-                removeContacts($_GET['id'],$_SESSION['id']);
+            case 'post':
+                addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
                 break;
-            case 'profilepage':
-                getProfileSearch($_GET['id']);
+            case 'contactList':
+                showContacts(htmlspecialchars($_SESSION['id']));
                 break;
-            case 'updateprofile':
+            case 'companyList':
+                showCompanies(htmlspecialchars($_SESSION['id']));
+                break;
+            case 'updateProfile':
                 updateToProfile($_SESSION['id']);
                 break;
             case 'profilemodif':
-                validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newpass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
+               validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newPass'],$_POST['confirmNewPass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
                 break;
             case 'signUp':
                 require('./view/signUpView.html');
                 break;
             case 'post':
-                addPost(htmlspecialchars($_POST['content']),$_POST['type'],$_SESSION['id']);
+                addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
                 break;
+            case 'addContact':
+                addToContacts(htmlspecialchars($_GET['id']),$_SESSION['id']);
+                break; 
+            case 'removeContact':
+                removeContact(htmlspecialchars($_GET['id']),$_SESSION['id']);
+                break; 
+            case 'comment':
+                addcomment(htmlspecialchars($_POST['comment']),$_SESSION['id'],$_POST['postId']);
+                break; 
+            case 'contactContacts':
+                showContacts($_POST['id']);
+            default:
+                home($_SESSION['id']);
+            
         }
-    }
-else {
-    if (!isset($_SESSION['name'])) {
-    require('view/signInView.html');
     } else {
-        header('Location:index.php?action=home');
+        if (!isset($_SESSION['name'])) {
+        require('view/signInView.php');
+        } else {
+            header('Location:index.php?action=home');
     }
 }
 ?>

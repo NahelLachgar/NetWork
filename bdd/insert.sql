@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  lun. 19 nov. 2018 à 19:38
+-- Généré le :  mar. 04 déc. 2018 à 13:39
 -- Version du serveur :  5.7.23
 -- Version de PHP :  7.2.8
 
@@ -13,266 +13,101 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `NetWork`
 --
-CREATE DATABASE IF NOT EXISTS `NetWork` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `NetWork`;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `comment`
---
-
-CREATE TABLE IF NOT EXISTS `comment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `com` int(11) NOT NULL,
-  `publication` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`com`,`publication`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `fk_comment_coms1_idx` (`com`),
-  KEY `fk_comment_publications1_idx` (`publication`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `coms`
---
-
-CREATE TABLE IF NOT EXISTS `coms` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` varchar(255) NOT NULL,
-  `comDate` datetime NOT NULL,
-  `user` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `contacts`
---
-
-CREATE TABLE IF NOT EXISTS `contacts` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `contact` int(11) DEFAULT NULL,
-  `user` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`user`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `fk_contacts_users1_idx` (`user`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `contacts`
 --
+USE NetWork;
 
--- --------------------------------------------------------
+INSERT INTO `users` (`id`, `name`, `lastName`, `email`, `phone`, `photo`, `password`, `status`, `job`, `company`, `town`) VALUES
+(1, 'Nahel', 'Lachgar', 'nahellachgar@hotmail.fr', '0623221148', '', '$2y$10$31qDNwnyDoLXXtMFehte3.hDIzjBREwmKzQdxBp/sR8D9Sh0OUBTy', 'employee', 'PDG', 'NetWork', 'Ivry'),
+(2, 'Fred', 'Mba', 'fred@gmail.com', '0612324561', '', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'employee', 'Ingénieur', 'NetWork', 'Paris'),
+(3, 'Google', NULL, 'admin@google.com', NULL, '', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'company', NULL, NULL, 'New York'),
+(4, 'Barao Da Silva', 'Kévin', 'kevin@gmail.com', '0623457689', '', '$2y$10$bJqHYyDP34r96NwFBgqWZewI8JunHsTEVooGd3qiuGVvyEXD1i8hS', 'employee', 'Développeur', 'NetWork', 'Trappes'),
+(5, 'A', 'A', 'a@gmail.com', '0611111111', '', '$2y$12$ZaAnkJXDqHc5MSND2SwA0eFA9NU.iORdZKQleLKabjEASH95eLSCW', 'employee', 'A', 'A', 'Le Plessis-Bouchard'),
+(6, 'Amazon', NULL, 'admin@amazon.com', NULL, '', '$2y$12$ZaAnkJXDqHc5MSND2SwA0eFA9NU.iORdZKQleLKabjEASH95eLSCW', 'company', NULL, NULL, 'Los Angeles');
 
---
--- Structure de la table `events`
---
-
-CREATE TABLE IF NOT EXISTS `events` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) NOT NULL,
-  `eventDate` datetime NOT NULL,
-  `place` varchar(45) DEFAULT NULL,
-  `admin` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
+INSERT INTO `contacts` (`id`, `contact`, `user`) VALUES
+(13, 1, 2),
+(15, 4, 2),
+(20, 5, 2),
+(21, 4, 1);
 
 --
--- Structure de la table `groupAdd`
+-- Déchargement des données de la table `post`
 --
+INSERT INTO `publications` (`id`, `content`, `postDate`, `type`) VALUES
+(5, 'Bonjour', '2018-11-21 21:03:34', 'text'),
+(7, 'gt\'rthtyhfhrtegd', '2018-11-21 21:09:21', 'text'),
+(8, 'feezaefdqsfq', '2018-11-21 21:16:58', 'text'),
+(9, 'deqfs<', '2018-11-21 21:20:05', 'text'),
+(13, 'setdfhtrqeshfdstdfgjyrte', '2018-11-21 23:30:12', 'text'),
+(14, 'bgrfezdfezda', '2018-11-23 13:44:46', 'text'),
+(15, 'rfezaed\r\n', '2018-11-23 14:29:25', 'text'),
+(16, 'grzgzesdfs', '2018-11-23 14:29:46', 'text'),
+(17, 'rftft', '2018-11-23 14:30:48', 'text'),
+(18, 'hello paris', '2018-11-23 14:34:43', 'text'),
+(19, 'BONSOIR PARIIIIIIS YeEeeAaaaAaahH', '2018-11-23 14:35:02', 'text'),
+(20, 'Salut mon ptit chou de Nahel', '2018-11-23 14:35:52', 'text'),
+(21, 'nique morgan', '2018-11-23 14:36:39', 'text'),
+(22, 'Salut bg de Nahel', '2018-11-23 14:41:03', 'text'),
+(23, 'dvrfzefefrezd', '2018-11-23 14:41:10', 'text'),
+(24, 'dsds', '2018-11-23 14:47:40', 'text'),
+(25, 'sasasas', '2018-11-23 14:48:23', 'text'),
+(26, 'salut kevin', '2018-11-23 14:49:57', 'text'),
+(27, 'Salut Morgan!', '2018-11-23 14:50:27', 'text'),
+(28, 'le Kevin de chez NetWork !!!', '2018-11-23 14:50:53', 'text'),
+(29, 'salut mon ptit chou de Morgan Mba', '2018-11-23 14:51:26', 'text'),
+(30, 'keeeeeeeeeeevvvvvvvvvvvvv', '2018-11-23 14:54:14', 'text'),
+(31, 'Salut mon chou', '2018-11-23 15:25:39', 'text'),
+(32, 'nique tanguy', '2018-11-23 15:38:27', 'text'),
+(33, 'nique les gilets jaunes !!', '2018-11-26 09:35:29', 'text'),
+(34, ' ', '2018-11-26 09:43:12', 'text'),
+(35, 'MORGAN PD', '2018-11-26 13:56:49', 'text'),
+(36, 'dsf', '2018-11-28 11:09:06', 'text'),
+(37, 'krtnerzfmlkgbntlrefm;scxw', '2018-11-30 15:59:37', 'text'),
+(38, '&lt;script&gt;alert(\'a\');&lt;script&gt;', '2018-12-03 18:54:41', 'text');
 
-CREATE TABLE IF NOT EXISTS `groupAdd` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `message` char(1) DEFAULT NULL,
-  `addDate` datetime NOT NULL,
-  `user` int(11) NOT NULL,
-  `status` enum('message','member') DEFAULT NULL,
-  `group` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`user`,`group`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `fk_groupMessages_users1_idx` (`user`),
-  KEY `fk_groupAdd_groups1_idx` (`group`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `groups`
---
-
-CREATE TABLE IF NOT EXISTS `groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(45) NOT NULL,
-  `createDate` date DEFAULT NULL,
-  `admin` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `titre_UNIQUE` (`title`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `participate`
---
-
-CREATE TABLE IF NOT EXISTS `participate` (
-  `id` int(10) UNSIGNED ZEROFILL NOT NULL,
-  `user` int(11) NOT NULL,
-  `event` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`user`,`event`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `fk_participate_users1_idx` (`user`),
-  KEY `fk_participate_events1_idx` (`event`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `post`
---
-
-CREATE TABLE IF NOT EXISTS `post` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `publication` int(11) NOT NULL,
-  `user` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`publication`,`user`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `fk_post_publications1_idx` (`publication`),
-  KEY `fk_post_users1_idx` (`user`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `privateMessages`
---
-
-CREATE TABLE IF NOT EXISTS `privateMessages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` char(1) DEFAULT NULL,
-  `reicever` int(11) DEFAULT NULL,
-  `sendDate` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
+INSERT INTO `post` (`id`, `publication`, `user`) VALUES
+(3, 5, 1),
+(5, 7, 2),
+(6, 8, 1),
+(7, 9, 1),
+(11, 13, 1),
+(15, 14, 1),
+(16, 15, 1),
+(17, 16, 1),
+(18, 17, 4),
+(19, 18, 4),
+(20, 19, 4),
+(21, 20, 4),
+(22, 21, 1),
+(23, 22, 4),
+(24, 23, 1),
+(25, 24, 2),
+(26, 25, 2),
+(27, 26, 2),
+(28, 27, 4),
+(29, 28, 2),
+(30, 29, 4),
+(31, 30, 2),
+(32, 31, 4),
+(33, 32, 1),
+(34, 33, 2),
+(35, 34, 1),
+(36, 35, 1),
+(37, 36, 1),
+(38, 37, 1),
+(39, 38, 1);
 
 --
--- Structure de la table `publications`
+-- Déchargement des données de la table `publications`
 --
 
-CREATE TABLE IF NOT EXISTS `publications` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content` varchar(255) DEFAULT NULL,
-  `postDate` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `sendPrivate`
---
-
-CREATE TABLE IF NOT EXISTS `sendPrivate` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `receiver` int(11) DEFAULT NULL,
-  `user` int(11) NOT NULL,
-  `privateMessage` int(11) NOT NULL,
-  PRIMARY KEY (`id`,`user`,`privateMessage`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  KEY `fk_sendPrivate_users1_idx` (`user`),
-  KEY `fk_sendPrivate_privateMessages1_idx` (`privateMessage`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `users`
---
-
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) DEFAULT NULL,
-  `lastName` varchar(45) DEFAULT NULL,
-  `email` varchar(45) NOT NULL,
-  `phone` varchar(10) DEFAULT NULL,
-  `photo` varchar(255) NOT NULL,
-  `password` varchar(256) NOT NULL,
-  `status` enum('company','employee') NOT NULL,
-  `job` varchar(45) DEFAULT NULL,
-  `company` varchar(45) DEFAULT NULL,
-  `town` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`),
-  UNIQUE KEY `mail_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` ( `name`, `lastName`, `email`, `phone`, `photo`, `password`, `status`, `job`, `company`, `town`) VALUES
-('Nahel', 'Lachgar', 'nahellachgar@hotmail.fr', '0623221148', '', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'employee', 'employee', 'NetWork', 'Paris'),
-('Fred', 'Mba', 'fred@gmail.com', '0612324561', '', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'employee', 'Ingénieur', 'NetWork', 'Paris'),
-('Google', NULL, 'admin@google.com', '02166636', '', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'company', NULL, NULL, 'New York'),
-('idee', 'kévin', 'kevin@gmail.com', '0623457689', '', '$2y$12$m4ZDAKnUYV4DSzAasTdNouXz.qLU/lNtWTKa1bP5RpgLEady2fJbO', 'employee', 'a', 'a', 'a');
 
-
-INSERT INTO `contacts` (`id`, `contact`, `user`) VALUES
-(1, 2, 1),
-(2, 3, 1);
---
--- Contraintes pour les tables déchargées
---
-
---
--- Contraintes pour la table `comment`
---
-ALTER TABLE `comment`
-  ADD CONSTRAINT `fk_comment_coms1` FOREIGN KEY (`com`) REFERENCES `coms` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_comment_publications1` FOREIGN KEY (`publication`) REFERENCES `publications` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `contacts`
---
-ALTER TABLE `contacts`
-  ADD CONSTRAINT `fk_contacts_users1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `groupAdd`
---
-ALTER TABLE `groupAdd`
-  ADD CONSTRAINT `fk_groupAdd_groups1` FOREIGN KEY (`group`) REFERENCES `groups` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_groupMessages_users1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `participate`
---
-ALTER TABLE `participate`
-  ADD CONSTRAINT `fk_participate_events1` FOREIGN KEY (`event`) REFERENCES `events` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_participate_users1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `post`
---
-ALTER TABLE `post`
-  ADD CONSTRAINT `fk_post_publications1` FOREIGN KEY (`publication`) REFERENCES `publications` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_post_users1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Contraintes pour la table `sendPrivate`
---
-ALTER TABLE `sendPrivate`
-  ADD CONSTRAINT `fk_sendPrivate_privateMessages1` FOREIGN KEY (`privateMessage`) REFERENCES `privateMessages` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_sendPrivate_users1` FOREIGN KEY (`user`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
