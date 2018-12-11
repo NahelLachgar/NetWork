@@ -13,6 +13,9 @@ function home($userId) {
 	require('view/homeView.php');
 }
 
+function showMessages () {
+	require('./view/messagesView.php');
+}
 function contactHome($contactId) {
 	$profile = getProfile($contactId);
 	$contactPosts = getContactPosts($contactId);
@@ -31,7 +34,7 @@ function addComment($content,$userId,$postId) {
 // CHECK SI LE COMPTE EXISTE
 function checkUserExists($email, $password){
 
-	// ON UTILISE SLEEP POUR EVITER UNE ATTAQUE PAR FORCE BRUTE
+	// LE  SYSTÈME FAIT UNE PAUSE D'UNE SECONDE A CHAQUE TENTATIVE DE CONNEXION POUR EVITER UNE ATTAQUE PAR FORCE BRUTE
 	sleep(1);
 
 	// ON SECURISE LES DONNEES 

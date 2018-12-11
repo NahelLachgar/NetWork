@@ -12,20 +12,7 @@ ob_start();
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-        
-<nav class="navbar navbar-light bg-bleu">
-        <a href="index.php?action=home" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
-        <form class="form-inline" action="index.php?action=search" method="POST">
-            <div class="input-group">
-                <input type="text" placeholder= "Rechercher un membre " name="research" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" required>
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-    </nav>
+
 
 <!-- PROFIL-->
     <div class="container-fluid gedf-wrapper">
@@ -52,12 +39,12 @@ ob_start();
                             <div class="h5"><?= $contactsNb ?></div>
                         </li>
                         <li class="list-group-item">
-                           <?php if($_GET['token'] == 0 || $_GET['token'] == 2): ?>
+                           <?php if($_POST['token'] == 0 || $_POST['token'] == 2): ?>
                          <form action="index.php?action=removeContact">
                             <input type="hidden" name="contactId" value="<?=$profile['id']?>">
                             <button type="submit" class="btn btn-link" ><img src="./img/icon/unfriend.png"></button>
                          </form>
-                            <?php elseif($_GET['token'] == 1): ?>
+                            <?php elseif($_POST['token'] == 1): ?>
                         <form action="index.php?action=addContact">
                             <input type="hidden" name="contactId" value="<?=$profile['id']?>">
                             <button type="submit" class="btn btn-link" ><img src="./img/icon/users.png"></button>

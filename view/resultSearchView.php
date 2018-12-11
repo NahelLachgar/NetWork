@@ -12,20 +12,6 @@ ob_start();
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-        
-<nav class="navbar navbar-light bg-bleu">
-        <a href="index.php?action=home" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
-        <form class="form-inline" action="index.php?action=search" method="POST">
-            <div class="input-group">
-                <input type="text" name="research" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
-            </div>
-    </nav>
-    </form>
     <br><br>
         <?php if ($res == true) :
             foreach ($res as $result) : ?>
@@ -34,26 +20,15 @@ ob_start();
             <?php if ($result['status'] == 'employee') : ?>
                             <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
                             <form action="index.php?action=profilePage" method="POST" > 
-                                <input type="hidden" name="contactId" value="<?= $result['idContact'] ?>">
-                                <input type="hidden" name="token" value="1">
-                                <button type="submit" class="btn btn-link"><?= $result['name'] . ' ' . $result['lastName'] ?></button> 
+                            <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>"> 
+                            <a href="index.php?action=profilePage&contactId=<?= $result['contactId']?>&token=1s"  class="btn btn-link"><?= $result['name'] . ' ' . $result['lastName'] ?></a>
                              </form></h5>
-                             <form action="index.php?action=addContact" method="POST" > 
-                                <input type="hidden" name="contactId" value="<?= $result['idContact'] ?>">
-                                <button type="submit" class="btn btn-link"><img src="./img/icon/users.png"></button> 
-                            </form>
                             <p class="card-text"><?= $result['job'] . ' chez ' . $result['company'] ?></p>
-                            
+                            <a href="index.php?action=addContact&id=<?= $result['contactId'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
              <?php else : ?>
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://bit.ly/22hadqw" alt="Photo de profil">&nbsp&nbsp&nbsp
-                            <form action="index.php?action=profilePage" method="POST">
-                                <input type="hidden" value="<?=$result['idContact'] ?>">
-                                <button type="submit" class="btn btn-link"><?= $result['name'] ?></button> 
-                            </form>
-                            <form action="index.php?action=addContact" method="POST">
-                                <input type="hidden" value="<?=$result['idContact'] ?>">
-                                <button type="submit" class="btn btn-link">Suivre</button> 
-                            </form>
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://bit.ly/22hadqw" alt="Photo de profil">&nbsp&nbsp&nbsp<a href="index.php?action=profilePage&id=<?= $result['contactId'] ?>"><?= $result['name'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>
+                            <a href="index.php?action=addContact&id=<?= $result['contactId'] ?>" class="card-link">Suivre</a>
+                
                         <?php endif;?>
 
                         </div>
