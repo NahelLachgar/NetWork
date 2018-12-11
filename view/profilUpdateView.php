@@ -30,64 +30,135 @@ ob_start();
                         </div>
                     </div> -->
 
-<div class="container">
-    <div class="row justify-content-md-center">
-        <div class="col-md-5">
-            <form class="form-label-group" action="index.php?action=profilemodif" method="POST">
-                <div>
-               <p> <img class="rounded-circle" width="100" src="https://picsum.photos/50/50" alt="Photo de profil"></p>        
-                </div>
-                <div class="form-label-group">
-                    <label for="newName">Nom</label>
-                    <input type="text"  name="newname" id="newName" value="<?= $recup['lastName'] ?>" required >
-                </div>
+    <div class="container">
+      <div class="py-2 text-center">
+        <h2>Modifiez votre profil!</h2>
+        <p class="lead"></p>
+      </div>
 
-                <div class="form-label-group">
-                    <label for="">Prenom</label>
-                    <input type="text"  name="newsurname" value="<?= $recup['name'] ?>" required >
-                </div>
+      <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
 
-                <div class="form-label-group">
-                    <label for="">email</label>
-                    <input type="mail"  name="newmail" value="<?= $recup['email'] ?>" required >
-                </div>
+        </div>
+        <div class="col-md-12 order-md-1">
+          <form enctype="multipart/form-data" action="index.php?action=profilemodif" method="POST">
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <label for="file">Avatar</label><br>
+                <img class="rounded-circle" width="100" src="https://picsum.photos/50/50" alt="Photo de profil">
+                <div class="row justify-content-center">
+                    <div class="col-md-12-center">
+                    <input type="file" class="form-control-file" name="photo" id="file"> 
+                    </div>
+                </div>   
+            </div>
+        </div>        
 
-                <div class="form-label-group">
-                    <label for="">Mot de passe</label>
-                    <input type="password"  name="newPass" required >
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="newName">Prenom</label>
+                <input type="text" class="form-control" id="newName" name="newsurname" value="<?= $recup['name'] ?>" required>
+                <div class="invalid-feedback">
+                  Entrez votre prenom .
                 </div>
-
-                 <div class="form-label-group">
-                    <label for="">Confirmez le mot de passe</label>
-                    <input type="password"  name="confirmNewPass" required >
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="lastName">Nom</label>
+                <input type="text" class="form-control" id="lastName" value="<?= $recup['lastName'] ?>" name="newname" required>
+                <div class="invalid-feedback">
+                  Entrez votre nom.
                 </div>
-
-                <div class="form-label-group">
-                    <label for="">Telephone</label>
-                    <input type="text"  name="newphone" value="<?= $recup['phone'] ?>" required >
+              </div>
+            </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="email">Adresse email</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
                 </div>
-
-                 <div class="form-label-group">
-                    <label for="">Emploi</label>
-                    <input type="text"  name="newjob" value="<?= $recup['job'] ?>" required >
+                <input type="email" class="form-control" id="email" name="newmail" value="<?= $recup['email'] ?>" required>
+                <div class="invalid-feedback" style="width: 100%;">
+                  Entrez votre adresse mail.
                 </div>
+              </div>
+              <span id="aideCourriel"></span>
+            </div>
 
-                <div class="form-label-group">
-                    <label for="">Entreprise</label>
-                    <input type="text"  name="newcompany" value="<?= $recup['company'] ?>" required >
+            <div class="col-md-6 mb-3">
+              <label for="phone">Numero de telephone</label>
+              <input type="text" class="form-control" id="phone" name="newphone" value="<?= $recup['phone'] ?>"  required>
+              <div class="invalid-feedback">
+                Entrez votre numero de telephone.
+              </div>
+              <span id="aidePhone"></span>
+            </div>
+        </div>
+
+
+
+
+            <hr class="mb-4">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="mdp">Mot de passe</label>
+                <input type="password" class="form-control" id="mdp" name="newPass" required>
+                <div class="invalid-feedback">
+                  Entrez un mot de passe.
                 </div>
-
-                <div class="form-label-group">
-                    <label for="">Ville</label>
-                    <input type="text"  name="newtown" value="<?= $recup['town'] ?>" required >
+              </div>
+              <div class="col-md-6 mb-3">
+               <label for="mdp2">Confirmation du mot de passe</label>
+                <input type="password" class="form-control" id="mdp2" name="confirmNewPass" required>
+                <div class="invalid-feedback">
+                  Entrez votre mot de passe.
                 </div>
-
-                <input class="btn btn-md btn-primary" type="submit" value="Modifier" >
+              </div>
+            </div>
+            <hr class="mb-4">
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label for="emploi">Emploi</label>
+              <input type="text" class="form-control" id="emploi" name="newjob" value="<?= $recup['job'] ?>" required>
+              <div class="invalid-feedback">
+                Entrez votre profession.
+              </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="entreprise">Entreprise</label>
+                <input type="text" name="newcompany" value="<?= $recup['company'] ?>" class="form-control" id="company" required>
+                <div class="invalid-feedback">
+                  Entrez votre d'entreprise de travail.
+                </div>
+              </div>
+            <div class="col-md-4 mb-3">
+              <label for="ville">Ville</label>
+              <input type="text" class="form-control" id="town" name="newtown" value="<?= $recup['town'] ?>" required>
+              <div class="invalid-feedback">
+                Entrez votre ville.
+              </div>
+            </div>
+        </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-3">
+                        <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">Modifier</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
-</div>
 
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
+    <script src="./js/inscription.js"></script>
 
 
     <?php 
