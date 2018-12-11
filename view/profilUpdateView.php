@@ -15,10 +15,6 @@ ob_start();
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
         
-<nav class="navbar navbar-light bg-bleu">
-    <a href="index.php?action=home" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
-</nav>
-
      <!--- \\\\\\\Post-->
       <!--  <div class="card gedf-card">
             <div class="card-header">

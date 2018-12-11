@@ -19,7 +19,7 @@ require('controller/controller.php');
                 search(htmlspecialchars($_SESSION['id']),htmlspecialchars($_POST['research']));
                 break;
             case 'profilePage':
-                    contactHome($_POST['contactId']);
+                contactHome($_POST['contactId']);
                 break;
             case 'post':
                 addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
@@ -53,6 +53,8 @@ require('controller/controller.php');
                 break; 
             case 'contactContacts':
                 showContacts($_POST['contactId']);
+            case 'showMessages':
+                showMessages();
             default:
                 home($_SESSION['id']);
             
