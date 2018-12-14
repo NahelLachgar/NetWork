@@ -55,6 +55,7 @@ require('controller/controller.php');
                 showContacts($_POST['contactId']);
             case 'showMessages':
                 showMessages();
+                break;
             default:
                 home($_SESSION['id']);
             

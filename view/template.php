@@ -36,6 +36,7 @@
                     </button>
                 </div>
             </div>
+        </form>
     </nav>
   <?= $content ?>
     </body>
