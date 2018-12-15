@@ -13,8 +13,28 @@ function home($userId) {
 	require('view/homeView.php');
 }
 
-function showMessages () {
-	require('./view/messagesView.php');
+function showMessages ($userId,$contactId) {
+	$userProfile = getProfile($_SESSION['id']);
+	$contacts = getContacts($userId);
+	$reiceverProfile = getProfile($_POST['contactId']);
+	if ($contacts) {
+	$contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
+	for ($i=0;$i<count($contactsFetch);$i++) {
+		$profile = getProfile($contactsFetch[$i]['id']);
+		$contactProfile[$i] = $profile;
+	}
+	$messages = getMessages($userId,$contactId);
+	require('./view/chatView.php');
+	} else {
+		echo("Vous n'avez aucun message");
+	}
+}
+
+function addMessage($content,$contactId,$userId) {
+	$message = sendMessage($content,$contactId,$userId);
+	//if ($message) {
+		header('Location:'.$_SERVER['HTTP_REFERER']);
+//	}
 }
 function contactHome($contactId) {
 	$profile = getProfile($contactId);

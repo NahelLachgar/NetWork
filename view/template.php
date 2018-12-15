@@ -23,6 +23,7 @@
   <body>
   <nav class="navbar navbar-light bg-bleu">
         <a href="index.php?action=home" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
+        <form action="index.php?action=showMessages" method="POST"></form>
         <a href="index.php?action=showMessages"> 
           <button class="btn btn-outline-primary" type="submit"  id="button-addon">
                  <i class="far fa-envelope-open"></i>
@@ -36,6 +37,7 @@
                     </button>
                 </div>
             </div>
+            </form>
     </nav>
   <?= $content ?>
     </body>
