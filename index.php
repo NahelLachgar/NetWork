@@ -65,7 +65,7 @@ require('controller/controller.php');
             case 'sendMessage':
                 addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break;
-            case 'groupe':
+            case 'groups':
                 echo "groupe";
                 break;
             default:
