@@ -37,7 +37,7 @@ require('controller/controller.php');
                validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newPass'],$_POST['confirmNewPass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
                 break;
             case 'signUp':
-                require('./view/signUpView.html');
+                require('./view/signUpView.php');
                 break;
             case 'post':
                 addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
@@ -53,8 +53,13 @@ require('controller/controller.php');
                 break; 
             case 'contactContacts':
                 showContacts($_POST['contactId']);
+                break;
             case 'showMessages':
                 showMessages();
+                break;
+            case 'groups':
+                echo "groupe";
+                break;
             default:
                 home($_SESSION['id']);
             

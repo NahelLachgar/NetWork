@@ -2,14 +2,22 @@
 //CONTROLE MAIL
 document.getElementById("email").addEventListener("input", function (e) {
     var validiteCourriel = "";
+    var regex =  /[@.]/g;
     var couleurMsg = "red";
-    if (e.target.value.indexOf("@" && ".") === -1) {
-        // Le courriel saisi ne contient pas le caractère @
-        validiteCourriel = "Adresse invalide";
+    var textSansEspace = $('#email').val().replace(/ /g,"");
+    
+   if ((e.target.value.indexOf("@") === -1 ) || (e.target.value.indexOf(".") === -1 )) {
+       if(e.target.value.indexOf(".") === -1) {
+            // Le courriel saisi ne contient pas le caractère @
+            validiteCourriel = "Adresse invalide";
+       }
+       validiteCourriel = "Adresse invalide";
     } else {
       validiteCourriel = "Adresse valide";
       var couleurMsg = "green"; 
     }
+
+
     var aideCourrielElt = document.getElementById("aideCourriel");
     document.getElementById("aideCourriel").textContent = validiteCourriel;
     aideCourrielElt.style.color = couleurMsg;

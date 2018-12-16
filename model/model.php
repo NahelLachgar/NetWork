@@ -300,4 +300,30 @@ function getProfileUpdate($ids)
     $post = $req->fetch();
     return $post;
 }
+
+    //GESTION DES GROUPES
+
+    //SELECTIONNE LES GROUPES DONT TU FAIS PARTIS
+   /* function getGroups() {
+        $db = dbConnect();
+        $req = $db->prepare('SELECT ')
+    }*/
+
+    //CREER UN GROUPE
+    function createGroup($nameGroup,$date,$adminId){
+        $db = dbConnect();
+        $date = now();
+        $req = $db->prepare('INSERT INTO groups(title,createDate,admin) VALUES (?,?,?)');
+        $create = $req->execute(array($nameGroup,$date,$adminId));
+        return $create;
+    }
+
+    function contactAddGroup($date,$memberId,$status,$groupId) {
+        $db = dbConnect();
+        $date = now();
+        $req = $db->prepare('INSERT INTO groupAdd(addDate,user,status,group) VALUES (?,?,?,?)');
+        $create = $req->execute(array($date,$memberId,$status,$groupId));
+        return $create;
+    }
+
 ?>
