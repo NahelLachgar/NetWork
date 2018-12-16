@@ -38,7 +38,7 @@
         </div>
         <div class="col-md-12 order-md-1">
         
-          <form enctype="multipart/form-data" action="index.php?action=addUser" method="POST">
+          <form name="form" enctype="multipart/form-data" action="index.php?action=addUser" method="POST">
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">Prenom</label>
@@ -46,6 +46,7 @@
                 <div class="invalid-feedback">
                   Entrez votre prenom .
                 </div>
+                <span id="aideName"></span>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="lastName">Nom</label>
@@ -54,6 +55,7 @@
                   Entrez votre nom.
                 </div>
               </div>
+              <span id="aideLname"></span>
             </div>
 
             <div class="mb-3">

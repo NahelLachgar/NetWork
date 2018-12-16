@@ -44,3 +44,35 @@ document.getElementById("email").addEventListener("input", function (e) {
     document.getElementById("aidePhone").textContent = validitePhone;
     aidePhoneElt.style.color = couleurMsg;
 }); 
+
+  //CONTROLE NOM
+  document.getElementById("firstName").addEventListener("input", function (e) {
+    var validiteName = "";
+    var couleurMsg = "red";
+
+        if((document.getElementById('firstName').value==' ') || (document.getElementById('firstName').value=='')){
+            validiteName = "Nom invalide";
+        } else {
+            validiteName = "Nom valide";
+            couleurMsg = "green";
+        }
+    var aideNameElt = document.getElementById("aideName");
+    document.getElementById("aideName").textContent = validiteName;
+    aideNameElt.style.color = couleurMsg;
+}); 
+
+//CONTROLE PRENOM
+document.getElementById("lastName").addEventListener("input", function (e) {
+    var validiteName = "";
+    var couleurMsg = "red";
+
+        if((document.getElementById('lastName').value==' ') || (document.getElementById('lastName').value=='')){
+            validiteName = "Prenom invalide";
+        } else {
+            validiteName = "Prenom valide";
+            couleurMsg = "green";
+        }
+    var aideLnameElt = document.getElementById("aideLname");
+    document.getElementById("aideLname").textContent = validiteName;
+    aideLnameElt.style.color = couleurMsg;
+}); 
