@@ -23,6 +23,9 @@ function contactHome($contactId) {
 	$followedCompaniesNb = getFollowedCompaniesCount($contactId);
 	require('view/profilepageView.php');	
 }
+function groups() {
+	
+}
 function addPost($content,$type,$userId) {
 	post($content,$type,$userId);
 	header('Location:index.php?action=home');
@@ -61,9 +64,12 @@ function checkUserExists($email, $password){
 // CHECK LES INFOS D'INSCRIPTION
 function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirmPassword, $status, $job, $company, $town){
 
+	$errors = array();
+
 	// ON VERIFIE QUE LES DONNEES NE SOIT PAS VIDE
 	if(empty($firstName) || empty($lastName) || empty($email) || empty($phone) || empty($password) || empty($confirmPassword) || empty($status) || empty($job) || empty($company) || empty($town)){
-		require('view/signUpView.html');
+		$errors['empty'] = "Verifier que les champs sont biens remplis";
+		require('view/signUpView.php');
 	}
 
 	// ON SECURISE LES DONNEES 
@@ -80,6 +86,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 
 	// ON CHECK SI LE MOT DE PASSE ET LA CONFIRMATION DU MOT DE PASSE SONT DIFFERENTE
 	if($password != $confirmPassword){
+		$errors['wrongPassWord'] = "Le mot de passe saisis est incorrecte";
 		header('Location:index.php?action=signUp');
 	}
 	// ON CHECK SI LES DONNEÉS SONT BONNES

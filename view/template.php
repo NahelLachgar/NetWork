@@ -23,6 +23,7 @@
   <body>
   <nav class="navbar navbar-light bg-bleu">
         <a href="index.php?action=home" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
+        <a href="index.php?action=groups" class="groups"><img width="45" src="img/icon/group.png" alt="Groupe"></a>
         <a href="index.php?action=showMessages"> 
           <button class="btn btn-outline-primary" type="submit"  id="button-addon">
                  <i class="far fa-envelope-open"></i>

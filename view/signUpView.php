@@ -25,7 +25,13 @@
         <h2>Inscription</h2>
         <p class="lead"></p>
       </div>
-
+      <?php if(!empty($errors)) : ?>
+      <div class="alert alert-danger">
+         <?php foreach($errors as $error): ?>
+            <p><?= $error ; ?></p>
+          <?php endforeach ; ?>
+      </div>     
+    <?php endif; ?>
       <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
 
@@ -94,6 +100,7 @@
                   Entrez votre mot de passe.
                 </div>
               </div>
+              <span id="aidePass"></span>
             </div>
             <hr class="mb-4">
             <div class="row">

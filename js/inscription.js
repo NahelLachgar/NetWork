@@ -2,14 +2,22 @@
 //CONTROLE MAIL
 document.getElementById("email").addEventListener("input", function (e) {
     var validiteCourriel = "";
+    var regex =  /[@.]/g;
     var couleurMsg = "red";
-    if (e.target.value.indexOf("@" && ".") === -1) {
-        // Le courriel saisi ne contient pas le caractère @
-        validiteCourriel = "Adresse invalide";
+    var textSansEspace = $('#email').val().replace(/ /g,"");
+    
+   if ((e.target.value.indexOf("@") === -1 ) || (e.target.value.indexOf(".") === -1 )) {
+       if(e.target.value.indexOf(".") === -1) {
+            // Le courriel saisi ne contient pas le caractère @
+            validiteCourriel = "Adresse invalide";
+       }
+       validiteCourriel = "Adresse invalide";
     } else {
       validiteCourriel = "Adresse valide";
       var couleurMsg = "green"; 
     }
+
+
     var aideCourrielElt = document.getElementById("aideCourriel");
     document.getElementById("aideCourriel").textContent = validiteCourriel;
     aideCourrielElt.style.color = couleurMsg;
@@ -19,18 +27,20 @@ document.getElementById("email").addEventListener("input", function (e) {
     var validitePhone = "";
     var phone = e.target.value;
     var couleurMsg = "red";
-    var type = typeof(phone);
-    if(type != "number"){
-        validitePhone = "Numero de telephone invalide";
-    } else if(type == "number"){
+    var regex =  /[a-zA-Z_ ]/g;
+
     if (phone.length != 10) {
-        // Le courriel saisi ne contient pas le caractère @
+        // la taille du numero de telephone est different de 10
         validitePhone = "Numero de telephone invalide";
     } else if(phone.length = 10) {
-      validitePhone = "Numero de telephone valide";
-      var couleurMsg = "green"; 
+        if(phone.match(regex)){
+            validitePhone = "Numero de telephone invalide";
+        } else {
+            validitePhone = "Numero de telephone valide";
+            couleurMsg = "green";
+        }
     }
     var aidePhoneElt = document.getElementById("aidePhone");
     document.getElementById("aidePhone").textContent = validitePhone;
     aidePhoneElt.style.color = couleurMsg;
-}});  
+}); 
