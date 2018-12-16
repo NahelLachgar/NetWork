@@ -55,14 +55,21 @@ require('controller/controller.php');
                 showContacts($_POST['contactId']);
                 break;
             case 'showMessages':
-                showMessages();
+                if (!isset($_POST['contactId'])) {
+                    $contacts = getContacts($_SESSION['id']);
+                    $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
+                    $_POST['contactId'] = $contactsFetch[0]['id']; 
+                } 
+                    showMessages($_SESSION['id'],$_POST['contactId']);
                 break;
-            case 'groups':
+            case 'sendMessage':
+                addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);
+                break;
+            case 'groupe':
                 echo "groupe";
                 break;
             default:
                 home($_SESSION['id']);
-            
         }
     } else {
         if (!isset($_SESSION['name'])) {

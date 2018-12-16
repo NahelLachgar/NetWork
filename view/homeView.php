@@ -54,11 +54,10 @@ ob_start();
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">Make
-                                    a publication</a>
+                                <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">Publication</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">Images</a>
+                                <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images" aria-selected="false" href="#images">Image</a>
                             </li>
                         </ul>
                     </div>
@@ -66,7 +65,7 @@ ob_start();
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                 <div class="form-group">
-                                    <label class="sr-only" for="message">Post</label>
+                                    <label class="sr-only" for="message">Publier</label>
                                     <form action="index.php?action=post" method="POST">
                                     <textarea name="content" class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?" required></textarea>
                                 </div>

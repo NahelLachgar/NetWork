@@ -41,11 +41,27 @@ function getContactPosts($contactId) {
     return $posts;
 }
 
-function getMessages($userId) {
+function sendMessage($content,$contactId,$userId) {
     $db = dbConnect();
-    $messages = $db->prepare('SELECT * FROM sendPrivate JOIN privateMessages 
-    ON 
-    WHERE reicever');
+    $sendMessage = $db->prepare('INSERT into privateMessages (content,reicever,sendDate,sender)
+                                VALUES (:content,:reicever,NOW(),:sender)');
+    $sendMessage->execute(array(
+        "content"=>$content,
+        "reicever"=>$contactId,
+        "sender"=>$userId
+    ));
+}
+//RÉCUPÉRATION DES MESSAGES QU'A REÇUS OU ENVOYÉS L'UTILISATEUR
+function getMessages($userId,$contactId) {
+    $db = dbConnect();
+    $messages = $db->prepare('SELECT * FROM privateMessages
+    WHERE reicever = :userId AND sender = :contactId OR reicever = :contactId AND sender = :userId
+    ORDER BY sendDate ASC');
+    $messages->execute(array(
+        "userId"=>$userId,
+        "contactId"=>$contactId
+    ));
+    return $messages;
 }
 //RÉCUPÉRATION DES PUBLICATIONS DES CONTACTS ET ENTREPRISES SUIVIES PAR L'UTILISATEUR (FIL D'ACUTALITÉ)
 function getContactsPosts($userId)
