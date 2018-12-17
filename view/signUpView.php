@@ -54,8 +54,8 @@
                 <div class="invalid-feedback">
                   Entrez votre nom.
                 </div>
+                <span id="aideLname"></span>
               </div>
-              <span id="aideLname"></span>
             </div>
 
             <div class="mb-3">
@@ -97,7 +97,7 @@
               
               <div class="col-md-6 mb-3">
                <label for="mdp2">Confirmation du mot de passe</label>
-                <input type="password" class="form-control" id="mdp2" name="confirmPassword" required>
+                <input type="password" class="form-control" id="mdp2" name="confirmPassword" /*onclick="password()"*/ required>
                 <div class="invalid-feedback">
                   Entrez votre mot de passe.
                 </div>
@@ -118,11 +118,12 @@
                 </div>
               </div>
               <div class="col-md-4 mb-3">
-                <label for="emploi">Emploi</label>
-              <input type="text" class="form-control" id="emploi" name="job" required>
+                <label for="job">Emploi</label>
+              <input type="text" class="form-control" id="job" name="job" required>
               <div class="invalid-feedback">
                 Entrez votre profession.
               </div>
+              <span id="aideJob"></span>
               </div>
               <div class="col-md-5 mb-3">
                 <label for="entreprise">Entreprise</label>
@@ -130,6 +131,7 @@
                 <div class="invalid-feedback">
                   Entrez votre d'entreprise de travail.
                 </div>
+                <span id="aideCompany"></span>
               </div>
             </div>
             <div class="mb-3">
@@ -138,6 +140,7 @@
               <div class="invalid-feedback">
                 Entrez votre ville.
               </div>
+              <span id="aideTown"></span>
             </div>
             <hr class="mb-4">
             <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">S'inscire</button>
