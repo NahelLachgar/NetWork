@@ -242,6 +242,20 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		require("./view/showContacts.php");
 	}
 
+	//AFFICHER LA PAGE DE SUPPRESSION DE COMPTE
+	function deleteView($id)
+	{
+		$profile=getProfile($id);
+		$contactsNb=getContactsCount($id);
+		if($contactsNb>0) {
+			$contactsPosts=getContactsPosts($id);
+			$companiesSuggests=getCompanySuggests($id);
+			$employeesSuggests=getEmployeeSuggests($id);
+		}
+		$followedCompaniesNb=getFollowedCompaniesCount($id);
+		include('view/deleteView.php');
+	}
+
 	//SUPPRIMER LE COMPTE
 	function deleteAccount($id)
 	{
@@ -290,6 +304,8 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 			$employeesSuggests=getEmployeeSuggests($id);
 		}
 		$followedCompaniesNb=getFollowedCompaniesCount($id);
+
+
 		include('view/createEventView.php');
 	}
 

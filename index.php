@@ -93,7 +93,7 @@ require('controller/controller.php');
                 removeEvent($_GET['id']);
                 break;
             case 'updateEventView':
-                updateEventView($_SESSION['id']);
+                updateEventView($_GET['id']);
                 break;
             case 'updateEvent':
                 modifyEvent($_GET['id'], $_GET['title'], $_GET['eventDate'], $_GET['place']);

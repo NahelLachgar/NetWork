@@ -13,11 +13,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 
-<nav class="navbar navbar-light bg-bleu">
-        <a href="index.php?action=home" class="home"><img width="45" src="https://image.flaticon.com/icons/svg/263/263115.svg" alt="Photo de profil"></a>
-        <a href="index.php?action=showEvents" class="home"><img width="45" src="https://www.shareicon.net/data/2016/08/07/808208_calendar_512x512.png" alt="Photo de profil"></a>
-</nav>
-
     <h1>Création d'un événement</h1>
     <form action="index.php" method="GET">
         <input type="hidden" name="action" value="createEvent">
