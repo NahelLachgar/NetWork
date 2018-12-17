@@ -51,9 +51,9 @@ document.getElementById("email").addEventListener("input", function (e) {
     var couleurMsg = "red";
 
         if((document.getElementById('firstName').value==' ') || (document.getElementById('firstName').value=='')){
-            validiteName = "Nom invalide";
+            validiteName = "Prénom invalide";
         } else {
-            validiteName = "Nom valide";
+            validiteName = "Prénom valide";
             couleurMsg = "green";
         }
     var aideNameElt = document.getElementById("aideName");
@@ -67,9 +67,9 @@ document.getElementById("lastName").addEventListener("input", function (e) {
     var couleurMsg = "red";
 
         if((document.getElementById('lastName').value==' ') || (document.getElementById('lastName').value=='')){
-            validiteName = "Prenom invalide";
+            validiteName = "Nom invalide";
         } else {
-            validiteName = "Prenom valide";
+            validiteName = "Nom valide";
             couleurMsg = "green";
         }
     var aideLnameElt = document.getElementById("aideLname");
