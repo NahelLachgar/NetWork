@@ -349,4 +349,434 @@ function getProfileUpdate($ids)
         return $create;
     }
 
+    //SUPPRIMER LES COMMENTAIRES
+    function deleteAllComs($ID)
+    {
+        $bdd=dbConnect();
+        //RECHERCHER LES COMMENTAIRES DE L'UTILISATEUR
+        $reponse=$bdd->prepare('SELECT com
+                                FROM coms, comment
+                                WHERE user=:ID AND com=coms.id');
+        $reponse->execute(['ID'=>$ID]);
+        $e=array();
+        $m=0;
+        while($donnees=$reponse->fetch())
+        {
+            $e[$m]=$donnees['com'];
+            $m++;
+        }
+        //SUPPRIMER LES COMMENTAIRES DE L'UTILISATEUR
+        for($m=0;$m<sizeof($e);$m++)
+        {
+            $reponse=$bdd->prepare('DELETE FROM comment
+                                    WHERE com=:id');
+            $reponse->execute(['id'=>$e[$m]]);
+        }
+        $reponse=$bdd->prepare('DELETE FROM coms
+                                WHERE user=:ID');
+        $reponse->execute(['ID'=>$ID]);
+    }
+
+    //SUPPRIMER LES PUBLICATIONS
+    function deleteAllPubli($ID)
+    {
+        $bdd=dbConnect();
+        //RECHERCHER LES PUBLICATIONS DE L'UTILISATEUR
+        $reponse=$bdd->prepare('SELECT publication
+                                FROM post, publications
+                                WHERE user=:ID AND publication=publications.id');
+        $reponse->execute(['ID'=>$ID]);
+        $f=array();
+        $n=0;
+        while($donnees=$reponse->fetch())
+        {
+            $f[$n]=$donnees['publication'];
+            $n++;
+        }
+        //RECHERCHER LES COMMENTAIRES SUR LES PUBLICATIONS DE L'UTILISATEUR
+        $g=array();
+        $o=0;
+        for($n=0;$n<sizeof($f);$n++)
+        { 
+            $reponse=$bdd->prepare('SELECT com
+                                    FROM coms, comment, post
+                                    WHERE post.publication=:id AND comment.publication=post.publication AND com=coms.id');
+            $reponse->execute(['id'=>$f[$n]]);
+            while($donnees=$reponse->fetch())
+            {
+                $g[$o]=$donnees['com'];
+                $o++;
+            }
+        }
+        //SUPPRIMER LES COMMENTAIRES SUR LES PUBLICATIONS DE L'UTILISATEUR
+        for($o=0;$o<sizeof($g);$o++)
+        {
+            $reponse=$bdd->prepare('DELETE FROM comment
+                                    WHERE com=:id');
+            $reponse->execute(['id'=>$g[$o]]);
+            $reponse=$bdd->prepare('DELETE FROM coms
+                                WHERE id=:id');
+            $reponse->execute(['id'=>$g[$o]]);
+        }
+        //SUPPRIMER LES PUBLICATIONS DE L'UTILISATEUR
+        $reponse=$bdd->prepare('DELETE FROM post
+                                WHERE user=:ID');
+        $reponse->execute(['ID'=>$ID]);
+        for($n=0;$n<sizeof($f);$n++)
+        {
+            $reponse=$bdd->prepare('DELETE FROM publications
+                                    WHERE id=:id');
+            $reponse->execute(['id'=>$f[$n]]);
+        }
+    }
+
+    //SUPPRIMER LES MESSAGES
+    function deleteAllMessages($ID)
+    {
+        $bdd=dbConnect();
+        //RECHERCHER LES MESSAGES DE L'UTILISATEUR
+        $reponse=$bdd->prepare('SELECT privateMessage
+                                FROM sendPrivate, privateMessages
+                                WHERE user=:ID AND privateMessage=privateMessages.id');
+        $reponse->execute(['ID'=>$ID]);
+        $c=array();
+        $k=0;
+        while($donnees=$reponse->fetch())
+        {
+            $c[$k]=$donnees['privateMessage'];
+            $k++;
+        }
+        //RECHERCHER LES MESSAGES RECU PAR L'UTILISATEUR
+        $reponse=$bdd->prepare('SELECT privateMessage
+                                FROM sendPrivate, privateMessages
+                                WHERE receiver=:ID AND privateMessage=privateMessages.id');
+        $reponse->execute(['ID'=>$ID]);
+        $d=array();
+        $l=0;
+        while($donnees=$reponse->fetch())
+        {
+            $d[$l]=$donnees['privateMessage'];
+            $l++;
+        }
+        //SUPPRIMER LES MESSAGES DE L'UTILISATEUR
+        $reponse=$bdd->prepare('DELETE FROM sendPrivate
+                                WHERE user=:ID');
+        $reponse->execute(['ID'=>$ID]);
+        for($k=0;$k<sizeof($c);$k++)
+        {
+            $reponse=$bdd->prepare('DELETE FROM privateMessages
+                                    WHERE id=:id');
+            $reponse->execute(['id'=>$c[$k]]);
+        }
+        //SUPPRIMER LES MESSAGES RECU PAR L'UTILISATEUR
+        $reponse=$bdd->prepare('DELETE FROM sendPrivate
+                                WHERE receiver=:ID');
+        $reponse->execute(['ID'=>$ID]);
+        for($l=0;$l<sizeof($d);$l++)
+        {
+            $reponse=$bdd->prepare('DELETE FROM privateMessages
+                                    WHERE id=:id');
+            $reponse->execute(['id'=>$d[$l]]);
+        }
+    }
+
+    //SUPPRIMER EVENEMENTS / LES PARTICIPATIONS DANS LES EVENEMENTS
+    function deleteAllEvents($ID)
+    {
+        $bdd=dbConnect();
+        //RECHERCHER LES EVENEMENTS OU L'UTILISATEUR EN EST L'ADMINISTRATEUR
+        /*$reponse=$bdd->prepare('SELECT events
+                                FROM participate, events
+                                WHERE admin=:ID AND event=events.id');
+        $reponse->execute(['ID'=>$ID]);
+        $b=array();
+        $j=0;
+        while($donnees=$reponse->fetch())
+        {
+            $b[$j]=$donnees['event'];
+            $j++;
+        }*/
+        //SUPPRIMER LES PARTICIPATIONS DE L'UTILISATEUR
+        $reponse=$bdd->prepare('DELETE FROM participate
+                                WHERE user=:ID');
+        $reponse->execute(['ID'=>$ID]);
+        //SUPPRIMER LES EVENEMENTS OU L'UTILISATEUR EN EST L'ADMINISTRATEUR
+        /*for($j=0;$j<sizeof($b);$j++)
+        { 
+            $reponse=$bdd->prepare('DELETE FROM events
+                                    WHERE id=:id');
+            $reponse->execute(['id'=>$b[$j]]);
+        }*/
+    }
+
+    //SUPPRIMER LES GROUPES / LES PARTICIPATIONS DANS LES GROUPES
+    function deleteAllGroups($ID)
+    {
+        $bdd=dbConnect();
+        //RECHERCHER LES GROUPES OU L'UTILISATEUR EN EST L'ADMINISTRATEUR
+        /*$reponse=$bdd->prepare('SELECT group
+                                FROM groupAdd, groups
+                                WHERE admin=:ID AND group=groups.id');
+        $reponse->execute(['ID'=>$ID]);
+        $a=array();
+        $i=0;
+        while($donnees=$reponse->fetch())
+        {
+            $a[$i]=$donnees['group'];
+            $i++;
+        }*/
+        //SUPPRIMER LES PARTICIPATIONS DE L'UTILISATEUR
+        $reponse=$bdd->prepare('DELETE FROM groupAdd
+                                WHERE user=:ID');
+        $reponse->execute(['ID'=>$ID]);
+        //SUPPRIMER LES GROUPES OU L'UTILISATEUR EN EST L'ADMINISTRATEUR
+        /*for($i=0;$i<sizeof($a);$i++)
+        { 
+            $reponse=$bdd->prepare('DELETE FROM groups
+                                    WHERE id=:id');
+            $reponse->execute(['id'=>$a[$i]]);
+        }*/
+    }
+
+    //SUPPRIMER LES CONTACTS
+    function deleteAllContacts($ID)
+    {
+        $bdd=dbConnect();
+        //SUPPRIMER LES CONTACTS DE L'UTILISATEUR
+        $reponse=$bdd->prepare('DELETE FROM contacts
+                                WHERE user=:ID OR contact=:ID');
+        $reponse->execute(['ID'=>$ID]);
+    }
+
+    //SUPPRIMER L'UTILISATEUR
+    function deleteUser($ID)
+    {
+        $bdd=dbConnect();
+        //SUPPRIMER LE COMPTE DE L'UTILISATEUR
+        $reponse=$bdd->prepare('DELETE FROM users
+                                WHERE id=:ID');
+        $reponse->execute(['ID'=>$ID]);
+    }
+
+    //AFFICHER EVENEMENTS AYANT POUR PARTICIPANT L'UTILISATEUR
+    function selectMember($ID)
+    {
+        $bdd=dbConnect();
+        //rechercher les événements propres à l'utilisateur en tant que participant
+        $reponse=$bdd->prepare('SELECT event, title
+                                FROM events, participate
+                                WHERE user=:ID AND event=events.id AND admin!=user');
+
+        $reponse->execute(['ID'=>$ID]);
+        $a=false;
+        $i=0;
+        while($donnees=$reponse->fetch())
+        {
+            $a[$i][0]=$donnees['event'];
+            $a[$i][1]=$donnees['title'];
+            $i++;
+        }
+        return $a;
+    }
+
+    //AFFICHER LES EVENEMENTS AYANT POUR ADMINISTRATEUR L'UTILISATEUR
+    function selectAdmin($ID)
+    {
+        $bdd=dbConnect();
+        //RECHERCHER LES EVENEMENTS OU L'UTILISATEUR EN EST L'ADMINISTRATEUR
+        $reponse=$bdd->prepare('SELECT id, title
+                                FROM events
+                                WHERE admin=:ID');
+        $reponse->execute(['ID'=>$ID]);
+        $b=false;
+        $j=0;
+        while($donnees=$reponse->fetch())
+        {
+            $b[$j][0]=$donnees['id'];
+            $b[$j][1]=$donnees['title'];
+            $j++;
+        }
+        return $b;
+    }
+
+    //AFFICHER LES INFORMATIONS DE L'EVENEMENT
+    function infoEvent($id)
+    {
+        $bdd=dbConnect();
+        //RECUPERER LES INFORMATIONS DE CET EVENEMENT
+        $reponse=$bdd->prepare('SELECT title, eventDate, place
+                                FROM events
+                                WHERE id=:id');
+        $reponse->execute(['id'=>$id]);
+        $a=array();
+        while($donnees=$reponse->fetch())
+        {
+            $a[0]=$donnees['title'];
+            $a[1]=$donnees['eventDate'];
+            $a[2]=$donnees['place'];
+        }
+        return $a;
+    }
+
+    //AFFICHER LA LISTE DE CONTACTS D'UN UTILISATEUR NE PARTICIPANT PAS 
+    function infoContact($ID, $id)
+    {
+        $bdd=dbConnect();
+        //RECUPERER LES CONTACTS DE L'UTILISATEUR QUI NE FONT PAS PARTIS DE CET EVENEMENT
+        $reponse=$bdd->prepare('SELECT users.id AS id, lastName, name
+                                FROM users, contacts
+                                WHERE contact=:ID AND users.id=user
+                                AND users.id NOT IN (SELECT user
+                                                    FROM participate
+                                                    WHERE event=:id)
+                                ORDER BY lastName, name');
+        $reponse->execute(['ID'=>$ID,
+                            'id'=>$id]);
+        $a=array();
+        $i=0;
+        while($donnees=$reponse->fetch())
+        {
+            $a[$i][0]=$donnees['id'];
+            $a[$i][1]=$donnees['lastName'];
+            $a[$i][2]=$donnees['name'];
+            $i++;
+        }
+        return $a;
+    }
+
+    //CREER UN EVENEMENT
+    function insertEvent($ID, $title, $eventDate, $place)
+    {
+        $bdd=dbConnect();
+        //CREER L'EVENEMENT AVEC L'UTILISATEUR EN TANT QU'ADMINISTRATEUR
+        $reponse=$bdd->prepare('INSERT INTO `events` (title, eventDate, place, admin)
+                                VALUES (:title, :eventDate, :place, :ID)');
+        $reponse->execute(['title'=>$title,
+                            'eventDate'=>$eventDate,
+                            'place'=>$place,
+                            'ID'=>$ID]);
+        //CHERCHER L'ID DU NOUVEL EVENEMENT CREE
+        $reponse=$bdd->prepare('SELECT id
+                                FROM events
+                                WHERE admin=:ID');
+        $reponse->execute(['ID'=>$ID]);
+        while($donnees=$reponse->fetch())
+        {
+            $c=$donnees['id'];
+        }
+        //AJOUTER L'UTILISATEUR EN TANT QUE PARTICIPANT
+        $reponse=$bdd->prepare('INSERT INTO `participate` (user, event)
+                                VALUES (:ID, :event)');
+        $reponse->execute(['ID'=>$ID,
+                        'event'=>$c]);
+    }
+
+    //AFFICHER ADMINISTRATEUR
+    function checkAdmin($id)
+    {
+        $bdd=dbConnect();
+        //CHERCHER L'ADMINISTRATEUR DE CET EVENEMENT
+        $reponse=$bdd->prepare('SELECT admin
+                                FROM events
+                                WHERE id=:id');
+        $reponse->execute(['id'=>$id]);
+        while($donnees=$reponse->fetch())
+        {
+            $a=$donnees['admin'];
+        }
+        //RECUPERER LE NOM ET PRENOM DE L'ADMINISTRATEUR
+        $reponse=$bdd->prepare('SELECT lastName, name
+                                FROM users
+                                WHERE id=:admin');
+        $reponse->execute(['admin'=>$a]);
+        while($donnees=$reponse->fetch())
+        {
+            $b[0]=$donnees['lastName'];
+            $b[1]=$donnees['name'];
+        }
+        return $b;
+    }
+
+    //AFFICHER PARTICIPANTS
+    function checkParticipate($id)
+    {
+        $bdd=dbConnect();
+        //RECUPERER LES NOMS ET PRENOMS DES PARTICIPANTS DE CET EVENEMENT
+        $reponse=$bdd->prepare('SELECT user, lastName, name
+                                FROM events, participate, users
+                                WHERE events.id=event AND user=users.id AND user!=admin AND event=:id
+                                ORDER BY lastName, name');
+        $reponse->execute(['id'=>$id]);
+        $c=false;
+        $i=0;
+        while($donnees=$reponse->fetch())
+        {
+            $c[$i][0]=$donnees['user'];
+            $c[$i][1]=$donnees['lastName'];
+            $c[$i][2]=$donnees['name'];
+            $i++;
+        }
+        return $c;
+    }
+
+    //QUITTER EVENEMENT
+    function deleteParticipate($ID, $id)
+    {
+        $bdd=dbConnect();
+        //SUPPRIMER LA PARTICIPATION DE L'UTILISATEUR DANS CET EVENEMENT
+        $reponse=$bdd->prepare('DELETE FROM participate
+                                WHERE user=:ID AND event=:id');
+        $reponse->execute(['ID'=>$ID,
+                            'id'=>$id]);
+    }
+
+    //SUPPRIMER EVENEMENT
+    function deleteEvent($ID)
+    {
+        $bdd=dbConnect();
+        //SUPPRIMER LA PARTICIPATION DES PARTICIPANTS DE CET EVENEMENT
+        $reponse=$bdd->prepare('DELETE FROM participate
+                                WHERE event=:ID');
+        $reponse->execute(['ID'=>$ID]);
+        //SUPPRIMER L'EVENEMENT
+        $reponse=$bdd->prepare('DELETE FROM events
+                                WHERE id=:ID');
+        $reponse->execute(['ID'=>$ID]);
+    }
+
+    //MODIFIER EVENEMENT
+    function updateEvent($id, $title, $eventDate, $place)
+    {
+        $bdd=dbConnect();
+        //MODIFIER LE TITRE, LA DATE ET L'EMPLACEMENT DE L'EVENEMENT
+        $reponse=$bdd->prepare('UPDATE events
+                                SET title=:title, eventDate=:eventDate, place=:place
+                                WHERE id=:id');
+        $reponse->execute(['title'=>$title,
+                            'eventDate'=>$eventDate,
+                            'place'=>$place,
+                            'id'=>$id]);
+    }
+
+    //AJOUTER PARTICIPANT
+    function insertParticipate($ID, $id)
+    {
+        $bdd=dbConnect();
+        //AJOUTER LA PARTICIPATION DE L'UTILISATEUR DANS CET EVENEMENT
+        $reponse=$bdd->prepare('INSERT INTO participate (user, event)
+                                VALUES (:user, :event)');
+        $reponse->execute(['user'=>$ID,
+                            'event'=>$id]);
+    }
+    /*function join($ID)
+    {
+        $bdd=dbConnect();
+        //AJOUTER LA PARTICIPATION DE L'UTILISATEUR DANS CET EVENEMENT
+    }
+
+    function decline($ID)
+    {
+        $bdd=dbConnect();
+        //DECLINER LA PARTICIPATION DE L'UTILISATEUR DANS CET EVENEMENT
+    }*/
 ?>

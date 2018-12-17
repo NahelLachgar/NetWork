@@ -241,3 +241,176 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		}
 		require("./view/showContacts.php");
 	}
+
+	//SUPPRIMER LE COMPTE
+	function deleteAccount($id)
+	{
+		//SUPPRIMER LES COMMENTAIRES
+		deleteAllComs($id);
+		//SUPPRIMER LES PUBLICATIONS
+		deleteAllPubli($id);
+		//SUPPRIMER LES MESSAGES
+		deleteAllMessages($id);
+		//SUPPRIMER LES EVENEMENTS / LES PARTICIPATIONS DANS LES EVENEMENTS
+		deleteAllEvents($id);
+		//SUPPRIMER LES GROUPES / LES PARTICIPATIONS DANS LES GROUPES
+		deleteAllGroups($id);
+		//SUPPRIMER LES CONTACTS
+		deleteAllContacts($id);
+		//SUPPRIMER L'UTILISATEUR
+		deleteUser($id);
+		header('location: index.php');
+	}
+
+	//AFFICHER LA PAGE DES EVENEMENTS
+	function showEvents($id)
+	{
+		$profile=getProfile($id);
+		$contactsNb=getContactsCount($id);
+		if($contactsNb>0) {
+			$contactsPosts=getContactsPosts($id);
+			$companiesSuggests=getCompanySuggests($id);
+			$employeesSuggests=getEmployeeSuggests($id);
+		}
+		$followedCompaniesNb=getFollowedCompaniesCount($id);
+		$role=2;
+		$admin=selectAdmin($id);
+		$event=selectMember($id);
+		include('view/showEvents.php');
+	}
+
+	//AFFICHER LA PAGE CREATION D'UN EVENEMENT
+	function createEventView($id)
+	{
+		$profile=getProfile($id);
+		$contactsNb=getContactsCount($id);
+		if($contactsNb>0) {
+			$contactsPosts=getContactsPosts($id);
+			$companiesSuggests=getCompanySuggests($id);
+			$employeesSuggests=getEmployeeSuggests($id);
+		}
+		$followedCompaniesNb=getFollowedCompaniesCount($id);
+		include('view/createEventView.php');
+	}
+
+	//CREER UN EVENEMENT
+	function createEvent($id, $title, $eventDate, $place)
+	{
+		//VERIFIER LE REMPLISSAGE DE LA SAISIE DE LA VARIABLE PLACE PUIS CREER L'EVENEMENT
+		if(isset($place) && empty($place)!=true) {
+			//AVEC LE CHAMP 'PLACE' REMPLI
+			insertEvent($id, $title, $eventDate, $place);
+		}
+		else {
+			//SANS LE CHAMP 'PLACE' REMPLI
+			insertEvent($id, $title, $eventDate, "");
+		}
+		$_SESSION['erreur']="L'événement '".$title."' a bien été créé.";
+		header('location: index.php?action=showEvents');
+	}
+
+	//AFFICHER LA PAGE PERSONNELLE DE L'EVENEMENT
+	function eventView($ID, $id, $role)
+	{
+		$profile=getProfile($id);
+		$contactsNb=getContactsCount($id);
+		if($contactsNb>0) {
+			$contactsPosts=getContactsPosts($id);
+			$companiesSuggests=getCompanySuggests($id);
+			$employeesSuggests=getEmployeeSuggests($id);
+		}
+		$followedCompaniesNb=getFollowedCompaniesCount($id);
+		$event=infoEvent($id);
+		$admin=checkAdmin($id);
+		$participate=checkParticipate($id);
+		include('view/eventView.php');
+	}
+
+	//SUPPRIMER LA PARTICIPATION D'UN UTILISATEUR
+	function quitEvent($ID, $id, $role)
+	{
+		//SUPPRIMER LA PARTICIPATION DE L'UTILISATEUR DANS CET EVENEMENT
+		deleteParticipate($ID, $id);
+		if($_GET['role']=='participate') {
+			$_SESSION['erreur']="Vous vous êtes bien retiré de l'événement.";
+			header('location: index.php?action=showEvents');
+		}
+		else if($_GET['role']=='admin') {
+			$_SESSION['erreur']="Vous avez bien retiré la participation de cette personne dans cet événement.";
+			header('location: index.php?action=eventView&id='.$id.'&role=admin');
+		}
+	}
+
+	//SUPPRIMER UN EVENEMENT
+	function removeEvent($id)
+	{
+		//SUPPRIMER L'EVENEMENT
+		deleteEvent($_GET['id']);
+		$_SESSION['erreur']="Vous avez supprimé cet événement avec succès.";
+		header('location: index.php?action=showEvents');
+	}
+
+	//AFFICHER LA PAGE DE MODIFICATION D'UN EVENEMENT
+	function updateEventView($id)
+	{
+	   $event=infoEvent($id);
+	   include('view/updateEventView.php');
+	}
+
+	//MODIFIER UN EVENEMENT
+	function modifyEvent($id, $title, $eventDate, $place)
+	{
+		//VERIFIER LSI LA VARIABLE place EST VIDE OU NON PUIS MODIFIER L'EVENEMENT
+		if(isset($place)) {
+			//AVEC place
+			updateEvent($id, $title, $eventDate, $place);
+		}
+		else {
+			//SANS place
+			updateEvent($id, $title, $eventDate, "");
+		}
+		header('location: index.php?action=eventView&id='.$id.'&role=admin');
+	}
+
+	//AFFICHER LA PAGE D'AJOUT DE PARTICIPATION
+	function addParticipateView($ID, $id)
+	{
+		$contact=infoContact($ID, $id);
+		include('view/addParticipateView.php');
+	}
+
+	//AJOUTER DES PARTICIPATIONS A UN EVENEMENT
+	function addParticipate($contact, $id)
+	{
+		//VERIFIER QU'IL Y A AU MOINS UNE CASE COCHEE
+		if(isset($contact)) {
+			//AJOUTER LES CONTACTS DANS L'EVENEMENT
+			foreach($contact as $valeur) {
+			   insertParticipate($valeur, $id);
+			}
+			$_SESSION['erreur']="Vos contacts ont bien été ajouté à votre événement.";
+			header('location: index.php?action=eventView&id='.$id.'&role=admin');
+		}
+		else {
+			$_SESSION['erreur']="Vous n'avez sélectionné aucun contact à ajouter aux participants de votre événement.";
+			header('location: index.php?action=addParticipateView&id='.$id);
+		}
+	}
+
+	/*function joinInvitation($id)
+	{
+		if() {
+		}
+		else {
+
+		}
+	}
+
+	function declineInvitation($id)
+	{
+		if() {
+		}
+		else {
+
+		}
+	}*/

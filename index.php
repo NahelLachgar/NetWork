@@ -68,6 +68,52 @@ require('controller/controller.php');
             case 'groups':
                 echo "groupe";
                 break;
+            case 'deleteView':
+                deleteView($_SESSION['id']);
+                break;
+            case 'deleteAccount':
+                deleteAccount($_SESSION['id']);
+                break;
+            case 'showEvents':
+                showEvents($_SESSION['id']);
+                break;
+            case 'createEventView':
+                createEventView($_SESSION['id']);
+                break;
+            case 'createEvent':
+                createEvent($_SESSION['id'], $_GET['title'], $_GET['eventDate'], $_GET['place']);
+                break;
+            case 'eventView':
+                eventView($_SESSION['id'], $_GET['id'], $_GET['role']);
+                break;
+            case 'quitEvent':
+                quitEvent($_GET['ID'], $_GET['id'], $_GET['role']);
+                break;
+            case 'deleteEvent':
+                removeEvent($_GET['id']);
+                break;
+            case 'updateEventView':
+                updateEventView($_SESSION['id']);
+                break;
+            case 'updateEvent':
+                modifyEvent($_GET['id'], $_GET['title'], $_GET['eventDate'], $_GET['place']);
+                break;
+            case 'addParticipateView':
+                addParticipateView($_SESSION['id'], $_GET['id']);
+                break;
+            case 'addParticipate':
+                addParticipate($_GET['contact'], $_GET['id']);
+                break;
+            /*
+            case 'joinInvitation':
+            //A FAIRE
+                joinInvitation($_SESSION['id'], $_GET['id']);
+                break;
+            case 'declineInvitation':
+            //A FAIRE
+                declineInvitation($_SESSION['id'], $_GET['id']);
+                break;
+            */
             default:
                 home($_SESSION['id']);
         }
