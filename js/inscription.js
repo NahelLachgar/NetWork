@@ -2,7 +2,6 @@
 //CONTROLE MAIL
 document.getElementById("email").addEventListener("input", function (e) {
     var validiteCourriel = "";
-    var regex =  /[@.]/g;
     var couleurMsg = "red";
     var textSansEspace = $('#email').val().replace(/ /g,"");
     
@@ -45,15 +44,15 @@ document.getElementById("email").addEventListener("input", function (e) {
     aidePhoneElt.style.color = couleurMsg;
 }); 
 
-  //CONTROLE NOM
+  //CONTROLE PRENOM
   document.getElementById("firstName").addEventListener("input", function (e) {
     var validiteName = "";
     var couleurMsg = "red";
 
         if((document.getElementById('firstName').value==' ') || (document.getElementById('firstName').value=='')){
-            validiteName = "Prénom invalide";
+            validiteName = "Prenom invalide";
         } else {
-            validiteName = "Prénom valide";
+            validiteName = "Prenom valide";
             couleurMsg = "green";
         }
     var aideNameElt = document.getElementById("aideName");
@@ -61,7 +60,7 @@ document.getElementById("email").addEventListener("input", function (e) {
     aideNameElt.style.color = couleurMsg;
 }); 
 
-//CONTROLE PRENOM
+//CONTROLE NOM
 document.getElementById("lastName").addEventListener("input", function (e) {
     var validiteName = "";
     var couleurMsg = "red";
@@ -76,3 +75,67 @@ document.getElementById("lastName").addEventListener("input", function (e) {
     document.getElementById("aideLname").textContent = validiteName;
     aideLnameElt.style.color = couleurMsg;
 }); 
+//CONTROLE JOB
+document.getElementById("job").addEventListener("input", function (e) {
+    var validiteJob = "";
+    var couleurMsg = "red";
+
+        if((document.getElementById('job').value==' ') || (document.getElementById('job').value=='')){
+            validiteJob = "Emploi invalide";
+        } else {
+            validiteJob = "Emploi valide";
+            couleurMsg = "green";
+        }
+    var aideJobElt = document.getElementById("aideJob");
+    document.getElementById("aideJob").textContent = validiteJob;
+    aideJobElt.style.color = couleurMsg;
+}); 
+
+//CONTROLE COMPANY
+document.getElementById("company").addEventListener("input", function (e) {
+    var validiteCompany = "";
+    var couleurMsg = "red";
+
+        if((document.getElementById('company').value==' ') || (document.getElementById('company').value=='')){
+            validiteCompany = "Entreprise invalide";
+        } else {
+            validiteCompany = "Entreprise valide";
+            couleurMsg = "green";
+        }
+    var aideCompanyElt = document.getElementById("aideCompany");
+    document.getElementById("aideCompany").textContent = validiteCompany;
+    aideCompanyElt.style.color = couleurMsg;
+}); 
+
+//CONTROLE VILLE
+document.getElementById("town").addEventListener("input", function (e) {
+    var validiteTown = "";
+    var couleurMsg = "red";
+
+        if((document.getElementById('town').value==' ') || (document.getElementById('town').value=='')){
+            validiteTown = "Ville invalide";
+        } else {
+            validiteTown = "Ville valide";
+            couleurMsg = "green";
+        }
+    var aideTownElt = document.getElementById("aideTown");
+    document.getElementById("aideTown").textContent = validiteTown;
+    aideTownElt.style.color = couleurMsg;
+}); 
+//CONTROLE MOT DE PASSE
+function password() {
+    var mdp = document.getElementById("mdp").value;
+    var confirm = document.getElementById("mdp2").value;
+    var validitePass = "";
+    var couleurMsg = "red";
+
+    if (mdp == confirm) {
+        validitePass = "Mot de passe valide";
+        couleurMsg = "green";
+    } else {
+        validitePass = "Mot de passe invalide";
+    }
+    var aidePass = document.getElementById("aidePass");
+    document.getElementById("aidePass").textContent = validitePass;
+    aidePassElt.style.color = couleurMsg;
+}
