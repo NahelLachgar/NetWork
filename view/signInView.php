@@ -39,10 +39,6 @@
   </head>
 
   <body class="text-center">
-  <div>
-    <button class="btn btn-lg btn-primary btn-block" name="SignUp" type="submit">Coté entreprise</button>
-  </div>
-
   <div class="container">
     <div class="row">
     <form class="form-signin" action="?action=checkUser" method="POST">
