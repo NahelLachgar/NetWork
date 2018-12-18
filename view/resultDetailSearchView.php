@@ -92,7 +92,7 @@ ob_start();
         else: ?>
         <center><div class="card gedf-card">
             <div class="card-body">       
-           <b> Aucun result trouve </b>
+           <b> Aucun resultat trouvé </b>
             </div></center>
 <?php
 endif;

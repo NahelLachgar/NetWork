@@ -58,11 +58,70 @@ require('controller/controller.php');
                 showContacts($_POST['contactId']);
                 break;
             case 'showMessages':
-                showMessages();
+                if (!isset($_POST['contactId'])) {
+                    $contacts = getContacts($_SESSION['id']);
+                    $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
+                    $_POST['contactId'] = $contactsFetch[0]['id']; 
+                } 
+                    showMessages($_SESSION['id'],$_POST['contactId']);
                 break;
+            case 'sendMessage':
+                addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);
+                break;
+            case 'groups':
+                sessionGroup();
+                break;
+            case 'deleteView':
+                deleteView($_SESSION['id']);
+                break;
+            case 'deleteAccount':
+                deleteAccount($_SESSION['id']);
+                break;
+            case 'showEvents':
+                showEvents($_SESSION['id']);
+                break;
+            case 'createEventView':
+                createEventView($_SESSION['id']);
+                break;
+            case 'createEvent':
+                createEvent($_SESSION['id'], $_GET['title'], $_GET['eventDate'], $_GET['place']);
+                break;
+            case 'eventView':
+                eventView($_SESSION['id'], $_GET['id'], $_GET['role']);
+                break;
+            case 'quitEvent':
+                quitEvent($_GET['ID'], $_GET['id'], $_GET['role']);
+                break;
+            case 'deleteEvent':
+                removeEvent($_GET['id']);
+                break;
+            case 'updateEventView':
+                updateEventView($_GET['id']);
+                break;
+            case 'updateEvent':
+                modifyEvent($_GET['id'], $_GET['title'], $_GET['eventDate'], $_GET['place']);
+                break;
+            case 'addParticipateView':
+                addParticipateView($_SESSION['id'], $_GET['id']);
+                break;
+            case 'addParticipate':
+                addParticipate($_GET['contact'], $_GET['id']);
+                break;
+            /*
+            case 'joinInvitation':
+            //A FAIRE
+                joinInvitation($_SESSION['id'], $_GET['id']);
+                break;
+            case 'declineInvitation':
+            //A FAIRE
+                declineInvitation($_SESSION['id'], $_GET['id']);
+                break;
+            */
+            case 'createGroup':
+                //echo $_POST['userId'];
+                //break;
             default:
                 home($_SESSION['id']);
-            
         }
     } else {
         if (!isset($_SESSION['name'])) {

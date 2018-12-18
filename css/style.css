@@ -709,3 +709,7 @@
             outline: none;
           }
       /******/
+
+      #photoUpdateFile {
+        display:none;
+      }

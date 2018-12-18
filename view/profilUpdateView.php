@@ -40,16 +40,27 @@ ob_start();
           <form enctype="multipart/form-data" action="index.php?action=profilemodif" method="POST">
         <div class="row">
             <div class="col-md-12 mb-3">
-                <label for="file">Avatar</label><br>
-                <img class="rounded-circle" width="100" src="https://picsum.photos/50/50" alt="Photo de profil">
                 <div class="row justify-content-center">
                     <div class="col-md-12-center">
-                    <input type="file" class="form-control-file" name="photo" id="file"> 
+                        <button class="btn btn-link" id="photoUpdate">
+                            <img class="rounded-circle" width="100" src="https://picsum.photos/50/50" alt="Photo de profil">
+                        </button>
+                    <input style="display:none" type="file" class="form-control-file" name="photo" id="photoUpdateFile"> 
                     </div>
                 </div>   
             </div>
         </div>        
-
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+    jQuery(function($){
+        $('#photoUpdateFile').click(function(e){
+        });
+         
+        $('#photoUpdate').click(function(e){
+            $('#photoUpdateFile').trigger('click'); // équivalent de  $('#lien1').click();
+        });
+    });
+    </script>
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="newName">Prenom</label>
