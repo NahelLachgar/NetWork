@@ -30,7 +30,7 @@ ob_start();
 							<p class="name"><?= $contactProfile[$i]['name'] . ' ' . $contactProfile[$i]['lastName'] ?></p>
 							</button>
 
-							<p class="preview"><?= "É c koman la ca di koi " ?></p>
+							<p class="preview"><?= "Dernier message" ?></p>
 
 							</form>
 						</div>
@@ -57,21 +57,23 @@ ob_start();
 				$class = "sent";
 			} else {
 				$class = "replies";
+
 			}
 			?>
 				<li class=<?= $class ?>>
 					<p><?= $messagesFetch['content'] ?></p>
+					
 				</li>
                     <?php endwhile ?>
 			</ul>
 		</div>
 		<div class="message-input">
 			<div class="wrap">
-			<form action="index.php?action=sendMessage" method="POST">
+			<form action="send.php" method="POST">
 				<input type="text" name="content" id="content" placeholder="Écrivez votre message" />
-				<input type="hidden" name="contactId" id="contactId" value="<?= $_POST['contactId'] ?>">
+				<input type="hidden" name="contactId" id="contactId" value="<?= $reiceverProfile['id'] ?>">
 				<i class="fa fa-paperclip attachment" aria-hidden="true"></i> 
-				<button type="submit" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+				<button type="submit" name="send" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</form>
 			</div>
 		</div>
@@ -85,12 +87,12 @@ ob_start();
 		return false;
 	}
 
-	$('#envoi').click(function(e)){
+	$('#send').click(function(e)){
 		e.preventDefault();
 		var content = $('#content').val();
 		var contactId = $('#contactId').val();
 
-		if (content != "" && trim(content) != "") {
+		if (trim(content) != "") {
 			$.ajax({
 				url : "send.php",
 				type : "POST",
@@ -105,15 +107,14 @@ function load(){
 			var fisrtId = $('#messages p:first').attr('id');
 			$.ajax({
 				url : "load.php",
-				type : POST,
+				type : GET,
 				data : "messageId=" + firstId,
 				success : function(html){
 					$('#messages').prepend(html);
 				}
-			})
-		});
-		load();
-	},5000);
+			})load();
+		}),5);		
+	};
 load();
 
 </script>
