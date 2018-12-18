@@ -59,45 +59,39 @@
         echo $_SESSION['erreur']."<br/><br/>";
         $_SESSION['erreur']="";
     }
-    if($_GET['role']=='admin')
+    if($role=='admin')
     {
         //MODIFIER L'EVENEMENT
-        echo "<form action='index.php' method='GET'>
-            <input type='hidden' name='action' value='updateEventView'>
+        echo "<form action='index.php?action=updateEventView' method='POST'>
             <input type='hidden' name='id' value='".$id."'>
             <input type='submit' class='btn btn-primary' name='submit' value='Modifier l&apos;événement'>
         </form>";
         //SUPPRIMER L'EVENEMENT
-        echo "<form action='index.php' method='GET'>
-            <input type='hidden' name='action' value='deleteEvent'>
+        echo "<form action='index.php?action=deleteEvent' method='POST'>
             <input type='hidden' name='id' value='".$id."'>
             <input type='submit' class='btn btn-primary' name='submit' value='Supprimer l&apos;événement'>
         </form>";
         //AJOUTER DES CONTACTS AUX PARTICIPANTS DE L'EVENEMENT
-        echo "<form action='index.php' method='GET'>
-            <input type='hidden' name='action' value='addParticipateView'>
+        echo "<form action='index.php?action=addParticipateView' method='POST'>
             <input type='hidden' name='id' value='".$id."'>
             <input type='submit' class='btn btn-primary' name='submit' value='Ajouter des participants'>
         </form>";
     }
-    else if($_GET['role']=='participate')
+    else if($role=='participate')
     {
         //PRENDRE EN COMPTE LES INVITATIONS
         /*
-        echo "<form action='index.php' method='GET'>
-                <input type='hidden' name='action' value='join'>
+        echo "<form action='index.php?action=join' method='POST'>
                 <input type='hidden' name='id' value='".$event[$i][0]."'>
                 <input type='submit' class='btn btn-primary' name='submit' value='Rejoindre un événement'>
             </form>";
-        echo "<form action='index.php' method='GET'>
-                <input type='hidden' name='action' value='decline'>
+        echo "<form action='index.php?action=decline' method='POST'>
                 <input type='hidden' name='id' value='".$event[$i][0]."'>
                 <input type='submit' class='btn btn-primary' name='submit' value='Refuser un événement'>
             </form>";
         */
         //SUPPRIMER L'UTILISATEUR DES PARTICIPANTS DE L'EVENEMENT
-        echo "<form action='index.php' method='GET'>
-            <input type='hidden' name='action' value='quitEvent'>
+        echo "<form action='index.php?action=quitEvent' method='POST'>
             <input type='hidden' name='ID' value='".$_SESSION['id']."'>
             <input type='hidden' name='id' value='".$id."'>
             <input type='hidden' name='role' value='participate'>
@@ -109,7 +103,7 @@
 ?>
     <br/>
     <h2>Administrateur</h2>
-    <a href='index.php?action='><?php echo $admin[0]." ".$admin[1]; ?></a><br/><br/>
+    <a href='index.php?action=profilePage'><?php echo $admin[0]." ".$admin[1]; ?></a><br/><br/>
 <?php
     //AFFICHER LES PARTICIPANTS
 ?>
@@ -122,11 +116,10 @@
             //AFFICHER LES PARTICIPANTS
 //METTRE PROFIL DANS HYPERLIEN
             echo "<a href='index.php?action=profilePage'>".$participate[$i][1]." ".$participate[$i][2]."</a><br/>";
-            if($_GET['role']=='admin')
+            if($role=='admin')
             {
                 //SUPPRIMER LE PARTICIPANT
-                echo "<form action='index.php' method='GET'>
-                    <input type='hidden' name='action' value='quitEvent'>
+                echo "<form action='index.php?action=quitEvent' method='POST'>
                     <input type='hidden' name='ID' value='".$participate[$i][0]."'>
                     <input type='hidden' name='id' value='".$id."'>
                     <input type='hidden' name='role' value='admin'>

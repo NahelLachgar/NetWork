@@ -324,14 +324,14 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	//AFFICHER LA PAGE PERSONNELLE DE L'EVENEMENT
 	function eventView($ID, $id, $role)
 	{
-		$profile=getProfile($id);
-		$contactsNb=getContactsCount($id);
+		$profile=getProfile($ID);
+		$contactsNb=getContactsCount($ID);
 		if($contactsNb>0) {
-			$contactsPosts=getContactsPosts($id);
-			$companiesSuggests=getCompanySuggests($id);
-			$employeesSuggests=getEmployeeSuggests($id);
+			$contactsPosts=getContactsPosts($ID);
+			$companiesSuggests=getCompanySuggests($ID);
+			$employeesSuggests=getEmployeeSuggests($ID);
 		}
-		$followedCompaniesNb=getFollowedCompaniesCount($id);
+		$followedCompaniesNb=getFollowedCompaniesCount($ID);
 		$event=infoEvent($id);
 		$admin=checkAdmin($id);
 		$participate=checkParticipate($id);
@@ -343,13 +343,13 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	{
 		//SUPPRIMER LA PARTICIPATION DE L'UTILISATEUR DANS CET EVENEMENT
 		deleteParticipate($ID, $id);
-		if($_GET['role']=='participate') {
+		if($role=='participate') {
 			$_SESSION['erreur']="Vous vous êtes bien retiré de l'événement.";
 			header('location: index.php?action=showEvents');
 		}
-		else if($_GET['role']=='admin') {
+		else if($role=='admin') {
 			$_SESSION['erreur']="Vous avez bien retiré la participation de cette personne dans cet événement.";
-			header('location: index.php?action=eventView&id='.$id.'&role=admin');
+			eventView($ID, $id, 'admin');
 		}
 	}
 
@@ -357,7 +357,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	function removeEvent($id)
 	{
 		//SUPPRIMER L'EVENEMENT
-		deleteEvent($_GET['id']);
+		deleteEvent($id);
 		$_SESSION['erreur']="Vous avez supprimé cet événement avec succès.";
 		header('location: index.php?action=showEvents');
 	}
@@ -381,7 +381,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 			//SANS place
 			updateEvent($id, $title, $eventDate, "");
 		}
-		header('location: index.php?action=eventView&id='.$id.'&role=admin');
+		eventView($_SESSION['id'], $id, 'admin');
 	}
 
 	//AFFICHER LA PAGE D'AJOUT DE PARTICIPATION
@@ -395,17 +395,17 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	function addParticipate($contact, $id)
 	{
 		//VERIFIER QU'IL Y A AU MOINS UNE CASE COCHEE
-		if(isset($contact)) {
+		if($contact!=="") {
 			//AJOUTER LES CONTACTS DANS L'EVENEMENT
 			foreach($contact as $valeur) {
 			   insertParticipate($valeur, $id);
 			}
 			$_SESSION['erreur']="Vos contacts ont bien été ajouté à votre événement.";
-			header('location: index.php?action=eventView&id='.$id.'&role=admin');
+			eventView($_SESSION['id'], $id, 'admin');
 		}
 		else {
 			$_SESSION['erreur']="Vous n'avez sélectionné aucun contact à ajouter aux participants de votre événement.";
-			header('location: index.php?action=addParticipateView&id='.$id);
+			addParticipateView($_SESSION['id'], $id);
 		}
 	}
 

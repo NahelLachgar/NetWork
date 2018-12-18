@@ -13,8 +13,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 
-
-
 <div class="container">
     <div class="py-2 text-center">
         <h2>Créer un événement</h2>
@@ -25,8 +23,7 @@
         <div class="col-md-4 order-md-2 mb-4">
         </div>
         <div class="col-md-12 order-md-1">
-            <form enctype="multipart/form-data" action="index.php" method="GET">
-                <input type="hidden" name="action" value="createEvent">
+            <form enctype="multipart/form-data" action="index.php?action=createEvent" method="POST">
                 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
                 <script>
                 jQuery(function($) {

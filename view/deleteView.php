@@ -49,20 +49,37 @@
             </div>
             <div class="col-md-6 gedf-main">
 
-<h2>Êtes-vous sûr(e) de vouloir supprimer votre compte ?</h2>
-<form action="index.php" method="GET">
-    <input type="hidden" name="action" value="deleteAccount">
-    <input type="submit" class="btn btn-primary" name ="submit" value="Oui">
-</form><br/>
-<form action="index.php" method="GET">
-    <input type="hidden" name="action" value="home">
-    <input type="submit" class="btn btn-primary" name ="submit" value="Non">
-</form>
+<div class="container">
+    <div class="py-2 text-center">
+        <h2>Êtes-vous sûr(e) de vouloir supprimer votre compte ?</h2>
+        <p class="lead"></p>
+    </div>
+
+        <div class="row">
+            <div class="col-md-12 order-md-1">
+                <form enctype="multipart/form-data" action="index.php" method="GET">
+                    <input type="hidden" name="action" value="deleteAccount">
+                    <div class="row justify-content-center">
+                        <div class="col-md-3">
+                            <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Supprimer">
+                        </div>
+                    </div>
+                </form>
+                <div class="col-md-4 order-md-2 mb-4">
+                </div>
+                <form enctype="multipart/form-data" action="index.php" method="GET">
+                    <input type="hidden" name="action" value="home">
+                    <div class="row justify-content-center">
+                        <div class="col-md-3">
+                            <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Retour">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <?php
-	if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="") {
-        echo $_SESSION['erreur']."<br/><br/>";
-        $_SESSION['erreur']="";
-    }
     $content=ob_get_clean();
     require('view/template.php');
 ?>

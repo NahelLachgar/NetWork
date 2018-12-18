@@ -69,14 +69,14 @@ require('controller/controller.php');
                 echo "groupe";
                 break;
             case 'deleteView':
-//CSS
+//BOUTONS A COTE
                 deleteView($_SESSION['id']);
                 break;
             case 'deleteAccount':
                 deleteAccount($_SESSION['id']);
                 break;
             case 'showEvents':
-//CSS + POST
+//CSS
                 showEvents($_SESSION['id']);
                 break;
             case 'createEventView':
@@ -84,37 +84,38 @@ require('controller/controller.php');
                 createEventView($_SESSION['id'], $_POST['role']);
                 break;
             case 'createEvent':
-//POST
-                createEvent($_SESSION['id'], $_GET['title'], $_GET['eventDate'], $_GET['place']);
+                createEvent($_SESSION['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
                 break;
             case 'eventView':
-//CSS + POST
+//CSS
 //METTRE PROFIL DANS HYPERLIEN
-                eventView($_SESSION['id'], $_GET['id'], $_GET['role']);
+                eventView($_SESSION['id'], $_POST['id'], $_POST['role']);
                 break;
             case 'quitEvent':
-//POST
-                quitEvent($_GET['ID'], $_GET['id'], $_GET['role']);
+                quitEvent($_POST['ID'], $_POST['id'], $_POST['role']);
                 break;
             case 'deleteEvent':
-//POST
-                removeEvent($_GET['id']);
+                removeEvent($_POST['id']);
                 break;
             case 'updateEventView':
-//CSS + JS + POST
-                updateEventView($_GET['id']);
+//CSS + JS
+                updateEventView($_POST['id']);
                 break;
             case 'updateEvent':
-//POST
-                modifyEvent($_GET['id'], $_GET['title'], $_GET['eventDate'], $_GET['place']);
+                modifyEvent($_POST['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
                 break;
             case 'addParticipateView':
-//CSS + JS + POST
-                addParticipateView($_SESSION['id'], $_GET['id']);
+//CSS + JS
+                addParticipateView($_SESSION['id'], $_POST['id']);
                 break;
             case 'addParticipate':
-//POST
-                addParticipate($_GET['contact'], $_GET['id']);
+                //VERIFIER QU'IL Y A AU MOINS UNE CASE COCHEE
+                if(isset($_POST['contact'])) {
+                    addParticipate($_POST['contact'], $_POST['id']);
+                }
+                else {
+                    addParticipate("", $_POST['id']);
+                }
                 break;
             /*
             case 'joinInvitation':

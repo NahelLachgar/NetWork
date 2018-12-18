@@ -66,13 +66,11 @@
     }
     //PRENDRE EN COMPTE LES INVITATIONS
     /*
-    echo "<form action='index.php' method='GET'>
-    		<input type='hidden' name='action' value='joinInvitation'>
+    echo "<form action='index.php?action=joinInvitation' method='POST'>
             <input type='hidden' name='id' value='".$event[$i][0]."'>
             <input type='submit' class='btn btn-primary' name='submit' value='Rejoindre un événement'>
         </form>";
-    echo "<form action='index.php' method='GET'>
-    		<input type='hidden' name='action' value='declineInvitation'>
+    echo "<form action='index.php?action=declineInvitation' method='POST'>
             <input type='hidden' name='id' value='".$event[$i][0]."'>
             <input type='submit' class='btn btn-primary' name='submit' value='Refuser un événement'>
         </form>";
@@ -84,8 +82,7 @@
         for($i=0;$i<sizeof($admin);$i++)
         {
             echo $admin[$i][1];
-            echo "<form action='index.php' method='GET'>
-                <input type='hidden' name='action' value='eventView'>
+            echo "<form action='index.php?action=eventView' method='POST'>
                 <input type='hidden' name='id' value='".$admin[$i][0]."'>
                 <input type='hidden' name='role' value='admin'>
                 <input type='submit' class='btn btn-primary' name='submit' value='Afficher la page de l&apos;événement'>
@@ -103,8 +100,7 @@
         for($j=0;$j<sizeof($event);$j++)
         {
             echo $event[$j][1];
-            echo "<form action='index.php' method='GET'>
-                <input type='hidden' name='action' value='eventView'>
+            echo "<form action='index.php?action=eventView' method='POST'>
                 <input type='hidden' name='id' value='".$event[$j][0]."'>
                 <input type='hidden' name='role' value='participate'>
                 <input type='submit' class='btn btn-primary' name='submit' value='Afficher la page de l&apos;événement'>

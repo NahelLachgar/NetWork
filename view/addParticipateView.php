@@ -17,14 +17,13 @@
 <?php
 	if($contact!=false)
 	{
-		echo "<form action='index.php' method='GET'>
-				<input type='hidden' name='action' value='addParticipate'>";
+		echo "<form action='index.php?action=addParticipate' method='POST'>";
 			for($i=0;$i<sizeof($contact);$i++)
 			{
 				echo "<input type='checkbox' name='contact[]' value='".$contact[$i][0]."'>".$contact[$i][1]." ".$contact[$i][2]."<br/>";
 			}
 			echo "<input type='hidden' name='id' value='".$id."'>
-			<br/><input type='submit' class='btn btn-primary' name='submit' value='Envoyer'><br/>
+			<br/><input type='submit' class='btn btn-primary' name='submit' value='Envoyer'><br/><br/>
 		</form>";
 	}
 	else
@@ -41,8 +40,7 @@
         echo "<br/><br/>";
     }
 ?>
-    <form action="index.php" method="GET">
-        <input type="hidden" name="action" value="eventView">
+    <form action="index.php?action=eventView" method="POST">
         <input type="hidden" name="id" value='<?php echo $id; ?>'>
         <input type="hidden" name="role" value="admin">
         <input type="submit" class="btn btn-primary" name="submit" value="Retour">
