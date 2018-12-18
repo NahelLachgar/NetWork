@@ -71,6 +71,9 @@ require('controller/controller.php');
             case 'groups':
                 sessionGroup();
                 break;
+            case 'createGroup':
+                createGroups($_POST['nameG'],$_SESSION['id']);
+                break;
             case 'deleteView':
                 deleteView($_SESSION['id']);
                 break;
@@ -117,9 +120,6 @@ require('controller/controller.php');
                 declineInvitation($_SESSION['id'], $_GET['id']);
                 break;
             */
-            case 'createGroup':
-                //echo $_POST['userId'];
-                //break;
             default:
                 home($_SESSION['id']);
         }
