@@ -94,9 +94,10 @@ ob_start();
 			$.ajax({
 				url : "send.php",
 				type : "POST",
-				data : "content=" + content + "&contactId=" + idContact
+				data : "content=" + content + "&contactId=" + idContact,
+				dataType:'html'
 			});
-			$('#messages').append("<li class=<?= $class ?>><p>" + content + "</p></ul>");
+			$('#messages').appendTo("<li class=<?= $class ?>><p>" + content + "</p></ul>");
 		}
 	}
 	});
@@ -105,8 +106,9 @@ function load(){
 			var fisrtId = $('#messages p:first').attr('id');
 			$.ajax({
 				url : "load.php",
-				type : POST,
+				type : "POST",
 				data : "messageId=" + firstId,
+				dataType:'html',
 				success : function(html){
 					$('#messages').prepend(html);
 				}
