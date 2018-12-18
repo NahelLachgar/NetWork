@@ -56,6 +56,7 @@ require('controller/controller.php');
                 break; 
             case 'contactContacts':
                 showContacts($_POST['contactId']);
+                break;
             case 'showMessages':
                 showMessages();
                 break;

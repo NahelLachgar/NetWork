@@ -35,14 +35,14 @@
           <form enctype="multipart/form-data" action="index.php?action=addUser" method="POST">
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="firstName">Nom de l'entreprise</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" required>
+                <label for="lastName">Nom de l'entreprise</label>
+                <input type="text" class="form-control" id="lastName" name="lastName" placeholder="" required>
                 <div class="invalid-feedback">
                   Entrez votre prenom .
                 </div>
               </div>
 
-              <input type="hidden" name="lastName" value="">
+              <input type="hidden" name="firstName" value=" ">
               
               <div class="col-md-6 mb-3">
                   <label for="email">Adresse email</label>
@@ -95,40 +95,35 @@
             <div class="row">
               <input type="hidden" name="status" value="1">
               <div class="col-md-4 mb-3">
-                <label for="emploi">Emploi</label>
+                <label for="emploi">Ville</label>
               <input type="text" class="form-control" id="emploi" name="job" required>
               <div class="invalid-feedback">
                 Entrez votre profession.
               </div>
               </div>
               <div class="col-md-4 mb-3">
-                <label for="entreprise">Entreprise</label>
+                <label for="entreprise">Code postal</label>
                 <input type="text" name="company" class="form-control" id="company" required>
                 <div class="invalid-feedback">
                   Entrez votre d'entreprise de travail.
                 </div>
               </div>
             <div class="col-md-4 mb-3">
-              <label for="ville">Ville</label>
+              <label for="ville">Rue</label>
               <input type="text" class="form-control" id="town" name="town" required>
               <div class="invalid-feedback">
                 Entrez votre ville.
               </div>
             </div>
           </div>
-            <hr class="mb-4">
-
             <div class="row justify-content-center">
                 <div class="col-md-3">
                     <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">S'inscrire</button>
                 </div>
             </div>
-
-            <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">S'inscrire</button>
           </form>
         </div>
       </div>
-
     </div>
 
     <!-- Bootstrap core JavaScript

@@ -20,9 +20,9 @@
   <body class="bg-light">
 
     <div class="container">
-      <div class="py-5 text-center">
+      <div class="py-12 text-center">
         <img class="d-block mx-auto mb-4" src="" alt="" width="72" height="72">
-        <h2>Inscription</h2>
+        <h2>Inscription membre</h2>
         <p class="lead"></p>
       </div>
 
@@ -50,7 +50,8 @@
               </div>
             </div>
 
-            <div class="mb-3">
+          <div class="row">
+            <div class="mb-3 col-md-6">
               <label for="email">Adresse email</label>
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -64,7 +65,7 @@
               <span id="aideCourriel"></span>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 col-md-6">
               <label for="phone">Numero de telephone</label>
               <input type="text" class="form-control" id="phone" name="phone" required>
               <div class="invalid-feedback">
@@ -72,12 +73,13 @@
               </div>
               <span id="aidePhone"></span>
             </div>
+          </div>
 
             <div class="mb-3">
                 <label for="file">Avatar</label>
                 <input type="file" class="form-control-file" name="photo" id="file">
             </div>
-            <hr class="mb-4">
+
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="mdp">Mot de passe</label>
@@ -95,7 +97,6 @@
                 </div>
               </div>
             </div>
-            <hr class="mb-4">
             <div class="row">
 
               <input type="hidden" name="status" value="2">
@@ -134,8 +135,11 @@
               </div>
             </div>
           </div>
-            <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">S'inscrire</button>
+          <div class="row justify-content-center">
+              <div class="col-md-3">
+                  <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">S'inscrire</button>
+              </div>
+          </div>
           </form>
         </div>
       </div>

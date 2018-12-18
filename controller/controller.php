@@ -10,7 +10,13 @@ function home($userId) {
 	$employeesSuggests = getEmployeeSuggests($userId);
 	}
 	$followedCompaniesNb = getFollowedCompaniesCount($userId);
-	require('view/homeView.php');
+
+	if($profile['status'] == "employee"){
+		require('view/homeViewEmployee.php');
+	}else{
+		require('view/homeViewCompany.php');
+	}
+	// require('view/homeView.php');
 }
 
 function showMessages () {
