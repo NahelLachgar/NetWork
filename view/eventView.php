@@ -65,19 +65,19 @@
         echo "<form action='index.php' method='GET'>
             <input type='hidden' name='action' value='updateEventView'>
             <input type='hidden' name='id' value='".$id."'>
-            <input type='submit' name='submit' value='Modifier l&apos;événement'>
+            <input type='submit' class='btn btn-primary' name='submit' value='Modifier l&apos;événement'>
         </form>";
         //SUPPRIMER L'EVENEMENT
         echo "<form action='index.php' method='GET'>
             <input type='hidden' name='action' value='deleteEvent'>
             <input type='hidden' name='id' value='".$id."'>
-            <input type='submit' name='submit' value='Supprimer l&apos;événement'>
+            <input type='submit' class='btn btn-primary' name='submit' value='Supprimer l&apos;événement'>
         </form>";
         //AJOUTER DES CONTACTS AUX PARTICIPANTS DE L'EVENEMENT
         echo "<form action='index.php' method='GET'>
             <input type='hidden' name='action' value='addParticipateView'>
             <input type='hidden' name='id' value='".$id."'>
-            <input type='submit' name='submit' value='Ajouter des participants'>
+            <input type='submit' class='btn btn-primary' name='submit' value='Ajouter des participants'>
         </form>";
     }
     else if($_GET['role']=='participate')
@@ -87,12 +87,12 @@
         echo "<form action='index.php' method='GET'>
                 <input type='hidden' name='action' value='join'>
                 <input type='hidden' name='id' value='".$event[$i][0]."'>
-                <button>Rejoindre un événement</button>
+                <input type='submit' class='btn btn-primary' name='submit' value='Rejoindre un événement'>
             </form>";
         echo "<form action='index.php' method='GET'>
                 <input type='hidden' name='action' value='decline'>
                 <input type='hidden' name='id' value='".$event[$i][0]."'>
-                <button>Refuser un événement</button>
+                <input type='submit' class='btn btn-primary' name='submit' value='Refuser un événement'>
             </form>";
         */
         //SUPPRIMER L'UTILISATEUR DES PARTICIPANTS DE L'EVENEMENT
@@ -101,7 +101,7 @@
             <input type='hidden' name='ID' value='".$_SESSION['id']."'>
             <input type='hidden' name='id' value='".$id."'>
             <input type='hidden' name='role' value='participate'>
-            <input type='submit' name='submit' value='Quitter l&apos;événement'>
+            <input type='submit' class='btn btn-primary' name='submit' value='Quitter l&apos;événement'>
         </form>";
     }
     //AFFICHER L'ADMINISTRATEUR
@@ -121,7 +121,7 @@
         {
             //AFFICHER LES PARTICIPANTS
 //METTRE PROFIL DANS HYPERLIEN
-            echo "<a href='index.php?action='>".$participate[$i][1]." ".$participate[$i][2]."</a><br/>";
+            echo "<a href='index.php?action=profilePage'>".$participate[$i][1]." ".$participate[$i][2]."</a><br/>";
             if($_GET['role']=='admin')
             {
                 //SUPPRIMER LE PARTICIPANT
@@ -130,7 +130,7 @@
                     <input type='hidden' name='ID' value='".$participate[$i][0]."'>
                     <input type='hidden' name='id' value='".$id."'>
                     <input type='hidden' name='role' value='admin'>
-                    <input type='submit' name='submit' value='Enlever sa participation'>
+                    <input type='submit' class='btn btn-primary' name='submit' value='Enlever sa participation'>
                 </form><br/>";
             }
         }
@@ -143,9 +143,18 @@
 ?>
     <form action="index.php" method="GET">
         <input type="hidden" name="action" value="showEvents">
-        <input type="submit" name="submit" value="Retour">
+        <input type="submit" class='btn btn-primary' name="submit" value="Retour">
     </form>
 <?php
     $content=ob_get_clean();
     require('view/template.php');
+
+    /*
+<form action="index.php?action=addContact" method="POST">
+                            <input type="hidden" name="contactId" value="<?=$result['contactId']?>">
+                            <button type="submit" class="btn btn-link"><img src="./img/icon/users.png"></button>
+                        </form>
+
+                        <a href="index.php?action=addContact&id=<?= $result['contactId'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+    */
 ?>

@@ -13,38 +13,80 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 
-    <h1>Création d'un événement</h1>
-    <form action="index.php" method="GET">
-        <input type="hidden" name="action" value="createEvent">
-        <input type="text" placeholder="Nom" name="title" required><br/>
-        <input type="date" placeholder="YYYY-MM-JJ HH:MM:SS" name="eventDate" required><br/>
-        <input type="text" placeholder="Lieu de rendez-vous" name="place"><br/><br/>
-        <input type="submit" name="submit" value="Envoyer">
-    </form>
-<?php
-    if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="")
-    {
-        echo "<br/>".$_SESSION['erreur']."<br/><br/>";
-        $_SESSION['erreur']="";
-    }
-    else
-    {
-        echo "<br/><br/>";
-    }
-?>
-    <form action="index.php" method="GET">
-        <input type="hidden" name="action" value="showEvents">
-        <input type="submit" name="submit" value="Retour">
-    </form>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
-    <script src="https://getbootstrap.com/docs/4.1/dist/js/bootstrap.min.js"></script>
-    <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
-    <script src="./js/inscription.js"></script>
+
+
+<div class="container">
+    <div class="py-2 text-center">
+        <h2>Créer un événement</h2>
+        <p class="lead"></p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+        </div>
+        <div class="col-md-12 order-md-1">
+            <form enctype="multipart/form-data" action="index.php" method="GET">
+                <input type="hidden" name="action" value="createEvent">
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                <script>
+                jQuery(function($) {
+                    $('#photoUpdateFile').click(function(e) {
+                    });
+                     
+                    $('#photoUpdate').click(function(e) {
+                        $('#photoUpdateFile').trigger('click');
+                    });
+                });
+                </script>
+                <div class="row justify-content-center">
+                    <div class="col-md-6 mb-3">
+                        <label for="newName">Nom</label>
+                        <input type="text" class="form-control" id="newName" name="title" required>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-6 mb-3">
+                        <label for="newName">Date</label>
+                        <input type="date" class="form-control" id="newName" name="eventDate" placeholder="YYYY-MM-JJ HH:MM:SS" required>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-6 mb-3">
+                        <label for="newName">Lieu</label>
+                        <input type="text" class="form-control" id="newName" name="place">
+                        <div class="invalid-feedback"></div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row justify-content-center">
+                    <div class="col-md-3">
+                        <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Créer">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<form enctype="multipart/form-data" action="index.php" method="GET">
+    <input type="hidden" name="action" value="showEvents">
+    <div class="row justify-content-center">
+        <div class="col-md-3">
+            <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Retour">
+        </div>
+    </div>
+</form>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
+<script src="https://getbootstrap.com/docs/4.1/dist/js/bootstrap.min.js"></script>
+<script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
+<script src="./js/inscription.js"></script>
 <?php
     $content=ob_get_clean();
     require('view/template.php');

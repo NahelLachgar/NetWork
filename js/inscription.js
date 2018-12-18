@@ -30,12 +30,12 @@ document.getElementById("email").addEventListener("input", function (e) {
 
     if (phone.length != 10) {
         // la taille du numero de telephone est different de 10
-        validitePhone = "Numero de telephone invalide";
+        validitePhone = "Numéro de téléphone invalide";
     } else if(phone.length = 10) {
         if(phone.match(regex)){
-            validitePhone = "Numero de telephone invalide";
+            validitePhone = "Numéro de téléphone invalide";
         } else {
-            validitePhone = "Numero de telephone valide";
+            validitePhone = "Numéro de téléphone valide";
             couleurMsg = "green";
         }
     }
@@ -50,9 +50,9 @@ document.getElementById("email").addEventListener("input", function (e) {
     var couleurMsg = "red";
 
         if((document.getElementById('firstName').value==' ') || (document.getElementById('firstName').value=='')){
-            validiteName = "Prenom invalide";
+            validiteName = "Prénom invalide";
         } else {
-            validiteName = "Prenom valide";
+            validiteName = "Prénom valide";
             couleurMsg = "green";
         }
     var aideNameElt = document.getElementById("aideName");

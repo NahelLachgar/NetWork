@@ -12,7 +12,7 @@ ob_start();
 		</div>
 		<div id="search">
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="Search contacts..." />
+			<input type="text" placeholder="Rechercher des contacts..." />
 		</div>
 		<div id="contacts">
 			<ul>
@@ -67,7 +67,7 @@ ob_start();
 		<div class="message-input">
 			<div class="wrap">
 			<form action="index.php?action=sendMessage" method="POST">
-				<input type="text" name="content" id="content" placeholder="Écrivez votre message" />
+				<input type="text" name="content" id="content" placeholder="Écrivez votre message." />
 				<input type="hidden" name="contactId" id="contactId" value="<?= $_POST['contactId'] ?>">
 				<i class="fa fa-paperclip attachment" aria-hidden="true"></i> 
 				<button type="submit" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>

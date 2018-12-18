@@ -24,7 +24,7 @@
 				echo "<input type='checkbox' name='contact[]' value='".$contact[$i][0]."'>".$contact[$i][1]." ".$contact[$i][2]."<br/>";
 			}
 			echo "<input type='hidden' name='id' value='".$id."'>
-			<br/><input type='submit' name='submit' value='Envoyer'><br/>
+			<br/><input type='submit' class='btn btn-primary' name='submit' value='Envoyer'><br/>
 		</form>";
 	}
 	else
@@ -45,7 +45,7 @@
         <input type="hidden" name="action" value="eventView">
         <input type="hidden" name="id" value='<?php echo $id; ?>'>
         <input type="hidden" name="role" value="admin">
-        <input type="submit" name="submit" value="Retour">
+        <input type="submit" class="btn btn-primary" name="submit" value="Retour">
     </form>
 
     <!-- Bootstrap core JavaScript

@@ -51,8 +51,8 @@
         </div>     
       <?php endif; ?>
 
-      <label for="inputEmail" class="sr-only">Adresse mail</label>
-      <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Adresse mail" required autofocus>
+      <label for="inputEmail" class="sr-only">Adresse e-mail</label>
+      <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Adresse e-mail" required autofocus>
       <label for="inputPassword" class="sr-only">Mot de passe</label>
       <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Mot de passe" required>
 	  <button class="btn btn-lg btn-primary btn-block" name="SignUp" type="submit">Se connecter</button>

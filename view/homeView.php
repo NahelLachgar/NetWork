@@ -78,7 +78,7 @@ ob_start();
                                 <div class="form-group">
                                     <div class="custom-file">
                                         <input type="file" accept="image/*" class="custom-file-input" id="customFile">
-                                        <label class="custom-file-label" for="customFile">Upload image</label>
+                                        <label class="custom-file-label" for="customFile">Publier une image</label>
                                     </div>
                                 </div>
                                 <div class="py-4"></div>
@@ -153,7 +153,7 @@ ob_start();
                     <?php 
                     endfor;
                  else :
-                    echo("Vous n'avez aucune publication a afficher");
+                    echo("Vous n'avez aucune publication à afficher.");
                  endif;
                     ?>
                 </div>

@@ -294,19 +294,15 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	}
 
 	//AFFICHER LA PAGE CREATION D'UN EVENEMENT
-	function createEventView($id)
+	function createEventView($id, $role)
 	{
-		$profile=getProfile($id);
-		$contactsNb=getContactsCount($id);
-		if($contactsNb>0) {
-			$contactsPosts=getContactsPosts($id);
-			$companiesSuggests=getCompanySuggests($id);
-			$employeesSuggests=getEmployeeSuggests($id);
+		if($role=='admin') {
+			include('view/createEventView.php');
 		}
-		$followedCompaniesNb=getFollowedCompaniesCount($id);
-
-
-		include('view/createEventView.php');
+		else
+		{
+			header('location: index.php?action=showEvents');
+		}
 	}
 
 	//CREER UN EVENEMENT

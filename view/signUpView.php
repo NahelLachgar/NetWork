@@ -41,10 +41,10 @@
           <form name="form" enctype="multipart/form-data" action="index.php?action=addUser" method="POST">
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="firstName">Prenom</label>
+                <label for="firstName">Prénom</label>
                 <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" required>
                 <div class="invalid-feedback">
-                  Entrez votre prenom .
+                  Entrez votre prénom.
                 </div>
                 <span id="aideName"></span>
               </div>
@@ -59,24 +59,24 @@
             </div>
 
             <div class="mb-3">
-              <label for="email">Adresse email</label>
+              <label for="email">Adresse e-mail</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">@</span>
                 </div>
                 <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email" required>
                 <div class="invalid-feedback" style="width: 100%;">
-                  Entrez votre adresse mail.
+                  Entrez votre adresse e-mail.
                 </div>
               </div>
               <span id="aideCourriel"></span>
             </div>
 
             <div class="mb-3">
-              <label for="phone">Numero de telephone</label>
+              <label for="phone">Numéro de téléphone</label>
               <input type="text" class="form-control" id="phone" name="phone" required>
               <div class="invalid-feedback">
-                Entrez votre numero de telephone.
+                Entrez votre numéro de téléphone.
               </div>
               <span id="aidePhone"></span>
             </div>
@@ -99,7 +99,7 @@
                <label for="mdp2">Confirmation du mot de passe</label>
                 <input type="password" class="form-control" id="mdp2" name="confirmPassword" /*onclick="password()"*/ required>
                 <div class="invalid-feedback">
-                  Entrez votre mot de passe.
+                  Rentrez de nouveau le mot de passe.
                 </div>
               </div>
               <span id="aidePass"></span>
@@ -111,10 +111,10 @@
                 <select name="status" class="custom-select d-block w-100" id="Status" required>
                   <option value="">Choisissez un statut</option>
                   <option value="1">entreprise</option>
-                  <option value="2">employé</option>
+                  <option value="2">employé(e)</option>
                 </select>
                 <div class="invalid-feedback">
-                  Selectionnez votre statut.
+                  Sélectionnez votre statut.
                 </div>
               </div>
               <div class="col-md-4 mb-3">
@@ -129,7 +129,7 @@
                 <label for="entreprise">Entreprise</label>
                 <input type="text" name="company" class="form-control" id="company" required>
                 <div class="invalid-feedback">
-                  Entrez votre d'entreprise de travail.
+                  Entrez votre nom d'entreprise.
                 </div>
                 <span id="aideCompany"></span>
               </div>
@@ -143,7 +143,7 @@
               <span id="aideTown"></span>
             </div>
             <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">S'inscire</button>
+            <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">S'inscrire</button>
           </form>
         </div>
       </div>

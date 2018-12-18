@@ -50,9 +50,9 @@
             <div class="col-md-6 gedf-main">
 
 <h1>Mes événements</h1>
-<form action="index.php" method="GET">
-    <input type="hidden" name="action" value="createEventView">
-    <input type="submit" name="submit" value="Créer un événement">
+<form action="index.php?action=createEventView" method="POST">
+    <input type="hidden" name="role" value="admin">
+    <input type="submit" class="btn btn-primary" name="submit" value="Créer un événement">
 </form>
 <?php
     if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="")
@@ -69,12 +69,12 @@
     echo "<form action='index.php' method='GET'>
     		<input type='hidden' name='action' value='joinInvitation'>
             <input type='hidden' name='id' value='".$event[$i][0]."'>
-            <button>Rejoindre un événement</button>
+            <input type='submit' class='btn btn-primary' name='submit' value='Rejoindre un événement'>
         </form>";
     echo "<form action='index.php' method='GET'>
     		<input type='hidden' name='action' value='declineInvitation'>
             <input type='hidden' name='id' value='".$event[$i][0]."'>
-            <button>Refuser un événement</button>
+            <input type='submit' class='btn btn-primary' name='submit' value='Refuser un événement'>
         </form>";
     */
     if($admin!=false)
@@ -83,13 +83,12 @@
         //AFFICHER LES EVENEMENTS QUE L'UTILISATEUR ORGANISE
         for($i=0;$i<sizeof($admin);$i++)
         {
-////////////////////////////////DAFUQ
             echo $admin[$i][1];
             echo "<form action='index.php' method='GET'>
                 <input type='hidden' name='action' value='eventView'>
                 <input type='hidden' name='id' value='".$admin[$i][0]."'>
                 <input type='hidden' name='role' value='admin'>
-                <input type='submit' name='submit' value='Afficher la page de l&apos;événement'>
+                <input type='submit' class='btn btn-primary' name='submit' value='Afficher la page de l&apos;événement'>
             </form><br/>";
         }
     }
@@ -108,7 +107,7 @@
                 <input type='hidden' name='action' value='eventView'>
                 <input type='hidden' name='id' value='".$event[$j][0]."'>
                 <input type='hidden' name='role' value='participate'>
-                <input type='submit' name='submit' value='Afficher la page de l&apos;événement'>
+                <input type='submit' class='btn btn-primary' name='submit' value='Afficher la page de l&apos;événement'>
             </form>";
         }
     }

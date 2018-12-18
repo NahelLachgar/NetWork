@@ -69,39 +69,51 @@ require('controller/controller.php');
                 echo "groupe";
                 break;
             case 'deleteView':
+//CSS
                 deleteView($_SESSION['id']);
                 break;
             case 'deleteAccount':
                 deleteAccount($_SESSION['id']);
                 break;
             case 'showEvents':
+//CSS + POST
                 showEvents($_SESSION['id']);
                 break;
             case 'createEventView':
-                createEventView($_SESSION['id']);
+//JS
+                createEventView($_SESSION['id'], $_POST['role']);
                 break;
             case 'createEvent':
+//POST
                 createEvent($_SESSION['id'], $_GET['title'], $_GET['eventDate'], $_GET['place']);
                 break;
             case 'eventView':
+//CSS + POST
+//METTRE PROFIL DANS HYPERLIEN
                 eventView($_SESSION['id'], $_GET['id'], $_GET['role']);
                 break;
             case 'quitEvent':
+//POST
                 quitEvent($_GET['ID'], $_GET['id'], $_GET['role']);
                 break;
             case 'deleteEvent':
+//POST
                 removeEvent($_GET['id']);
                 break;
             case 'updateEventView':
+//CSS + JS + POST
                 updateEventView($_GET['id']);
                 break;
             case 'updateEvent':
+//POST
                 modifyEvent($_GET['id'], $_GET['title'], $_GET['eventDate'], $_GET['place']);
                 break;
             case 'addParticipateView':
+//CSS + JS + POST
                 addParticipateView($_SESSION['id'], $_GET['id']);
                 break;
             case 'addParticipate':
+//POST
                 addParticipate($_GET['contact'], $_GET['id']);
                 break;
             /*

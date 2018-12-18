@@ -52,11 +52,11 @@
 <h2>Êtes-vous sûr(e) de vouloir supprimer votre compte ?</h2>
 <form action="index.php" method="GET">
     <input type="hidden" name="action" value="deleteAccount">
-    <input type="submit" name ="submit" value="Oui">
-</form>
+    <input type="submit" class="btn btn-primary" name ="submit" value="Oui">
+</form><br/>
 <form action="index.php" method="GET">
     <input type="hidden" name="action" value="home">
-    <input type="submit" name ="submit" value="Non">
+    <input type="submit" class="btn btn-primary" name ="submit" value="Non">
 </form>
 <?php
 	if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="") {

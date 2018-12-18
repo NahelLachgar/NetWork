@@ -32,7 +32,7 @@
            </button></a>
         <form class="form-inline" action="index.php?action=search" method="POST">
             <div class="input-group">
-                <input type="text" placeholder="Rechercher un membre" name="research" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <input type="text" placeholder="Rechercher..." name="research" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
                         <i class="fa fa-search"></i>
