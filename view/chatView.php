@@ -61,6 +61,7 @@ ob_start();
 			?>
 				<li class=<?= $class ?>>
 					<p><?= $messagesFetch['content'] ?></p>
+				</li>
                     <?php endwhile ?>
 			</ul>
 		</div>
@@ -91,7 +92,7 @@ ob_start();
 
 		if (content != "" && trim(content) != "") {
 			$.ajax({
-				url : "index.php?action=sendMessage",
+				url : "send.php",
 				type : "POST",
 				data : "content=" + content + "&contactId=" + idContact
 			});
@@ -103,7 +104,7 @@ function load(){
 		setTimeout( function(){
 			var fisrtId = $('#messages p:first').attr('id');
 			$.ajax({
-				url : "index.php?action=showMessages",
+				url : "load.php",
 				type : POST,
 				data : "messageId=" + firstId,
 				success : function(html){
