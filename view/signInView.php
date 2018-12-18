@@ -39,6 +39,8 @@
   </head>
 
   <body class="text-center">
+  <div class="container">
+    <div class="row">
     <form class="form-signin" action="?action=checkUser" method="POST">
       <img class="lg-4" src="./img/logo/logo.png" alt="" width="250" height="250">
       <h1 class="h3 mb-3 font-weight-normal">Connectez-vous !</h1>
@@ -56,8 +58,11 @@
       <label for="inputPassword" class="sr-only">Mot de passe</label>
       <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Mot de passe" required>
 	  <button class="btn btn-lg btn-primary btn-block" name="SignUp" type="submit">Se connecter</button>
-	  <a href="index.php?action=signUp">Inscrivez-vous</a>
-	</form>
+    <a href="index.php?action=signUpEmployee">Inscrivez-vous en tant que membre</a>
+    <a href="index.php?action=signUpCompany">Inscrivez-vous en tant qu'entreprise</a>
+  </form>
+  </div>
+</div>
 	
   </body>
 </html>

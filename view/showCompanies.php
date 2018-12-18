@@ -23,7 +23,7 @@ ob_start();
                         <div class="card-body">
                             <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
                             <form action="index.php?action=profilePage" method="POST">
-                                <input type="hidden" value="<?=$result['contactId'] ?>">
+                                <input type="hidden" name="contactId" value="<?=$result['id'] ?>">
                                 <button type="submit" class="btn btn-link"><?= $result['name']. ' ' . $result['lastName'] ?></button> 
                             </form>
                         <?php endif;?>

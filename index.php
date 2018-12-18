@@ -36,8 +36,11 @@ require('controller/controller.php');
             case 'profilemodif':
                validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newPass'],$_POST['confirmNewPass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
                 break;
-            case 'signUp':
-                require('./view/signUpView.php');
+            case 'signUpCompany':
+                require('./view/signUpCompanyView.html');
+                break;
+            case 'signUpEmployee':
+                require('./view/signUpEmployeeView.html');
                 break;
             case 'post':
                 addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
