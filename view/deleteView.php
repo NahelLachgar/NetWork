@@ -79,6 +79,17 @@
         </div>
     </div>
 </div>
+
+<!--
+<form enctype="multipart/form-data" action="index.php?action=eventView" method="POST">
+    <input type="hidden" name="role" value="admin">
+    <div class="row justify-content-center">
+        <div class="col-md-3">
+            <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Retour">
+        </div>
+    </div>
+</form>
+-->
 <?php
     $content=ob_get_clean();
     require('view/template.php');

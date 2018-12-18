@@ -13,9 +13,55 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
 
-	<h1>Ajouter des participants à l'événement</h1>
+<div class="container">
+    <div class="py-2 text-center">
+        <h2>Ajouter des participants à l'événement</h2>
+        <p class="lead"></p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+        </div>
+        <div class="col-md-12 order-md-1">
+            <form enctype="multipart/form-data" action="index.php?action=addParticipate" method="POST">
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
 <?php
-	if($contact!=false)
+                for($i=0;$i<sizeof($contact);$i++) {
+                    echo "<div class='row justify-content-center'>
+                            <div class='col-md-6 mb-3'>";
+                    for($j=0;$j<12;$j++) { 
+                        echo "&emsp;";
+                    }
+                    echo "<input type='checkbox' name='contact[]' value='".$contact[$i][0]."'> ".$contact[$i][1]." ".$contact[$i][2]."<br/>
+                            </div>
+                        </div>";
+                }
+?>
+                <div class="row justify-content-center">
+                    <div class="col-md-3">
+                        <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Ajouter">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<form enctype="multipart/form-data" action="index.php?action=eventView" method="POST">
+    <input type="hidden" name="id" value="<?php echo $id ?>">
+    <input type="hidden" name="role" value="admin">
+    <div class="row justify-content-center">
+        <div class="col-md-3">
+            <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Retour">
+        </div>
+    </div>
+</form>
+
+	<!--<h1>Ajouter des participants à l'événement</h1>-->
+<?php
+	/*if($contact!=false)
 	{
 		echo "<form action='index.php?action=addParticipate' method='POST'>";
 			for($i=0;$i<sizeof($contact);$i++)
@@ -38,13 +84,13 @@
     else
     {
         echo "<br/><br/>";
-    }
+    }*/
 ?>
-    <form action="index.php?action=eventView" method="POST">
+    <!--<form action="index.php?action=eventView" method="POST">
         <input type="hidden" name="id" value='<?php echo $id; ?>'>
         <input type="hidden" name="role" value="admin">
         <input type="submit" class="btn btn-primary" name="submit" value="Retour">
-    </form>
+    </form>-->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

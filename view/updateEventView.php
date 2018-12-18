@@ -67,7 +67,7 @@
         </div>
     </div>
 </div>
-<!--A REFAIRE-->
+
 <form enctype="multipart/form-data" action="index.php?action=eventView" method="POST">
     <input type="hidden" name="id" value="<?php echo $id ?>">
     <input type="hidden" name="role" value="admin">
@@ -77,36 +77,6 @@
         </div>
     </div>
 </form>
-
-
-
-
-<!--<h1>Modification d'un événement</h1>
-    <form action="index.php" method="GET">
-        <input type="hidden" name="action" value="updateEvent">
-        <input type='hidden' name='id' value='<?php echo $id; ?>'>
-        <input type="text" placeholder="Nom" name="title" value='<?php echo $event[0]; ?>' required><br/>
-        <input type="date" placeholder="YYYY-MM-JJ HH:MM:SS" name="eventDate" value='<?php echo $event[1]; ?>' required><br/>
-        <input type="text" placeholder="Lieu de rendez-vous" name="place" value='<?php echo $event[2]; ?>'><br/><br/>
-        <input type="submit" class="btn btn-primary" name="submit" value="Envoyer">
-    </form>-->
-<?php
-    /*if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="")
-    {
-        echo "<br/>".$_SESSION['erreur']."<br/><br/>";
-        $_SESSION['erreur']="";
-    }
-    else
-    {
-        echo "<br/><br/>";
-    }*/
-?>
-    <!--<form action="index.php" method="GET">
-        <input type="hidden" name="action" value="showEvents">
-        <input type="hidden" name="id" value='<?php echo $id; ?>'>
-        <input type="hidden" name="role" value="admin">
-        <input type="submit" class="btn btn-primary" name="submit" value="Retour">
-    </form>-->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

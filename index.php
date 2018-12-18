@@ -69,7 +69,7 @@ require('controller/controller.php');
                 echo "groupe";
                 break;
             case 'deleteView':
-//BOUTONS A COTE
+//BOUTONS A COTE / taille + grande
                 deleteView($_SESSION['id']);
                 break;
             case 'deleteAccount':
@@ -98,14 +98,14 @@ require('controller/controller.php');
                 removeEvent($_POST['id']);
                 break;
             case 'updateEventView':
-//CSS + JS
+//JS
                 updateEventView($_POST['id']);
                 break;
             case 'updateEvent':
                 modifyEvent($_POST['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
                 break;
             case 'addParticipateView':
-//CSS + JS
+//JS
                 addParticipateView($_SESSION['id'], $_POST['id']);
                 break;
             case 'addParticipate':
