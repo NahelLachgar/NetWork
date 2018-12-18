@@ -43,9 +43,7 @@ function contactHome($contactId) {
 	$followedCompaniesNb = getFollowedCompaniesCount($contactId);
 	require('view/profilepageView.php');	
 }
-function groups() {
-	
-}
+
 function addPost($content,$type,$userId) {
 	post($content,$type,$userId);
 	header('Location:index.php?action=home');
@@ -229,7 +227,18 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 
 	// GROUPE
 	function sessionGroup(){
-		require("./view/homeGroup.php");
+		require('./view/homeGroup.php');
+	}
+
+	//CREER UN GROUPE
+	function createGroups($name,$userId) {
+		$create = createGroup($name,$userId);
+		$contacts = getContactToUser($userId);
+		if($create == TRUE) {
+			require('./view/addContactGroupView.php');	
+		} else {
+			echo "Une erreur c'est produite !";
+		}
 	}
 
 	// SE DECONNECTER

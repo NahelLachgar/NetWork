@@ -15,23 +15,23 @@ ob_start();
     <span class="helper"></span>
     <div>
         <div class="popupCloseButton">X</div>
-        <center><form name="form" action="index.php?action=createGroup" method="POST">
-            <div class="row">
+        <form name="form" action="index.php?action=createGroup" method="POST">
+            
               <div class="mb-3">
                 <label for="name">Nom du groupe</label>
                 <input type="text" class="form-control" id="name" name="nameG" placeholder="" required>
                 <div class="invalid-feedback">
-                  
+                
                 </div>
                 <span id="aideName"></span>
               </div>
         
-            </div>
-        </form> <button class="btn btn-primary btn-lg btn-block" name="creer" type="submit">Creer</button></center>
+         <a class="creer"><button class="btn btn-primary btn-lg btn-block" name="creer" type="submit">Creer</button></a></form>
     </div>
+    
  
 </div>
-
+   
 <?php 
     $content = ob_get_clean();
     require('view/template.php');
