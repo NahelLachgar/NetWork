@@ -66,8 +66,11 @@ require('controller/controller.php');
                 addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break;
             case 'groups':
-                echo "groupe";
+                sessionGroup();
                 break;
+            case 'createGroup':
+                //echo $_POST['userId'];
+                //break;
             default:
                 home($_SESSION['id']);
         }

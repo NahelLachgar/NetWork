@@ -227,6 +227,12 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		
 	}
 
+	// GROUPE
+	function sessionGroup(){
+		require("./view/homeGroup.php");
+	}
+
+	// SE DECONNECTER
 	function disconnect() {
 		session_destroy();
 		header('Location:index.php');
