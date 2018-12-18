@@ -66,7 +66,7 @@ require('controller/controller.php');
                 addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break;
             case 'groups':
-                echo "groupe";
+                sessionGroup();
                 break;
             case 'deleteView':
                 deleteView($_SESSION['id']);
@@ -114,6 +114,9 @@ require('controller/controller.php');
                 declineInvitation($_SESSION['id'], $_GET['id']);
                 break;
             */
+            case 'createGroup':
+                //echo $_POST['userId'];
+                //break;
             default:
                 home($_SESSION['id']);
         }
