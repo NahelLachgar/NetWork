@@ -23,31 +23,39 @@
         <div class="col-md-4 order-md-2 mb-4">
         </div>
         <div class="col-md-12 order-md-1">
-            <form enctype="multipart/form-data" action="index.php?action=addParticipate" method="POST">
-                <input type="hidden" name="id" value="<?php echo $id; ?>">
 <?php
-                for($i=0;$i<sizeof($contact);$i++) {
-                    echo "<div class='row justify-content-center'>
-                            <div class='col-md-6 mb-3'>";
-                    for($j=0;$j<12;$j++) { 
-                        echo "&emsp;";
+            if($contact!=false)
+            {
+                echo "<form enctype='multipart/form-data' action='index.php?action=addParticipate' method='POST'>
+                    <input type='hidden' name='id' value='".$id."'>";
+                    for($i=0;$i<sizeof($contact);$i++) {
+                        echo "<div class='row justify-content-center'>
+                                <div class='col-md-6 mb-3'>";
+                        echo "<center><input type='checkbox' name='contact[]' value='".$contact[$i][0]."'> ".$contact[$i][1]." ".$contact[$i][2]."<br/>
+                                    </center>
+                                </div>
+                            </div>";
                     }
-                    echo "<input type='checkbox' name='contact[]' value='".$contact[$i][0]."'> ".$contact[$i][1]." ".$contact[$i][2]."<br/>
-                            </div>
-                        </div>";
-                }
-?>
-                <div class="row justify-content-center">
-                    <div class="col-md-3">
-                        <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Ajouter">
+                echo "<div class='row justify-content-center'>
+                        <div class='col-md-3'>
+                            <input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Ajouter'>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>";
+            }
+            else
+            {
+                echo "<center>Vous ne possédez aucun contact à inviter à votre événement.</center>";
+            }
+            if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="")
+            {
+                echo "<center><br/>".$_SESSION['erreur']."</center>";
+                $_SESSION['erreur']="";
+            }
+?>
         </div>
     </div>
 </div>
-
-
 
 <form enctype="multipart/form-data" action="index.php?action=eventView" method="POST">
     <input type="hidden" name="id" value="<?php echo $id ?>">
@@ -58,39 +66,6 @@
         </div>
     </div>
 </form>
-
-	<!--<h1>Ajouter des participants à l'événement</h1>-->
-<?php
-	/*if($contact!=false)
-	{
-		echo "<form action='index.php?action=addParticipate' method='POST'>";
-			for($i=0;$i<sizeof($contact);$i++)
-			{
-				echo "<input type='checkbox' name='contact[]' value='".$contact[$i][0]."'>".$contact[$i][1]." ".$contact[$i][2]."<br/>";
-			}
-			echo "<input type='hidden' name='id' value='".$id."'>
-			<br/><input type='submit' class='btn btn-primary' name='submit' value='Envoyer'><br/><br/>
-		</form>";
-	}
-	else
-	{
-		echo "Vous ne possédez aucun contact à inviter à votre événement.";
-	}
-	if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="")
-    {
-        echo $_SESSION['erreur']."<br/><br/>";
-        $_SESSION['erreur']="";
-    }
-    else
-    {
-        echo "<br/><br/>";
-    }*/
-?>
-    <!--<form action="index.php?action=eventView" method="POST">
-        <input type="hidden" name="id" value='<?php echo $id; ?>'>
-        <input type="hidden" name="role" value="admin">
-        <input type="submit" class="btn btn-primary" name="submit" value="Retour">
-    </form>-->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

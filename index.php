@@ -69,7 +69,6 @@ require('controller/controller.php');
                 echo "groupe";
                 break;
             case 'deleteView':
-//BOUTONS A COTE / taille + grande
                 deleteView($_SESSION['id']);
                 break;
             case 'deleteAccount':
@@ -77,6 +76,7 @@ require('controller/controller.php');
                 break;
             case 'showEvents':
 //CSS
+//ICI
                 showEvents($_SESSION['id']);
                 break;
             case 'createEventView':

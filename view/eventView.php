@@ -52,7 +52,7 @@
 
     <h1><?php echo $event[0]; ?></h1>
     Heure de l'événement : <?php echo $event[1]; ?><br/><br/>
-    Lieu : <?php if(empty($event[2])==true){echo "Aucun lieu n&apos;a été désigné.";}else{echo $event[2];} ?><br/><br/>
+    Lieu : <?php if(empty($event[2])==true){echo "Aucun lieu n&apos;a été choisi.";}else{echo $event[2];} ?><br/><br/>
 <?php
     if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="")
     {
@@ -151,3 +151,6 @@
                         <a href="index.php?action=addContact&id=<?= $result['contactId'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
     */
 ?>
+            </div>
+        </div>
+    </div>

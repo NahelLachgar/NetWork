@@ -14,82 +14,74 @@
         crossorigin="anonymous"></script>
 
 <!-- PROFIL-->
-    <div class="container-fluid gedf-wrapper">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="h5"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
-                        <?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
-                        <div class="h7">
-                            <?= $profile['job'] . ' chez ' . $profile['company'] ?>
-                        </div>
+<div class="container-fluid gedf-wrapper">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="h5"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
+                    <?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
+                    <div class="h7">
+                        <?= $profile['job'] . ' chez ' . $profile['company'] ?>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="h6 text-muted"><a href="index.php?action=companyList">Entreprises</a></div>
-                            <div class="h5"><?= $followedCompaniesNb ?></div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="h6 text-muted"><a href="index.php?action=contactList">Contacts</a></div>
-                            <div class="h5"><?= $contactsNb ?></div>
-        
-                        </li>
-                        <li class="list-group-item">
-                            <div class="h6 text-muted"><a href="index.php?action=updateProfile">Modifier le profil</a></div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="h6 text-muted"><a href="index.php?action=deleteView">Supprimer le compte</a></div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="h6 text-muted"><a href="index.php?action=disconnect">Déconnexion</a></div>
-                        </li>
-                    </ul>
                 </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="h6 text-muted"><a href="index.php?action=companyList">Entreprises</a></div>
+                        <div class="h5"><?= $followedCompaniesNb ?></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h6 text-muted"><a href="index.php?action=contactList">Contacts</a></div>
+                        <div class="h5"><?= $contactsNb ?></div>
+    
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h6 text-muted"><a href="index.php?action=updateProfile">Modifier le profil</a></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h6 text-muted"><a href="index.php?action=deleteView">Supprimer le compte</a></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h6 text-muted"><a href="index.php?action=disconnect">Déconnexion</a></div>
+                    </li>
+                </ul>
             </div>
-            <div class="col-md-6 gedf-main">
+        </div>
+        <div class="col-md-6 gedf-main">
 
-<div class="container">
-    <div class="py-2 text-center">
-        <h2>Êtes-vous sûr(e) de vouloir supprimer votre compte ?</h2>
-        <p class="lead"></p>
-    </div>
-
-        <div class="row">
-            <div class="col-md-12 order-md-1">
-                <form enctype="multipart/form-data" action="index.php" method="GET">
-                    <input type="hidden" name="action" value="deleteAccount">
-                    <div class="row justify-content-center">
-                        <div class="col-md-3">
-                            <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Supprimer">
-                        </div>
-                    </div>
-                </form>
-                <div class="col-md-4 order-md-2 mb-4">
+            <div class="container">
+                <div class="py-2 text-center">
+                    <h2>Êtes-vous sûr(e) de vouloir supprimer votre compte ?</h2>
+                    <p class="lead"></p>
                 </div>
-                <form enctype="multipart/form-data" action="index.php" method="GET">
-                    <input type="hidden" name="action" value="home">
-                    <div class="row justify-content-center">
-                        <div class="col-md-3">
-                            <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Retour">
+
+                <div class="row">
+                    <div class="col-md-12 order-md-1">
+                        <form enctype="multipart/form-data" action="index.php" method="GET">
+                            <input type="hidden" name="action" value="deleteAccount">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Supprimer">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-md-4 order-md-2 mb-4">
                         </div>
+                        <form enctype="multipart/form-data" action="index.php" method="GET">
+                            <input type="hidden" name="action" value="home">
+                            <div class="row justify-content-center">
+                                <div class="col-md-7">
+                                    <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Retour">
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<!--
-<form enctype="multipart/form-data" action="index.php?action=eventView" method="POST">
-    <input type="hidden" name="role" value="admin">
-    <div class="row justify-content-center">
-        <div class="col-md-3">
-            <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Retour">
-        </div>
-    </div>
-</form>
--->
 <?php
     $content=ob_get_clean();
     require('view/template.php');
