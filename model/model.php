@@ -27,7 +27,8 @@ function getContacts($userId)
     $contactsId->execute(array(
         "id" => $userId
     ));
-    return $contactsId;
+    $post = $contactsId->fetchAll();
+    return $post;
 }
 
 function getContactPosts($contactId) {
@@ -340,10 +341,10 @@ function getProfileUpdate($ids)
         return $create;
     }
 
-    function contactAddGroup($date,$memberId,$status,$groupId) {
+    function contactAddGroup($memberId,$status) {
         $db = dbConnect();
-        $req = $db->prepare('INSERT INTO groupAdd(addDate,user,status,group) VALUES (NOW(),?,?,?)');
-        $create = $req->execute(array($memberId,$status,$groupId));
+        $req = $db->prepare('INSERT INTO groupAdd(addDate,user,status,group) VALUES (NOW(),?,?,LAST_INSERT_ID()');
+        $create = $req->execute(array($memberId,$status));
         return $create;
     }
 

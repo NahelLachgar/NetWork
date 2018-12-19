@@ -239,13 +239,30 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	//CREER UN GROUPE
 	function createGroups($name,$userId) {
 		$create = createGroup($name,$userId);
-		$contacts = getContactToUser($userId);
 		if($create == TRUE) {
+			$contacts = getContacts($userId);
+			foreach ($contacts as $contact) {
+				$res[] = getProfile($contact['id']);
+				
+			}
 			require('./view/addContactGroupView.php');	
 		} else {
 			echo "Une erreur c'est produite !";
 		}
 	}
+
+	//AJOUTER LES CONTACTS DANS UN GROUPE
+	function addContactsToGroup($contact) {
+		$comt = COUNT($contact);
+		$status = "membre";
+		var_dump($contact);
+		var_dump($comt);
+        /*    for($i=0;$i<$comt;$i++)
+            {
+                contactAddGroup($contact[$i],$status);
+			}
+			echo "bon";
+		*/}
 
 	// SE DECONNECTER
 	function disconnect() {

@@ -11,15 +11,17 @@ ob_start();
     <span class="helper"></span>
     <div>
         <div class="popupCloseButton">X</div>
-            <form  action="index.php?action=add" method="post">
-            <div class="form-label-group">
-                <label for=""> Ajouter des contacts</label><br>
-                <?php foreach ($contacts as $add): ?>
-                    <input type="checkbox" name="addContacts[]" value="<?= $add['id'] ?>"><?= $add['id'] ?>
+            <form method="POST" action="index.php?action=addContactsToGroups" >
+                Ajouter des contacts<br>
+                <div>
+                <?php foreach ($res as $add): ?>
+                    <input type="checkbox" id="<?= $add['id'] ?>" name="addContacts[]" value="<?= $add['id'] ?>">
+                    <label for="<?= $add['id'] ?>"><?= $add['lastName'] ?> <?= $add['name'] ?></label><br>
                 <?php endforeach; ?>
-                <input type="submit" value="Ajouter" name="ajouter">
+                </div>
+                <input type="submit" class="btn btn-primary btn-lg btn-block" name="ajouter" value="Ajouter">
             </form>
-            </div>
+        </div>
     </div>
     
  
