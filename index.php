@@ -75,8 +75,6 @@ require('controller/controller.php');
                 deleteAccount($_SESSION['id']);
                 break;
             case 'showEvents':
-//CSS
-//ICI
                 showEvents($_SESSION['id']);
                 break;
             case 'createEventView':
@@ -87,7 +85,7 @@ require('controller/controller.php');
                 createEvent($_SESSION['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
                 break;
             case 'eventView':
-//CSS
+//CSS ICI
 //METTRE PROFIL DANS HYPERLIEN
                 eventView($_SESSION['id'], $_POST['id'], $_POST['role']);
                 break;
