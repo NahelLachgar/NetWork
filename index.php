@@ -82,7 +82,7 @@ require('controller/controller.php');
                 showEvents($_SESSION['id']);
                 break;
             case 'createEventView':
-//JS
+            //JS A FAIRE
                 createEventView($_SESSION['id'], $_POST['role']);
                 break;
             case 'createEvent':
@@ -99,14 +99,14 @@ require('controller/controller.php');
                 removeEvent($_POST['id']);
                 break;
             case 'updateEventView':
-//JS
+            //JS A FAIRE
                 updateEventView($_SESSION['id'], $_POST['id']);
                 break;
             case 'updateEvent':
                 modifyEvent($_POST['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
                 break;
             case 'addParticipateView':
-//JS
+            //JS A FAIRE
                 addParticipateView($_SESSION['id'], $_POST['id']);
                 break;
             case 'addParticipate':
