@@ -111,7 +111,6 @@ require('controller/controller.php');
                 break;
             case 'addParticipate':
                 //VERIFIER QU'IL Y A AU MOINS UNE CASE COCHEE
-//PRENDRE EN COMPTE LES ENTREPRISES
                 if(isset($_POST['contact'])) {
                     addParticipate($_POST['contact'], $_POST['id']);
                 }

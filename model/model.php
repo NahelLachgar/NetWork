@@ -632,14 +632,15 @@ function getProfileUpdate($ids)
         //RECUPERER LES CONTACTS DE L'UTILISATEUR QUI NE FONT PAS PARTIS DE CET EVENEMENT
         $reponse=$bdd->prepare('SELECT users.id AS id, lastName, name
                                 FROM users, contacts
-                                WHERE (contact=:ID AND users.id=user
+                                WHERE status!="company"
+                                AND ((contact=:ID AND users.id=user
                                         AND users.id NOT IN (SELECT user
                                                             FROM participate
                                                             WHERE event=:id))
                                 OR (contact=users.id AND user=:ID
                                         AND contact NOT IN (SELECT user
                                                             FROM participate
-                                                            WHERE event=:id))
+                                                            WHERE event=:id)))
                                 ORDER BY lastName, name');
         $reponse->execute(['ID'=>$ID,
                             'id'=>$id]);
