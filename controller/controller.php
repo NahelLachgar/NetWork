@@ -212,6 +212,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	// MODIFIER SON PROFIL
 	function validateProfile($lastname,$name,$email,$pass,$confirmPass,$phone,$job,$company,$town,$id)
 	{
+		$profilePhoto = $_FILES['photo']['name'];  
 		$lastName = htmlspecialchars($lastname);
 		$Name = htmlspecialchars($name);
 		$Email = htmlspecialchars($email);
@@ -222,7 +223,18 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		if($pass != $confirmPass){
 			header('Location:index.php?action=updateProfile');
 		}else{
-			$validate = updateProfiles($lastName,$Name,$Email,$pass,$Phone,$Job,$Company,$Town,$id);
+		// PHOTO
+		if($profilePhoto){
+			// ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
+			list($name, $ext) = explode(".", $profilePhoto);    
+			// ON RAJOUTE UN . DEVANT L'EXTENSION 
+			$ext=".".$ext; 
+			// ON MET LA PHOTO DANS UN DOSSIER IMG
+			$path = "./img/profile/".$email.$ext;
+			move_uploaded_file($_FILES['photo']['tmp_name'],$path);
+			$profilePhoto = $email.$ext; 
+		}
+			$validate = updateProfiles($lastName,$Name,$Email,$pass,$profilePhoto,$Phone,$Job,$Company,$Town,$id);
 			if( $validate == TRUE )
 			{
 			header('Location:index.php?action=home');
@@ -257,7 +269,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	}
 
 	//AJOUTER LES CONTACTS DANS UN GROUPE
-	function addContactsToGroup() {
+	function addContactsToGroup($contact) {
 		$comt = COUNT($contact);
 		$status = "membre";
            for($i=0;$i<$comt;$i++)

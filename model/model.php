@@ -261,12 +261,12 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
     $insertUser->execute(array($firstName, $lastName, $email, $phone, $photo, $password, $status, $job, $company, $town));
 }
     // MODIFICATION DES CHAMPS DU PROFIL EXCEPTE LE CHAMP photo
-function updateProfiles($lastName, $name, $email, $pass, $phone, $job, $company, $town, $id)
+function updateProfiles($lastName, $name, $email, $pass, $photo, $phone, $job, $company, $town, $id)
 {
     $db = dbConnect();
-    $req = $db->prepare('UPDATE users SET users.lastName = ?, users.name = ?, users.email = ?,users.password = ?, users.phone = ?,users.job = ?,users.company = ?,users.town = ?  WHERE users.id = ?');
+    $req = $db->prepare('UPDATE users SET users.lastName = ?, users.name = ?, users.email = ?,users.password = ?, users.photo = ?,users.phone = ?,users.job = ?,users.company = ?,users.town = ?  WHERE users.id = ?');
     $password = password_hash($pass, PASSWORD_BCRYPT);
-    $req->execute(array($lastName, $name, $email, $password, $phone, $job, $company, $town, $id));
+    $req->execute(array($lastName, $name, $email, $password, $photo, $phone, $job, $company, $town, $id));
     return $req;
 }
     
