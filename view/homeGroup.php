@@ -8,7 +8,6 @@ ob_start();
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <SCRIPT LANGUAGE="JavaScript" SRC="js/group.js"></SCRIPT>       
 
- 
 <a class="trigger_popup_fricc"><button class="btn btn-link">Créer un groupe</button></a>
 
 <div class="hover_bkgr_fricc">
