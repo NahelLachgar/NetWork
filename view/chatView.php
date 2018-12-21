@@ -12,7 +12,7 @@ ob_start();
 		</div>
 		<div id="search">
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="Rechercher des contacts..." />
+			<input type="text" placeholder="Search contacts..." />
 		</div>
 		<div id="contacts">
 			<ul>
@@ -61,13 +61,14 @@ ob_start();
 			?>
 				<li class=<?= $class ?>>
 					<p><?= $messagesFetch['content'] ?></p>
+				</li>
                     <?php endwhile ?>
 			</ul>
 		</div>
 		<div class="message-input">
 			<div class="wrap">
 			<form action="index.php?action=sendMessage" method="POST">
-				<input type="text" name="content" id="content" placeholder="Écrivez votre message." />
+				<input type="text" name="content" id="content" placeholder="Écrivez votre message" />
 				<input type="hidden" name="contactId" id="contactId" value="<?= $_POST['contactId'] ?>">
 				<i class="fa fa-paperclip attachment" aria-hidden="true"></i> 
 				<button type="submit" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
@@ -91,11 +92,12 @@ ob_start();
 
 		if (content != "" && trim(content) != "") {
 			$.ajax({
-				url : "index.php?action=sendMessage",
+				url : "send.php",
 				type : "POST",
-				data : "content=" + content + "&contactId=" + idContact
+				data : "content=" + content + "&contactId=" + idContact,
+				dataType:'html'
 			});
-			$('#messages').append("<li class=<?= $class ?>><p>" + content + "</p></ul>");
+			$('#messages').appendTo("<li class=<?= $class ?>><p>" + content + "</p></ul>");
 		}
 	}
 	});
@@ -103,9 +105,10 @@ function load(){
 		setTimeout( function(){
 			var fisrtId = $('#messages p:first').attr('id');
 			$.ajax({
-				url : "index.php?action=showMessages",
-				type : POST,
+				url : "load.php",
+				type : "POST",
 				data : "messageId=" + firstId,
+				dataType:'html',
 				success : function(html){
 					$('#messages').prepend(html);
 				}

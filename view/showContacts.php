@@ -15,7 +15,7 @@ ob_start();
         
     <br><br>
     <?php if (empty($res)) :
-            echo "vous n'avez pas de contact.";
+            echo "vous n'avez pas de contact!";
             ?>
 
         <?php elseif ($res == true) :

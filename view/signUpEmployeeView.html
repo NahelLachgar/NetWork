@@ -20,25 +20,19 @@
   <body class="bg-light">
 
     <div class="container">
-      <div class="py-5 text-center">
+      <div class="py-12 text-center">
         <img class="d-block mx-auto mb-4" src="" alt="" width="72" height="72">
-        <h2>Inscription</h2>
+        <h2>Inscription membre</h2>
         <p class="lead"></p>
       </div>
-      <?php if(!empty($errors)) : ?>
-      <div class="alert alert-danger">
-         <?php foreach($errors as $error): ?>
-            <p><?= $error ; ?></p>
-          <?php endforeach ; ?>
-      </div>     
-    <?php endif; ?>
+
       <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
 
         </div>
         <div class="col-md-12 order-md-1">
         
-          <form name="form" enctype="multipart/form-data" action="index.php?action=addUser" method="POST">
+          <form enctype="multipart/form-data" action="index.php?action=addUser" method="POST">
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">Prenom</label>
@@ -46,7 +40,6 @@
                 <div class="invalid-feedback">
                   Entrez votre prenom .
                 </div>
-                <span id="aideName"></span>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="lastName">Nom</label>
@@ -54,11 +47,11 @@
                 <div class="invalid-feedback">
                   Entrez votre nom.
                 </div>
-                <span id="aideLname"></span>
               </div>
             </div>
 
-            <div class="mb-3">
+          <div class="row">
+            <div class="mb-3 col-md-6">
               <label for="email">Adresse email</label>
               <div class="input-group">
                 <div class="input-group-prepend">
@@ -72,7 +65,7 @@
               <span id="aideCourriel"></span>
             </div>
 
-            <div class="mb-3">
+            <div class="mb-3 col-md-6">
               <label for="phone">Numero de telephone</label>
               <input type="text" class="form-control" id="phone" name="phone" required>
               <div class="invalid-feedback">
@@ -80,12 +73,13 @@
               </div>
               <span id="aidePhone"></span>
             </div>
+          </div>
 
             <div class="mb-3">
                 <label for="file">Avatar</label>
                 <input type="file" class="form-control-file" name="photo" id="file">
             </div>
-            <hr class="mb-4">
+
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="mdp">Mot de passe</label>
@@ -97,15 +91,16 @@
               
               <div class="col-md-6 mb-3">
                <label for="mdp2">Confirmation du mot de passe</label>
-                <input type="password" class="form-control" id="mdp2" name="confirmPassword" /*onclick="password()"*/ required>
+                <input type="password" class="form-control" id="mdp2" name="confirmPassword" required>
                 <div class="invalid-feedback">
                   Entrez votre mot de passe.
                 </div>
               </div>
-              <span id="aidePass"></span>
             </div>
-            <hr class="mb-4">
             <div class="row">
+
+              <input type="hidden" name="status" value="2">
+<!--
               <div class="col-md-3 mb-3">
                 <label for="Status">Statut</label>
                 <select name="status" class="custom-select d-block w-100" id="Status" required>
@@ -117,33 +112,34 @@
                   Selectionnez votre statut.
                 </div>
               </div>
+            -->
               <div class="col-md-4 mb-3">
-                <label for="job">Emploi</label>
-              <input type="text" class="form-control" id="job" name="job" required>
+                <label for="emploi">Emploi</label>
+              <input type="text" class="form-control" id="emploi" name="job" required>
               <div class="invalid-feedback">
                 Entrez votre profession.
               </div>
-              <span id="aideJob"></span>
               </div>
-              <div class="col-md-5 mb-3">
+              <div class="col-md-4 mb-3">
                 <label for="entreprise">Entreprise</label>
                 <input type="text" name="company" class="form-control" id="company" required>
                 <div class="invalid-feedback">
                   Entrez votre d'entreprise de travail.
                 </div>
-                <span id="aideCompany"></span>
               </div>
-            </div>
-            <div class="mb-3">
+            <div class="col-md-4 mb-3">
               <label for="ville">Ville</label>
               <input type="text" class="form-control" id="town" name="town" required>
               <div class="invalid-feedback">
                 Entrez votre ville.
               </div>
-              <span id="aideTown"></span>
             </div>
-            <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">S'inscire</button>
+          </div>
+          <div class="row justify-content-center">
+              <div class="col-md-3">
+                  <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">S'inscrire</button>
+              </div>
+          </div>
           </form>
         </div>
       </div>

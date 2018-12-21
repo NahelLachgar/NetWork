@@ -333,19 +333,26 @@ function getProfileUpdate($ids)
     }*/
 
     //CREER UN GROUPE
-    function createGroup($nameGroup,$date,$adminId){
+    function createGroup($nameGroup,$adminId){
         $db = dbConnect();
-        $date = now();
-        $req = $db->prepare('INSERT INTO groups(title,createDate,admin) VALUES (?,?,?)');
-        $create = $req->execute(array($nameGroup,$date,$adminId));
+        $req = $db->prepare('INSERT INTO groups(title,createDate,admin) VALUES (?,NOW(),?)');
+        $create = $req->execute(array($nameGroup,$adminId));
         return $create;
     }
 
-    function contactAddGroup($date,$memberId,$status,$groupId) {
+    function lastId(){
         $db = dbConnect();
-        $date = now();
-        $req = $db->prepare('INSERT INTO groupAdd(addDate,user,status,group) VALUES (?,?,?,?)');
-        $create = $req->execute(array($date,$memberId,$status,$groupId));
+        $req = $db->prepare("SELECT LAST_INSERT_ID() FROM table");
+        $post = $req->fetch();
+        return $post;   
+    }
+
+    function contactAddGroup($memberId,$status) {
+        $db = dbConnect();
+        $groupId = $db->lastInsertId();
+        $req = $db->prepare('INSERT INTO groupAdd(addDate,user,status,group) VALUES (NOW(),?,?,?');
+        $create = $req->execute(array($memberId,$status,$groupId));
+        
         return $create;
     }
 

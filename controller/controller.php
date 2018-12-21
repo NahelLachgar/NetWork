@@ -10,7 +10,13 @@ function home($userId) {
 	$employeesSuggests = getEmployeeSuggests($userId);
 	}
 	$followedCompaniesNb = getFollowedCompaniesCount($userId);
-	require('view/homeView.php');
+
+	if($profile['status'] == "employee"){
+		require('view/homeViewEmployee.php');
+	}else{
+		require('view/homeViewCompany.php');
+	}
+	// require('view/homeView.php');
 }
 
 function showMessages ($userId,$contactId) {
@@ -43,9 +49,7 @@ function contactHome($contactId) {
 	$followedCompaniesNb = getFollowedCompaniesCount($contactId);
 	require('view/profilepageView.php');	
 }
-function groups() {
-	
-}
+
 function addPost($content,$type,$userId) {
 	post($content,$type,$userId);
 	header('Location:index.php?action=home');
@@ -227,6 +231,38 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		
 	}
 
+	//CREER UN GROUPE
+	function createGroups($name,$userId) {
+		$create = createGroup($name,$userId);
+		if($create == TRUE) {
+			$contacts = getContacts($userId);
+			$contacts = $contacts->fetchAll(PDO::FETCH_ASSOC);
+			for($i = 0; $i < count($contacts); $i++) {
+					$contactProfile[] = getProfile($contacts[$i]['id']);
+			}
+			foreach( $contactProfile as $contact){
+				if ($contact['status'] == "employee"){
+					$res[] = $contact;
+				}
+			}
+			require('./view/addContactGroupView.php');
+			
+	
+		}
+	}
+
+	//AJOUTER LES CONTACTS DANS UN GROUPE
+	function addContactsToGroup() {
+		$comt = COUNT($contact);
+		$status = "membre";
+           for($i=0;$i<$comt;$i++)
+            {
+				contactAddGroup($contact[$i],$status);
+			}
+		
+		}
+
+	// SE DECONNECTER
 	function disconnect() {
 		session_destroy();
 		header('Location:index.php');

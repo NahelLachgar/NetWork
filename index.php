@@ -36,8 +36,11 @@ require('controller/controller.php');
             case 'profilemodif':
                validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newPass'],$_POST['confirmNewPass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
                 break;
-            case 'signUp':
-                require('./view/signUpView.php');
+            case 'signUpCompany':
+                require('./view/signUpCompanyView.html');
+                break;
+            case 'signUpEmployee':
+                require('./view/signUpEmployeeView.html');
                 break;
             case 'post':
                 addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
@@ -66,7 +69,7 @@ require('controller/controller.php');
                 addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break;
             case 'groups':
-                echo "groupe";
+                sessionGroup();
                 break;
             case 'deleteView':
                 deleteView($_SESSION['id']);
@@ -108,6 +111,7 @@ require('controller/controller.php');
                 break;
             case 'addParticipate':
                 //VERIFIER QU'IL Y A AU MOINS UNE CASE COCHEE
+//PRENDRE EN COMPTE LES ENTREPRISES
                 if(isset($_POST['contact'])) {
                     addParticipate($_POST['contact'], $_POST['id']);
                 }
@@ -125,6 +129,12 @@ require('controller/controller.php');
                 decline($_SESSION['id'], $_GET['id'], $_GET['type']);
                 break;
             */
+            case 'createGroup':
+                createGroups($_POST['nameG'],$_SESSION['id']);
+                break;
+            case 'addContactsToGroups':
+                addContactsToGroup($_POST['addContacts']);
+                break;
             default:
                 home($_SESSION['id']);
         }
