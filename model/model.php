@@ -695,8 +695,9 @@ function getProfileUpdate($ids)
         $reponse->execute(['admin'=>$a]);
         while($donnees=$reponse->fetch())
         {
-            $b[0]=$donnees['lastName'];
-            $b[1]=$donnees['name'];
+            $b[0]=$a;
+            $b[1]=$donnees['lastName'];
+            $b[2]=$donnees['name'];
         }
         return $b;
     }

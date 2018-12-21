@@ -2,7 +2,6 @@
     //PAGE PERSONNELLE D'UN EVENEMENT
     $title="Evénements";
     ob_start();
-    //RAJOUTER PROFILS
 ?>
 <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
         crossorigin="anonymous">
@@ -64,15 +63,18 @@
     else {
         echo "<br/>";
     }
-    //AFFICHER L'ADMINISTRATEUR
 ?>
                 <div class="py-2 text-center">
                     <h2>Administrateur</h2>
                     <p class="lead"></p>
-                    <a href='index.php?action=profilePage'><?php echo $admin[0]." ".$admin[1]; ?></a><br/><br/>
-                </div>
 <?php
     if($role=='admin') {
+        //AFFICHER L'ADMINISTRATEUR
+        echo "<form action='index.php' method='GET'>
+                    <input type='hidden' name='action' value='home'>
+                    <button type='submit' class='btn btn-link'>".$admin[1]." ".$admin[2]."</button> 
+                </form>
+            </div>";
         //MODIFIER L'EVENEMENT
         echo "<div class='row'>
                 <div class='col-md-12 order-md-1'>
@@ -108,6 +110,12 @@
             </form>";
     }
     else if($role=='participate') {
+        //AFFICHER L'ADMINISTRATEUR
+        echo "<form action='index.php?action=profilePage' method='POST'>
+                    <input type='hidden' name='contactId' value=".$admin[0].">
+                    <button type='submit' class='btn btn-link'>".$admin[1]." ".$admin[2]."</button> 
+                </form>
+            </div>";
         //PRENDRE EN COMPTE LES INVITATIONS
         /*
         if($invit!=false) {
@@ -150,7 +158,6 @@
                             </form>";
         //}
     }
-    //AFFICHER LES PARTICIPANTS
 ?>
                         <div class="col-md-4 order-md-2 mb-4">
                         </div>
@@ -161,20 +168,31 @@
     if($participate!=false) {
         for($i=0;$i<sizeof($participate);$i++) {
             //AFFICHER LES PARTICIPANTS
-//METTRE PROFIL DANS HYPERLIEN
-            echo "<a href='index.php?action=profilePage'>".$participate[$i][1]." ".$participate[$i][2]."</a><br/>";
+            if($participate[$i][0]!==$_SESSION['id']) {
+                echo "<form action='index.php?action=profilePage' method='POST'>
+                        <input type='hidden' name='contactId' value='".$participate[$i][0]."'>
+                        <button type='submit' class='btn btn-link'>".$participate[$i][1]." ".$participate[$i][2]."</button> 
+                    </form>";
+            }
+            else {
+                echo "<form action='index.php' method='GET'>
+                    <input type='hidden' name='action' value='home'>
+                    <button type='submit' class='btn btn-link'>".$participate[$i][1]." ".$participate[$i][2]."</button> 
+                </form>
+            </div>";
+            }
             if($role=='admin') {
                 //SUPPRIMER LE PARTICIPANT
                 echo "<form enctype='multipart/form-data' action='index.php?action=quitEvent' method='POST'>
-                                    <input type='hidden' name='ID' value='".$participate[$i][0]."'>
-                                    <input type='hidden' name='id' value='".$id."'>
-                                    <input type='hidden' name='role' value='admin'>
-                                    <div class='row justify-content-center'>
-                                        <div class='col-md-6'>
-                                            <input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Enlever sa participation'>
-                                        </div>
-                                    </div>
-                                </form><br/>";
+                            <input type='hidden' name='ID' value='".$participate[$i][0]."'>
+                            <input type='hidden' name='id' value='".$id."'>
+                            <input type='hidden' name='role' value='admin'>
+                            <div class='row justify-content-center'>
+                                <div class='col-md-6'>
+                                    <input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Enlever sa participation'>
+                                </div>
+                            </div>
+                        </form><br/>";
             }
         }
         echo "<br/>";
@@ -184,18 +202,17 @@
     }
     $content=ob_get_clean();
     require('view/template.php');
-?>
-                        
-                        </div>
-                        <form enctype="multipart/form-data" action="index.php" method="GET">
-                            <input type="hidden" name="action" value="showEvents">
-                            <div class="row justify-content-center">
-                                <div class="col-md-7">
-                                    <input type="submit" class='btn btn-primary btn-lg btn-block' name="submit" value="Retour">
+?>                    
+                            <form enctype="multipart/form-data" action="index.php" method="GET">
+                                <input type="hidden" name="action" value="showEvents">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-7">
+                                        <input type="submit" class='btn btn-primary btn-lg btn-block' name="submit" value="Retour">
+                                    </div>
                                 </div>
+                            </form>
+                            <div class="col-md-4 order-md-2 mb-4">
                             </div>
-                        </form>
-                        <div class="col-md-4 order-md-2 mb-4">
                         </div>
                     </div>
                 </div>
@@ -203,9 +220,3 @@
         </div>
     </div>
 </div>
-<!--<form action="index.php?action=addContact" method="POST">
-                            <input type="hidden" name="contactId" value="<?=$result['contactId']?>">
-                            <button type="submit" class="btn btn-link"><img src="./img/icon/users.png"></button>
-                        </form>
-
-                        <a href="index.php?action=addContact&id=<?= $result['contactId'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>-->
