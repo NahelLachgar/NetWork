@@ -75,7 +75,7 @@ require('controller/controller.php');
                 deleteAccount($_SESSION['id']);
                 break;
             case 'showEvents':
-//PRENDRE EN COMPTE LES INVITATIONS
+                //PRENDRE EN COMPTE LES INVITATIONS
                 showEvents($_SESSION['id']);
                 break;
             case 'createEventView':
@@ -86,7 +86,7 @@ require('controller/controller.php');
                 createEvent($_SESSION['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
                 break;
             case 'eventView':
-//PRENDRE EN COMPTE LES INVITATIONS
+                //PRENDRE EN COMPTE LES INVITATIONS
                 eventView($_SESSION['id'], $_POST['id'], $_POST['role']);
                 break;
             case 'quitEvent':
