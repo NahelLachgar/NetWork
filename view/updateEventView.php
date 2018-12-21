@@ -23,27 +23,33 @@
         </div>
         <div class="col-md-12 order-md-1">
             <form enctype="multipart/form-data" action="index.php?action=updateEvent" method="POST">
-                <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="newName">Nom</label>
-                        <input type="text" class="form-control" id="newName" name="title" value="<?php echo $event[0]; ?>" required>
-                        <div class="invalid-feedback"></div>
+                        <input type="text" class="form-control" id="newTitle" name="title" value="<?php echo $event[0]; ?>" required>
+                        <div class="invalid-feedback">
+                            Nommez votre événement.
+                        </div>
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="newName">Date</label>
-                        <input type="date" class="form-control" id="newName" name="eventDate" placeholder="YYYY-MM-JJ HH:MM:SS" value="<?php echo $event[1]; ?>" required>
-                        <div class="invalid-feedback"></div>
+                        <input type="date" class="form-control" id="newEventDate" name="eventDate" placeholder="YYYY-MM-JJ HH:MM:SS" value="<?php echo $event[1]; ?>" required>
+                        <div class="invalid-feedback">
+                            Fixez une date.
+                        </div>
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="newName">Lieu de rendez-vous</label>
-                        <input type="text" class="form-control" id="newName" name="place" value="<?php echo $event[2]; ?>">
-                        <div class="invalid-feedback"></div>
+                        <input type="text" class="form-control" id="newPlace" name="place" value="<?php echo $event[2]; ?>">
+                        <div class="invalid-feedback">
+                            Donnez une adresse.
+                        </div>
                     </div>
                 </div>
                 <br/>

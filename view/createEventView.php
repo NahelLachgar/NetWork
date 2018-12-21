@@ -27,22 +27,28 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="newName">Nom</label>
-                        <input type="text" class="form-control" id="newName" name="title" required>
-                        <div class="invalid-feedback"></div>
+                        <input type="text" class="form-control" id="newTitle" name="title" required>
+                        <div class="invalid-feedback">
+                            Nommez votre événement.
+                        </div>
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="newName">Date</label>
-                        <input type="date" class="form-control" id="newName" name="eventDate" placeholder="YYYY-MM-JJ HH:MM:SS" required>
-                        <div class="invalid-feedback"></div>
+                        <input type="date" class="form-control" id="newEventDate" name="eventDate" placeholder="YYYY-MM-JJ HH:MM:SS" required>
+                        <div class="invalid-feedback">
+                            Fixez une date.
+                        </div>
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="newName">Lieu</label>
-                        <input type="text" class="form-control" id="newName" name="place">
-                        <div class="invalid-feedback"></div>
+                        <input type="text" class="form-control" id="newPlace" name="place">
+                        <div class="invalid-feedback">
+                            Donnez une adresse.
+                        </div>
                     </div>
                 </div>
                 <br/>

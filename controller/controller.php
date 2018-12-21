@@ -260,12 +260,11 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 			$status = checkStatus($userId);
 			require('./view/addContactGroupView.php');
 		}
-	}
 
 	//AJOUTER LES CONTACTS DANS UN GROUPE
 	function addContactsToGroup($contact) {
 		$comt = COUNT($contact);
-		$status = "membre";
+		$status = "member";
            for($i=0;$i<$comt;$i++)
             {
 				contactAddGroup($contact[$i],$status);
@@ -280,13 +279,13 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	}
 
 	// MONTRER LES CONTACTS
-	function showContacts($userId,$id){
+	function showContacts($id){
 		$contacts = getContacts($id);
 		foreach ($contacts as $contact) {
 			$res[] = getProfile($contact['id']);
 			
 		}
-		$status = checkStatus($userId);
+		$status = checkStatus($id);
 		require("./view/showContacts.php");
 	}
 
