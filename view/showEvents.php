@@ -65,13 +65,11 @@
                             </div>
                         </form>
 <?php
-    if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="")
-    {
-        echo "<br/><center>".$_SESSION['erreur']."</center>";
+    if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="") {
+        echo "<br/><div class='py-2 text-center'>".$_SESSION['erreur']."</div>";
         $_SESSION['erreur']="";
     }
-    else
-    {
+    else {
         echo "<br/><br/>";
     }
     //PRENDRE EN COMPTE LES INVITATIONS
@@ -97,15 +95,13 @@
             </div>
         </form>";
     */
-    if($admin!=false)
-    {
+    if($admin!=false) {
         echo "<div class='py-2 text-center'>
                     <h3>J'organise</h3>
                     <p class='lead'></p>
                 </div>";
         //AFFICHER LES EVENEMENTS QUE L'UTILISATEUR ORGANISE
-        for($i=0;$i<sizeof($admin);$i++)
-        {
+        for($i=0;$i<sizeof($admin);$i++) {
             echo "<center><h4>".$admin[$i][1]."</h4></center>";
             echo "<div class='col-md-4 order-md-2 mb-4'>
                 </div>
@@ -124,19 +120,16 @@
                 <div class='col-md-4 order-md-2 mb-4'>
                 </div>";
     }
-    else
-    {
+    else {
         $role--;
     }
-    if($event!=false)
-    {
+    if($event!=false) {
         echo "<div class='py-2 text-center'>
                     <h3>Je participe</h3>
                     <p class='lead'></p>
                 </div>";
         //AFFICHER LES EVENEMENTS OU L'UTILISATEUR PARTICIPE MAIS DONT IL N'EST PAS L'ADMINISTRATEUR
-        for($j=0;$j<sizeof($event);$j++)
-        {
+        for($j=0;$j<sizeof($event);$j++) {
             echo "<center><h4>".$event[$j][1]."</h4></center>";
             echo "<div class='col-md-4 order-md-2 mb-4'>
                 </div>
@@ -151,12 +144,10 @@
                 </form>";
         }
     }
-    else
-    {
+    else {
         $role--;
     }
-    if($role==0)
-    {
+    if($role==0) {
         echo "<br/><center>Vous ne participez à aucun événement.</center>";
     }
     $content=ob_get_clean();

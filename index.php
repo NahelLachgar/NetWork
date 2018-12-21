@@ -75,6 +75,7 @@ require('controller/controller.php');
                 deleteAccount($_SESSION['id']);
                 break;
             case 'showEvents':
+//PRENDRE EN COMPTE LES INVITATIONS
                 showEvents($_SESSION['id']);
                 break;
             case 'createEventView':
@@ -85,7 +86,8 @@ require('controller/controller.php');
                 createEvent($_SESSION['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
                 break;
             case 'eventView':
-//CSS ICI
+//ICI
+//PRENDRE EN COMPTE LES INVITATIONS
 //METTRE PROFIL DANS HYPERLIEN
                 eventView($_SESSION['id'], $_POST['id'], $_POST['role']);
                 break;
@@ -118,11 +120,11 @@ require('controller/controller.php');
             /*
             case 'joinInvitation':
             //A FAIRE
-                joinInvitation($_SESSION['id'], $_GET['id']);
+                join($_SESSION['id'], $_GET['id'], $_GET['type']);
                 break;
             case 'declineInvitation':
             //A FAIRE
-                declineInvitation($_SESSION['id'], $_GET['id']);
+                decline($_SESSION['id'], $_GET['id'], $_GET['type']);
                 break;
             */
             default:

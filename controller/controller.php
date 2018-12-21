@@ -290,6 +290,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		$role=2;
 		$admin=selectAdmin($id);
 		$event=selectMember($id);
+		//$invit=selectInvit($id, 'event');
 		include('view/showEvents.php');
 	}
 
@@ -335,6 +336,11 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		$event=infoEvent($id);
 		$admin=checkAdmin($id);
 		$participate=checkParticipate($id);
+		/*
+		if($role=='participate') {
+			$invit=invitation($ID, $id, 'event');
+		}
+		*/
 		include('view/eventView.php');
 	}
 
@@ -409,20 +415,26 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		}
 	}
 
-	/*function joinInvitation($id)
+	/*function join($ID, $id, $type)
 	{
-		if() {
+		if($type=='event') {
+			insertParticipate($ID, $id);
+			$_SESSION['erreur']="Vous vous êtes bien ajouté à cet événement.";
+			eventViewEvents($ID, $id, 'participate');
 		}
-		else {
-
+		else if($type=='group') {
+			groups();
 		}
+		else if($type=='contact') {
+			addContact($id, $ID);
+			home($ID);
+		}
+		deleteInvit($ID, $id, $type);
 	}
 
-	function declineInvitation($id)
+	function decline($ID, $id, $type)
 	{
-		if() {
-		}
-		else {
-
-		}
+		deleteInvit($ID, $id, $type);
+		$_SESSION['erreur']="Vous avez bien supprimé l'invitation à cet événement.";
+		showEvents($ID);
 	}*/
