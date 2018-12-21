@@ -558,11 +558,29 @@ function getProfileUpdate($ids)
         $reponse->execute(['ID'=>$ID]);
     }
 
+    //VERIFIE LE STATUS DU COMPTE DE L'UTILISATEUR
+    function checkStatus($ID)
+    {
+        $bdd=dbConnect();
+        //RECHERCHER LE STATUS DE L'UTILISATEUR
+        $reponse=$bdd->prepare('SELECT status
+                                FROM users
+                                WHERE id=:ID');
+
+        $reponse->execute(['ID'=>$ID]);
+        $a=false;
+        while($donnees=$reponse->fetch())
+        {
+            $a=$donnees['status'];
+        }
+        return $a;
+    }
+
     //AFFICHER EVENEMENTS AYANT POUR PARTICIPANT L'UTILISATEUR
     function selectMember($ID)
     {
         $bdd=dbConnect();
-        //rechercher les événements propres à l'utilisateur en tant que participant
+        //RECHERCHER LES EVENEMENTS PROPRES A L'UTILISATEUR EN TANT QUE PARTICIPANT
         $reponse=$bdd->prepare('SELECT event, title
                                 FROM events, participate
                                 WHERE user=:ID AND event=events.id AND admin!=user');
@@ -625,14 +643,15 @@ function getProfileUpdate($ids)
         //RECUPERER LES CONTACTS DE L'UTILISATEUR QUI NE FONT PAS PARTIS DE CET EVENEMENT
         $reponse=$bdd->prepare('SELECT users.id AS id, lastName, name
                                 FROM users, contacts
-                                WHERE (contact=:ID AND users.id=user
+                                WHERE status!="company"
+                                AND ((contact=:ID AND users.id=user
                                         AND users.id NOT IN (SELECT user
                                                             FROM participate
                                                             WHERE event=:id))
                                 OR (contact=users.id AND user=:ID
                                         AND contact NOT IN (SELECT user
                                                             FROM participate
-                                                            WHERE event=:id))
+                                                            WHERE event=:id)))
                                 ORDER BY lastName, name');
         $reponse->execute(['ID'=>$ID,
                             'id'=>$id]);
@@ -695,8 +714,9 @@ function getProfileUpdate($ids)
         $reponse->execute(['admin'=>$a]);
         while($donnees=$reponse->fetch())
         {
-            $b[0]=$donnees['lastName'];
-            $b[1]=$donnees['name'];
+            $b[0]=$a;
+            $b[1]=$donnees['lastName'];
+            $b[2]=$donnees['name'];
         }
         return $b;
     }
@@ -772,15 +792,25 @@ function getProfileUpdate($ids)
         $reponse->execute(['user'=>$ID,
                             'event'=>$id]);
     }
-    /*function join($ID)
+    /*
+    //AFFICHER LES EVENEMENTS AYANT INVITER L'UTILISER A PARTICIPER
+    function selectInvit($ID, $type)
     {
         $bdd=dbConnect();
-        //AJOUTER LA PARTICIPATION DE L'UTILISATEUR DANS CET EVENEMENT
+        //RECHERCHER LES INVITATIONS A PARTICIPER A L'EVENEMENT
     }
 
-    function decline($ID)
+    //AFFICHER INVITATION SUR L'EVENEMENT
+    function invitation($ID, $id, $type)
+    {
+        $bdd=dbConnect();
+        //CHERCHER LES INVITATIONS ENVOYES A L'UTILISATEUR
+    }
+
+    //SUPPRIMER INVITATION
+    function deleteInvit($ID, $id, $type)
     {
         $bdd=dbConnect();
         //DECLINER LA PARTICIPATION DE L'UTILISATEUR DANS CET EVENEMENT
-    }*/
+    }}*/
 ?>

@@ -28,7 +28,7 @@ ob_start();
 
     <div class="container">
       <div class="py-2 text-center">
-        <h2>Modifiez votre profil!</h2>
+        <h2>Modifiez mon profil</h2>
         <p class="lead"></p>
       </div>
 
@@ -63,10 +63,10 @@ ob_start();
     </script>
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label for="newName">Prenom</label>
+                <label for="newName">Prénom</label>
                 <input type="text" class="form-control" id="newName" name="newsurname" value="<?= $recup['name'] ?>" required>
                 <div class="invalid-feedback">
-                  Entrez votre prenom .
+                  Entrez votre prénom.
                 </div>
               </div>
               <div class="col-md-6 mb-3">
@@ -79,24 +79,24 @@ ob_start();
             </div>
         <div class="row">
             <div class="col-md-6 mb-3">
-              <label for="email">Adresse email</label>
+              <label for="email">Adresse e-mail</label>
               <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text">@</span>
                 </div>
                 <input type="email" class="form-control" id="email" name="newmail" value="<?= $recup['email'] ?>" required>
                 <div class="invalid-feedback" style="width: 100%;">
-                  Entrez votre adresse mail.
+                  Entrez votre adresse e-mail.
                 </div>
               </div>
               <span id="aideCourriel"></span>
             </div>
 
             <div class="col-md-6 mb-3">
-              <label for="phone">Numero de telephone</label>
+              <label for="phone">Numéro de téléphone</label>
               <input type="text" class="form-control" id="phone" name="newphone" value="<?= $recup['phone'] ?>"  required>
               <div class="invalid-feedback">
-                Entrez votre numero de telephone.
+                Entrez votre numéro de téléphone.
               </div>
               <span id="aidePhone"></span>
             </div>
@@ -114,7 +114,7 @@ ob_start();
                <label for="mdp2">Confirmation du mot de passe</label>
                 <input type="password" class="form-control" id="mdp2" name="confirmNewPass" required>
                 <div class="invalid-feedback">
-                  Entrez votre mot de passe.
+                  Rentrez de nouveau le mot de passe.
                 </div>
               </div>
             </div>
@@ -131,7 +131,7 @@ ob_start();
                 <label for="entreprise">Entreprise</label>
                 <input type="text" name="newcompany" value="<?= $recup['company'] ?>" class="form-control" id="company" required>
                 <div class="invalid-feedback">
-                  Entrez votre d'entreprise de travail.
+                  Entrez votre nom d'entreprise.
                 </div>
               </div>
             <div class="col-md-4 mb-3">

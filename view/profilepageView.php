@@ -106,7 +106,7 @@ ob_start();
                     <?php 
                     endwhile;
                  else :
-                    echo $profile['name'].' n\'a rien publié';
+                    echo $profile['name'].' n\'a rien publié.';
                  endif;
                     ?>
                 </div>
