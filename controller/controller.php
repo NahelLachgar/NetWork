@@ -240,29 +240,31 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	function createGroups($name,$userId) {
 		$create = createGroup($name,$userId);
 		if($create == TRUE) {
-			/*$contacts = getContacts($userId);
-			foreach ($contacts as $contact) {
-				$res[] = getProfile($contact['id']);
-				
+			$contacts = getContacts($userId);
+			$contacts = $contacts->fetchAll(PDO::FETCH_ASSOC);
+			for($i = 0; $i < count($contacts); $i++) {
+					$contactProfile[] = getProfile($contacts[$i]['id']);
 			}
-			require('./view/addContactGroupView.php');*/
-			lastId();
+			foreach( $contactProfile as $contact){
+				if ($contact['status'] == "employee"){
+					$res[] = $contact;
+				}
+			}
+			require('./view/addContactGroupView.php');
+			
 	
-		} else {
-			echo "Une erreur c'est produite !";
 		}
 	}
 
 	//AJOUTER LES CONTACTS DANS UN GROUPE
 	function addContactsToGroup() {
-		/*$comt = COUNT($contact);
+		$comt = COUNT($contact);
 		$status = "membre";
            for($i=0;$i<$comt;$i++)
             {
 				contactAddGroup($contact[$i],$status);
-			}*/
-			$id = lastId();
-			echo $id;
+			}
+		
 		}
 
 	// SE DECONNECTER
