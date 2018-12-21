@@ -19,7 +19,7 @@ require('controller/controller.php');
                 search(htmlspecialchars($_SESSION['id']),htmlspecialchars($_POST['research']));
                 break;
             case 'profilePage':
-                contactHome($_POST['contactId']);
+                contactHome($_SESSION['id'],$_POST['contactId']);
                 break;
             case 'post':
                 addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
@@ -55,7 +55,7 @@ require('controller/controller.php');
                 addcomment(htmlspecialchars($_POST['comment']),$_SESSION['id'],$_POST['postId']);
                 break; 
             case 'contactContacts':
-                showContacts($_POST['contactId']);
+                showContacts($_SESSION['id'],$_POST['contactId']);
                 break;
             case 'showMessages':
                 if (!isset($_POST['contactId'])) {
@@ -69,7 +69,7 @@ require('controller/controller.php');
                 addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break;
             case 'groups':
-                sessionGroup();
+                sessionGroup($_SESSION['id']);
                 break;
             case 'deleteView':
                 deleteView($_SESSION['id']);
@@ -100,7 +100,7 @@ require('controller/controller.php');
                 break;
             case 'updateEventView':
 //JS
-                updateEventView($_POST['id']);
+                updateEventView($_SESSION['id'], $_POST['id']);
                 break;
             case 'updateEvent':
                 modifyEvent($_POST['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
@@ -112,10 +112,10 @@ require('controller/controller.php');
             case 'addParticipate':
                 //VERIFIER QU'IL Y A AU MOINS UNE CASE COCHEE
                 if(isset($_POST['contact'])) {
-                    addParticipate($_POST['contact'], $_POST['id']);
+                    addParticipate($_SESSION['id'], $_POST['contact'], $_POST['id']);
                 }
                 else {
-                    addParticipate("", $_POST['id']);
+                    addParticipate($_SESSION['id'], "", $_POST['id']);
                 }
                 break;
             /*

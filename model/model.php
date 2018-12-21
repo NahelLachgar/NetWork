@@ -565,11 +565,29 @@ function getProfileUpdate($ids)
         $reponse->execute(['ID'=>$ID]);
     }
 
+    //VERIFIE LE STATUS DU COMPTE DE L'UTILISATEUR
+    function checkStatus($ID)
+    {
+        $bdd=dbConnect();
+        //RECHERCHER LE STATUS DE L'UTILISATEUR
+        $reponse=$bdd->prepare('SELECT status
+                                FROM users
+                                WHERE id=:ID');
+
+        $reponse->execute(['ID'=>$ID]);
+        $a=false;
+        while($donnees=$reponse->fetch())
+        {
+            $a=$donnees['status'];
+        }
+        return $a;
+    }
+
     //AFFICHER EVENEMENTS AYANT POUR PARTICIPANT L'UTILISATEUR
     function selectMember($ID)
     {
         $bdd=dbConnect();
-        //rechercher les événements propres à l'utilisateur en tant que participant
+        //RECHERCHER LES EVENEMENTS PROPRES A L'UTILISATEUR EN TANT QUE PARTICIPANT
         $reponse=$bdd->prepare('SELECT event, title
                                 FROM events, participate
                                 WHERE user=:ID AND event=events.id AND admin!=user');

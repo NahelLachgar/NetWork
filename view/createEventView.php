@@ -24,16 +24,6 @@
         <div class="col-md-12 order-md-1">
             <form enctype="multipart/form-data" action="index.php?action=createEvent" method="POST">
                 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-                <script>
-                jQuery(function($) {
-                    $('#photoUpdateFile').click(function(e) {
-                    });
-                     
-                    $('#photoUpdate').click(function(e) {
-                        $('#photoUpdateFile').trigger('click');
-                    });
-                });
-                </script>
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="newName">Nom</label>

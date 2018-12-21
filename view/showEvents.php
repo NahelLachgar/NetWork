@@ -113,11 +113,11 @@
                             <input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Afficher la page de l&apos;événement'>
                         </div>
                     </div>
-                </form>";
+                </form>
+                <div class='col-md-4 order-md-2 mb-4'>
+                </div>";
         }
         echo "<div class='col-md-4 order-md-2 mb-4'>
-                </div>
-                <div class='col-md-4 order-md-2 mb-4'>
                 </div>";
     }
     else {
@@ -141,7 +141,9 @@
                             <input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Afficher la page de l&apos;événement'>
                         </div>
                     </div>
-                </form>";
+                </form>
+                <div class='col-md-4 order-md-2 mb-4'>
+                </div>";
         }
     }
     else {

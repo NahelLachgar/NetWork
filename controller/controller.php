@@ -10,7 +10,7 @@ function home($userId) {
 	$employeesSuggests = getEmployeeSuggests($userId);
 	}
 	$followedCompaniesNb = getFollowedCompaniesCount($userId);
-
+	$status = checkStatus($userId);
 	if($profile['status'] == "employee"){
 		require('view/homeViewEmployee.php');
 	}else{
@@ -30,9 +30,10 @@ function showMessages ($userId,$contactId) {
 		$contactProfile[$i] = $profile;
 	}
 	$messages = getMessages($userId,$contactId);
+	$status = checkStatus($userId);
 	require('./view/chatView.php');
 	} else {
-		echo("Vous n'avez aucun message");
+		echo("Vous n'avez aucun message.");
 	}
 }
 
@@ -42,11 +43,12 @@ function addMessage($content,$contactId,$userId) {
 		header('Location:'.$_SERVER['HTTP_REFERER']);
 //	}
 }
-function contactHome($contactId) {
+function contactHome($id,$contactId) {
 	$profile = getProfile($contactId);
 	$contactPosts = getContactPosts($contactId);
 	$contactsNb = getContactsCount($contactId);
 	$followedCompaniesNb = getFollowedCompaniesCount($contactId);
+	$status = checkStatus($id);
 	require('view/profilepageView.php');	
 }
 
@@ -69,17 +71,17 @@ function checkUserExists($email, $password){
 	$password = htmlspecialchars($password);
 	$errors = array();
 
-	$user= checkUser($email);
+	$user = checkUser($email);
 
 	if($user === false){
-		$errors['compte'] = "votre compte n'existe pas !";
+		$errors['compte'] = "Votre compte n'existe pas !";
 		require('view/signInView.php');		
 	} else {
 		if(password_verify($password, $user['password'])){
 			$_SESSION['id'] = $user['id'];
 			header('Location:index.php?action=home');
 		} else { 
-			$errors['wrongPassWord'] = "Les indentifiants saisis sont incorrects.";
+			$errors['wrongPassWord'] = "Les identifiants saisis sont incorrects.";
 			require('view/signInView.php');			
 		}
 	}
@@ -92,7 +94,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 
 	// ON VERIFIE QUE LES DONNEES NE SOIT PAS VIDE
 	if(empty($firstName) || empty($lastName) || empty($email) || empty($phone) || empty($password) || empty($confirmPassword) || empty($status) || empty($job) || empty($company) || empty($town)){
-		$errors['empty'] = "Verifier que les champs sont biens remplis";
+		$errors['empty'] = "Vérifier que les champs sont bien remplis.";
 		require('view/signUpView.php');
 	}
 
@@ -110,7 +112,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 
 	// ON CHECK SI LE MOT DE PASSE ET LA CONFIRMATION DU MOT DE PASSE SONT DIFFERENTE
 	if($password != $confirmPassword){
-		$errors['wrongPassWord'] = "Le mot de passe saisis est incorrecte";
+		$errors['wrongPassWord'] = "Le mot de passe saisi est incorrect.";
 		header('Location:index.php?action=signUp');
 	}
 	// ON CHECK SI LES DONNEÉS SONT BONNES
@@ -147,6 +149,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		$data = htmlspecialchars($data);
 		$res = getSearch($ids,$data);
 		$contact = getContactToUser($ids);
+		$status = checkStatus($ids);
 		if(($res == TRUE) && (empty($contact))){
 			require('./view/resultSearchView.php');
 		} else if( ($res == TRUE) && (!empty($contact)) ){
@@ -183,6 +186,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 			$res[] = getProfile($contact['id']);
 		
 		}
+		$status = checkStatus($id);
 		require("./view/showCompanies.php");
 	}
 	
@@ -190,6 +194,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	function contactList($userId)
 	{
 		$list = getContacts($userId);
+		$status = checkStatus($userId);
 		if($list == TRUE) 
 		{
 			require('./view/contactsListView.php');		
@@ -200,12 +205,14 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	function updateToProfile($id)
 	{
 		$recup = getProfileUpdate($id);
+		$status = checkStatus($id);
 		require('./view/profilUpdateView.php');
 	}
 
 	function getProfileSearch($id)
 	{
 		$recup = getProfileUpdate($id);
+		$status = checkStatus($id);
 		require('./view/profilepageView.php');
 	}
 
@@ -231,6 +238,12 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		
 	}
 
+	// GROUPE
+	function sessionGroup($id) {
+		$status = checkStatus($id);
+		require('./view/homeGroup.php');
+	}
+
 	//CREER UN GROUPE
 	function createGroups($name,$userId) {
 		$create = createGroup($name,$userId);
@@ -245,6 +258,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 					$res[] = $contact;
 				}
 			}
+			$status = checkStatus($userId);
 			require('./view/addContactGroupView.php');
 			
 	
@@ -269,12 +283,13 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	}
 
 	// MONTRER LES CONTACTS
-	function showContacts($id){
+	function showContacts($userId,$id){
 		$contacts = getContacts($id);
 		foreach ($contacts as $contact) {
 			$res[] = getProfile($contact['id']);
 			
 		}
+		$status = checkStatus($userId);
 		require("./view/showContacts.php");
 	}
 
@@ -289,6 +304,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 			$employeesSuggests=getEmployeeSuggests($id);
 		}
 		$followedCompaniesNb=getFollowedCompaniesCount($id);
+		$status=checkStatus($id);
 		include('view/deleteView.php');
 	}
 
@@ -327,12 +343,14 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		$admin=selectAdmin($id);
 		$event=selectMember($id);
 		//$invit=selectInvit($id, 'event');
+		$status=checkStatus($id);
 		include('view/showEvents.php');
 	}
 
 	//AFFICHER LA PAGE CREATION D'UN EVENEMENT
 	function createEventView($id, $role)
 	{
+		$status=checkStatus($id);
 		if($role=='admin') {
 			include('view/createEventView.php');
 		}
@@ -377,6 +395,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 			$invit=invitation($ID, $id, 'event');
 		}
 		*/
+		$status=checkStatus($ID);
 		include('view/eventView.php');
 	}
 
@@ -405,9 +424,10 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	}
 
 	//AFFICHER LA PAGE DE MODIFICATION D'UN EVENEMENT
-	function updateEventView($id)
+	function updateEventView($ID, $id)
 	{
 	   $event=infoEvent($id);
+	   $status=checkStatus($ID);
 	   include('view/updateEventView.php');
 	}
 
@@ -430,11 +450,12 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	function addParticipateView($ID, $id)
 	{
 		$contact=infoContact($ID, $id);
+		$status=checkStatus($ID);
 		include('view/addParticipateView.php');
 	}
 
 	//AJOUTER DES PARTICIPATIONS A UN EVENEMENT
-	function addParticipate($contact, $id)
+	function addParticipate($ID, $contact, $id)
 	{
 		//VERIFIER QU'IL Y A AU MOINS UNE CASE COCHEE
 		if($contact!=="") {
@@ -443,11 +464,11 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 			   insertParticipate($valeur, $id);
 			}
 			$_SESSION['erreur']="Vos contacts ont bien été ajouté à votre événement.";
-			eventView($_SESSION['id'], $id, 'admin');
+			eventView($ID, $id, 'admin');
 		}
 		else {
 			$_SESSION['erreur']="Vous n'avez sélectionné aucun contact à ajouter aux participants de votre événement.";
-			addParticipateView($_SESSION['id'], $id);
+			addParticipateView($ID, $id);
 		}
 	}
 

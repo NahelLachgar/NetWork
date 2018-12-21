@@ -9,7 +9,7 @@ ob_start();
         <SCRIPT LANGUAGE="JavaScript" SRC="js/group.js"></SCRIPT>       
 
  
-<a class="trigger_popup_fricc"><button class="btn btn-link">Creer un groupe</button></a>
+<a class="trigger_popup_fricc"><button class="btn btn-link">Créer un groupe</button></a>
 
 <div class="hover_bkgr_fricc">
     <span class="helper"></span>
@@ -26,7 +26,7 @@ ob_start();
                 <span id="aideName"></span>
               </div>
         
-         <a class="creer"><button class="btn btn-primary btn-lg btn-block" name="creer" type="submit">Creer</button></a></form>
+         <a class="creer"><button class="btn btn-primary btn-lg btn-block" name="creer" type="submit">Créer</button></a></form>
     </div>
     
  
