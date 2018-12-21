@@ -5,6 +5,9 @@ $(window).load(function () {
     $('.popupCloseButton').click(function(){
         $('.hover_bkgr_fricc').hide();
     });
+    $('.creer').click(function(){
+        $('.add').hide();
+    });
         $('.add').show();
         $('.popupCloseButton').click(function(){
             $('.add').hide();

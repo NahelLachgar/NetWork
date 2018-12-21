@@ -19,7 +19,7 @@ require('controller/controller.php');
                 search(htmlspecialchars($_SESSION['id']),htmlspecialchars($_POST['research']));
                 break;
             case 'profilePage':
-                contactHome($_POST['contactId']);
+                contactHome($_SESSION['id'],$_POST['contactId']);
                 break;
             case 'post':
                 addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
@@ -55,7 +55,7 @@ require('controller/controller.php');
                 addcomment(htmlspecialchars($_POST['comment']),$_SESSION['id'],$_POST['postId']);
                 break; 
             case 'contactContacts':
-                showContacts($_POST['contactId']);
+                showContacts($_SESSION['id'],$_POST['contactId']);
                 break;
             case 'showMessages':
                 if (!isset($_POST['contactId'])) {
@@ -69,7 +69,7 @@ require('controller/controller.php');
                 addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break;
             case 'groups':
-                sessionGroup();
+                sessionGroup($_SESSION['id']);
                 break;
             case 'deleteView':
                 deleteView($_SESSION['id']);
@@ -78,51 +78,62 @@ require('controller/controller.php');
                 deleteAccount($_SESSION['id']);
                 break;
             case 'showEvents':
+                //PRENDRE EN COMPTE LES INVITATIONS
                 showEvents($_SESSION['id']);
                 break;
             case 'createEventView':
-                createEventView($_SESSION['id']);
+            //JS A FAIRE
+                createEventView($_SESSION['id'], $_POST['role']);
                 break;
             case 'createEvent':
-                createEvent($_SESSION['id'], $_GET['title'], $_GET['eventDate'], $_GET['place']);
+                createEvent($_SESSION['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
                 break;
             case 'eventView':
-                eventView($_SESSION['id'], $_GET['id'], $_GET['role']);
+                //PRENDRE EN COMPTE LES INVITATIONS
+                eventView($_SESSION['id'], $_POST['id'], $_POST['role']);
                 break;
             case 'quitEvent':
-                quitEvent($_GET['ID'], $_GET['id'], $_GET['role']);
+                quitEvent($_POST['ID'], $_POST['id'], $_POST['role']);
                 break;
             case 'deleteEvent':
-                removeEvent($_GET['id']);
+                removeEvent($_POST['id']);
                 break;
             case 'updateEventView':
-                updateEventView($_GET['id']);
+            //JS A FAIRE
+                updateEventView($_SESSION['id'], $_POST['id']);
                 break;
             case 'updateEvent':
-                modifyEvent($_GET['id'], $_GET['title'], $_GET['eventDate'], $_GET['place']);
+                modifyEvent($_POST['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
                 break;
             case 'addParticipateView':
-                addParticipateView($_SESSION['id'], $_GET['id']);
+            //JS A FAIRE
+                addParticipateView($_SESSION['id'], $_POST['id']);
                 break;
             case 'addParticipate':
-                addParticipate($_GET['contact'], $_GET['id']);
+                //VERIFIER QU'IL Y A AU MOINS UNE CASE COCHEE
+                if(isset($_POST['contact'])) {
+                    addParticipate($_SESSION['id'], $_POST['contact'], $_POST['id']);
+                }
+                else {
+                    addParticipate($_SESSION['id'], "", $_POST['id']);
+                }
                 break;
             /*
             case 'joinInvitation':
             //A FAIRE
-                joinInvitation($_SESSION['id'], $_GET['id']);
+                join($_SESSION['id'], $_GET['id'], $_GET['type']);
                 break;
             case 'declineInvitation':
             //A FAIRE
-                declineInvitation($_SESSION['id'], $_GET['id']);
+                decline($_SESSION['id'], $_GET['id'], $_GET['type']);
                 break;
             */
             case 'createGroup':
                 createGroups($_POST['nameG'],$_SESSION['id']);
                 break;
-            case 'addContactsToGroups':
+            /*case 'addContactsToGroups':
                 addContactsToGroup($_POST['addContacts']);
-                break;
+                break;*/
             default:
                 home($_SESSION['id']);
         }
