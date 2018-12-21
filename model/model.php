@@ -32,7 +32,7 @@ function getContacts($userId)
 
 function getContactPosts($contactId) {
     $db = dbConnect();
-    $posts = $db->prepare('SELECT p.*,u.lastName AS lastName,u.name AS name, u.job AS job, u.company AS company, u.id AS contactId FROM users u 
+    $posts = $db->prepare('SELECT p.*,u.lastName AS lastName,u.name AS name, u.job AS job, u.photo AS photo, u.company AS company, u.id AS contactId FROM users u 
         JOIN post ON u.id = post.user
         JOIN publications p ON post.publication = p.id
         WHERE post.user = ? 
@@ -69,7 +69,7 @@ function getContactsPosts($userId)
     $db = dbConnect();
     $contacts = getContacts($userId);
     $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
-    $posts = $db->prepare('SELECT p.*,u.lastName AS lastName,u.name AS name, u.job AS job, u.company AS company, u.id AS contactId FROM users u 
+    $posts = $db->prepare('SELECT p.*,u.lastName AS lastName,u.name AS name, u.job AS job, u.photo as photo,u.company AS company, u.id AS contactId FROM users u 
         JOIN post ON u.id = post.user
         JOIN publications p ON post.publication = p.id
         WHERE post.user = ? OR post.user = ?  
@@ -318,7 +318,7 @@ function getContactToUser($idUser)
 function getProfileUpdate($ids)
 {
     $db = dbConnect();
-    $req = $db->prepare('SELECT users.lastName,users.name,users.email,users.phone,users.job,users.company,users.town FROM users WHERE users.id = ?');
+    $req = $db->prepare('SELECT users.lastName,users.name,users.email,users.phone,users.photo,users.job,users.company,users.town FROM users WHERE users.id = ?');
     $post = $req->execute(array($ids));
     $post = $req->fetch();
     return $post;
