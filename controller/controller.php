@@ -239,7 +239,6 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	//CREER UN GROUPE
 	function createGroups($name,$userId) {
 		$create = createGroup($name,$userId);
-		if($create == TRUE) {
 			$contacts = getContacts($userId);
 			$contacts = $contacts->fetchAll(PDO::FETCH_ASSOC);
 			for($i = 0; $i < count($contacts); $i++) {
@@ -251,20 +250,18 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 				}
 			}
 			require('./view/addContactGroupView.php');
-			
-	
-		}
+		
 	}
 
 	//AJOUTER LES CONTACTS DANS UN GROUPE
-	function addContactsToGroup() {
+	function addContactsToGroup($contact) {
 		$comt = COUNT($contact);
-		$status = "membre";
+		$status = "member";
            for($i=0;$i<$comt;$i++)
             {
 				contactAddGroup($contact[$i],$status);
 			}
-		
+			echo "bon";
 		}
 
 	// SE DECONNECTER
