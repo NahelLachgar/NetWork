@@ -21,7 +21,7 @@ ob_start();
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="h5"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
+                        <div class="h5"><img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
 						<?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                         <div class="h7">
                             <?= $profile['job'] . ' chez ' . $profile['company'] ?>
