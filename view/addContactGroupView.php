@@ -12,6 +12,8 @@ ob_start();
     <div>
         <div class="popupCloseButton">X</div>
             <form method="POST" action="index.php?action=addContactsToGroups" >
+            <input type="hidden" name="groupId" value="<?= $create ?>">
+            <input type="hidden" name="statut" value="2">
                 Ajouter des contacts<br>
                 <div>
                 <?php foreach ($res as $add): ?>

@@ -250,18 +250,16 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 				}
 			}
 			require('./view/addContactGroupView.php');
-		
+			
 	}
 
 	//AJOUTER LES CONTACTS DANS UN GROUPE
-	function addContactsToGroup($contact) {
+	function addContactsToGroup($contact,$status,$groupId) {
 		$comt = COUNT($contact);
-		$status = "member";
-           for($i=0;$i<$comt;$i++)
-            {
-				contactAddGroup($contact[$i],$status);
+           for( $i = 0; $i < $comt ; $i++) {
+				contactAddGroup($contact[$i],$status,$groupId);
 			}
-			echo "bon";
+			
 		}
 
 	// SE DECONNECTER

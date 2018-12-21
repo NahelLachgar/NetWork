@@ -120,9 +120,9 @@ require('controller/controller.php');
             case 'createGroup':
                 createGroups($_POST['nameG'],$_SESSION['id']);
                 break;
-            /*case 'addContactsToGroups':
-                addContactsToGroup($_POST['addContacts']);
-                break;*/
+            case 'addContactsToGroups':
+                addContactsToGroup($_POST['addContacts'],$_POST['statut'],$_POST['groupId']);
+                break;
             default:
                 home($_SESSION['id']);
         }
