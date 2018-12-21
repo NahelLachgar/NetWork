@@ -240,29 +240,30 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	function createGroups($name,$userId) {
 		$create = createGroup($name,$userId);
 		if($create == TRUE) {
-			$contacts = getContacts($userId);
+			/*$contacts = getContacts($userId);
 			foreach ($contacts as $contact) {
 				$res[] = getProfile($contact['id']);
 				
 			}
-			require('./view/addContactGroupView.php');	
+			require('./view/addContactGroupView.php');*/
+			lastId();
+	
 		} else {
 			echo "Une erreur c'est produite !";
 		}
 	}
 
 	//AJOUTER LES CONTACTS DANS UN GROUPE
-	function addContactsToGroup($contact) {
-		$comt = COUNT($contact);
+	function addContactsToGroup() {
+		/*$comt = COUNT($contact);
 		$status = "membre";
-		var_dump($contact);
-		var_dump($comt);
-        /*    for($i=0;$i<$comt;$i++)
+           for($i=0;$i<$comt;$i++)
             {
-                contactAddGroup($contact[$i],$status);
-			}
-			echo "bon";
-		*/}
+				contactAddGroup($contact[$i],$status);
+			}*/
+			$id = lastId();
+			echo $id;
+		}
 
 	// SE DECONNECTER
 	function disconnect() {

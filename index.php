@@ -121,7 +121,7 @@ require('controller/controller.php');
                 createGroups($_POST['nameG'],$_SESSION['id']);
                 break;
             case 'addContactsToGroups':
-                addContactsToGroup($_POST['addContacts']);
+                addContactsToGroup();
                 break;
             default:
                 home($_SESSION['id']);
