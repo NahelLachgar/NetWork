@@ -327,10 +327,13 @@ function getProfileUpdate($ids)
     //GESTION DES GROUPES
 
     //SELECTIONNE LES GROUPES DONT TU FAIS PARTIS
-   /* function getGroups() {
+    function getGroups($contactId) {
         $db = dbConnect();
-        $req = $db->prepare('SELECT ')
-    }*/
+        $req = $db->prepare('SELECT * FROM `groupadd` INNER JOIN groups ON groupadd.group = groups.id WHERE groupadd.user = ? AND groupadd.status LIKE "member"');
+        $req->execute(array($contactId));
+        $req = $req->fetchAll();
+        return $req;
+    }
 
     //CREER UN GROUPE
     function createGroup($nameGroup,$adminId){
@@ -341,6 +344,7 @@ function getProfileUpdate($ids)
         return $lastId;
     }
 
+    //AJOUTER DES CONTACTS DANS UN GROUPE
     function contactAddGroup($memberId,$status,$groupID) {
         $db = dbConnect();
         $req = $db->prepare("INSERT INTO `groupadd` (`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(), $memberId, $status, $groupID)");
