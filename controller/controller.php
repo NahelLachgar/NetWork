@@ -205,7 +205,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	function updateToProfile($id)
 	{
 		$recup = getProfileUpdate($id);
-		$status = checkStatus($id);
+			$status = checkStatus($id);
 		require('./view/profilUpdateView.php');
 	}
 
@@ -274,14 +274,12 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		}
 
 	//AJOUTER LES CONTACTS DANS UN GROUPE
-	function addContactsToGroup($contact) {
+	function addContactsToGroup($contact,$status,$groupId) {
 		$comt = COUNT($contact);
-		$status = "member";
-           for($i=0;$i<$comt;$i++)
-            {
-				contactAddGroup($contact[$i],$status);
+           for( $i = 0; $i < $comt ; $i++) {
+				contactAddGroup($contact[$i],$status,$groupId);
 			}
-			echo "bon";
+			
 		}
 
 	// SE DECONNECTER

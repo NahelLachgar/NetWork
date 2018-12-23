@@ -327,26 +327,28 @@ function getProfileUpdate($ids)
     //GESTION DES GROUPES
 
     //SELECTIONNE LES GROUPES DONT TU FAIS PARTIS
-   /* function getGroups() {
+    function getGroups($contactId) {
         $db = dbConnect();
-        $req = $db->prepare('SELECT ')
-    }*/
+        $req = $db->prepare('SELECT * FROM `groupadd` INNER JOIN groups ON groupadd.group = groups.id WHERE groupadd.user = ? AND groupadd.status LIKE "member"');
+        $req->execute(array($contactId));
+        $req = $req->fetchAll();
+        return $req;
+    }
 
     //CREER UN GROUPE
     function createGroup($nameGroup,$adminId){
         $db = dbConnect();
         $req = $db->prepare('INSERT INTO groups(title,createDate,admin) VALUES (?,NOW(),?)');
-        $create = $req->execute(array($nameGroup,$adminId));
+        $req->execute(array($nameGroup,$adminId));
         $lastId = $db->lastInsertId();
         return $lastId;
     }
 
-    function contactAddGroup($memberId,$status,$groupI) {
+    //AJOUTER DES CONTACTS DANS UN GROUPE
+    function contactAddGroup($memberId,$status,$groupID) {
         $db = dbConnect();
-        $req = $db->prepare('INSERT INTO groupAdd(addDate,user,status,group) VALUES (NOW(),?,?,LAST_INSERT_ID()');
-        $create = $req->execute(array($memberId,$status));
-        
-        return $create;
+        $req = $db->prepare("INSERT INTO `groupadd` (`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(), $memberId, $status, $groupID)");
+        $req->execute(array($memberId,$status,$groupID));
     }
 
     //SUPPRIMER LES COMMENTAIRES
