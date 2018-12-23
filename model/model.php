@@ -336,17 +336,15 @@ function getProfileUpdate($ids)
     function createGroup($nameGroup,$adminId){
         $db = dbConnect();
         $req = $db->prepare('INSERT INTO groups(title,createDate,admin) VALUES (?,NOW(),?)');
-        $create = $req->execute(array($nameGroup,$adminId));
+        $req->execute(array($nameGroup,$adminId));
         $lastId = $db->lastInsertId();
         return $lastId;
     }
 
-    function contactAddGroup($memberId,$status,$groupI) {
+    function contactAddGroup($memberId,$status,$groupID) {
         $db = dbConnect();
-        $req = $db->prepare('INSERT INTO groupAdd(addDate,user,status,group) VALUES (NOW(),?,?,LAST_INSERT_ID()');
-        $create = $req->execute(array($memberId,$status));
-        
-        return $create;
+        $req = $db->prepare("INSERT INTO `groupadd` (`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(), $memberId, $status, $groupID)");
+        $req->execute(array($memberId,$status,$groupID));
     }
 
     //SUPPRIMER LES COMMENTAIRES
