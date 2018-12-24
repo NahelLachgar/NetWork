@@ -351,6 +351,15 @@ function getProfileUpdate($ids)
         $req->execute(array($memberId,$status,$groupID));
     }
 
+    //AFFICHER LES MEMBRES D"UN GROUPE
+    function selectContactGroup($groupId){
+        $db = dbConnect();
+        $req = $db->prepare(" SELECT * FROM `groupadd` INNER JOIN groups ON groupadd.group = groups.id WHERE groupadd.group = ? AND groupadd.status = 'member' ");
+        $req->execute(array($groupId));
+        $req = $req->fetchAll();
+        return $req;
+    }
+
     //SUPPRIMER LES COMMENTAIRES
     function deleteAllComs($ID)
     {

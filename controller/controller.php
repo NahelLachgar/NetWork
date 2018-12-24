@@ -287,6 +287,19 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		$groups = getGroups($userId);
 	}
 
+	//AFFICHE LES MEMBRES D'UN GROUPE
+	function getMembersToGroups($groupId,$id){
+		$members = selectContactGroup($groupId);
+		for($i = 0; $i < count($members); $i++) {
+			$memberProfile[] = getProfile($members[$i]['user']);
+		}
+		foreach( $memberProfile as $member){
+			$res[] = $member;
+		}
+		$status = checkStatus($id);
+		require('./view/membersGroupView.php');
+	}
+
 	// SE DECONNECTER
 	function disconnect() {
 		session_destroy();
