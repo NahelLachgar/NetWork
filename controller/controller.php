@@ -253,6 +253,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	// GROUPE
 	function sessionGroup($id) {
 		$status = checkStatus($id);
+		$groups = getGroups($id);
 		require('./view/homeGroup.php');
 	}
 
@@ -279,8 +280,12 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
            for( $i = 0; $i < $comt ; $i++) {
 				contactAddGroup($contact[$i],$status,$groupId);
 			}
-			
+			sessionGroup($userId);
 		}
+	//SELECTIONNE TOUS LES GROUPES DONT L'USER FAIT PARTI
+	function getGroupsContact($userId){
+		$groups = getGroups($userId);
+	}
 
 	// SE DECONNECTER
 	function disconnect() {

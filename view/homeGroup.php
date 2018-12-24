@@ -13,6 +13,13 @@ ob_start();
         <div class="col-md-4 order-md-2 mb-4">
             <br><h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Vos groupes</span></h4>
+            <?php      
+             foreach ($groups as $group): ?>
+                <form method="POST" action="index.php?action=">
+                    <input type="hidden" name="groupId" value="<?= $group['group'] ?>" >
+                    <input type="submit" class="btn btn-link" value="<?= $group['title'] ?>" >
+                </form><br>
+            <?php endforeach; ?>
         </div>
         <div class="col-md-8 order-md-1">
             <a class="trigger_popup_fricc"><button class="btn btn-link">Créer un groupe</button></a>

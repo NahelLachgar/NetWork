@@ -329,7 +329,7 @@ function getProfileUpdate($ids)
     //SELECTIONNE LES GROUPES DONT TU FAIS PARTIS
     function getGroups($contactId) {
         $db = dbConnect();
-        $req = $db->prepare('SELECT * FROM `groupadd` INNER JOIN groups ON groupadd.group = groups.id WHERE groupadd.user = ? AND groupadd.status LIKE "member"');
+        $req = $db->prepare("SELECT * FROM groupadd INNER JOIN groups ON groupadd.group = groups.id WHERE groupadd.user = ? AND groupadd.status LIKE 'member' ");
         $req->execute(array($contactId));
         $req = $req->fetchAll();
         return $req;
