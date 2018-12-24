@@ -15,7 +15,7 @@ ob_start();
             <span class="text-muted">Vos groupes</span></h4>
             <?php      
              foreach ($groups as $group): ?>
-                <form method="POST" action="index.php?action=">
+                <form method="POST" action="index.php?action=getGroupId">
                     <input type="hidden" name="groupId" value="<?= $group['group'] ?>" >
                     <input type="submit" class="btn btn-link" value="<?= $group['title'] ?>" >
                 </form><br>

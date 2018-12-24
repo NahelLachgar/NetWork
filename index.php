@@ -134,6 +134,9 @@ require('controller/controller.php');
             case 'addContactsToGroups':
                 addContactsToGroup($_POST['addContacts'],$_POST['statut'],$_POST['groupId']);
                 break;
+            case 'getGroupId':
+                echo $_POST['groupId'];
+                break;
             default:
                 home($_SESSION['id']);
         }
