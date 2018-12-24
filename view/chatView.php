@@ -17,7 +17,7 @@ ob_start();
 		<div id="contacts">
 			<ul>
             <?php for ($i = 0; $i < count($contactProfile); $i++) : ?>
-			<form action="index.php?action=showMessages" method="POST">
+			<form>
 			<input type="hidden" name="contactId" value="<?= $contactProfile[$i]['id'] ?>">
 
 				<li class="contact">
@@ -77,9 +77,11 @@ ob_start();
 		</div>
 	</div>
 </div>
-<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-<script >$("#messages").animate({ scrollTop: $(document).height() }, "fast");
-//BARRE DE SCROLL EN BAS 
+<script src='https://production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+<script >
+$(document).ready(function(){
+	$("#messages").animate({ scrollTop: $(document).height() }, "fast");
+	//BARRE DE SCROLL EN BAS 
 	$(window).on('keydown', function(e) {
 	if (e.which == 13) {
 		return false;
@@ -102,22 +104,22 @@ ob_start();
 	}
 	});
 function load(){
-		setTimeout( function(){
-			var fisrtId = $('#messages p:first').attr('id');
-			$.ajax({
-				url : "load.php",
-				type : "POST",
-				data : "messageId=" + firstId,
-				dataType:'html',
-				success : function(html){
+				setTimeout( function(){
+				var fisrtId = $('#messages p:first').attr('id');
+				$.ajax({
+					url : "load.php",
+					type : "POST",
+					data : "messageId=" + firstId,
+					dataType:'html',
+					success : function(html){
 					$('#messages').prepend(html);
-				}
-			})
-		});
-		load();
+					}
+				})
+			});
+			load();
 	},5000);
-load();
-
+	load();
+)};
 </script>
  <?php 
 $content = ob_get_clean();
