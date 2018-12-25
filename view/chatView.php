@@ -6,7 +6,8 @@ ob_start();
 	<div id="sidepanel">
 		<div id="profile">
 			<div class="wrap">
-				<img id="profile-img" src="https://picsum.photos/50/50" class="online" alt="" />
+			
+				<img id="profile-img" src="./img/profile/<?= $userProfile['photo'] ?>" class="online rounded-circle" width="45" alt="" />
 				<p><?= $userProfile['name'] . ' ' . $userProfile['lastName'] ?></p>
 			</div>
 		</div>
@@ -23,14 +24,12 @@ ob_start();
 				<li class="contact">
 					<div class="wrap">
 						<span class="contact-status online"></span>
-						<img src="https://picsum.photos/50/50" alt="" />
+						<img class="rounded-circle" width="45"src="./img/profile/<?= $contactProfile[$i]['photo'] ?>" alt="" />
 						<div class="meta">
 						<button type="submit" class="btn btn-link">
 
 							<p class="name"><?= $contactProfile[$i]['name'] . ' ' . $contactProfile[$i]['lastName'] ?></p>
 							</button>
-
-							<p class="preview"><?= "É c koman la ca di koi " ?></p>
 
 							</form>
 						</div>
@@ -45,7 +44,7 @@ ob_start();
 	</div>
 	<div class="content">
 		<div class="contact-profile">
-			<img src="https://picsum.photos/50/50" alt="" />
+		<img class="rounded-circle" width="45"src="./img/profile/<?= $reiceverProfile['photo'] ?>" alt="" />
 			<p><?= $reiceverProfile['name'] . ' ' . $reiceverProfile['lastName'] ?></p>
         </div>
         

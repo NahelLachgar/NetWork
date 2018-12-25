@@ -18,7 +18,7 @@ ob_start();
            <div class="card gedf-card">
                         <div class="card-body">
             <?php if ($result['status'] == 'employee') : ?>
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                             <form action="index.php?action=profilePage" method="POST" > 
                             <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>"> 
                             <a href="index.php?action=profilePage&contactId=<?= $result['contactId']?>&token=1s"  class="btn btn-link"><?= $result['name'] . ' ' . $result['lastName'] ?></a>

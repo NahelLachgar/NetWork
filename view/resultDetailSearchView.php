@@ -24,7 +24,7 @@ ob_start();
             ?>
             <div class="card gedf-card">
                     <div class="card-body">
-                        <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
+                        <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                         <form action="index.php?action=profilePage" method="POST">
                             <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>"> 
                             <input type="hidden" name="token" value="0">
@@ -41,7 +41,7 @@ ob_start();
             <?php else: ?>
             <div class="card gedf-card">
                     <div class="card-body">       
-                        <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
+                        <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                         <form action="index.php?action=profilePage" method="POST">
                             <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>"><input type="hidden" name="token" value="0"> 
                             <input type="submit" class="btn btn-link" value="<?= $result['name'] . ' ' . $result['lastName'] ?>"> </form></h5>
@@ -58,7 +58,7 @@ ob_start();
                         ?>
                 <div class="card gedf-card">
                     <div class="card-body">
-                        <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
+                        <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                         <form action="index.php?action=profilePage" method="POST">
                             <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>">
                             <input type="hidden" name="token" value="1"> 
@@ -74,7 +74,7 @@ ob_start();
             <?php else: ?>
             <div class="card gedf-card">
                     <div class="card-body">       
-                        <h5 class="card-title"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
+                        <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                         <form action="index.php?action=profilePage" method="POST">
                             <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>">
                             <input type="hidden" name="token" value="1">
