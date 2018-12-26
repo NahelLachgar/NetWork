@@ -19,8 +19,8 @@ ob_start();
         <div class="row">
             <div class="col-md-3">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="h5"><img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="Photo de profil">&nbsp&nbsp&nbsp
+                    <div class="card-body"></div>
+                        <div class="h5"><img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
 						<?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                         <div class="h7">
                             <?= $profile['job'] . ' chez ' . $profile['company'] ?>
@@ -71,7 +71,7 @@ ob_start();
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="mr-2">
-                                        <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                                    <img class="rounded-circle" width="45" src="./img/profile/<?= $postsFetch['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                                     </div>
                                     <div class="ml-2">
                                         <div class="h5 m-0"><?= $postsFetch['name'] . ' ' . $postsFetch['lastName'] ?></div>

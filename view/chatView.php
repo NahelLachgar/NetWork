@@ -6,7 +6,8 @@ ob_start();
 	<div id="sidepanel">
 		<div id="profile">
 			<div class="wrap">
-				<img id="profile-img" src="https://picsum.photos/50/50" class="online" alt="" />
+			
+				<img id="profile-img" src="./img/profile/<?= $userProfile['photo'] ?>" class="online rounded-circle" width="45" alt="" />
 				<p><?= $userProfile['name'] . ' ' . $userProfile['lastName'] ?></p>
 			</div>
 		</div>
@@ -17,20 +18,18 @@ ob_start();
 		<div id="contacts">
 			<ul>
             <?php for ($i = 0; $i < count($contactProfile); $i++) : ?>
-			<form action="index.php?action=showMessages" method="POST">
+			<form>
 			<input type="hidden" name="contactId" value="<?= $contactProfile[$i]['id'] ?>">
 
 				<li class="contact">
 					<div class="wrap">
 						<span class="contact-status online"></span>
-						<img src="https://picsum.photos/50/50" alt="" />
+						<img class="rounded-circle" width="45"src="./img/profile/<?= $contactProfile[$i]['photo'] ?>" alt="" />
 						<div class="meta">
 						<button type="submit" class="btn btn-link">
 
 							<p class="name"><?= $contactProfile[$i]['name'] . ' ' . $contactProfile[$i]['lastName'] ?></p>
 							</button>
-
-							<p class="preview"><?= "É c koman la ca di koi " ?></p>
 
 							</form>
 						</div>
@@ -45,7 +44,7 @@ ob_start();
 	</div>
 	<div class="content">
 		<div class="contact-profile">
-			<img src="https://picsum.photos/50/50" alt="" />
+		<img class="rounded-circle" width="45"src="./img/profile/<?= $reiceverProfile['photo'] ?>" alt="" />
 			<p><?= $reiceverProfile['name'] . ' ' . $reiceverProfile['lastName'] ?></p>
         </div>
         
@@ -77,9 +76,11 @@ ob_start();
 		</div>
 	</div>
 </div>
-<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-<script >$("#messages").animate({ scrollTop: $(document).height() }, "fast");
-//BARRE DE SCROLL EN BAS 
+<script src='https://production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
+<script >
+$(document).ready(function(){
+	$("#messages").animate({ scrollTop: $(document).height() }, "fast");
+	//BARRE DE SCROLL EN BAS 
 	$(window).on('keydown', function(e) {
 	if (e.which == 13) {
 		return false;
@@ -102,22 +103,22 @@ ob_start();
 	}
 	});
 function load(){
-		setTimeout( function(){
-			var fisrtId = $('#messages p:first').attr('id');
-			$.ajax({
-				url : "load.php",
-				type : "POST",
-				data : "messageId=" + firstId,
-				dataType:'html',
-				success : function(html){
+				setTimeout( function(){
+				var fisrtId = $('#messages p:first').attr('id');
+				$.ajax({
+					url : "load.php",
+					type : "POST",
+					data : "messageId=" + firstId,
+					dataType:'html',
+					success : function(html){
 					$('#messages').prepend(html);
-				}
-			})
-		});
-		load();
+					}
+				})
+			});
+			load();
 	},5000);
-load();
-
+	load();
+)};
 </script>
  <?php 
 $content = ob_get_clean();

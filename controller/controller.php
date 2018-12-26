@@ -205,7 +205,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	function updateToProfile($id)
 	{
 		$recup = getProfileUpdate($id);
-		$status = checkStatus($id);
+			$status = checkStatus($id);
 		require('./view/profilUpdateView.php');
 	}
 
@@ -253,6 +253,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	// GROUPE
 	function sessionGroup($id) {
 		$status = checkStatus($id);
+		$groups = getGroups($id);
 		require('./view/homeGroup.php');
 	}
 
@@ -274,15 +275,30 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		}
 
 	//AJOUTER LES CONTACTS DANS UN GROUPE
-	function addContactsToGroup($contact) {
+	function addContactsToGroup($contact,$status,$groupId) {
 		$comt = COUNT($contact);
-		$status = "member";
-           for($i=0;$i<$comt;$i++)
-            {
-				contactAddGroup($contact[$i],$status);
+           for( $i = 0; $i < $comt ; $i++) {
+				contactAddGroup($contact[$i],$status,$groupId);
 			}
-			echo "bon";
+			sessionGroup($userId);
 		}
+	//SELECTIONNE TOUS LES GROUPES DONT L'USER FAIT PARTI
+	function getGroupsContact($userId){
+		$groups = getGroups($userId);
+	}
+
+	//AFFICHE LES MEMBRES D'UN GROUPE
+	function getMembersToGroups($groupId,$id){
+		$members = selectContactGroup($groupId);
+		for($i = 0; $i < count($members); $i++) {
+			$memberProfile[] = getProfile($members[$i]['user']);
+		}
+		foreach( $memberProfile as $member){
+			$res[] = $member;
+		}
+		$status = checkStatus($id);
+		require('./view/membersGroupView.php');
+	}
 
 	// SE DECONNECTER
 	function disconnect() {
