@@ -260,7 +260,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	//CREER UN GROUPE
 	function createGroups($name,$userId) {
 		$create = createGroup($name,$userId);
-		$addAdmin = contactAddGroup()
+		//$addAdmin = contactAddGroup()
 			$contacts = getContacts($userId);
 			$contacts = $contacts->fetchAll(PDO::FETCH_ASSOC);
 			for($i = 0; $i < count($contacts); $i++) {
