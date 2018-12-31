@@ -317,10 +317,16 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		require('./view/manageGroupView.php');
 	}
 
-	function removeToGroup($contactId,$groupId,$id) {
+	function adminRemoveToGroup($contactId,$groupId,$id) {
 		$remove = removeFromGroup($contactId, $groupId);
 		$status = checkStatus($id);
 		groupManage($groupId,$id);
+	}
+
+	function RemoveToGroup($contactId,$groupId,$id) {
+		$remove = removeFromGroup($contactId, $groupId);
+		$status = checkStatus($id);
+		sessionGroup($id);
 	}
 
 	// SE DECONNECTER

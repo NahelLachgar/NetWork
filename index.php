@@ -141,7 +141,10 @@ require('controller/controller.php');
                 groupManage($_POST['groupId'],$_SESSION['id']);
                 break;
             case 'removeToGroups':
-                removeToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
+                adminRemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
+                break;
+            case 'leaveTheGroups':
+                RemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
                 break;
             default:
                 home($_SESSION['id']);
