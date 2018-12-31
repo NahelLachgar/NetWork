@@ -335,6 +335,14 @@ function getProfileUpdate($ids)
         return $req;
     }
 
+    /*function getAdminGroup($contactId) {
+        $db = dbConnect();
+        $req = $db->prepare("SELECT * FROM groups INNER JOIN groupadd ON groups.id = groupadd.group WHERE groups.admin = ?");
+        $req->execute(array($contactId));
+        $req = $req->fetchAll();
+        return $req;
+    }*/
+
     //CREER UN GROUPE
     function createGroup($nameGroup,$adminId){
         $db = dbConnect();
