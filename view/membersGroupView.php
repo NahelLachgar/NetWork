@@ -17,7 +17,12 @@ ob_start();
 
 <?php foreach( $res as $member) :?>
     <?php if ( ($member['id'] != $admin['id']) && ($member['id'] == $_SESSION['id']) ): ?>
-        <?= $member['name']." ".$member['lastName'] ?> <a href="#">quitter le groupe</a><br>
+        <?= $member['name']." ".$member['lastName'] ?>
+        <form action="index.php?action=removeToGroups" method="POST">
+             <input type="hidden" name="contactId" value="<?=$member['id']?>">
+             <input type="hidden" name="groupId" value="<?= $idGroup ?>">
+             <button type="submit" class="btn btn-link">Quitter le groupe</button>
+        </form><br>
     <?php else: ?>
         <?= $member['name']." ".$member['lastName'] ?><br>
     <?php endif; ?>

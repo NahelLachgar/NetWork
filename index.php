@@ -137,6 +137,12 @@ require('controller/controller.php');
             case 'getGroupId':
                 getMembersToGroups($_POST['groupId'],$_SESSION['id']);
                 break;
+            case 'groupsManage':
+                groupManage($_POST['groupId'],$_SESSION['id']);
+                break;
+            case 'removeToGroups':
+                removeToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
+                break;
             default:
                 home($_SESSION['id']);
         }

@@ -13,8 +13,17 @@ ob_start();
         <div class="col-md-4 order-md-2 mb-4">
             <br><h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Vos groupes</span></h4>
-            <?php  if($groups['0']['admin'] == $_SESSION['id']): ?>
-                    
+            
+            <?php  
+             if($adminGroup['0']['admin'] == $_SESSION['id']): ?>
+
+                <?php foreach ($adminGroup as $groupAdmin): ?>
+                <form method="POST" action="index.php?action=groupsManage">
+                    <input type="hidden" name="groupId" value="<?= $groupAdmin['id'] ?>" >
+                    <input type="submit" class="btn btn-link" value="<?= $groupAdmin['title'] ?>" >
+                </form><br>
+                <?php endforeach; ?>
+
             <?php else : ?>
             <?php foreach ($groups as $group): ?>
                 <form method="POST" action="index.php?action=getGroupId">

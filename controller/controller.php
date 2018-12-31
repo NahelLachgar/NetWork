@@ -254,6 +254,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	function sessionGroup($id) {
 		$status = checkStatus($id);
 		$groups = getGroups($id);
+		$adminGroup = getAdminGroup($id);
 		require('./view/homeGroup.php');
 	}
 
@@ -290,6 +291,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 
 	//AFFICHE LES MEMBRES D'UN GROUPE
 	function getMembersToGroups($groupId,$id){
+		$idGroup = $groupId;
 		$members = selectContactGroup($groupId);
 		for($i = 0; $i < count($members); $i++) {
 			$memberProfile[] = getProfile($members[$i]['user']);
@@ -300,6 +302,25 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		$status = checkStatus($id);
 		$admin = getProfile($members['0']['admin']);
 		require('./view/membersGroupView.php');
+	}
+
+	function groupManage($groupId,$id) {
+		$idGroup = $groupId;
+		$members = selectContactGroup($groupId);
+		for($i = 0; $i < count($members); $i++) {
+			$memberProfile[] = getProfile($members[$i]['user']);
+		}
+		foreach( $memberProfile as $member){
+			$res[] = $member;
+		}
+		$status = checkStatus($id);
+		require('./view/manageGroupView.php');
+	}
+
+	function removeToGroup($contactId,$groupId,$id) {
+		$remove = removeFromGroup($contactId, $groupId);
+		$status = checkStatus($id);
+		groupManage($groupId,$id);
 	}
 
 	// SE DECONNECTER

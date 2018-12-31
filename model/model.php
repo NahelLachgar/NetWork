@@ -335,13 +335,20 @@ function getProfileUpdate($ids)
         return $req;
     }
 
-    /*function getAdminGroup($contactId) {
+    function getAdminGroup($contactId) {
         $db = dbConnect();
-        $req = $db->prepare("SELECT * FROM groups INNER JOIN groupadd ON groups.id = groupadd.group WHERE groups.admin = ?");
+        $req = $db->prepare("SELECT DISTINCT groups.id, groups.title,groups.createDate,groups.admin FROM groupadd INNER JOIN groups ON groupadd.group = groups.id WHERE groups.admin = ?");
         $req->execute(array($contactId));
         $req = $req->fetchAll();
         return $req;
-    }*/
+    }
+
+    function removeFromGroup($contactId, $groupId) {
+        $db = dbConnect();
+        $req = $db->prepare("DELETE FROM groupadd WHERE groupadd.user = ? AND groupadd.group = ?");
+        $req->execute(array($contactId, $groupId));
+        return $req;
+    }
 
     //CREER UN GROUPE
     function createGroup($nameGroup,$adminId){
