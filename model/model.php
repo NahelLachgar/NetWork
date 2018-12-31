@@ -329,9 +329,9 @@ function getProfileUpdate($ids)
     //SELECTIONNE LES GROUPES DONT TU FAIS PARTIS
     function getGroups($contactId) {
         $db = dbConnect();
-        $req = $db->prepare("SELECT * FROM groupadd INNER JOIN groups ON groupadd.group = groups.id WHERE groupadd.user = ? AND groupadd.status LIKE 'member' ");
-        $req->execute(array($contactId));
-        $req = $req->fetchAll();
+        $req = $db->prepare("SELECT * FROM groupAdd INNER JOIN groups ON groupadd.group = groups.id WHERE groups.admin=? OR groupadd.user = ? AND groupadd.status LIKE 'member' ");
+        $req->execute(array($_SESSION['id'],$contactId));
+        $req = $req->fetchAll(PDO::FETCH_ASSOC);
         return $req;
     }
 
@@ -345,10 +345,10 @@ function getProfileUpdate($ids)
     }
 
     //AJOUTER DES CONTACTS DANS UN GROUPE
-    function contactAddGroup($memberId,$status,$groupID) {
+    function contactAddGroup($memberId,$groupId) {
         $db = dbConnect();
-        $req = $db->prepare("INSERT INTO `groupadd` (`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(), $memberId, $status, $groupID)");
-        $req->execute(array($memberId,$status,$groupID));
+        $req = $db->prepare('INSERT INTO `groupAdd` (`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(), $memberId, "member", $groupId)');
+        $req->execute(array($memberId,$groupId));
     }
 
     //AFFICHER LES MEMBRES D"UN GROUPE

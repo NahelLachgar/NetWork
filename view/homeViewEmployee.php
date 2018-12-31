@@ -183,8 +183,8 @@ ob_start();
                         <h5 class="card-title"><?= $employeesSuggests[0]['name'] . ' ' . $employeesSuggests[0]['lastName'] ?></h5>
                         <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[0]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
                         <form action="index.php?addContact" method="POST">
-                        <input type="hidden">
-                            <button type="button" class="btn btn-link" name="contactId" value="<?= $employeesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
+                        <input type="hidden" name="contactId" value="<?=$employeesSuggests[0]['id']?>"">
+                            <button type="submit" class="btn btn-link" name="contactId" value="<?= $employeesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
                         </form>
             </div>
         </div>
@@ -248,8 +248,8 @@ ob_start();
                         <h5 class="card-title"><?= $companiesSuggests[0]['name'] . ' ' . $companiesSuggests[0]['lastName'] ?></h5>
                         <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[0]['job'] . ' chez ' . $companiesSuggests[0]['company'] ?></h6>
                         <form action="index.php?addContact" method="POST">
-                        <input type="hidden">
-                            <button type="button" class="btn btn-link" name="contactId" value="<?= $companiesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
+                        <input type="hidden" name="contactId" value="<?=$companiesSuggests[0]['id']?>">
+                            <button type="submit" class="btn btn-link" name="contactId" value="<?= $companiesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
                         </form>
             </div>
         </div>

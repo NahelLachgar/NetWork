@@ -132,7 +132,7 @@ require('controller/controller.php');
                 createGroups($_POST['nameG'],$_SESSION['id']);
                 break;
             case 'addContactsToGroups':
-                addContactsToGroup($_POST['addContacts'],$_POST['statut'],$_POST['groupId']);
+                addContactsToGroup($_POST['addContacts'],$_POST['groupId']);
                 break;
             case 'getGroupId':
                 getMembersToGroups($_POST['groupId'],$_SESSION['id']);

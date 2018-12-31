@@ -275,12 +275,12 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		}
 
 	//AJOUTER LES CONTACTS DANS UN GROUPE
-	function addContactsToGroup($contact,$status,$groupId) {
+	function addContactsToGroup($contact,$groupId) {
 		$comt = COUNT($contact);
            for( $i = 0; $i < $comt ; $i++) {
-				contactAddGroup($contact[$i],$status,$groupId);
+				contactAddGroup($contact[$i],$groupId);
 			}
-			sessionGroup($userId);
+			sessionGroup($_SESSION['id']);
 		}
 	//SELECTIONNE TOUS LES GROUPES DONT L'USER FAIT PARTI
 	function getGroupsContact($userId){
