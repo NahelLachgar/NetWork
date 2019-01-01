@@ -19,18 +19,14 @@ ob_start();
 			<ul>
             <?php for ($i = 0; $i < count($contactProfile); $i++) : ?>
 			<form>
-			<input type="hidden" name="contactId" value="<?= $contactProfile[$i]['id'] ?>">
+			<input type="hidden" id="idContact" name="contactId" value="<?= $contactProfile[$i]['id'] ?>">
 
 				<li class="contact">
 					<div class="wrap">
 						<span class="contact-status online"></span>
 						<img class="rounded-circle" width="45"src="./img/profile/<?= $contactProfile[$i]['photo'] ?>" alt="" />
 						<div class="meta">
-						<button type="submit" class="btn btn-link">
-
-							<p class="name"><?= $contactProfile[$i]['name'] . ' ' . $contactProfile[$i]['lastName'] ?></p>
-							</button>
-
+						<p class="name"><?= $contactProfile[$i]['name'] . ' ' . $contactProfile[$i]['lastName'] ?></p>
 			</form>
 						</div>
 					</div>
@@ -70,7 +66,7 @@ ob_start();
 				<input type="text" name="content" id="content" placeholder="Écrivez votre message" />
 				<input type="hidden" name="contactId" id="contactId" value="<?= $_POST['contactId'] ?>">
 				<i class="fa fa-paperclip attachment" aria-hidden="true"></i> 
-				<button type="submit" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+				<button type="button" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</form>
 			</div>
 		</div>    
@@ -79,47 +75,41 @@ ob_start();
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-console.log('a');
-	function load(){
-				setTimeout( function(){
-				var fisrtId = $('#messages li:first').attr('id');
+	$(window).on('keydown', function(e) {
+		if (e.which == 13) {
+			return false;
+		}
+	});
+	function load() {
+				setInterval(function(){
+				var lastId = $('#messages li:last').attr('id');
 				$.ajax({
-					url : "load.php",
+					url : "view/load.php",
 					type : "POST",
-					data : "messageId=" + firstId,
-					dataType:'html',
+					data : "messageId=" + lastId,
+					dataType:"html",
 					success : function(html){
-					$('#messages').prepend(html);
+						$('.messages ul').append(html);
 					}
-				})
-			},5000);
+				});
+			},1000)
+	}
 			load();
 
 	$('#send').click(function(e){
-		e.preventDefault();
-		var content = $('#content').val();
-		var contactId = $('#contactId').val();
-		if ($.trim(content) != "") {
-			$.post(
-				'index.php?action=send',
-				{
-					content: $('#content').val(),
-					contactId: $('#contactId').val()
-				},
-				function (data) {
-					if (data == "Success") {	
-						$('#messages').append('<li id="'+Number($('#messages li:last').attr('id'))+1+'" class="sent"><p>' + content + '</p></li>');
-					} else {
-						echo ("Erreur lors de l'envoi");
-					}
-				}
-			'html'
-			);
-		}
+			var content = $('#content').val();
+			var contactId = $('#contactId').val();
+			if ($.trim(content) != "") {			
+				$.ajax({
+				url : "view/send.php", // on donne l'URL du fichier de traitement
+				type : "POST", // la requête est de type POST
+				data : "content=" + contactId + "&contactId=" + content // et on envoie nos données
+				});
+			}
+		$('#content').val("");
 	});
-
+	
 });
-
 </script>
  <?php 
 $content = ob_get_clean();
