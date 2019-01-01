@@ -275,7 +275,7 @@ function getSearch($userId, $name)
 {
     $db = dbConnect();
     $res = "%" . $name . "%";
-    $req = $db->prepare('SELECT users.id as contactId,users.lastName,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.id != ? AND (users.lastName LIKE ?  OR users.name LIKE ?) ');
+    $req = $db->prepare('SELECT users.id as contactId,users.lastName,users.name,users.email,users.phone,users.job,users.company,users.town,status,photo FROM users WHERE users.id != ? AND (users.lastName LIKE ?  OR users.name LIKE ?) ');
     $req->execute(array($userId, $res, $res));
     $req = $req->fetchAll();
     return $req;
@@ -329,9 +329,24 @@ function getProfileUpdate($ids)
     //SELECTIONNE LES GROUPES DONT TU FAIS PARTIS
     function getGroups($contactId) {
         $db = dbConnect();
-        $req = $db->prepare("SELECT * FROM groupadd INNER JOIN groups ON groupadd.group = groups.id WHERE groupadd.user = ? AND groupadd.status LIKE 'member' ");
+        $req = $db->prepare("SELECT * FROM groupAdd INNER JOIN groups ON groupadd.group = groups.id WHERE groups.admin=? OR groupadd.user = ? AND groupadd.status LIKE 'member' ");
+        $req->execute(array($_SESSION['id'],$contactId));
+        $req = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $req;
+    }
+
+    function getAdminGroup($contactId) {
+        $db = dbConnect();
+        $req = $db->prepare("SELECT DISTINCT groups.id, groups.title,groups.createDate,groups.admin FROM groupadd INNER JOIN groups ON groupadd.group = groups.id WHERE groups.admin = ?");
         $req->execute(array($contactId));
         $req = $req->fetchAll();
+        return $req;
+    }
+
+    function removeFromGroup($contactId, $groupId) {
+        $db = dbConnect();
+        $req = $db->prepare("DELETE FROM groupadd WHERE groupadd.user = ? AND groupadd.group = ?");
+        $req->execute(array($contactId, $groupId));
         return $req;
     }
 

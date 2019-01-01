@@ -22,7 +22,11 @@ require('controller/controller.php');
                 contactHome($_SESSION['id'],$_POST['contactId']);
                 break;
             case 'post':
+            if (trim(htmlspecialchars($_POST['content'])) != "") {
                 addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
+            } else {
+                home(htmlspecialchars($_SESSION['id']));
+            }
                 break;
             case 'contactList':
                 showContacts(htmlspecialchars($_SESSION['id']));
@@ -68,6 +72,8 @@ require('controller/controller.php');
             case 'sendMessage':
                 addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break;
+            case 'send':
+                require('view/send.php');
             case 'groups':
                 sessionGroup($_SESSION['id']);
                 break;
@@ -131,11 +137,20 @@ require('controller/controller.php');
             case 'createGroup':
                 createGroups($_POST['nameG'],$_SESSION['id']);
                 break;
-            case 'addContactsToGroups':
+                case 'addContactsToGroups':
                 addContactsToGroup($_POST['addContacts'],$_POST['statut'],$_POST['groupId']);
                 break;
             case 'getGroupId':
                 getMembersToGroups($_POST['groupId'],$_SESSION['id']);
+                break;
+            case 'groupsManage':
+                groupManage($_POST['groupId'],$_SESSION['id']);
+                break;
+            case 'removeToGroups':
+                adminRemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
+                break;
+            case 'leaveTheGroups':
+                RemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
                 break;
             default:
                 home($_SESSION['id']);
