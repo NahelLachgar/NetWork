@@ -4,8 +4,8 @@ ob_start();
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/group.css" />
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <SCRIPT LANGUAGE="JavaScript" SRC="js/group.js"></SCRIPT>       
+        <script src="https://www.google.com/jsapi"></script>
+        <SCRIPT SRC="js/group.js"></SCRIPT>       
 
 <!-- Arriere plan -->
 <div class="container">
@@ -47,7 +47,6 @@ ob_start();
         <div class="popupCloseButton">X</div>
             <form method="POST" action="index.php?action=addContactsToGroups" >
             <input type="hidden" name="groupId" value="<?= $create ?>">
-            <input type="hidden" name="statut" value="2">
                 Ajouter des contacts<br>
                 <div>
                 <?php foreach ($res as $add): ?>
