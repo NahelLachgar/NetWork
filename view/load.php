@@ -6,7 +6,7 @@ $messageId = (int) $_POST['messageId']; // on s'assure que c'est un nombre entie
 
 // on récupère les messages ayant un id plus grand que celui donné
 $db = new PDO('mysql:host=localhost;dbname=NetWork;charset=utf8', 'root', 'root'); 
-$req = $db->prepare('SELECT * FROM privateMessages WHERE id > :id ORDER BY id DESC');
+$req = $db->prepare('SELECT * FROM privateMessages WHERE id > :id ORDER BY id ASC');
 $req->execute(array('id' => $messageId));
 
 $messages = null;
