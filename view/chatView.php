@@ -13,7 +13,7 @@ ob_start();
 		</div>
 		<div id="search">
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="Search contacts..." />
+			<input type="text" placeholder="Recherchez un contact..." />
 		</div>
 		<div id="contacts">
 			<ul>
