@@ -19,19 +19,15 @@ ob_start();
 			<ul>
             <?php for ($i = 0; $i < count($contactProfile); $i++) : ?>
 			<form>
-			<input type="hidden" name="contactId" value="<?= $contactProfile[$i]['id'] ?>">
+			<input type="hidden" id="idContact" name="contactId" value="<?= $contactProfile[$i]['id'] ?>">
 
 				<li class="contact">
 					<div class="wrap">
 						<span class="contact-status online"></span>
 						<img class="rounded-circle" width="45"src="./img/profile/<?= $contactProfile[$i]['photo'] ?>" alt="" />
 						<div class="meta">
-						<button type="submit" class="btn btn-link">
-
-							<p class="name"><?= $contactProfile[$i]['name'] . ' ' . $contactProfile[$i]['lastName'] ?></p>
-							</button>
-
-							</form>
+						<p class="name"><?= $contactProfile[$i]['name'] . ' ' . $contactProfile[$i]['lastName'] ?></p>
+			</form>
 						</div>
 					</div>
 				</li>
@@ -58,7 +54,7 @@ ob_start();
 				$class = "replies";
 			}
 			?>
-				<li class=<?= $class ?>>
+				<li id="<?= $messagesFetch['id'] ?>" class=<?= $class ?>>
 					<p><?= $messagesFetch['content'] ?></p>
 				</li>
                     <?php endwhile ?>
@@ -66,59 +62,54 @@ ob_start();
 		</div>
 		<div class="message-input">
 			<div class="wrap">
-			<form action="index.php?action=sendMessage" method="POST">
+			<form>
 				<input type="text" name="content" id="content" placeholder="Écrivez votre message" />
 				<input type="hidden" name="contactId" id="contactId" value="<?= $_POST['contactId'] ?>">
 				<i class="fa fa-paperclip attachment" aria-hidden="true"></i> 
-				<button type="submit" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+				<button type="button" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</form>
 			</div>
-		</div>
+		</div>    
 	</div>
 </div>
-<script src='https://production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
-<script >
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
 $(document).ready(function(){
-	$("#messages").animate({ scrollTop: $(document).height() }, "fast");
-	//BARRE DE SCROLL EN BAS 
 	$(window).on('keydown', function(e) {
-	if (e.which == 13) {
-		return false;
-	}
-
-	$('#envoi').click(function(e)){
-		e.preventDefault();
-		var content = $('#content').val();
-		var contactId = $('#contactId').val();
-
-		if (content != "" && trim(content) != "") {
-			$.ajax({
-				url : "send.php",
-				type : "POST",
-				data : "content=" + content + "&contactId=" + idContact,
-				dataType:'html'
-			});
-			$('#messages').appendTo("<li class=<?= $class ?>><p>" + content + "</p></ul>");
+		if (e.which == 13) {
+			return false;
 		}
-	}
 	});
-function load(){
-				setTimeout( function(){
-				var fisrtId = $('#messages p:first').attr('id');
+	function load() {
+				setInterval(function(){
+				var lastId = $('#messages li:last').attr('id');
 				$.ajax({
-					url : "load.php",
+					url : "view/load.php",
 					type : "POST",
-					data : "messageId=" + firstId,
-					dataType:'html',
+					data : "messageId=" + lastId,
+					dataType:"html",
 					success : function(html){
-					$('#messages').prepend(html);
+						$('.messages ul').append(html);
 					}
-				})
-			});
+				});
+			},1000)
+	}
 			load();
-	},5000);
-	load();
-)};
+
+	$('#send').click(function(e){
+			var content = $('#content').val();
+			var contactId = $('#contactId').val();
+			if ($.trim(content) != "") {			
+				$.ajax({
+				url : "view/send.php", // on donne l'URL du fichier de traitement
+				type : "POST", // la requête est de type POST
+				data : "content=" + contactId + "&contactId=" + content // et on envoie nos données
+				});
+			}
+		$('#content').val("");
+	});
+	
+});
 </script>
  <?php 
 $content = ob_get_clean();
