@@ -277,11 +277,11 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		}
 
 	//AJOUTER LES CONTACTS DANS UN GROUPE
-	function addContactsToGroup($contact,$groupId) {
+	function addContactsToGroup($contact,$status,$groupId) {
 		$comt = COUNT($contact);
-           for( $i = 0; $i < $comt ; $i++) {
-				contactAddGroup($contact[$i],$groupId);
-			}
+		for( $i = 0; $i < $comt ; $i++) {
+			contactAddGroup($contact[$i],$status,$groupId);
+		}
 			sessionGroup($_SESSION['id']);
 		}
 	//SELECTIONNE TOUS LES GROUPES DONT L'USER FAIT PARTI

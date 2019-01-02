@@ -360,10 +360,10 @@ function getProfileUpdate($ids)
     }
 
     //AJOUTER DES CONTACTS DANS UN GROUPE
-    function contactAddGroup($memberId,$groupId) {
+    function contactAddGroup($memberId,$status,$groupID) {
         $db = dbConnect();
-        $req = $db->prepare('INSERT INTO `groupAdd` (`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(), $memberId, "member", $groupId)');
-        $req->execute(array($memberId,$groupId));
+        $req = $db->prepare("INSERT INTO `groupadd` (`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(), $memberId, $status, $groupID)");
+        $req->execute(array($memberId,$status,$groupID));
     }
 
     //AFFICHER LES MEMBRES D"UN GROUPE
