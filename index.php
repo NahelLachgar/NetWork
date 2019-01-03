@@ -146,6 +146,12 @@ require('controller/controller.php');
             case 'groupsManage':
                 groupManage($_POST['groupId'],$_SESSION['id']);
                 break;
+            case 'updateGroup':
+                updateGroup($_POST['groupName'],$_POST['admin'],$_POST['groupId']);
+                break;
+            case 'deleteGroup':
+                deleteGroup($_POST['groupId']);
+                break;
             case 'removeToGroups':
                 adminRemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
                 break;

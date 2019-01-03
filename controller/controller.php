@@ -258,6 +258,19 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		require('./view/homeGroup.php');
 	}
 
+	// MODIFIER UN GROUPE
+	function updateGroup($name, $admin, $groupId){
+		updateGroups($name, $admin, $groupId);
+		header('Location:index.php?action=groups');
+	}
+
+	// SUPPRIMER UN GROUPE
+	function deleteGroup($groupId){
+		deleteGroupAdd($groupId);
+		deleteGroups($groupId);
+		header('Location:index.php?action=groups');
+	}
+
 	//CREER UN GROUPE
 	function createGroups($name,$userId) {
 		$create = createGroup($name,$userId);
@@ -314,6 +327,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 			$res[] = $member;
 		}
 		$status = checkStatus($id);
+		$group = getGroup($groupId);
 		require('./view/manageGroupView.php');
 	}
 

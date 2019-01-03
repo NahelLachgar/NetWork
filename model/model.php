@@ -326,6 +326,36 @@ function getProfileUpdate($ids)
 
     //GESTION DES GROUPES
 
+    //RECUPERE LES INFOS D'UN GROUPE
+    function getGroup($groupId){
+        $db = dbConnect();
+        $req = $db->prepare("SELECT * FROM `groups` WHERE id LIKE ?");
+        $req->execute(array($groupId));
+        $req = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $req;
+    }
+
+    // MODIFIER LE GROUPE
+    function updateGroups($name,$admin,$groupId){
+        $db = dbConnect();
+        $req = $db->prepare("UPDATE groups SET title = ?, admin = ?  WHERE id = ?");
+        $req->execute(array($name, $admin, $groupId));
+    }
+
+    // SUPPRIMER DANS LA TABLE groupAdd
+	function deleteGroupAdd($groupId){
+		$db = dbConnect();
+        $req = $db->prepare("DELETE FROM groupadd WHERE groupadd.group = ?");
+        $req->execute(array($groupId));
+	}
+
+    // SUPPRIMER DANS LA TABLE groups
+	function deleteGroups($groupId){
+		$db = dbConnect();
+        $req = $db->prepare("DELETE FROM groups WHERE id = ?");
+        $req->execute(array($groupId));	
+    }
+    
     //SELECTIONNE LES GROUPES DONT TU FAIS PARTIS
     function getGroups($contactId) {
         $db = dbConnect();
