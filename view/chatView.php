@@ -12,7 +12,7 @@ function myFunction() {
   ul = document.getElementById("contactList");
   li = ul.getElementsByTagName('li');
 
-// ON PARCOURE LA LISTE EN MASQUANT CEUX QUI NE CORRESPONDENT PAS À LA RECHERCHE
+// ON PARCOURE LE TABLEAU EN MASQUANT CEUX QUI NE CORRESPONDENT PAS À LA RECHERCHE
   for (i = 0; i < li.length; i++) {
     a = li[i].getElementsByTagName("p")[0];
     txtValue = a.textContent || a.innerText;
@@ -98,11 +98,7 @@ function myFunction() {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-	/*$(window).on('keydown', function(e) {
-		if (e.which == 13) {
-			return false;
-		}
-	});*/
+	
 	function load() {
 				setInterval(function(){
 				var lastId = $('#messages li:last').attr('id');

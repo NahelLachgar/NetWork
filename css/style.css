@@ -397,7 +397,7 @@
           #frame #sidepanel #contacts ul li.contact {
             position: relative;
             padding: 10px 0 15px 0;
-            font-size: 0.9em;
+            font-size: 1.5em;
             cursor: pointer;
           }
           @media screen and (max-width: 735px) {
@@ -610,7 +610,7 @@
             float: left;
             margin: 15px 15px 5px 15px;
             width: calc(100% - 25px);
-            font-size: 0.9em;
+            font-size: 1.5em;
           }
           #frame .content .messages ul li:nth-last-child(1) {
             margin-bottom: 20px;
