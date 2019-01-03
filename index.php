@@ -62,12 +62,12 @@ require('controller/controller.php');
                 showContacts($_SESSION['id'],$_POST['contactId']);
                 break;
             case 'showMessages':
-                if (!isset($_POST['contactId'])) {
+                if (!isset($_GET['contactId'])) {
                     $contacts = getContacts($_SESSION['id']);
                     $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
-                    $_POST['contactId'] = $contactsFetch[0]['id']; 
+                    $_GET['contactId'] = $contactsFetch[0]['id']; 
                 } 
-                    showMessages($_SESSION['id'],$_POST['contactId']);
+                    showMessages($_SESSION['id'],$_GET['contactId']);
                 break;
             case 'sendMessage':
                 addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);

@@ -49,7 +49,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `NetWork`.`privateMessages` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `content` LONGTEXT NULL,
-  `reicever` INT NULL,
+  `receiver` INT NULL,
   `sendDate` DATETIME NULL,
   `sender` INT NOT NULL,
   PRIMARY KEY (`id`, `sender`),

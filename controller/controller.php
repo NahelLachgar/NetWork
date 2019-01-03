@@ -22,7 +22,7 @@ function home($userId) {
 function showMessages ($userId,$contactId) {
 	$userProfile = getProfile($_SESSION['id']);
 	$contacts = getContacts($userId);
-	$reiceverProfile = getProfile($_POST['contactId']);
+	$receiverProfile = getProfile($_GET['contactId']);
 	if ($contacts) {
 	$contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
 	for ($i=0;$i<count($contactsFetch);$i++) {

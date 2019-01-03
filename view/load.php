@@ -1,13 +1,21 @@
 <?php
 session_start();
-if(!empty($_POST['messageId'])){ // on vérifie que l'id est bien présent et pas vide
-
+if(isset($_POST['messageId']) && isset($_POST['contactId'])){ 
+$contactId = (int) $_POST['contactId'];
 $messageId = (int) $_POST['messageId']; // on s'assure que c'est un nombre entier
 
 // on récupère les messages ayant un id plus grand que celui donné
 $db = new PDO('mysql:host=localhost;dbname=NetWork;charset=utf8', 'root', 'root'); 
-$req = $db->prepare('SELECT * FROM privateMessages WHERE id > :id ORDER BY id ASC');
-$req->execute(array('id' => $messageId));
+$req = $db->prepare('SELECT DISTINCT * FROM privateMessages 
+WHERE id > :id 
+AND sender = :userId AND receiver = :contactId
+OR sender = :contactId AND receiver = :userId 
+ORDER BY id ASC');
+$req->execute(array(
+    'id' => $messageId,
+    'contactId' => $contactId,
+    'userId' => $_SESSION['id']
+));
 
 $messages = null;
 
@@ -20,6 +28,6 @@ while($donnees = $req->fetch()){
     }
     $messages .= '<li id="'.$donnees["id"].'" class="'.$class.'"><p>' . $donnees['content'] . '</p></li>';
 }
-echo $messages; // enfin, on retourne les messages à notre script JS
+echo $messages; // on retourne les messages à notre script JS
 }
 ?>
