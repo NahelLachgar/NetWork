@@ -417,7 +417,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 			header('location: index.php?action=showEvents');
 		}
 		else if($role=='admin') {
-			$_SESSION['erreur']="Vous avez bien retiré la participation de cette personne dans cet événement.";
+			$_SESSION['erreur']="Vous avez bien retiré la participation de cette personne de cet événement.";
 			eventView($ID, $id, 'admin');
 		}
 	}
