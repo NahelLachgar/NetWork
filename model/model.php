@@ -43,11 +43,11 @@ function getContactPosts($contactId) {
 
 function sendMessage($content,$contactId,$userId) {
     $db = dbConnect();
-    $sendMessage = $db->prepare('INSERT into privateMessages (content,reicever,sendDate,sender)
-                                VALUES (:content,:reicever,NOW(),:sender)');
+    $sendMessage = $db->prepare('INSERT into privateMessages (content,receiver,sendDate,sender)
+                                VALUES (:content,:receiver,NOW(),:sender)');
     $sendMessage->execute(array(
         "content"=>$content,
-        "reicever"=>$contactId,
+        "receiver"=>$contactId,
         "sender"=>$userId
     ));
 }
@@ -55,7 +55,7 @@ function sendMessage($content,$contactId,$userId) {
 function getMessages($userId,$contactId) {
     $db = dbConnect();
     $messages = $db->prepare('SELECT * FROM privateMessages
-    WHERE reicever = :userId AND sender = :contactId OR reicever = :contactId AND sender = :userId
+    WHERE receiver = :userId AND sender = :contactId OR receiver = :contactId AND sender = :userId
     ORDER BY sendDate ASC');
     $messages->execute(array(
         "userId"=>$userId,
