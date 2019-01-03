@@ -2,6 +2,28 @@
 $title = "Messages";
 ob_start();
 ?>
+<script>
+
+function myFunction() {
+// ON DÉCLARE LES VARIABLES
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('contactSearch');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("contactList");
+  li = ul.getElementsByTagName('li');
+
+// ON PARCOURE LA LISTE EN MASQUANT CEUX QUI NE CORRESPONDENT PAS À LA RECHERCHE
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("p")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>
 <div id="frame">
 	<div id="sidepanel">
 		<div id="profile">
@@ -13,12 +35,13 @@ ob_start();
 		</div>
 		<div id="search">
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="Recherchez un contact..." />
+			<input id="contactSearch" onkeyup="myFunction()" type="text" placeholder="Recherchez un contact..." />
 		</div>
 		<div id="contacts">
-			<ul>
+			<ul id="contactList">
 			<?php for ($i = 0; $i < count($contactProfile); $i++) : ?>
-			<a class="contactLink" href='index.php?action=showMessages&contactId=<?=$contactProfile[$i]['id']?>'>
+			<a class="contactLink" style="text-decoration:none;color:white" href='index.php?action=showMessages&contactId=<?=$contactProfile[$i]['id']?>'>
+
 				<li class="contact">
 					<div class="wrap">
 						<span class="contact-status online"></span>
@@ -29,6 +52,8 @@ ob_start();
 					</div>
 				</li>
 			</a>
+
+			
 			
 				
                 <?php endfor ?>
@@ -108,6 +133,14 @@ $(document).ready(function(){
 		$('#content').val("");
 	});
 	
+
+
+
+
+
+
+
+
 });
 </script>
  <?php 
