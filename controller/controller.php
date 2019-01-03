@@ -20,7 +20,8 @@ function home($userId) {
 }
 
 function showMessages ($userId,$contactId) {
-	$userProfile = getProfile($_SESSION['id']);
+	$groups = getGroupsName($userId);
+	$userProfile = getProfile($userId);
 	$contacts = getContacts($userId);
 	$receiverProfile = getProfile($_GET['contactId']);
 	if ($contacts) {
@@ -37,12 +38,7 @@ function showMessages ($userId,$contactId) {
 	}
 }
 
-function addMessage($content,$contactId,$userId) {
-	$message = sendMessage($content,$contactId,$userId);
-	//if ($message) {
-		header('Location:'.$_SERVER['HTTP_REFERER']);
-//	}
-}
+
 function contactHome($id,$contactId) {
 	$profile = getProfile($contactId);
 	$contactPosts = getContactPosts($contactId);

@@ -51,12 +51,22 @@ function myFunction() {
 						</div>
 					</div>
 				</li>
-			</a>
+			</a>		
+		<?php endfor;	
+				 for ($i = 0; $i < count($groups); $i++) : ?>
+			<a class="contactLink" style="text-decoration:none;color:white" href='index.php?action=showMessages&contactId=<?=$contactProfile[$i]['id']?>'>
 
-			
-			
-				
-                <?php endfor ?>
+				<li class="contact">
+					<div class="wrap">
+						<span class="contact-status online"></span>
+						<img class="rounded-circle" width="45"src="./img/profile/<?= $userProfile['photo'] ?>" alt="" />
+						<div class="meta">
+						<p class="name"><?= $groups[$i]['title']?></p>
+						</div>
+					</div>
+				</li>
+			</a>		
+				<?php endfor ?>	
 			</ul>
 		</div>
 		
@@ -78,6 +88,11 @@ function myFunction() {
 			}
 			?>
 				<li id="<?= $messagesFetch['id'] ?>" class=<?= $class ?>>
+				<?php if($messagesFetch['sender']==$_SESSION['id']):?>
+					<img src="./img/profile/<?=$userProfile['photo']?>" alt="">
+				<?php else:?>
+				<img src="./img/profile/<?=$receiverProfile['photo']?>" alt="">
+				<?php endif?>
 					<p><?= $messagesFetch['content'] ?></p>
 				</li>
                     <?php endwhile ?>

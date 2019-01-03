@@ -345,7 +345,7 @@ function getProfileUpdate($ids)
     // SUPPRIMER DANS LA TABLE groupAdd
 	function deleteGroupAdd($groupId){
 		$db = dbConnect();
-        $req = $db->prepare("DELETE FROM groupadd WHERE groupadd.group = ?");
+        $req = $db->prepare("DELETE FROM groupAdd WHERE groupAdd.group = ?");
         $req->execute(array($groupId));
 	}
 
@@ -356,18 +356,25 @@ function getProfileUpdate($ids)
         $req->execute(array($groupId));	
     }
     
-    //SELECTIONNE LES GROUPES DONT TU FAIS PARTIS
+    //SELECTIONNE LES GROUPES DONT L'UTILISATEUR FAIT PARTIE
     function getGroups($contactId) {
         $db = dbConnect();
-        $req = $db->prepare("SELECT * FROM groupAdd INNER JOIN groups ON groupadd.group = groups.id WHERE groups.admin=? OR groupadd.user = ? AND groupadd.status LIKE 'member' ");
+        $req = $db->prepare("SELECT DISTINCT * FROM groupAdd INNER JOIN groups ON groupAdd.group = groups.id WHERE groups.admin=? OR groupAdd.user = ? AND groupAdd.status LIKE 'member' ");
         $req->execute(array($_SESSION['id'],$contactId));
         $req = $req->fetchAll(PDO::FETCH_ASSOC);
         return $req;
     }
 
+    function getGroupsName($contactId) {
+        $db = dbConnect();
+        $req = $db->prepare("SELECT DISTINCT title FROM groupAdd INNER JOIN groups ON groupAdd.group = groups.id WHERE groups.admin=? OR groupAdd.user = ? AND groupAdd.status LIKE 'member' ");
+        $req->execute(array($_SESSION['id'],$contactId));
+        $req = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $req;
+    }
     function getAdminGroup($contactId) {
         $db = dbConnect();
-        $req = $db->prepare("SELECT DISTINCT groups.id, groups.title,groups.createDate,groups.admin FROM groupadd INNER JOIN groups ON groupadd.group = groups.id WHERE groups.admin = ?");
+        $req = $db->prepare("SELECT DISTINCT groups.id, groups.title,groups.createDate,groups.admin FROM groupAdd INNER JOIN groups ON groupAdd.group = groups.id WHERE groups.admin = ?");
         $req->execute(array($contactId));
         $req = $req->fetchAll();
         return $req;
@@ -375,7 +382,7 @@ function getProfileUpdate($ids)
 
     function removeFromGroup($contactId, $groupId) {
         $db = dbConnect();
-        $req = $db->prepare("DELETE FROM groupadd WHERE groupadd.user = ? AND groupadd.group = ?");
+        $req = $db->prepare("DELETE FROM groupAdd WHERE groupAdd.user = ? AND groupAdd.group = ?");
         $req->execute(array($contactId, $groupId));
         return $req;
     }
@@ -392,14 +399,14 @@ function getProfileUpdate($ids)
     //AJOUTER DES CONTACTS DANS UN GROUPE
     function contactAddGroup($memberId,$status,$groupID) {
         $db = dbConnect();
-        $req = $db->prepare("INSERT INTO `groupadd` (`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(), $memberId, $status, $groupID)");
+        $req = $db->prepare("INSERT INTO `groupAdd` (`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(), $memberId, $status, $groupID)");
         $req->execute(array($memberId,$status,$groupID));
     }
 
     //AFFICHER LES MEMBRES D"UN GROUPE
     function selectContactGroup($groupId){
         $db = dbConnect();
-        $req = $db->prepare(" SELECT * FROM `groupadd` INNER JOIN groups ON groupadd.group = groups.id WHERE groupadd.group = ? AND groupadd.status = 'member' ");
+        $req = $db->prepare(" SELECT * FROM `groupAdd` INNER JOIN groups ON groupAdd.group = groups.id WHERE groupAdd.group = ? AND groupAdd.status = 'member' ");
         $req->execute(array($groupId));
         $req = $req->fetchAll();
         return $req;
