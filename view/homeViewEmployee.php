@@ -21,7 +21,7 @@ ob_start();
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="h5"><img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                        <div class="h5"><img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp<!-- src="https://picsum.photos/50/50" -->
 						<?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                         <div class="h7">
                             <?= $profile['job'] . ' chez ' . $profile['company'] ?>
@@ -111,9 +111,15 @@ ob_start();
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-between align-items-center">
-                                    <div class="mr-2">
-                                    <img class="rounded-circle" width="45"src="./img/profile/<?= $contactsPosts[$i]['photo'] ?>" alt="" />
-                                    </div>
+                                    <?php if ($contactsPosts[$i]['contactId'] !== $_SESSION['id']): ?>
+                                        <div class="mr-2">
+                                            <img class="rounded-circle" width="45" src="./img/profile/<?= $contactsPosts[$i]['photo'] ?>" alt="photo de profil">
+                                        </div>
+                                    <?php else : ?>
+                                        <div class="mr-2">
+                                            <img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="photo de profil">
+                                        </div>
+                                    <?php endif ?>
                                     <div class="ml-2"> 
                                         <?php if ($contactsPosts[$i]['contactId'] !== $_SESSION['id']): ?>
                                         <form action="index.php?action=profilePage" method="POST">
