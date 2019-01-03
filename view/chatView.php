@@ -13,24 +13,22 @@ ob_start();
 		</div>
 		<div id="search">
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="Search contacts..." />
+			<input type="text" placeholder="Recherchez un contact..." />
 		</div>
 		<div id="contacts">
 			<ul>
-            <?php for ($i = 0; $i < count($contactProfile); $i++) : ?>
-			<form>
-			<input type="hidden" id="idContact" name="contactId" value="<?= $contactProfile[$i]['id'] ?>">
-
+			<?php for ($i = 0; $i < count($contactProfile); $i++) : ?>
+			<a class="contactLink" href='index.php?action=showMessages&contactId=<?=$contactProfile[$i]['id']?>'>
 				<li class="contact">
 					<div class="wrap">
 						<span class="contact-status online"></span>
 						<img class="rounded-circle" width="45"src="./img/profile/<?= $contactProfile[$i]['photo'] ?>" alt="" />
 						<div class="meta">
 						<p class="name"><?= $contactProfile[$i]['name'] . ' ' . $contactProfile[$i]['lastName'] ?></p>
-			</form>
 						</div>
 					</div>
 				</li>
+			</a>
 			
 				
                 <?php endfor ?>
@@ -40,15 +38,15 @@ ob_start();
 	</div>
 	<div class="content">
 		<div class="contact-profile">
-		<img class="rounded-circle" width="45"src="./img/profile/<?= $reiceverProfile['photo'] ?>" alt="" />
-			<p><?= $reiceverProfile['name'] . ' ' . $reiceverProfile['lastName'] ?></p>
+		<img class="rounded-circle" width="45"src="./img/profile/<?= $receiverProfile['photo'] ?>" alt="" />
+			<p><?= $receiverProfile['name'] . ' ' . $receiverProfile['lastName'] ?></p>
         </div>
         
 		<div class="messages">
 			<ul id="messages">
 			 <?php 
 			while ($messagesFetch = $messages->fetch()) :
-				if ($messagesFetch['reicever'] == $_SESSION['id']) {
+				if ($messagesFetch['receiver'] == $_SESSION['id']) {
 				$class = "sent";
 			} else {
 				$class = "replies";
@@ -64,7 +62,7 @@ ob_start();
 			<div class="wrap">
 			<form>
 				<input type="text" name="content" id="content" placeholder="Écrivez votre message" />
-				<input type="hidden" name="contactId" id="contactId" value="<?= $_POST['contactId'] ?>">
+				<input type="hidden" name="contactId" id="contactId" value=<?= $_GET['contactId'] ?>>
 				<i class="fa fa-paperclip attachment" aria-hidden="true"></i> 
 				<button type="button" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</form>
@@ -83,10 +81,11 @@ $(document).ready(function(){
 	function load() {
 				setInterval(function(){
 				var lastId = $('#messages li:last').attr('id');
+				var contactId = $('#contactId').val();
 				$.ajax({
 					url : "view/load.php",
 					type : "POST",
-					data : "messageId=" + lastId,
+					data : "contactId=" + contactId + "&messageId=" + lastId,
 					dataType:"html",
 					success : function(html){
 						$('.messages ul').append(html);
@@ -103,7 +102,7 @@ $(document).ready(function(){
 				$.ajax({
 				url : "view/send.php", // on donne l'URL du fichier de traitement
 				type : "POST", // la requête est de type POST
-				data : "content=" + contactId + "&contactId=" + content // et on envoie nos données
+				data : "content=" + content + "&contactId=" + contactId // et on envoie nos données
 				});
 			}
 		$('#content').val("");
