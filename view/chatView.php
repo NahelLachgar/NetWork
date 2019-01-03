@@ -71,7 +71,7 @@ function myFunction() {
 			<ul id="messages">
 			 <?php 
 			while ($messagesFetch = $messages->fetch()) :
-				if ($messagesFetch['receiver'] == $_SESSION['id']) {
+				if ($messagesFetch['sender'] == $_SESSION['id']) {
 				$class = "sent";
 			} else {
 				$class = "replies";
@@ -98,11 +98,11 @@ function myFunction() {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-	$(window).on('keydown', function(e) {
+	/*$(window).on('keydown', function(e) {
 		if (e.which == 13) {
 			return false;
 		}
-	});
+	});*/
 	function load() {
 				setInterval(function(){
 				var lastId = $('#messages li:last').attr('id');
@@ -131,6 +131,23 @@ $(document).ready(function(){
 				});
 			}
 		$('#content').val("");
+	});
+
+	$('#content').keydown(function(e){
+		if (e.which == 13) {
+			e.preventDefault();
+			var content = $('#content').val();
+			var contactId = $('#contactId').val();
+			if ($.trim(content) != "") {			
+				$.ajax({
+				url : "view/send.php", // on donne l'URL du fichier de traitement
+				type : "POST", // la requête est de type POST
+				data : "content=" + content + "&contactId=" + contactId // et on envoie nos données
+				});
+			}
+			$('#content').val("");
+		}
+
 	});
 	
 
