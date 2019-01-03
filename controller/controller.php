@@ -22,7 +22,7 @@ function home($userId) {
 function showMessages ($userId,$contactId) {
 	$userProfile = getProfile($_SESSION['id']);
 	$contacts = getContacts($userId);
-	$reiceverProfile = getProfile($_POST['contactId']);
+	$receiverProfile = getProfile($_GET['contactId']);
 	if ($contacts) {
 	$contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
 	for ($i=0;$i<count($contactsFetch);$i++) {
@@ -253,12 +253,28 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	// GROUPE
 	function sessionGroup($id) {
 		$status = checkStatus($id);
+		$groups = getGroups($id);
+		$adminGroup = getAdminGroup($id);
 		require('./view/homeGroup.php');
+	}
+
+	// MODIFIER UN GROUPE
+	function updateGroup($name, $admin, $groupId){
+		updateGroups($name, $admin, $groupId);
+		header('Location:index.php?action=groups');
+	}
+
+	// SUPPRIMER UN GROUPE
+	function deleteGroup($groupId){
+		deleteGroupAdd($groupId);
+		deleteGroups($groupId);
+		header('Location:index.php?action=groups');
 	}
 
 	//CREER UN GROUPE
 	function createGroups($name,$userId) {
 		$create = createGroup($name,$userId);
+		//$addAdmin = contactAddGroup()
 			$contacts = getContacts($userId);
 			$contacts = $contacts->fetchAll(PDO::FETCH_ASSOC);
 			for($i = 0; $i < count($contacts); $i++) {
@@ -274,15 +290,58 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		}
 
 	//AJOUTER LES CONTACTS DANS UN GROUPE
-	function addContactsToGroup($contact) {
+	function addContactsToGroup($contact,$status,$groupId) {
 		$comt = COUNT($contact);
-		$status = "member";
-           for($i=0;$i<$comt;$i++)
-            {
-				contactAddGroup($contact[$i],$status);
-			}
-			echo "bon";
+		for( $i = 0; $i < $comt ; $i++) {
+			contactAddGroup($contact[$i],$status,$groupId);
 		}
+			sessionGroup($_SESSION['id']);
+		}
+	//SELECTIONNE TOUS LES GROUPES DONT L'USER FAIT PARTI
+	function getGroupsContact($userId){
+		$groups = getGroups($userId);
+	}
+
+	//AFFICHE LES MEMBRES D'UN GROUPE
+	function getMembersToGroups($groupId,$id){
+		$idGroup = $groupId;
+		$members = selectContactGroup($groupId);
+		for($i = 0; $i < count($members); $i++) {
+			$memberProfile[] = getProfile($members[$i]['user']);
+		}
+		foreach( $memberProfile as $member){
+			$res[] = $member;
+		}
+		$status = checkStatus($id);
+		$admin = getProfile($members['0']['admin']);
+		require('./view/membersGroupView.php');
+	}
+
+	function groupManage($groupId,$id) {
+		$idGroup = $groupId;
+		$members = selectContactGroup($groupId);
+		for($i = 0; $i < count($members); $i++) {
+			$memberProfile[] = getProfile($members[$i]['user']);
+		}
+		foreach( $memberProfile as $member){
+			$res[] = $member;
+		}
+		$status = checkStatus($id);
+		$group = getGroup($groupId);
+		require('./view/manageGroupView.php');
+	}
+
+	function adminRemoveToGroup($contactId,$groupId,$id) {
+		$remove = removeFromGroup($contactId, $groupId);
+		$status = checkStatus($id);
+		groupManage($groupId,$id);
+	}
+
+	function RemoveToGroup($contactId,$groupId,$id) {
+		$remove = removeFromGroup($contactId, $groupId);
+		$status = checkStatus($id);
+		sessionGroup($id);
+	}
 
 	// SE DECONNECTER
 	function disconnect() {

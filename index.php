@@ -1,5 +1,7 @@
 <?php
 session_start();
+//2 case 'post'
+//manque un break à case 'send'
 require('controller/controller.php');
     if (isset($_GET['action'])) {
         switch ($_GET['action']) {
@@ -22,7 +24,11 @@ require('controller/controller.php');
                 contactHome($_SESSION['id'],$_POST['contactId']);
                 break;
             case 'post':
+            if (trim(htmlspecialchars($_POST['content'])) != "") {
                 addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
+            } else {
+                home(htmlspecialchars($_SESSION['id']));
+            }
                 break;
             case 'contactList':
                 showContacts(htmlspecialchars($_SESSION['id']));
@@ -58,16 +64,18 @@ require('controller/controller.php');
                 showContacts($_SESSION['id'],$_POST['contactId']);
                 break;
             case 'showMessages':
-                if (!isset($_POST['contactId'])) {
+                if (!isset($_GET['contactId'])) {
                     $contacts = getContacts($_SESSION['id']);
                     $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
-                    $_POST['contactId'] = $contactsFetch[0]['id']; 
+                    $_GET['contactId'] = $contactsFetch[0]['id']; 
                 } 
-                    showMessages($_SESSION['id'],$_POST['contactId']);
+                    showMessages($_SESSION['id'],$_GET['contactId']);
                 break;
             case 'sendMessage':
                 addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break;
+            case 'send':
+                require('view/send.php');
             case 'groups':
                 sessionGroup($_SESSION['id']);
                 break;
@@ -132,9 +140,27 @@ require('controller/controller.php');
             case 'createGroup':
                 createGroups($_POST['nameG'],$_SESSION['id']);
                 break;
-            /*case 'addContactsToGroups':
-                addContactsToGroup($_POST['addContacts']);
-                break;*/
+                case 'addContactsToGroups':
+                addContactsToGroup($_POST['addContacts'],$_POST['statut'],$_POST['groupId']);
+                break;
+            case 'getGroupId':
+                getMembersToGroups($_POST['groupId'],$_SESSION['id']);
+                break;
+            case 'groupsManage':
+                groupManage($_POST['groupId'],$_SESSION['id']);
+                break;
+            case 'updateGroup':
+                updateGroup($_POST['groupName'],$_POST['admin'],$_POST['groupId']);
+                break;
+            case 'deleteGroup':
+                deleteGroup($_POST['groupId']);
+                break;
+            case 'removeToGroups':
+                adminRemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
+                break;
+            case 'leaveTheGroups':
+                RemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
+                break;
             default:
                 home($_SESSION['id']);
         }

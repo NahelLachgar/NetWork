@@ -28,7 +28,7 @@ ob_start();
 
     <div class="container">
       <div class="py-2 text-center">
-        <h2>Modifiez mon profil</h2>
+
         <p class="lead"></p>
       </div>
 
@@ -43,7 +43,7 @@ ob_start();
                 <div class="row justify-content-center">
                     <div class="col-md-12-center">
                         <button class="btn btn-link" id="photoUpdate">
-                            <img class="rounded-circle" width="100" src="https://picsum.photos/50/50" alt="Photo de profil">
+                        <img class="rounded-circle" width="100" src="./img/profile/<?= $recup['photo'] ?>" alt="Photo de profil">
                         </button>
                     <input style="display:none" type="file" class="form-control-file" name="photo" id="photoUpdateFile"> 
                     </div>

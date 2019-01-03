@@ -2,40 +2,58 @@
 $title = "Messages";
 ob_start();
 ?>
+<script>
+
+function myFunction() {
+// ON DÉCLARE LES VARIABLES
+  var input, filter, ul, li, a, i, txtValue;
+  input = document.getElementById('contactSearch');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("contactList");
+  li = ul.getElementsByTagName('li');
+
+// ON PARCOURE LA LISTE EN MASQUANT CEUX QUI NE CORRESPONDENT PAS À LA RECHERCHE
+  for (i = 0; i < li.length; i++) {
+    a = li[i].getElementsByTagName("p")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}
+</script>
 <div id="frame">
 	<div id="sidepanel">
 		<div id="profile">
 			<div class="wrap">
-				<img id="profile-img" src="https://picsum.photos/50/50" class="online" alt="" />
+			
+				<img id="profile-img" src="./img/profile/<?= $userProfile['photo'] ?>" class="online rounded-circle" width="45" alt="" />
 				<p><?= $userProfile['name'] . ' ' . $userProfile['lastName'] ?></p>
 			</div>
 		</div>
 		<div id="search">
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="Search contacts..." />
+			<input id="contactSearch" onkeyup="myFunction()" type="text" placeholder="Recherchez un contact..." />
 		</div>
 		<div id="contacts">
-			<ul>
-            <?php for ($i = 0; $i < count($contactProfile); $i++) : ?>
-			<form action="index.php?action=showMessages" method="POST">
-			<input type="hidden" name="contactId" value="<?= $contactProfile[$i]['id'] ?>">
+			<ul id="contactList">
+			<?php for ($i = 0; $i < count($contactProfile); $i++) : ?>
+			<a class="contactLink" style="text-decoration:none;color:white" href='index.php?action=showMessages&contactId=<?=$contactProfile[$i]['id']?>'>
 
 				<li class="contact">
 					<div class="wrap">
 						<span class="contact-status online"></span>
-						<img src="https://picsum.photos/50/50" alt="" />
+						<img class="rounded-circle" width="45"src="./img/profile/<?= $contactProfile[$i]['photo'] ?>" alt="" />
 						<div class="meta">
-						<button type="submit" class="btn btn-link">
-
-							<p class="name"><?= $contactProfile[$i]['name'] . ' ' . $contactProfile[$i]['lastName'] ?></p>
-							</button>
-
-							<p class="preview"><?= "É c koman la ca di koi " ?></p>
-
-							</form>
+						<p class="name"><?= $contactProfile[$i]['name'] . ' ' . $contactProfile[$i]['lastName'] ?></p>
 						</div>
 					</div>
 				</li>
+			</a>
+
+			
 			
 				
                 <?php endfor ?>
@@ -45,21 +63,21 @@ ob_start();
 	</div>
 	<div class="content">
 		<div class="contact-profile">
-			<img src="https://picsum.photos/50/50" alt="" />
-			<p><?= $reiceverProfile['name'] . ' ' . $reiceverProfile['lastName'] ?></p>
+		<img class="rounded-circle" width="45"src="./img/profile/<?= $receiverProfile['photo'] ?>" alt="" />
+			<p><?= $receiverProfile['name'] . ' ' . $receiverProfile['lastName'] ?></p>
         </div>
         
 		<div class="messages">
 			<ul id="messages">
 			 <?php 
 			while ($messagesFetch = $messages->fetch()) :
-				if ($messagesFetch['reicever'] == $_SESSION['id']) {
+				if ($messagesFetch['sender'] == $_SESSION['id']) {
 				$class = "sent";
 			} else {
 				$class = "replies";
 			}
 			?>
-				<li class=<?= $class ?>>
+				<li id="<?= $messagesFetch['id'] ?>" class=<?= $class ?>>
 					<p><?= $messagesFetch['content'] ?></p>
 				</li>
                     <?php endwhile ?>
@@ -67,57 +85,80 @@ ob_start();
 		</div>
 		<div class="message-input">
 			<div class="wrap">
-			<form action="index.php?action=sendMessage" method="POST">
+			<form>
 				<input type="text" name="content" id="content" placeholder="Écrivez votre message" />
-				<input type="hidden" name="contactId" id="contactId" value="<?= $_POST['contactId'] ?>">
+				<input type="hidden" name="contactId" id="contactId" value=<?= $_GET['contactId'] ?>>
 				<i class="fa fa-paperclip attachment" aria-hidden="true"></i> 
-				<button type="submit" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+				<button type="button" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</form>
 			</div>
-		</div>
+		</div>    
 	</div>
 </div>
-<script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
-<script >$("#messages").animate({ scrollTop: $(document).height() }, "fast");
-//BARRE DE SCROLL EN BAS 
-	$(window).on('keydown', function(e) {
-	if (e.which == 13) {
-		return false;
-	}
-
-	$('#envoi').click(function(e)){
-		e.preventDefault();
-		var content = $('#content').val();
-		var contactId = $('#contactId').val();
-
-		if (content != "" && trim(content) != "") {
-			$.ajax({
-				url : "send.php",
-				type : "POST",
-				data : "content=" + content + "&contactId=" + idContact,
-				dataType:'html'
-			});
-			$('#messages').appendTo("<li class=<?= $class ?>><p>" + content + "</p></ul>");
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	/*$(window).on('keydown', function(e) {
+		if (e.which == 13) {
+			return false;
 		}
+	});*/
+	function load() {
+				setInterval(function(){
+				var lastId = $('#messages li:last').attr('id');
+				var contactId = $('#contactId').val();
+				$.ajax({
+					url : "view/load.php",
+					type : "POST",
+					data : "contactId=" + contactId + "&messageId=" + lastId,
+					dataType:"html",
+					success : function(html){
+						$('.messages ul').append(html);
+					}
+				});
+			},1000)
 	}
-	});
-function load(){
-		setTimeout( function(){
-			var fisrtId = $('#messages p:first').attr('id');
-			$.ajax({
-				url : "load.php",
-				type : "POST",
-				data : "messageId=" + firstId,
-				dataType:'html',
-				success : function(html){
-					$('#messages').prepend(html);
-				}
-			})
-		});
-		load();
-	},5000);
-load();
+			load();
 
+	$('#send').click(function(e){
+			var content = $('#content').val();
+			var contactId = $('#contactId').val();
+			if ($.trim(content) != "") {			
+				$.ajax({
+				url : "view/send.php", // on donne l'URL du fichier de traitement
+				type : "POST", // la requête est de type POST
+				data : "content=" + content + "&contactId=" + contactId // et on envoie nos données
+				});
+			}
+		$('#content').val("");
+	});
+
+	$('#content').keydown(function(e){
+		if (e.which == 13) {
+			e.preventDefault();
+			var content = $('#content').val();
+			var contactId = $('#contactId').val();
+			if ($.trim(content) != "") {			
+				$.ajax({
+				url : "view/send.php", // on donne l'URL du fichier de traitement
+				type : "POST", // la requête est de type POST
+				data : "content=" + content + "&contactId=" + contactId // et on envoie nos données
+				});
+			}
+			$('#content').val("");
+		}
+
+	});
+	
+
+
+
+
+
+
+
+
+});
 </script>
  <?php 
 $content = ob_get_clean();

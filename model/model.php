@@ -32,7 +32,7 @@ function getContacts($userId)
 
 function getContactPosts($contactId) {
     $db = dbConnect();
-    $posts = $db->prepare('SELECT p.*,u.lastName AS lastName,u.name AS name, u.job AS job, u.company AS company, u.id AS contactId FROM users u 
+    $posts = $db->prepare('SELECT p.*,u.lastName AS lastName,u.name AS name, u.job AS job, u.company AS company, u.id AS contactId,u.photo AS photo FROM users u 
         JOIN post ON u.id = post.user
         JOIN publications p ON post.publication = p.id
         WHERE post.user = ? 
@@ -43,11 +43,11 @@ function getContactPosts($contactId) {
 
 function sendMessage($content,$contactId,$userId) {
     $db = dbConnect();
-    $sendMessage = $db->prepare('INSERT into privateMessages (content,reicever,sendDate,sender)
-                                VALUES (:content,:reicever,NOW(),:sender)');
+    $sendMessage = $db->prepare('INSERT into privateMessages (content,receiver,sendDate,sender)
+                                VALUES (:content,:receiver,NOW(),:sender)');
     $sendMessage->execute(array(
         "content"=>$content,
-        "reicever"=>$contactId,
+        "receiver"=>$contactId,
         "sender"=>$userId
     ));
 }
@@ -55,7 +55,7 @@ function sendMessage($content,$contactId,$userId) {
 function getMessages($userId,$contactId) {
     $db = dbConnect();
     $messages = $db->prepare('SELECT * FROM privateMessages
-    WHERE reicever = :userId AND sender = :contactId OR reicever = :contactId AND sender = :userId
+    WHERE receiver = :userId AND sender = :contactId OR receiver = :contactId AND sender = :userId
     ORDER BY sendDate ASC');
     $messages->execute(array(
         "userId"=>$userId,
@@ -69,7 +69,7 @@ function getContactsPosts($userId)
     $db = dbConnect();
     $contacts = getContacts($userId);
     $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
-    $posts = $db->prepare('SELECT p.*,u.lastName AS lastName,u.name AS name, u.job AS job, u.company AS company, u.id AS contactId FROM users u 
+    $posts = $db->prepare('SELECT p.*,u.lastName AS lastName,u.name AS name, u.job AS job, u.company AS company, u.id AS contactId,u.photo AS photo FROM users u 
         JOIN post ON u.id = post.user
         JOIN publications p ON post.publication = p.id
         WHERE post.user = ? OR post.user = ?  
@@ -241,22 +241,22 @@ function comment($content, $userId, $postId)
 // DETECTION SI L'UTILISATEUR EXSITE
 function checkUser($email)
 {
-	// ON SE CONNECTE
+    // ON SE CONNECTE
     $db = dbConnect();
-	// ON SELECT LE MOT DE PASSE CORESPONDANT AU MAIL
+    // ON SELECT LE MOT DE PASSE CORESPONDANT AU MAIL
     $selectUser = $db->prepare('SELECT * FROM users WHERE email = ?');
     $selectUser->execute(array($email));
     $fetchSelectUser = $selectUser->fetch();
-	
-	// ON RETURN LE MOT DE PASSE
+    
+    // ON RETURN LE MOT DE PASSE
     return $fetchSelectUser;
 }
 // AJOUTER L'UTILISATEUR DANS LA BDD
 function addUser($lastName, $firstName, $email, $phone, $photo, $password, $status, $job, $company, $town)
 {
-	// ON SE CONNECTE
+    // ON SE CONNECTE
     $db = dbConnect();
-	// ON INSERT LES DONNES DANS LA BDD
+    // ON INSERT LES DONNES DANS LA BDD
     $insertUser = $db->prepare('INSERT INTO users (name, lastName, email, phone, photo, password, status, job, company, town) VALUES (?,?,?,?,?,?,?,?,?,?)');
     $insertUser->execute(array($firstName, $lastName, $email, $phone, $photo, $password, $status, $job, $company, $town));
 }
@@ -275,7 +275,7 @@ function getSearch($userId, $name)
 {
     $db = dbConnect();
     $res = "%" . $name . "%";
-    $req = $db->prepare('SELECT users.id as contactId,users.lastName,users.name,users.email,users.phone,users.job,users.company,users.town,status FROM users WHERE users.id != ? AND (users.lastName LIKE ?  OR users.name LIKE ?) ');
+    $req = $db->prepare('SELECT users.id as contactId,users.lastName,users.name,users.email,users.phone,users.job,users.company,users.town,status,photo FROM users WHERE users.id != ? AND (users.lastName LIKE ?  OR users.name LIKE ?) ');
     $req->execute(array($userId, $res, $res));
     $req = $req->fetchAll();
     return $req;
@@ -318,7 +318,7 @@ function getContactToUser($idUser)
 function getProfileUpdate($ids)
 {
     $db = dbConnect();
-    $req = $db->prepare('SELECT users.lastName,users.name,users.email,users.phone,users.job,users.company,users.town FROM users WHERE users.id = ?');
+    $req = $db->prepare('SELECT * FROM users WHERE id = ?');
     $post = $req->execute(array($ids));
     $post = $req->fetch();
     return $post;
@@ -326,27 +326,83 @@ function getProfileUpdate($ids)
 
     //GESTION DES GROUPES
 
-    //SELECTIONNE LES GROUPES DONT TU FAIS PARTIS
-   /* function getGroups() {
+    //RECUPERE LES INFOS D'UN GROUPE
+    function getGroup($groupId){
         $db = dbConnect();
-        $req = $db->prepare('SELECT ')
-    }*/
+        $req = $db->prepare("SELECT * FROM `groups` WHERE id LIKE ?");
+        $req->execute(array($groupId));
+        $req = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $req;
+    }
+
+    // MODIFIER LE GROUPE
+    function updateGroups($name,$admin,$groupId){
+        $db = dbConnect();
+        $req = $db->prepare("UPDATE groups SET title = ?, admin = ?  WHERE id = ?");
+        $req->execute(array($name, $admin, $groupId));
+    }
+
+    // SUPPRIMER DANS LA TABLE groupAdd
+    function deleteGroupAdd($groupId){
+        $db = dbConnect();
+        $req = $db->prepare("DELETE FROM groupadd WHERE groupadd.group = ?");
+        $req->execute(array($groupId));
+    }
+
+    // SUPPRIMER DANS LA TABLE groups
+    function deleteGroups($groupId){
+        $db = dbConnect();
+        $req = $db->prepare("DELETE FROM groups WHERE id = ?");
+        $req->execute(array($groupId)); 
+    }
+    
+    //SELECTIONNE LES GROUPES DONT TU FAIS PARTIS
+    function getGroups($contactId) {
+        $db = dbConnect();
+        $req = $db->prepare("SELECT * FROM groupAdd INNER JOIN groups ON groupadd.group = groups.id WHERE groups.admin=? OR groupadd.user = ? AND groupadd.status LIKE 'member' ");
+        $req->execute(array($_SESSION['id'],$contactId));
+        $req = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $req;
+    }
+
+    function getAdminGroup($contactId) {
+        $db = dbConnect();
+        $req = $db->prepare("SELECT DISTINCT groups.id, groups.title,groups.createDate,groups.admin FROM groupadd INNER JOIN groups ON groupadd.group = groups.id WHERE groups.admin = ?");
+        $req->execute(array($contactId));
+        $req = $req->fetchAll();
+        return $req;
+    }
+
+    function removeFromGroup($contactId, $groupId) {
+        $db = dbConnect();
+        $req = $db->prepare("DELETE FROM groupadd WHERE groupadd.user = ? AND groupadd.group = ?");
+        $req->execute(array($contactId, $groupId));
+        return $req;
+    }
 
     //CREER UN GROUPE
     function createGroup($nameGroup,$adminId){
         $db = dbConnect();
         $req = $db->prepare('INSERT INTO groups(title,createDate,admin) VALUES (?,NOW(),?)');
-        $create = $req->execute(array($nameGroup,$adminId));
+        $req->execute(array($nameGroup,$adminId));
         $lastId = $db->lastInsertId();
         return $lastId;
     }
 
-    function contactAddGroup($memberId,$status,$groupI) {
+    //AJOUTER DES CONTACTS DANS UN GROUPE
+    function contactAddGroup($memberId,$status,$groupID) {
         $db = dbConnect();
-        $req = $db->prepare('INSERT INTO groupAdd(addDate,user,status,group) VALUES (NOW(),?,?,LAST_INSERT_ID()');
-        $create = $req->execute(array($memberId,$status));
-        
-        return $create;
+        $req = $db->prepare("INSERT INTO `groupadd` (`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(), $memberId, $status, $groupID)");
+        $req->execute(array($memberId,$status,$groupID));
+    }
+
+    //AFFICHER LES MEMBRES D"UN GROUPE
+    function selectContactGroup($groupId){
+        $db = dbConnect();
+        $req = $db->prepare(" SELECT * FROM `groupadd` INNER JOIN groups ON groupadd.group = groups.id WHERE groupadd.group = ? AND groupadd.status = 'member' ");
+        $req->execute(array($groupId));
+        $req = $req->fetchAll();
+        return $req;
     }
 
     //SUPPRIMER LES COMMENTAIRES
