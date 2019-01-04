@@ -19,7 +19,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="h5">
-                    <img class="rounded-circle" width="45"src="./img/profile/<?= $profile['photo'] ?>" alt="" />
+                    <img class="rounded-circle" width="45"src="./img/profile/<?= $profile['photo'] ?>" alt="" />&nbsp&nbsp&nbsp
                     <?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                     <div class="h7">
                         <?= $profile['job'] . ' chez ' . $profile['company'] ?>

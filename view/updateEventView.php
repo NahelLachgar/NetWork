@@ -81,7 +81,7 @@
 <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
 <script src="https://getbootstrap.com/docs/4.1/dist/js/bootstrap.min.js"></script>
 <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
-<script src="./js/inscription.js"></script>
+<script src="./js/event.js"></script>
 <?php
     $content=ob_get_clean();
     require('view/template.php');

@@ -91,7 +91,6 @@ require('controller/controller.php');
                 break;
             case 'createEventView':
 //JS A FAIRE
-//ICI
                 createEventView($_SESSION['id'], $_POST['role']);
                 break;
             case 'createEvent':
@@ -115,7 +114,6 @@ require('controller/controller.php');
                 modifyEvent($_POST['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
                 break;
             case 'addParticipateView':
-//JS A FAIRE
                 addParticipateView($_SESSION['id'], $_POST['id']);
                 break;
             case 'addParticipate':

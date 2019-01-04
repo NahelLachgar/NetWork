@@ -26,8 +26,8 @@
                 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
-                        <label for="newNameEvent">Nom</label>
-                        <input type="text" class="form-control" id="newTitle" name="title" required>
+                        <label for="title">Nom</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
                         <div class="invalid-feedback">
                             Nommez votre événement.
                         </div>
@@ -35,8 +35,8 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
-                        <label for="newEventDate">Date</label>
-                        <input type="date" class="form-control" id="newEventDate" name="eventDate" placeholder="YYYY-MM-JJ HH:MM:SS" required>
+                        <label for="eventDate">Date</label>
+                        <input type="date" class="form-control" id="eventDate" name="eventDate" placeholder="YYYY-MM-JJ HH:MM:SS" required>
                         <div class="invalid-feedback">
                             Fixez une date.
                         </div>
@@ -44,8 +44,8 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
-                        <label for="newPlace">Lieu de rendez-vous</label>
-                        <input type="text" class="form-control" id="newPlace" name="place">
+                        <label for="place">Lieu de rendez-vous</label>
+                        <input type="text" class="form-control" id="place" name="place">
                         <div class="invalid-feedback">
                             Donnez une adresse.
                         </div>
@@ -79,7 +79,7 @@
 <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
 <script src="https://getbootstrap.com/docs/4.1/dist/js/bootstrap.min.js"></script>
 <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
-<script src="./js/inscription.js"></script>
+<script src="./js/event.js"></script>
 <?php
     $content=ob_get_clean();
     require('view/template.php');
