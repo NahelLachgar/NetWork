@@ -46,9 +46,6 @@ require('controller/controller.php');
             case 'signUpEmployee':
                 require('./view/signUpEmployeeView.html');
                 break;
-            case 'post':
-                addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
-                break;
             case 'addContact':
                 addToContacts(htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break; 
@@ -74,6 +71,7 @@ require('controller/controller.php');
                 break;
             case 'send':
                 require('view/send.php');
+                break;
             case 'groups':
                 sessionGroup($_SESSION['id']);
                 break;
