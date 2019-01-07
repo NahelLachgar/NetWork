@@ -118,7 +118,7 @@ ENGINE = InnoDB;
 -- Table `NetWork`.`participate`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NetWork`.`participate` (
-  `id` INT ZEROFILL NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `user` INT NOT NULL,
   `event` INT NOT NULL,
   PRIMARY KEY (`id`, `user`, `event`),
