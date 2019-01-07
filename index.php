@@ -19,7 +19,7 @@ require('controller/controller.php');
                 search(htmlspecialchars($_SESSION['id']),htmlspecialchars($_POST['research']));
                 break;
             case 'profilePage':
-                contactHome($_SESSION['id'],$_POST['contactId']);
+                contactHome($_SESSION['id'],$_POST['contactId'],$_POST['token']);
                 break;
             case 'post':
             if (trim(htmlspecialchars($_POST['content'])) != "") {

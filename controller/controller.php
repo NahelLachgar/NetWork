@@ -39,12 +39,13 @@ function showMessages ($userId,$contactId) {
 }
 
 
-function contactHome($id,$contactId) {
+function contactHome($id,$contactId,$token) {
 	$profile = getProfile($contactId);
 	$contactPosts = getContactPosts($contactId);
 	$contactsNb = getContactsCount($contactId);
 	$followedCompaniesNb = getFollowedCompaniesCount($contactId);
 	$status = checkStatus($id);
+	$pass = $token;
 	require('view/profilepageView.php');	
 }
 

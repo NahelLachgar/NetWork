@@ -39,12 +39,12 @@ ob_start();
                             <div class="h5"><?= $contactsNb ?></div>
                         </li>
                         <li class="list-group-item">
-                           <?php if($_POST['token'] == 0 || $_POST['token'] == 2): ?>
+                           <?php if($pass == 0 || $pass == 2): ?>
                          <form action="index.php?action=removeContact">
                             <input type="hidden" name="contactId" value="<?=$profile['id']?>">
                             <button type="submit" class="btn btn-link" ><img src="./img/icon/unfriend.png"></button>
                          </form>
-                            <?php elseif($_POST['token'] == 1): ?>
+                            <?php elseif($pass == 1): ?>
                         <form action="index.php?action=addContact">
                             <input type="hidden" name="contactId" value="<?=$profile['id']?>">
                             <button type="submit" class="btn btn-link" ><img src="./img/icon/users.png"></button>
