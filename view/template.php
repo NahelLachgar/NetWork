@@ -24,8 +24,8 @@
 ?>
         <form action="index.php?action=showMessages" method="POST"></form>
         <a href="index.php?action=showMessages"> 
-          <button class="btn btn-outline-primary" type="submit"  id="button-addon">
-                 <i class="far fa-envelope-open"></i>
+          <button class="btn btn-link" type="submit"  id="button-addon">
+          <img width="45px" src="img/icon/envelope.svg">
            </button></a>
         <form class="form-inline" action="index.php?action=search" method="POST">
             <div class="input-group">
