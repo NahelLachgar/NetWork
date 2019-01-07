@@ -18,7 +18,8 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
-                <img class="rounded-circle" width="45"src="./img/profile/<?= $profile['photo'] ?>" alt="" />
+                    <div class="h5">
+                    <img class="rounded-circle" width="45"src="./img/profile/<?= $profile['photo'] ?>" alt="" />&nbsp&nbsp&nbsp
                     <?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                     <div class="h7">
                         <?= $profile['job'] . ' chez ' . $profile['company'] ?>
@@ -143,7 +144,7 @@
                 </form>";
         }
         else{*/
-        //SUPPRIMER L'UTILISATEUR DES PARTICIPANTS DE L'EVENEMENT
+        //SUPPRIMER L'UTILISATEUR DANS LA LISTE DES PARTICIPANTS DE L'EVENEMENT
             echo "<div class='row'>
                         <div class='col-md-12 order-md-1'>
                             <form enctype='multipart/form-data' action='index.php?action=quitEvent' method='POST'>
@@ -178,8 +179,7 @@
                 echo "<form action='index.php' method='GET'>
                     <input type='hidden' name='action' value='home'>
                     <button type='submit' class='btn btn-link'>".$participate[$i][1]." ".$participate[$i][2]."</button> 
-                </form>
-            </div>";
+                </form>";
             }
             if($role=='admin') {
                 //SUPPRIMER LE PARTICIPANT
@@ -195,7 +195,7 @@
                         </form><br/>";
             }
         }
-        echo "<br/>";
+        echo "</div><br/>";
     }
     else {
         echo "Personne ne participe à cet événement.<br/><br/>";

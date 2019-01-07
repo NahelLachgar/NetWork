@@ -1,5 +1,7 @@
 <?php
 session_start();
+//2 case 'post'
+//manque un break à case 'send'
 require('controller/controller.php');
     if (isset($_GET['action'])) {
         switch ($_GET['action']) {
@@ -88,7 +90,7 @@ require('controller/controller.php');
                 showEvents($_SESSION['id']);
                 break;
             case 'createEventView':
-            //JS A FAIRE
+//JS A FAIRE
                 createEventView($_SESSION['id'], $_POST['role']);
                 break;
             case 'createEvent':
@@ -105,14 +107,13 @@ require('controller/controller.php');
                 removeEvent($_POST['id']);
                 break;
             case 'updateEventView':
-            //JS A FAIRE
+//JS A FAIRE
                 updateEventView($_SESSION['id'], $_POST['id']);
                 break;
             case 'updateEvent':
                 modifyEvent($_POST['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
                 break;
             case 'addParticipateView':
-            //JS A FAIRE
                 addParticipateView($_SESSION['id'], $_POST['id']);
                 break;
             case 'addParticipate':

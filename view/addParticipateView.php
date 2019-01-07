@@ -41,15 +41,19 @@
                         </div>
                     </div>
                 </form>";
+                if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="")
+                {
+                    echo "<center><br/>".$_SESSION['erreur']."</center>";
+                    $_SESSION['erreur']="";
+                }
+                else
+                {
+                    echo "<br/><br/>";
+                }
             }
             else
             {
                 echo "<center>Vous ne possédez aucun contact à inviter à votre événement.</center>";
-            }
-            if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="")
-            {
-                echo "<center><br/>".$_SESSION['erreur']."</center>";
-                $_SESSION['erreur']="";
             }
 ?>
         </div>
@@ -74,7 +78,6 @@
 <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
 <script src="https://getbootstrap.com/docs/4.1/dist/js/bootstrap.min.js"></script>
 <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
-<script src="./js/inscription.js"></script>
 <?php
     $content=ob_get_clean();
     require('view/template.php');

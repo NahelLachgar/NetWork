@@ -4,7 +4,11 @@ ob_start();
 ?>
 <script>
 
+<<<<<<< HEAD
 function filter() {
+=======
+function myFunction() {
+>>>>>>> clotilde
 // ON DÉCLARE LES VARIABLES
   var input, filter, ul, li, a, i, txtValue;
   input = document.getElementById('contactSearch');
