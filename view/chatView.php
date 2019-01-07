@@ -4,7 +4,7 @@ ob_start();
 ?>
 <script>
 
-function myFunction() {
+function filter() {
 // ON DÉCLARE LES VARIABLES
   var input, filter, ul, li, a, i, txtValue;
   input = document.getElementById('contactSearch');
@@ -35,7 +35,7 @@ function myFunction() {
 		</div>
 		<div id="search">
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input id="contactSearch" onkeyup="myFunction()" type="text" placeholder="Recherchez un contact..." />
+			<input id="contactSearch" onkeyup="filter()" type="text" placeholder="Recherchez un contact..." />
 		</div>
 		<div id="contacts">
 			<ul id="contactList">

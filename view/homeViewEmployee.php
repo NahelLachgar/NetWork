@@ -242,8 +242,8 @@ ob_start();
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
   <ol class="carousel-indicators">
     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <?php for ($i = 0; $i < count($companiesSuggests); $i++) : ?>
-    <li data-target="#carouselExampleIndicators" data-slide-to="<?=$companiesSuggests[$i]?>"></li>
+    <?php for ($i = 0; $i < count($companiesSuggests)-1; $i++) : ?>
+    <li data-target="#carouselExampleIndicators" data-slide-to="<?=$companiesSuggests[$i]['name']?>"></li>
     <?php endfor ?>
   </ol>
   <div class="carousel-innitemer">
