@@ -241,22 +241,22 @@ function comment($content, $userId, $postId)
 // DETECTION SI L'UTILISATEUR EXSITE
 function checkUser($email)
 {
-	// ON SE CONNECTE
+    // ON SE CONNECTE
     $db = dbConnect();
-	// ON SELECT LE MOT DE PASSE CORESPONDANT AU MAIL
+    // ON SELECT LE MOT DE PASSE CORESPONDANT AU MAIL
     $selectUser = $db->prepare('SELECT * FROM users WHERE email = ?');
     $selectUser->execute(array($email));
     $fetchSelectUser = $selectUser->fetch();
-	
-	// ON RETURN LE MOT DE PASSE
+    
+    // ON RETURN LE MOT DE PASSE
     return $fetchSelectUser;
 }
 // AJOUTER L'UTILISATEUR DANS LA BDD
 function addUser($lastName, $firstName, $email, $phone, $photo, $password, $status, $job, $company, $town)
 {
-	// ON SE CONNECTE
+    // ON SE CONNECTE
     $db = dbConnect();
-	// ON INSERT LES DONNES DANS LA BDD
+    // ON INSERT LES DONNES DANS LA BDD
     $insertUser = $db->prepare('INSERT INTO users (name, lastName, email, phone, photo, password, status, job, company, town) VALUES (?,?,?,?,?,?,?,?,?,?)');
     $insertUser->execute(array($firstName, $lastName, $email, $phone, $photo, $password, $status, $job, $company, $town));
 }
