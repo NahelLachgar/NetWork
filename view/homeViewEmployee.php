@@ -125,6 +125,7 @@ ob_start();
                                         <form action="index.php?action=profilePage" method="POST">
                                             <div class="h5 m-0"><button type="submit" class="btn btn-link"><?= $contactsPosts[$i]['name'] . ' ' . $contactsPosts[$i]['lastName'] ?></button></div>
                                             <input type="hidden" name="contactId" value="<?= $contactsPosts[$i]['id']?>">
+                                            <input type="hidden" name="token" value="0">
                                         </form>
                                         <?php else : ?>
                                         <div class="h5 m-0"><?= $contactsPosts[$i]['name'] . ' ' . $contactsPosts[$i]['lastName'] ?></div>
