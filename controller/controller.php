@@ -20,6 +20,7 @@ function home($userId) {
 }
 
 function showMessages ($userId,$contactId) {
+	$groupMessages = 
 	$groups = getGroupsName($userId);
 	$userProfile = getProfile($userId);
 	$contacts = getContacts($userId);
