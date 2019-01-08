@@ -292,7 +292,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		for( $i = 0; $i < $comt ; $i++) {
 			contactAddGroup($contact[$i],$status,$groupId);
 		}
-			sessionGroup($_SESSION['id']);
+			sessionGroup($_SESSION['id'],$_SESSION['id']);
 		}
 	//SELECTIONNE TOUS LES GROUPES DONT L'USER FAIT PARTI
 	function getGroupsContact($userId){
