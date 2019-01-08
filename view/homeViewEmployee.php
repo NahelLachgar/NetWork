@@ -189,7 +189,7 @@ ob_start();
                         <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[0]['photo'] ?>" alt="" />
                         <h5 class="card-title"><?= $employeesSuggests[0]['name'] . ' ' . $employeesSuggests[0]['lastName'] ?></h5>
                         <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[0]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
-                        <form action="index.php?addContact" method="POST">
+                        <form action="index.php?index=addContact" method="POST">
                         <input type="hidden" name="contactId" value="<?=$employeesSuggests[0]['id']?>"">
                             <button type="submit" class="btn btn-link" name="contactId" value="<?= $employeesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
                         </form>
@@ -254,7 +254,7 @@ ob_start();
             <img class="rounded-circle" width="45"src="./img/profile/<?= $companiesSuggests[$i]['photo'] ?>" alt="" />
                         <h5 class="card-title"><?= $companiesSuggests[0]['name'] . ' ' . $companiesSuggests[0]['lastName'] ?></h5>
                         <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[0]['job'] . ' chez ' . $companiesSuggests[0]['company'] ?></h6>
-                        <form action="index.php?addContact" method="POST">
+                        <form action="index.php?index=addContact" method="POST">
                         <input type="hidden" name="contactId" value="<?=$companiesSuggests[0]['id']?>">
                             <button type="submit" class="btn btn-link" name="contactId" value="<?= $companiesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
                         </form>
