@@ -15,7 +15,6 @@ ob_start();
             <span class="text-muted">Vos groupes</span></h4>
             
             <?php 
-                if(isset($adminGroup)) :
                 if ($adminGroup['0']['admin'] == $_SESSION['id']) : ?>
 
                 <?php foreach ($adminGroup as $groupAdmin) : ?>
@@ -25,16 +24,14 @@ ob_start();
                 </form><br>
                 <?php endforeach; ?>
 
-                <?php endif;
-                else: ?>
+            <?php endif; ?>
             <?php 
             foreach ($groups as $group) : ?>
                 <form method="POST" action="index.php?action=getGroupId">
                     <input type="hidden" name="groupId" value="<?= $group['group'] ?>" >
                     <input type="submit" class="btn btn-link" value="<?= $group['title'] ?>" >
                 </form><br>
-            <?php endforeach;
-            endif; ?>
+            <?php endforeach; ?>
         </div>
         <div class="col-md-8 order-md-1">
             <a class="trigger_popup_fricc"><button class="btn btn-link">Créer un groupe</button></a>
