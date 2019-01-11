@@ -22,33 +22,35 @@
         <div class="col-md-4 order-md-2 mb-4">
         </div>
         <div class="col-md-12 order-md-1">
-            <form enctype="multipart/form-data" action="index.php?action=createEvent" method="POST">
+            <form enctype="multipart/form-data" action="index.php?action=createEvent" method="POST" id="submitEvent">
                 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="title">Nom</label>
-                        <input type="text" class="form-control" id="title" name="title" required>
-                        <div class="invalid-feedback">
+                        <input type="text" class="form-control" id="title" name="title" maxlength="45" required>
+                        <span id="missTitle"></span>
+                        <!--<div class="invalid-feedback">
                             Nommez votre événement.
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="eventDate">Date</label>
                         <input type="date" class="form-control" id="eventDate" name="eventDate" placeholder="YYYY-MM-JJ HH:MM:SS" required>
-                        <div class="invalid-feedback">
+                        <!--<div class="invalid-feedback">
                             Fixez une date.
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="place">Lieu de rendez-vous</label>
-                        <input type="text" class="form-control" id="place" name="place">
-                        <div class="invalid-feedback">
+                        <input type="text" class="form-control" id="place" name="place" maxlength="45">
+                        <span id="missPlace"></span>
+                        <!--<div class="invalid-feedback">
                             Donnez une adresse.
-                        </div>
+                        </div>-->
                     </div>
                 </div>
                 <br/>
