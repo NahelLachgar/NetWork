@@ -31,8 +31,7 @@ ob_start();
                     <input type="hidden" name="groupId" value="<?= $group['group'] ?>" >
                     <input type="submit" class="btn btn-link" value="<?= $group['title'] ?>" >
                 </form><br>
-            <?php endforeach;
-            ?>
+            <?php endforeach; ?>
         </div>
         <div class="col-md-8 order-md-1">
             <a class="trigger_popup_fricc"><button class="btn btn-link">Créer un groupe</button></a>

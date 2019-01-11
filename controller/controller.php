@@ -265,7 +265,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	// GROUPE
 	function sessionGroup($sessId,$id) {
 		$status = checkStatus($id);
-		$groups = getGroups($sessId,$id);
+		$groups = getGroups($sessId);
 		$adminGroup = getAdminGroup($id);
 		require('./view/homeGroup.php');
 	}
