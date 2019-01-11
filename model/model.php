@@ -64,8 +64,15 @@ function getMessages($userId,$contactId) {
     return $messages;
 }
 
-function getGroupMessages () {
-    
+function getGroupMessages ($groupId) {
+    $db = dbConnect();
+    $messages = $db->prepare('SELECT * FROM groupAdd
+    WHERE  group = :groupId AND status = "message"
+    ORDER BY sendDate ASC');
+    $messages->execute(array(
+        "groupId"=>$groupId
+    ));
+    return $messages; 
 }
 //RÉCUPÉRATION DES PUBLICATIONS DES CONTACTS ET ENTREPRISES SUIVIES PAR L'UTILISATEUR (FIL D'ACUTALITÉ)
 function getContactsPosts($userId)
@@ -152,7 +159,7 @@ function getEmployeeSuggests($userId) {
                $employeeSuggestsFetch = $employeeSuggests->fetchAll(PDO::FETCH_ASSOC);
                $employees[$i] = $employeeSuggestsFetch;
         } 
-        if ($employees) {
+        if (isset($employees)) {
         if (count($employees) > 0) {
             for ($i = 0; $i < (count($employees) - 1); $i++) {
                 $employees[0] = array_merge($employees[$i], $employees[0]);
@@ -182,7 +189,7 @@ function getCompanySuggests($userId) {
                $companySuggestsFetch = $companySuggests->fetchAll(PDO::FETCH_ASSOC);
                $companies[$i] = $companySuggestsFetch;
         }
-        if ($companies) {
+        if (isset($companies)) {
         if (count($companies) > 0) {
             for ($i = 0; $i < (count($companies) - 1); $i++) {
                 $companies[0] = array_merge($companies[$i], $companies[0]);

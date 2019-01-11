@@ -17,7 +17,7 @@
         <h2>Modifier un événement</h2>
         <p class="lead"></p>
     </div>
-
+   
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
         </div>
@@ -28,7 +28,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="newName">Nom</label>
-                        <input type="text" class="form-control" id="newTitle" name="title" value="<?php echo $event[0]; ?>" required>
+                        <input type="text" class="form-control" id="newTitle" name="title" value="<?=$event[0]?>" required>
                         <div class="invalid-feedback">
                             Nommez votre événement.
                         </div>
@@ -37,7 +37,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="newName">Date</label>
-                        <input type="date" class="form-control" id="newEventDate" name="eventDate" placeholder="YYYY-MM-JJ HH:MM:SS" value="<?php echo $event[1]; ?>" required>
+                        <input type="date" class="form-control" id="newEventDate" name="eventDate" value="<?=strftime("%Y-%m-%d",strtotime($event[1]))?>" placeholder="YYYY-MM-JJ HH:MM:SS" required>
                         <div class="invalid-feedback">
                             Fixez une date.
                         </div>

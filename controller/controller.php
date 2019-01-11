@@ -20,7 +20,6 @@ function home($userId) {
 }
 
 function showMessages ($userId,$contactId) {
-	$groupMessages = 
 	$groups = getGroupsName($userId);
 	$userProfile = getProfile($userId);
 	$contacts = getContacts($userId);
@@ -39,6 +38,21 @@ function showMessages ($userId,$contactId) {
 	}
 }
 
+function showGroupMessages ($userId,$groupId) {
+	$groups = getGroupsName($userId);
+	$userProfile = getProfile($userId);
+	$contacts = getContacts($userId);
+	$receiverProfile = getProfile($_GET['contactId']);
+
+	$contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
+	for ($i=0;$i<count($contactsFetch);$i++) {
+		$profile = getProfile($contactsFetch[$i]['id']);
+		$contactProfile[$i] = $profile;
+	}
+	$groupMessages = getGroupsMessages($groupId);
+	$status = checkStatus($userId);
+	require('./view/chatView.php');
+}
 
 function contactHome($id,$contactId,$token) {
 	$profile = getProfile($contactId);
@@ -293,7 +307,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		for( $i = 0; $i < $comt ; $i++) {
 			contactAddGroup($contact[$i],$status,$groupId);
 		}
-			sessionGroup($_SESSION['id']);
+			sessionGroup($_SESSION['id'],$_SESSION['id']);
 		}
 	//SELECTIONNE TOUS LES GROUPES DONT L'USER FAIT PARTI
 	function getGroupsContact($userId){

@@ -49,7 +49,11 @@ require('controller/controller.php');
                 require('./view/signUpEmployeeView.html');
                 break;
             case 'addContact':
+            if (isset($_POST['contactId'])) {
                 addToContacts(htmlspecialchars($_POST['contactId']),$_SESSION['id']);
+            } else {
+                addToContacts(htmlspecialchars($_GET['contactId']),$_SESSION['id']);
+            }
                 break; 
             case 'removeContact':
                 removeContact(htmlspecialchars($_POST['contactId']),$_SESSION['id']);
@@ -156,6 +160,9 @@ require('controller/controller.php');
                 break;
             case 'leaveTheGroups':
                 RemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
+                break;
+            case 'showGroupMessages':
+                getGroupMessages($_SESSION['id'],$_GET['groupId']);
                 break;
             default:
                 home($_SESSION['id']);

@@ -5,6 +5,10 @@
 		.logo {
 					color:#F5F6FA;
     }
+    .posts {
+      overflow: scroll; 
+      height: 1000px;
+    }
     
     .header {
       position:sticky;

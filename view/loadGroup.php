@@ -10,7 +10,7 @@ function dbConnect() {
 }
 $db = dbConnect();
 $req = $db->prepare('SELECT DISTINCT * FROM groupAdd 
-WHERE  group = :groupId
+WHERE  group = :groupId AND status = "message"
 AND id > :id
 ORDER BY id ASC');
 $req->execute(array(

@@ -95,29 +95,18 @@
             <div class="row">
               <input type="hidden" name="status" value="1">
               <div class="col-md-4 mb-3">
-                <label for="emploi">Ville</label>
-              <input type="text" class="form-control" id="emploi" name="job" required>
-              <div class="invalid-feedback">
-                Entrez votre profession.
-              </div>
-              </div>
-              <div class="col-md-4 mb-3">
-                <label for="entreprise">Code postal</label>
-                <input type="text" name="company" class="form-control" id="company" required>
-                <div class="invalid-feedback">
-                  Entrez votre d'entreprise de travail.
-                </div>
-              </div>
-            <div class="col-md-4 mb-3">
-              <label for="ville">Rue</label>
+                <label for="town">Ville</label>
               <input type="text" class="form-control" id="town" name="town" required>
               <div class="invalid-feedback">
-                Entrez votre ville.
+                Entrez votre vile.
               </div>
-            </div>
+              </div>
           </div>
             <div class="row justify-content-center">
                 <div class="col-md-3">
+                    <div class="input-group-append">
+                        <input type="hidden" name="job" value=" ">
+                        <input type="hidden" name="company" value=" ">
                     <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">S'inscrire</button>
                 </div>
             </div>

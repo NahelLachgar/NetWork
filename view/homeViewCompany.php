@@ -142,11 +142,13 @@ ob_start();
                             <div class="input-group">
                                 <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">
                                 <input type="hidden" name="postId" value="<?=$contactsPosts[$i]['id']?>">
-                                <div class="input-group-append">
+                                
+                            <input type="hidden" name="company" value=" ">
                                 <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
                                     <i class="fa fa-comment"></i>
                                 </button>
                         </form>
+                        
                 </div>
                 </div>
                         </div>
