@@ -37,7 +37,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="newName">Date</label>
-                        <input type="date" class="form-control" id="newEventDate" name="eventDate" value="<?=strftime("%Y-%m-%d",strtotime($event[1]))?>" placeholder="YYYY-MM-JJ HH:MM:SS" required>
+                        <input type="date" class="form-control" id="newEventDate" name="eventDate" value="<?=strftime("%Y-%m-%d %H:%M",strtotime($event[1]))?>" placeholder="YYYY-MM-JJ HH:MM:SS" required>
                         <div class="invalid-feedback">
                             Fixez une date.
                         </div>

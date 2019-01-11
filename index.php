@@ -92,7 +92,6 @@ require('controller/controller.php');
                 showEvents($_SESSION['id']);
                 break;
             case 'createEventView':
-//JS A FAIRE
                 createEventView($_SESSION['id'], $_POST['role']);
                 break;
             case 'createEvent':
@@ -109,7 +108,6 @@ require('controller/controller.php');
                 removeEvent($_POST['id']);
                 break;
             case 'updateEventView':
-//JS A FAIRE
                 updateEventView($_SESSION['id'], $_POST['id']);
                 break;
             case 'updateEvent':

@@ -282,9 +282,15 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
 function updateProfiles($lastName, $name, $email, $pass, $photo, $phone, $job, $company, $town, $id)
 {
     $db = dbConnect();
+    if($photo){
     $req = $db->prepare('UPDATE users SET users.lastName = ?, users.name = ?, users.email = ?,users.password = ?, users.photo = ?,users.phone = ?,users.job = ?,users.company = ?,users.town = ?  WHERE users.id = ?');
     $password = password_hash($pass, PASSWORD_BCRYPT);
     $req->execute(array($lastName, $name, $email, $password, $photo, $phone, $job, $company, $town, $id));
+    } else {
+    $req = $db->prepare('UPDATE users SET users.lastName = ?, users.name = ?, users.email = ?,users.password = ?,users.phone = ?,users.job = ?,users.company = ?,users.town = ?  WHERE users.id = ?');
+    $password = password_hash($pass, PASSWORD_BCRYPT);
+    $req->execute(array($lastName, $name, $email, $password, $phone, $job, $company, $town, $id));
+    }
     return $req;
 }
     
@@ -515,50 +521,14 @@ function getProfileUpdate($ids)
     function deleteAllMessages($ID)
     {
         $bdd=dbConnect();
-        //RECHERCHER LES MESSAGES DE L'UTILISATEUR
-        $reponse=$bdd->prepare('SELECT privateMessage
-                                FROM sendPrivate, privateMessages
-                                WHERE user=:ID AND privateMessage=privateMessages.id');
+        //SUPPRIMER LES MESSAGES ENVOYES PAR L'UTILISATEUR
+        $reponse=$bdd->prepare('DELETE FROM privateMessages
+                                WHERE sender=:ID');
         $reponse->execute(['ID'=>$ID]);
-        $c=array();
-        $k=0;
-        while($donnees=$reponse->fetch())
-        {
-            $c[$k]=$donnees['privateMessage'];
-            $k++;
-        }
-        //RECHERCHER LES MESSAGES RECU PAR L'UTILISATEUR
-        $reponse=$bdd->prepare('SELECT privateMessage
-                                FROM sendPrivate, privateMessages
-                                WHERE receiver=:ID AND privateMessage=privateMessages.id');
-        $reponse->execute(['ID'=>$ID]);
-        $d=array();
-        $l=0;
-        while($donnees=$reponse->fetch())
-        {
-            $d[$l]=$donnees['privateMessage'];
-            $l++;
-        }
-        //SUPPRIMER LES MESSAGES DE L'UTILISATEUR
-        $reponse=$bdd->prepare('DELETE FROM sendPrivate
-                                WHERE user=:ID');
-        $reponse->execute(['ID'=>$ID]);
-        for($k=0;$k<sizeof($c);$k++)
-        {
-            $reponse=$bdd->prepare('DELETE FROM privateMessages
-                                    WHERE id=:id');
-            $reponse->execute(['id'=>$c[$k]]);
-        }
-        //SUPPRIMER LES MESSAGES RECU PAR L'UTILISATEUR
-        $reponse=$bdd->prepare('DELETE FROM sendPrivate
+        //SUPPRIMER LES MESSAGE RECU PAR L'UTILISATEUR
+        $reponse=$bdd->prepare('DELETE FROM privateMessages
                                 WHERE receiver=:ID');
         $reponse->execute(['ID'=>$ID]);
-        for($l=0;$l<sizeof($d);$l++)
-        {
-            $reponse=$bdd->prepare('DELETE FROM privateMessages
-                                    WHERE id=:id');
-            $reponse->execute(['id'=>$d[$l]]);
-        }
     }
 
     //SUPPRIMER EVENEMENTS / LES PARTICIPATIONS DANS LES EVENEMENTS
