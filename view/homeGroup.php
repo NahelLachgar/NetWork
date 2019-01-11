@@ -14,7 +14,7 @@ ob_start();
             <br><h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Vos groupes</span></h4>
             
-            <?php if(!empty($adminGroup) || !empty($groups)):
+            <?php if($adminGroup || $groups):
                 if ($adminGroup['0']['admin'] == $_SESSION['id']) : ?>
 
                 <?php foreach ($adminGroup as $groupAdmin) : ?>
