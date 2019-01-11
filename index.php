@@ -79,7 +79,7 @@ require('controller/controller.php');
                 require('view/send.php');
                 break;
             case 'groups':
-                sessionGroup($_SESSION['id']);
+                sessionGroup($_SESSION['id'],);
                 break;
             case 'deleteView':
                 deleteView($_SESSION['id']);
