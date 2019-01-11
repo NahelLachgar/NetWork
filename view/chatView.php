@@ -4,11 +4,9 @@ ob_start();
 ?>
 <script>
 
-<<<<<<< HEAD
+
 function filter() {
-=======
-function myFunction() {
->>>>>>> clotilde
+
 // ON DÉCLARE LES VARIABLES
   var input, filter, ul, li, a, i, txtValue;
   input = document.getElementById('contactSearch');
@@ -58,7 +56,7 @@ function myFunction() {
 			</a>		
 		<?php endfor;	
 				 for ($i = 0; $i < count($groups); $i++) : ?>
-			<a class="contactLink" style="text-decoration:none;color:white" href='index.php?action=showMessages&contactId=<?=$contactProfile[$i]['id']?>'>
+			<a class="contactLink" style="text-decoration:none;color:white" href='index.php?action=showGroupMessages&groupId=<?=$contactProfile[$i]['id']?>'>
 
 				<li class="contact">
 					<div class="wrap">

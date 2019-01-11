@@ -63,6 +63,17 @@ function getMessages($userId,$contactId) {
     ));
     return $messages;
 }
+
+function getGroupMessages ($groupId) {
+    $db = dbConnect();
+    $messages = $db->prepare('SELECT * FROM groupAdd
+    WHERE  group = :groupId AND status = "message"
+    ORDER BY sendDate ASC');
+    $messages->execute(array(
+        "groupId"=>$groupId
+    ));
+    return $messages; 
+}
 //RÉCUPÉRATION DES PUBLICATIONS DES CONTACTS ET ENTREPRISES SUIVIES PAR L'UTILISATEUR (FIL D'ACUTALITÉ)
 function getContactsPosts($userId)
 {
@@ -134,6 +145,7 @@ function getEmployeeSuggests($userId) {
     $db = dbConnect();
     $contacts = getContacts($userId);
     $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
+    if ($contactsFetch>1) {
     $employeeSuggests = $db->prepare('SELECT DISTINCT u.* 
     FROM users u JOIN contacts c ON u.id = c.user WHERE c.contact = :id AND c.user NOT LIKE :userId AND u.status LIKE "employee"
     UNION
@@ -146,7 +158,8 @@ function getEmployeeSuggests($userId) {
                 ));
                $employeeSuggestsFetch = $employeeSuggests->fetchAll(PDO::FETCH_ASSOC);
                $employees[$i] = $employeeSuggestsFetch;
-        }
+        } 
+        if (isset($employees)) {
         if (count($employees) > 0) {
             for ($i = 0; $i < (count($employees) - 1); $i++) {
                 $employees[0] = array_merge($employees[$i], $employees[0]);
@@ -155,6 +168,8 @@ function getEmployeeSuggests($userId) {
             $employees = array_merge($employees[$i], $employees[0]);
         } 
     return $employees; 
+    }
+}
 }
 //SUGGESTIONS D'ENTREPRISE POUR L'UTILISATEUR 
 function getCompanySuggests($userId) {
@@ -174,6 +189,7 @@ function getCompanySuggests($userId) {
                $companySuggestsFetch = $companySuggests->fetchAll(PDO::FETCH_ASSOC);
                $companies[$i] = $companySuggestsFetch;
         }
+        if (isset($companies)) {
         if (count($companies) > 0) {
             for ($i = 0; $i < (count($companies) - 1); $i++) {
                 $companies[0] = array_merge($companies[$i], $companies[0]);
@@ -181,7 +197,9 @@ function getCompanySuggests($userId) {
             }
             $companies = array_merge($companies[$i], $companies[0]);
         } 
+    
     return $companies; 
+    }
 }
 //NOMBRE DE CONTACTS
 function getContactsCount($userId)
@@ -855,6 +873,9 @@ function getProfileUpdate($ids)
         $reponse->execute(['user'=>$ID,
                             'event'=>$id]);
     }
+
+
+
     /*
     //AFFICHER LES EVENEMENTS AYANT INVITER L'UTILISER A PARTICIPER
     function selectInvit($ID, $type)
