@@ -47,7 +47,7 @@ ob_start();
                         
                         <div class="mb-3">
                             <label for="name">Nom du groupe</label>
-                            <input type="text" class="form-control" id="name" name="nameG" placeholder="" required>
+                            <input type="text" class="form-control" id="name" name="nameG" placeholder="" include_onced>
                             <div class="invalid-feedback">
                             
                             </div>
@@ -65,5 +65,5 @@ ob_start();
    
 <?php 
 $content = ob_get_clean();
-require('view/template.php');
+include_once('view/template.php');
 ?>

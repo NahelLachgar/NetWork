@@ -617,7 +617,7 @@
             clear: both;
             float: left;
             margin: 15px 15px 5px 15px;
-            width: calc(100% - 90px);
+            width: calc(100% - 25px);
             font-size: 1.2em;
           }
           #frame .content .messages ul li:nth-last-child(1) {

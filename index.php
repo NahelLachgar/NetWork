@@ -1,8 +1,11 @@
 <?php
 session_start();
+include_once('controller/updateController.php');
+include_once('controller/insertController.php');
+include_once('controller/selectController.php');
+include_once('controller/deleteController.php');
 //2 case 'post'
 //manque un break à case 'send'
-require('controller/controller.php');
     if (isset($_GET['action'])) {
         switch ($_GET['action']) {
            case 'disconnect':
@@ -43,10 +46,10 @@ require('controller/controller.php');
                validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newPass'],$_POST['confirmNewPass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
                 break;
             case 'signUpCompany':
-                require('./view/signUpCompanyView.html');
+                include_once('./view/signUpCompanyView.html');
                 break;
             case 'signUpEmployee':
-                require('./view/signUpEmployeeView.html');
+                include_once('./view/signUpEmployeeView.html');
                 break;
             case 'addContact':
             if (isset($_POST['contactId'])) {
@@ -76,7 +79,7 @@ require('controller/controller.php');
                 addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break;
             case 'send':
-                require('view/send.php');
+                include_once('view/send.php');
                 break;
             case 'groups':
                 sessionGroup($_SESSION['id']);
@@ -167,7 +170,7 @@ require('controller/controller.php');
         }
     } else {
         if (!isset($_SESSION['name'])) {
-        require('view/signInView.php');
+        include_once('view/signInView.php');
         } else {
             header('Location:index.php?action=home');
     }

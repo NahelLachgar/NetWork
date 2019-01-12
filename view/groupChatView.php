@@ -7,6 +7,7 @@ ob_start();
 	<div id="sidepanel">
 		<div id="profile">
 			<div class="wrap">
+			
 				<img id="profile-img" src="./img/profile/<?= $userProfile['photo'] ?>" class="online rounded-circle" width="45" alt="" />
 				<p><?= $userProfile['name'] . ' ' . $userProfile['lastName'] ?></p>
 			</div>
@@ -30,7 +31,7 @@ ob_start();
 					</div>
 				</li>
 			</a>		
-		<?php endfor;	
+        <?php endfor;	
 				 for ($i = 0; $i < count($groups); $i++) : ?>
 			<a class="contactLink" style="text-decoration:none;color:white" href='index.php?action=showGroupMessages&groupId=<?=$contactProfile[$i]['id']?>'>
 
@@ -51,27 +52,27 @@ ob_start();
 	</div>
 	<div class="content">
 		<div class="contact-profile">
-		<img class="rounded-circle" width="45"src="./img/profile/<?= $receiverProfile['photo'] ?>" alt="" />
-			<p><?= $receiverProfile['name'] . ' ' . $receiverProfile['lastName'] ?></p>
+	<!--	PHOTO DU GROUPE <img class="rounded-circle" width="45"src="./img/profile/<$groups['photo'] ?>" alt="" /> -->
+			<p><?= $groups['name']?></p>
         </div>
         
 		<div class="messages">
 			<ul id="messages">
 			 <?php 
 			while ($messagesFetch = $messages->fetch()) :
-				if ($messagesFetch['sender'] == $_SESSION['id']) {
+				if ($messagesFetch['user'] == $_SESSION['id']) {
 				$class = "sent";
 			} else {
 				$class = "replies";
 			}
 			?>
 				<li id="<?= $messagesFetch['id'] ?>" class=<?= $class ?>>
-				<?php if($messagesFetch['sender']==$_SESSION['id']):?>
+				<?php if($messagesFetch['user']==$_SESSION['id']):?>
 					<img src="./img/profile/<?=$userProfile['photo']?>" alt="">
 				<?php else:?>
 				<img src="./img/profile/<?=$receiverProfile['photo']?>" alt="">
 				<?php endif?>
-					<p><?= $messagesFetch['content'] ?></p>
+					<p><?= $messagesFetch['message'] ?></p>
 				</li>
                     <?php endwhile ?>
 			</ul>
@@ -79,8 +80,8 @@ ob_start();
 		<div class="message-input">
 			<div class="wrap">
 			<form>
-				<input type="text" name="content" id="content" placeholder="Écrivez votre message" />
-				<input type="hidden" name="contactId" id="contactId" value=<?= $_GET['contactId'] ?>>
+				<input type="text" name="message" id="message" placeholder="Écrivez votre message" />
+				<input type="hidden" name="groupId" id="groupId" value=<?= $_GET['groupId'] ?>>
 				<i class="fa fa-paperclip attachment" aria-hidden="true"></i> 
 				<button type="button" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</form>
@@ -89,7 +90,8 @@ ob_start();
 	</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="js/chat.js"></script>
+<script src="js/groupChat.js">
+</script>
  <?php 
 $content = ob_get_clean();
 include_once('./view/template.php');

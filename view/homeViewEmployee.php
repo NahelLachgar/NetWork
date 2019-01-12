@@ -70,7 +70,7 @@ ob_start();
                                 <div class="form-group">
                                     <label class="sr-only" for="message">Publier</label>
                                     <form action="index.php?action=post" method="POST">
-                                    <textarea name="content" class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?" required></textarea>
+                                    <textarea name="content" class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?" include_onced></textarea>
                                 </div>
 
                             </div>
@@ -313,5 +313,5 @@ if ($employeesSuggests) :
     </div>
     <?php 
     $content = ob_get_clean();
-    require('view/template.php');
+    include_once('view/template.php');
     ?>
