@@ -15,17 +15,18 @@
   </head>
   <body>
   <nav class="navbar navbar-light bg-bleu">
-        <a href="index.php?action=home" class="home"><img width="45" src="img/icon/home.svg" alt="Photo de profil"></a>
-        <a href="index.php?action=groups" class="groups"><img width="45" src="img/icon/group.svg" alt="Groupe"></a>
+  
+        <a id="buttonHome" href="index.php?action=home" class="home"><img width="30px" src="img/icon/home.svg" alt="Photo de profil"></a>
+        <a id="buttonGroup" href="index.php?action=groups" class="groups"><img width="30px" src="img/icon/group.svg" alt="Groupe"></a>
 <?php
     if($status=="employee") {
-        echo "<a href='index.php?action=showEvents' class='home'><img width='45' src='img/icon/event.svg' alt='Photo de profil'></a>";
+        echo "<a id='buttonEvent' href='index.php?action=showEvents' class='home'><img width=30px src='img/icon/event.svg' alt='Photo de profil'></a>";
     }
 ?>
         <form action="index.php?action=showMessages" method="POST"></form>
-        <a href="index.php?action=showMessages"> 
+        <a id="buttonMessages" href="index.php?action=showMessages"> 
           <button class="btn btn-link" type="submit"  id="button-addon">
-          <img width="45px" src="img/icon/message.svg">
+          <img width="30x" src="img/icon/message.svg">
            </button></a>
         <form class="form-inline" action="index.php?action=search" method="POST">
             <div class="input-group">

@@ -129,7 +129,7 @@ $(document).ready(function(){
 						$('.messages ul').append(html);
 					}
 				});
-			},1000)
+			},100)
 	}
 			load();
 
@@ -144,6 +144,8 @@ $(document).ready(function(){
 				});
 			}
 		$('#content').val("");
+		$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
 	});
 
 	$('#content').keydown(function(e){
@@ -159,6 +161,8 @@ $(document).ready(function(){
 				});
 			}
 			$('#content').val("");
+			$(".messages").animate({ scrollTop: $(document).height() }, "fast");
+
 		}
 
 	});

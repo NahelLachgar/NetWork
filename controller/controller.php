@@ -61,7 +61,7 @@ function contactHome($id,$contactId,$token) {
 	$followedCompaniesNb = getFollowedCompaniesCount($contactId);
 	$status = checkStatus($id);
 	$pass = $token;
-	require('view/profilepageView.php');	
+	require('view/profilePageView.php');	
 }
 
 function addPost($content,$type,$userId) {
@@ -185,7 +185,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 		function removeContact($contactId,$userId)
 		{
 			$unf = unfollow($contactId,$userId);
-			if($unf == TRUE) 
+			if($unf) 
 			{
 				header('Location:index.php?action=home');	
 			}
@@ -225,7 +225,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	{
 		$recup = getProfileUpdate($id);
 		$status = checkStatus($id);
-		require('./view/profilepageView.php');
+		require('./view/profilePageView.php');
 	}
 
 	// MODIFIER SON PROFIL

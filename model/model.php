@@ -317,8 +317,10 @@ function addContact($contactId, $idUser)
     function unfollow($contactId, $idUser)
     {
         $db = dbConnect();
-        $req = $db->prepare('DELETE FROM contacts WHERE contacts.contact = ? AND contacts.user = ?');
-        $req->execute(array($contactId, $idUser));
+        $req = $db->prepare('DELETE FROM contacts WHERE contact = ? AND user = ?
+       OR contact = ? AND usuer = ?   
+        ');
+        $req->execute(array($contactId, $idUser,$idUser,$contactId));
         return $req;
     }
 
