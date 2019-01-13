@@ -17,8 +17,7 @@ function addComment($content, $userId, $postId)
     header('Location:index.php?action=home');
 }
 // CHECK LES INFOS D'INSCRIPTION
-function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirmPassword, $status, $job, $company, $town)
-{
+function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirmPassword, $status, $job, $company, $town){
 
     $errors = array();
 
@@ -65,6 +64,9 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
             $path = "./img/profile/" . $email . $ext;
             move_uploaded_file($_FILES['photo']['tmp_name'], $path);
             $profilePhoto = $email . $ext;
+    // SI L'UTILISATEUR N'A PAS CHOISI DE PHOTO DE PROFIL, ON LUI EN ATTRIBUT UNE DEJA EXISTANTE
+        } else if($profilePhoto == false){
+            $profilePhoto = "NetWork.png";
         }
 	// ON ENVOIE LES DONNES DANS LA BDD
         addUser($firstName, $lastName, $email, $phone, $profilePhoto, $hashpassword, $status, $job, $company, $town);
