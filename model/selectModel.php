@@ -268,8 +268,8 @@ function getProfileUpdate($ids)
 //SELECTIONNE LES GROUPES DONT L'UTILISATEUR FAIT PARTIE
 function getGroups($id) {
     $db = dbConnect();
-    $req = $db->prepare("SELECT DISTINCT groupadd.group,groups.title FROM groupadd INNER JOIN groups ON groupadd.group=groups.id WHERE groups.admin !=? AND groupadd.status = 'member' ");
-    $req->execute(array($id));
+    $req = $db->prepare("SELECT DISTINCT groupadd.group,groups.title FROM groupadd INNER JOIN groups ON groupadd.group=groups.id WHERE groups.admin !=? AND groupadd.user = ?  AND groupadd.status = 'member';");
+    $req->execute(array($id,$id));
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
     return $req;
 }

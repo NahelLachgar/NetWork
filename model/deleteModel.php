@@ -14,8 +14,6 @@ function unfollow($contactId, $idUser)
 }
 
 
-
-
 // SUPPRIMER DANS LA TABLE groupAdd
 function deleteGroupAdd($groupId){
     $db = dbConnect();
