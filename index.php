@@ -71,7 +71,11 @@ include_once('controller/deleteController.php');
                 if (!isset($_GET['contactId'])) {
                     $contacts = getContacts($_SESSION['id']);
                     $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
+                    if ($contactsFetch) {
                     $_GET['contactId'] = $contactsFetch[0]['id']; 
+                    } else {
+                        $_GET['contactId'] = 0; 
+                    }
                 } 
                     showMessages($_SESSION['id'],$_GET['contactId']);
                 break;

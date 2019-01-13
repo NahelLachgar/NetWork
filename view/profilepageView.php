@@ -42,7 +42,6 @@ ob_start();
                            <?php if($pass == 0 || $pass == 2): ?>
                          <form action="index.php?action=removeContact">
                              <input type="hidden" name="action" value="removeContact">
-                             <?php var_dump($profile)?>
                             <input type="hidden" name="contactId" value="<?=$profile['id']?>">
                             <button type="submit" class="btn btn-link" ><img src="./img/icon/unfriend.png"></button>
                          </form>

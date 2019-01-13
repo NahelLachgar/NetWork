@@ -10,12 +10,17 @@ include_once('model/selectModel.php');
 
 function home($userId) {
 	$profile = getProfile($userId);
-	$contactsNb = getContactsCount($userId);
+    $contactsNb = getContactsCount($userId);
+    if ($contactswNb>1) {
+        $contactsPosts = getContactsPosts($userId);
+    }
+    else {
+        $userPosts = getUserPosts($userId);
+    }
 	if ($contactsNb>0) {
-	$contactsPosts = getContactsPosts($userId);
 	$companiesSuggests = getCompanySuggests($userId);
 	$employeesSuggests = getEmployeeSuggests($userId);
-	}
+	} 
 	$followedCompaniesNb = getFollowedCompaniesCount($userId);
 	$status = checkStatus($userId);
 	if($profile['status'] == "employee"){
@@ -23,16 +28,16 @@ function home($userId) {
 	}else{
 		include_once('view/homeViewCompany.php');
 	}
-	// include_once('view/homeView.php');
 }
 
 function showMessages ($userId,$contactId) {
 	$groups = getGroupsName($userId);
 	$userProfile = getProfile($userId);
-	$contacts = getContacts($userId);
-	$receiverProfile = getProfile($_GET['contactId']);
-	if ($contacts) {
-	$contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
+    $contacts = getContacts($userId);
+    $contactsFetch = $contacts -> fetch();
+    $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
+    if ($contactsFetch) {
+    $receiverProfile = getProfile($_GET['contactId']);
 	for ($i=0;$i<count($contactsFetch);$i++) {
 		$profile = getProfile($contactsFetch[$i]['id']);
 		$contactProfile[$i] = $profile;
@@ -41,7 +46,7 @@ function showMessages ($userId,$contactId) {
 	$status = checkStatus($userId);
 	include_once('./view/chatView.php');
 	} else {
-		echo("Vous n'avez aucun message.");
+		echo('Vous n\'avez aucun message.<br><a href="index.php?action=home">Retour</a>');
 	}
 }
 function showGroupMessages ($userId,$groupId) {

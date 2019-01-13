@@ -103,15 +103,15 @@ ob_start();
                 <!--- ---------FIL D'ACTUALITÉ--------- -->
                 <div>
                     <?php 
-                    if ($contactsPosts) :
-                        if ($contactsPosts>1) :
+                    if (isset($contactsPosts)) {
+                        if ($contactsPosts > 1) {
                             for ($i = 0; $i < count($contactsPosts); $i++) :
-                            ?>
+                    ?>
                             <div class="card gedf-card">
                                 <div class="card-header">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <?php if ($contactsPosts[$i]['contactId'] !== $_SESSION['id']): ?>
+                                            <?php if ($contactsPosts[$i]['contactId'] !== $_SESSION['id']) : ?>
                                                 <div class="mr-2">
                                                     <img class="rounded-circle" width="45" src="./img/profile/<?= $contactsPosts[$i]['photo'] ?>" alt="photo de profil">
                                                 </div>
@@ -121,10 +121,10 @@ ob_start();
                                                 </div>
                                             <?php endif ?>
                                             <div class="ml-2"> 
-                                            <?php if ($contactsPosts[$i]['contactId'] !== $_SESSION['id']): ?>
+                                            <?php if ($contactsPosts[$i]['contactId'] !== $_SESSION['id']) : ?>
                                                 <form action="index.php?action=profilePage" method="POST">
                                                     <div class="h5 m-0"><button style="color:black;font-size:1.1em;text-decoration:none" type="submit" class="btn btn-link"><?= $contactsPosts[$i]['name'] . ' ' . $contactsPosts[$i]['lastName'] ?></button></div>
-                                                    <input type="hidden" name="contactId" value="<?= $contactsPosts[$i]['id']?>">
+                                                    <input type="hidden" name="contactId" value="<?= $contactsPosts[$i]['id'] ?>">
                                                     <input type="hidden" name="token" value="0">
                                                 </form>
                                             <?php else : ?>
@@ -138,7 +138,7 @@ ob_start();
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> <?= strftime("Le %d %b à %R",strtotime($contactsPosts[$i]['postDate'])) ?></div>
+                                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> <?= strftime("Le %d %b à %R", strtotime($contactsPosts[$i]['postDate'])) ?></div>
                                     <p class="card-text">
                                         <?= $contactsPosts[$i]['content'] ?>
                                     </p>
@@ -147,7 +147,7 @@ ob_start();
                                 <form action="index.php?action=comment" method="post">
                                     <div class="input-group">
                                         <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">
-                                        <input type="hidden" name="postId" value="<?=$contactsPosts[$i]['id']?>">
+                                        <input type="hidden" name="postId" value="<?= $contactsPosts[$i]['id'] ?>">
                                         <div class="input-group-append">
                                         <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
                                             <i class="fa fa-comment"></i>
@@ -158,12 +158,14 @@ ob_start();
                                 </div>
                             </div>
                             <?php 
-                            endfor;
-                        
-                        endif;
-                    else :
-                        echo("Vous n'avez aucune publication a afficher");    
-                    ?>
+                            endfor; 
+                        } else {
+                            echo "abcd";
+                        }
+                    } else {
+                        echo ("Vous n'avez aucune publication a afficher");
+                     }        
+                            ?>
                 </div>
             </div>
                 </div>
@@ -176,8 +178,8 @@ ob_start();
 
 <!--------- SUGGESTIONS DE CONTACTS----------->
 <?php
-if ($employeesSuggests) :
-            if (count($employeesSuggests)>1) :?>
+if (isset($employeesSuggests)) :
+    if (count($employeesSuggests) > 1) : ?>
 
             <div class="col-md-3">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -194,7 +196,7 @@ if ($employeesSuggests) :
                                     <h5 class="card-title"><?= $employeesSuggests[0]['name'] . ' ' . $employeesSuggests[0]['lastName'] ?></h5>
                                     <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[0]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
                                     <form action="index.php?action=addContact" method="POST">
-                                    <input type="hidden" name="contactId" value="<?=$employeesSuggests[0]['id']?>">
+                                    <input type="hidden" name="contactId" value="<?= $employeesSuggests[0]['id'] ?>">
                                         <button type="submit" class="btn btn-link" name="contactId" value="<?= $employeesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
                                     </form>
                         </div>
@@ -226,7 +228,7 @@ if ($employeesSuggests) :
                 <span class="sr-only">Next</span>
             </a>
             </div>
-                            <?php elseif (count($employeeSuggest)==1): ?>
+                            <?php elseif (count($employeeSuggest) == 1) : ?>
                             <div class="card gedf-card">
                                     <div class="card-body">
                                     <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[$i]['photo'] ?>" alt="" />
@@ -242,15 +244,15 @@ if ($employeesSuggests) :
 
             <!--------- SUGGESTIONS D'ENTREPRISE----------->
             <?php 
-            if (isset($companiesSuggests)):            
-            if (count($companiesSuggests)>1) :?>
+            if (isset($companiesSuggests)) :
+                if (count($companiesSuggests) > 1) : ?>
 
             <div class="col-md-3">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <?php for ($i = 0; $i < count($companiesSuggests)-1; $i++) : ?>
-                <li data-target="#carouselExampleIndicators" data-slide-to="<?=$companiesSuggests[$i]['name']?>"></li>
+                <?php for ($i = 0; $i < count($companiesSuggests) - 1; $i++) : ?>
+                <li data-target="#carouselExampleIndicators" data-slide-to="<?= $companiesSuggests[$i]['name'] ?>"></li>
                 <?php endfor ?>
             </ol>
             <div class="carousel-innitemer">
@@ -261,7 +263,7 @@ if ($employeesSuggests) :
                                     <h5 class="card-title"><?= $companiesSuggests[0]['name'] . ' ' . $companiesSuggests[0]['lastName'] ?></h5>
                                     <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[0]['job'] . ' chez ' . $companiesSuggests[0]['company'] ?></h6>
                                     <form action="index.php?action=addContact" method="POST">
-                                    <input type="hidden" name="contactId" value="<?=$companiesSuggests[0]['id']?>">
+                                    <input type="hidden" name="contactId" value="<?= $companiesSuggests[0]['id'] ?>">
                                         <button type="submit" class="btn btn-link" name="contactId" value="<?= $companiesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
                                     </form>
                         </div>
@@ -293,7 +295,7 @@ if ($employeesSuggests) :
                 <span class="sr-only">Next</span>
             </a>
             </div>
-                            <?php elseif (count($companiesSuggests)==1): ?>
+                            <?php elseif (count($companiesSuggests) == 1) : ?>
                             <div class="card gedf-card">
                                     <div class="card-body">
                                     <img class="rounded-circle" width="45"src="./img/profile/<?= $companiesSuggests[$i]['photo'] ?>" alt="" />
@@ -302,9 +304,8 @@ if ($employeesSuggests) :
                                     <a href="index.php?action=addcontacts&id=<?= $companiesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
                                     </div>
                 </div>    
-                            <?php endif; 
-                                    endif;
-                                endif;
+                            <?php endif;
+                            endif;
                             endif;
                             ?>
 <!--------------------------> 
