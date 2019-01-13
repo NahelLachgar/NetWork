@@ -147,6 +147,10 @@ function getContactsPosts($userId)
             ORDER BY p.postDate DESC');
         $posts->execute(array($contactsFetch[0]['id'], $userId));
         $contactsPosts = $posts -> fetchAll(PDO::FETCH_ASSOC);
+    } else if (count($contactsFetch)==0) {
+        $posts = getUserPosts($userId);
+        $contactsPosts = $posts -> fetchAll(PDO::FETCH_ASSOC);
+        var_dump($contactsPosts);
     }
     return $contactsPosts;
 }

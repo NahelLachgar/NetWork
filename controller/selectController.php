@@ -11,16 +11,17 @@ include_once('model/selectModel.php');
 function home($userId) {
 	$profile = getProfile($userId);
     $contactsNb = getContactsCount($userId);
-    if ($contactsNb>1) {
+    
         $contactsPosts = getContactsPosts($userId);
-    }
-    else {
-        $userPosts = getUserPosts($userId);
-    }
+
+   
 	if ($contactsNb>0) {
 	$companiesSuggests = getCompanySuggests($userId);
 	$employeesSuggests = getEmployeeSuggests($userId);
-	} 
+    } 
+    else {
+        $userPosts = getUserPosts($userId);
+    }
 	$followedCompaniesNb = getFollowedCompaniesCount($userId);
 	$status = checkStatus($userId);
 	if($profile['status'] == "employee"){
@@ -67,7 +68,7 @@ function showGroupMessages ($userId,$groupId) {
 
 function contactHome($id,$contactId,$token) {
 	$profile = getProfile($contactId);
-	$contactPosts = getContactPosts($contactId);
+	$contactPosts = getUserPosts($contactId);
 	$contactsNb = getContactsCount($contactId);
 	$followedCompaniesNb = getFollowedCompaniesCount($contactId);
 	$status = checkStatus($id);
