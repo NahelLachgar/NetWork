@@ -1,0 +1,1 @@
+toutes les photos des groupes seront stockées ici

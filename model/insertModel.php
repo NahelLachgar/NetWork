@@ -46,10 +46,10 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
     $insertUser->execute(array($firstName, $lastName, $email, $phone, $photo, $password, $status, $job, $company, $town));
 }
 //CREER UN GROUPE
-function createGroup($nameGroup,$adminId){
+function createGroup($nameGroup,$adminId,$groupPhoto){
     $db = dbConnect();
-    $req = $db->prepare('INSERT INTO groups(title,createDate,admin) VALUES (?,NOW(),?)');
-    $req->execute(array($nameGroup,$adminId));
+    $req = $db->prepare('INSERT INTO groups(title,createDate,admin,photo) VALUES (?,NOW(),?,?)');
+    $req->execute(array($nameGroup,$adminId,$groupPhoto));
     $lastId = $db->lastInsertId();
     return $lastId;
 }

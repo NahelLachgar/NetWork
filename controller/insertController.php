@@ -92,9 +92,26 @@ function removeContact($contactId, $userId)
     }
 }
     //CREER UN GROUPE
-function createGroups($name, $userId)
+function createGroups($groupName, $userId)
 {
-    $create = createGroup($name, $userId);
+    // PHOTO
+    var_dump($_FILES);
+    $groupPhoto = $_FILES['photo']['name'];
+    if ($groupPhoto) {
+    // ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
+        list($name, $ext) = explode(".", $groupPhoto);    
+   // ON RAJOUTE UN . DEVANT L'EXTENSION 
+        $ext = "." . $ext; 
+    // ON MET LA PHOTO DANS UN DOSSIER IMG
+        $path = "./img/groups/" . $groupName . $ext;
+        move_uploaded_file($_FILES['photo']['tmp_name'], $path);
+        $groupPhoto = $groupName . $ext;
+    // SI L'UTILISATEUR N'A PAS CHOISI DE PHOTO DE PROFIL, ON LUI EN ATTRIBUT UNE DEJA EXISTANTE
+    } else if($groupPhoto == false){
+        $groupPhoto = "NetWork.png";
+    }
+    // ON ENVOIE LES DONNES DANS LA BDD
+    $create = createGroup($groupName, $userId, $groupPhoto);
 		//$addAdmin = contactAddGroup()
     $contacts = getContacts($userId);
     $contacts = $contacts->fetchAll(PDO::FETCH_ASSOC);
