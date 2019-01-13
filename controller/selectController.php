@@ -11,7 +11,7 @@ include_once('model/selectModel.php');
 function home($userId) {
 	$profile = getProfile($userId);
     $contactsNb = getContactsCount($userId);
-    if ($contactswNb>1) {
+    if ($contactsNb>1) {
         $contactsPosts = getContactsPosts($userId);
     }
     else {
