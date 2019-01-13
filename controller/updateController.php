@@ -58,7 +58,18 @@ function validateProfile($lastname, $name, $email, $pass, $confirmPass, $phone, 
 	// MODIFIER UN GROUPE
 function updateGroup($name, $admin, $groupId)
 {
-    updateGroups($name, $admin, $groupId);
+    $groupPhoto = $_FILES['photo']['name'];
+    if ($groupPhoto) {
+        // ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
+        list($name, $ext) = explode(".", $groupPhoto);    
+        // ON RAJOUTE UN . DEVANT L'EXTENSION 
+        $ext = "." . $ext; 
+        // ON MET LA PHOTO DANS UN DOSSIER IMG
+        $path = "./img/groups/" . $name . $ext;
+        move_uploaded_file($_FILES['photo']['tmp_name'], $path);
+        $groupPhoto = $name . $ext;
+    }
+    updateGroups($name, $admin, $groupId, $groupPhoto);
     header('Location:index.php?action=groups');
 }
     //AFFICHER LA PAGE DE MODIFICATION D'UN EVENEMENT
