@@ -25,6 +25,15 @@ function getContacts($userId)
     return $contactsId;
 }
 
+// COMPTE LES ID DANS LA TABLE PUBLICATIONS
+function countPublications() {
+    $db = dbConnect();
+    $publications = $db->prepare('SELECT COUNT(*)+1 FROM publications');
+    $publications->execute();
+    $publication = $publications->fetch();
+    return $publication;
+}
+
 function getContactPosts($contactId) {
     $db = dbConnect();
     $posts = $db->prepare('SELECT p.*,u.lastName AS lastName,u.name AS name, u.job AS job, u.company AS company, u.id AS contactId,u.photo AS photo FROM users u 

@@ -133,10 +133,20 @@ ob_start();
                         </div>
                         <div class="card-body">
                             <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> <?= strftime("Le %d %b à %R",strtotime($contactsPosts[$i]['postDate'])) ?></div>
-                            <p class="card-text">
-                                <?= $contactsPosts[$i]['content'] ?>
-                            </p>
-                        </div>
+                            <div class="card-text">
+                                <?php if ($contactsPosts[$i]['type'] == "text"): ?>
+                                    <?= $contactsPosts[$i]['content'] ?>
+                                <?php else : ?>
+                                    <div class="row justify-content-center">
+                                        <div>
+                                            <div class="col-md-12">
+                                                <img  width="200" src="./img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo de profil">
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                            </div>
+                        </div> <!-- CARD BODY -->
                         <div class="card-footer">
                         <form action="index.php?action=comment" method="post">
                             <div class="input-group">
