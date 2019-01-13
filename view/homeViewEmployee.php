@@ -76,7 +76,8 @@ ob_start();
                             <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
                                 <div class="form-group">
                                     <div class="custom-file">
-                                        <input type="file" accept="image/*" name="photo">                     
+                                        <input type="file" accept="image/*" name="photo" class="custom-file-input" id="customFile">
+                                        <label class="custom-file-label" for="customFile">Upload image</label>
                                     </div>
                                 </div>
                                 <div class="py-4"></div>
