@@ -26,15 +26,17 @@ include_once('controller/deleteController.php');
             case 'profilePage':
                 contactHome($_SESSION['id'],$_POST['contactId'],$_POST['token']);
                 break;
-                /* SI LE $_POST['content'] EST FALSE LA PHOTO NE PASSE PAS
             case 'post':
-            if (trim(htmlspecialchars($_POST['content'])) != "") {
-                addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
-            } else {
-                home(htmlspecialchars($_SESSION['id']));
-            } */
-            case 'post':
-                addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
+                $imagePost = $_FILES['photo']['name'];
+                if($imagePost){
+                    addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
+                } else {
+                    if (trim(htmlspecialchars($_POST['content'])) != "") {
+                        addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
+                    } else {
+                        home(htmlspecialchars($_SESSION['id']));
+                    } 
+                }
                 break;
             case 'contactList':
                 showContacts(htmlspecialchars($_SESSION['id']));
