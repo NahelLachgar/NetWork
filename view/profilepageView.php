@@ -32,7 +32,7 @@ ob_start();
                             <div class="h5"><?= $followedCompaniesNb ?></div>
                         </li>
                         <li class="list-group-item">
-                            <form action="index.php?action=contactContacts" action="POST">
+                            <form action="index.php?action=contactContacts" method="POST">
                             <input type="hidden" name="id" value="<?=$profile['id']?>">
                             <button type="submit" class="btn btn-link">Contacts</button>
                             </form>
@@ -40,14 +40,12 @@ ob_start();
                         </li>
                         <li class="list-group-item">
                            <?php if($pass == 0 || $pass == 2): ?>
-                         <form action="index.php?action=removeContact">
-                             <input type="hidden" name="action" value="removeContact">
-                             <?php var_dump($profile)?>
+                         <form action="index.php?action=removeContact" method="POST">
                             <input type="hidden" name="contactId" value="<?=$profile['id']?>">
                             <button type="submit" class="btn btn-link" ><img src="./img/icon/unfriend.png"></button>
                          </form>
                             <?php elseif($pass == 1): ?>
-                        <form action="index.php?action=addContact">
+                        <form action="index.php?action=addContact" method="POST" >
                             <input type="hidden" name="contactId" value="<?=$profile['id']?>">
                             <button type="submit" class="btn btn-link" ><img src="./img/icon/users.png"></button>
                         </form>
