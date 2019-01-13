@@ -8,14 +8,10 @@ include_once('model/updateModel.php');
 function unfollow($contactId, $idUser)
 {
     $db = dbConnect();
-    $req = $db->prepare('DELETE FROM contacts WHERE contact = ? AND user = ?
-   OR contact = ? AND usuer = ?   
-    ');
+    $req = $db->prepare('DELETE FROM contacts WHERE contact = ? AND user = ? OR contact = ? AND user = ?');
     $req->execute(array($contactId, $idUser,$idUser,$contactId));
     return $req;
 }
-
-
 
 
 // SUPPRIMER DANS LA TABLE groupAdd

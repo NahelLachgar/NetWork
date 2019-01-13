@@ -19,10 +19,15 @@ function updateProfiles($lastName, $name, $email, $pass, $photo, $phone, $job, $
     return $req;
 }
  // MODIFIER LE GROUPE
- function updateGroups($name,$admin,$groupId){
+ function updateGroups($name,$admin,$groupId,$groupPhoto){
     $db = dbConnect();
+    if($groupPhoto){
+    $req = $db->prepare("UPDATE groups SET title = ?, admin = ?, photo = ?  WHERE id = ?");
+    $req->execute(array($name, $admin, $groupPhoto, $groupId));
+    } else {
     $req = $db->prepare("UPDATE groups SET title = ?, admin = ?  WHERE id = ?");
     $req->execute(array($name, $admin, $groupId));
+    }
 }
  //MODIFIER EVENEMENT
  function updateEvent($id, $title, $eventDate, $place)

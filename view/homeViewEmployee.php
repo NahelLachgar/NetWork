@@ -69,15 +69,14 @@ ob_start();
                             <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                 <div class="form-group">
                                     <label class="sr-only" for="message">Publier</label>
-                                    <form action="index.php?action=post" method="POST">
-                                    <textarea name="content" class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?" include_onced></textarea>
+                                    <form enctype="multipart/form-data" action="index.php?action=post" method="POST">
+                                    <textarea name="content" class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?"></textarea>
                                 </div>
-
                             </div>
                             <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
                                 <div class="form-group">
                                     <div class="custom-file">
-                                        <input type="file" accept="image/*" class="custom-file-input" id="customFile">
+                                        <input type="file" accept="image/*" name="photo" class="custom-file-input" id="customFile">
                                         <label class="custom-file-label" for="customFile">Upload image</label>
                                     </div>
                                 </div>
@@ -138,11 +137,21 @@ ob_start();
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> <?= strftime("Le %d %b à %R", strtotime($contactsPosts[$i]['postDate'])) ?></div>
-                                    <p class="card-text">
-                                        <?= $contactsPosts[$i]['content'] ?>
-                                    </p>
-                                </div>
+                                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> <?= strftime("Le %d %b à %R",strtotime($contactsPosts[$i]['postDate'])) ?></div>
+                                    <div class="card-text">
+                                        <?php if ($contactsPosts[$i]['type'] == "text"): ?>
+                                            <?= $contactsPosts[$i]['content'] ?>
+                                        <?php else : ?>
+                                            <div class="row justify-content-center">
+                                                <div>
+                                                    <div class="col-md-12">
+                                                        <img  width="200" src="./img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo de profil">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endif ?>
+                                    </div>
+                                </div> <!-- CARD BODY -->
                                 <div class="card-footer">
                                 <form action="index.php?action=comment" method="post">
                                     <div class="input-group">

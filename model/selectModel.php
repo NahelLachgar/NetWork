@@ -25,6 +25,18 @@ function getContacts($userId)
     return $contactsId;
 }
 
+
+
+
+// COMPTE LES ID DANS LA TABLE PUBLICATIONS
+function countPublications() {
+    $db = dbConnect();
+    $publications = $db->prepare('SELECT COUNT(*)+1 FROM publications');
+    $publications->execute();
+    $publication = $publications->fetch();
+    return $publication;
+}
+
 //RÉCUPÈRE LES PUBLICATION D'UN SEUL UTILISATEUR
 function getUserPosts($contactId)
 {
@@ -286,8 +298,8 @@ function getGroup($groupId)
 function getGroups($id)
 {
     $db = dbConnect();
-    $req = $db->prepare("SELECT DISTINCT groupadd.group,groups.title FROM groupadd INNER JOIN groups ON groupadd.group=groups.id WHERE groups.admin !=? AND groupadd.status = 'member' ");
-    $req->execute(array($id));
+    $req = $db->prepare("SELECT DISTINCT groupadd.group,groups.title FROM groupadd INNER JOIN groups ON groupadd.group=groups.id WHERE groups.admin !=? AND groupadd.user = ?  AND groupadd.status = 'member';");
+    $req->execute(array($id,$id));
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
     return $req;
 }

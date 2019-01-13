@@ -27,11 +27,16 @@ include_once('controller/deleteController.php');
                 contactHome($_SESSION['id'],$_POST['contactId'],$_POST['token']);
                 break;
             case 'post':
-            if (trim(htmlspecialchars($_POST['content'])) != "") {
-                addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
-            } else {
-                home(htmlspecialchars($_SESSION['id']));
-            }
+                $imagePost = $_FILES['photo']['name'];
+                if($imagePost){
+                    addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
+                } else {
+                    if (trim(htmlspecialchars($_POST['content'])) != "") {
+                        addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
+                    } else {
+                        home(htmlspecialchars($_SESSION['id']));
+                    } 
+                }
                 break;
             case 'contactList':
                 showContacts(htmlspecialchars($_SESSION['id']));
