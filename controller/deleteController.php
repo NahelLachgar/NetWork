@@ -1,11 +1,11 @@
 <?php
-include_once('controller/insertController.php');
-include_once('controller/selectController.php');
-include_once('controller/updateController.php');
-include_once('model/insertModel.php');
-include_once('model/updateModel.php');
-include_once('model/deleteModel.php');
-include_once('model/selectModel.php');
+require_once('controller/insertController.php');
+require_once('controller/selectController.php');
+require_once('controller/updateController.php');
+require_once('model/insertModel.php');
+require_once('model/updateModel.php');
+require_once('model/deleteModel.php');
+require_once('model/selectModel.php');
 
 // SUPPRIMER UN GROUPE
 function deleteGroup($groupId)

@@ -1,24 +1,24 @@
 <?php
-include_once('controller/insertController.php');
-include_once('controller/selectController.php');
-include_once('controller/deleteController.php');
-include_once('model/insertModel.php');
-include_once('model/updateModel.php');
-include_once('model/deleteModel.php');
-include_once('model/selectModel.php');
+require_once('controller/insertController.php');
+require_once('controller/selectController.php');
+require_once('controller/deleteController.php');
+require_once('model/insertModel.php');
+require_once('model/updateModel.php');
+require_once('model/deleteModel.php');
+require_once('model/selectModel.php');
 //FUNCTION AFFICHE LES INFOS A MODIFIER
 function updateToProfile($id)
 {
     $recup = getProfileUpdate($id);
     $status = checkStatus($id);
-    include_once('./view/profilUpdateView.php');
+    require_once('./view/profilUpdateView.php');
 }
 
 function getProfileSearch($id)
 {
     $recup = getProfileUpdate($id);
     $status = checkStatus($id);
-    include_once('./view/profilePageView.php');
+    require_once('./view/profilePageView.php');
 }
 
 	// MODIFIER SON PROFIL
@@ -106,7 +106,7 @@ function groupManage($groupId,$id) {
     }
     $status = checkStatus($id);
     $group = getGroup($groupId);
-    include_once('./view/manageGroupView.php');
+    require_once('./view/manageGroupView.php');
 }
 
 ?>

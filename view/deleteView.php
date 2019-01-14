@@ -83,5 +83,5 @@
 </div>
 <?php
     $content=ob_get_clean();
-    include_once('view/template.php');
+    require_once('view/template.php');
 ?>

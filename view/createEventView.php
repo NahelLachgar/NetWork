@@ -27,7 +27,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="title">Nom</label>
-                        <input type="text" class="form-control" id="title" name="title" include_onced>
+                        <input type="text" class="form-control" id="title" name="title" require_onced>
                         <div class="invalid-feedback">
                             Nommez votre événement.
                         </div>
@@ -36,7 +36,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
                         <label for="eventDate">Date</label>
-                        <input type="date" class="form-control" id="eventDate" name="eventDate" placeholder="YYYY-MM-JJ HH:MM:SS" include_onced>
+                        <input type="date" class="form-control" id="eventDate" name="eventDate" placeholder="YYYY-MM-JJ HH:MM:SS" require_onced>
                         <div class="invalid-feedback">
                             Fixez une date.
                         </div>
@@ -82,5 +82,5 @@
 <script src="./js/event.js"></script>
 <?php
     $content=ob_get_clean();
-    include_once('view/template.php');
+    require_once('view/template.php');
 ?>

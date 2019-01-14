@@ -1,8 +1,8 @@
 <?php
-include_once('model/dbConnect.php');
-include_once('model/insertModel.php');
-include_once('model/deleteModel.php');
-include_once('model/updateModel.php');
+require_once('model/dbConnect.php');
+require_once('model/insertModel.php');
+require_once('model/deleteModel.php');
+require_once('model/updateModel.php');
 //RÉCUPÉRATION DES INFOS SUR L'UTILISATEUR 
 function getProfile($userId)
 {
@@ -150,7 +150,6 @@ function getContactsPosts($userId)
     } else if (count($contactsFetch)==0) {
         $posts = getUserPosts($userId);
         $contactsPosts = $posts -> fetchAll(PDO::FETCH_ASSOC);
-        var_dump($contactsPosts);
     }
     return $contactsPosts;
 }
