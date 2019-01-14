@@ -48,7 +48,7 @@ function showMessages ($userId,$contactId) {
 	} else {
         $status = checkStatus($userId); 
         $title="messages";
-        $content = 'Vous n\'avez aucun contact.<br><a href="index.php?action=home">Retour</a>';
+        $content = '<center>Vous n\'avez aucun contact.<br><a href="index.php?action=home">Retour</a></center>';
         require('view/template.php');
 	}
 }

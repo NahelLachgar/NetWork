@@ -52,7 +52,7 @@ ob_start();
 	</div>
 	<div class="content">
 		<div class="contact-profile">
-	<!--	PHOTO DU GROUPE <img class="rounded-circle" width="45"src="./img/profile/<$groups['photo'] ?>" alt="" /> -->
+<img class="rounded-circle" width="45"src="./img/profile/<?=$groups['photo'] ?>" alt="" />
 			<p><?= $groups['name']?></p>
         </div>
         
