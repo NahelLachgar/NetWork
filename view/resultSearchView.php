@@ -30,7 +30,13 @@ ob_start();
                             <button type="submit" class="btn btn-link"><img src="./img/icon/users.png"></button>
                         </form>
              <?php else : ?>
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://bit.ly/22hadqw" alt="Photo de profil">&nbsp&nbsp&nbsp<a href="index.php?action=profilePage&id=<?= $result['contactId'] ?>"><?= $result['name'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://bit.ly/22hadqw" alt="Photo de profil">&nbsp&nbsp&nbsp
+                            <form action="index.php?action=profilePage" method="POST">
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                                <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>">
+                                <input type="hidden" name="token" value="1">
+                                <input type="submit" class="btn btn-link" value="<?= $result['name'] . ' ' . $result['lastName'] ?>"> 
+                            </form></h5>
                             <form action="index.php?action=addContact" method="POST">
                             <input type="hidden" name="contactId" value="<?=$result['contactId']?>">
                             <button type="submit" class="btn btn-link">Suivre</button>
