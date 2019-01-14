@@ -30,7 +30,6 @@ ob_start();
                             <button type="submit" class="btn btn-link"><img src="./img/icon/users.png"></button>
                         </form>
              <?php else : ?>
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://bit.ly/22hadqw" alt="Photo de profil">&nbsp&nbsp&nbsp
                             <form action="index.php?action=profilePage" method="POST">
                             <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                                 <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>">
