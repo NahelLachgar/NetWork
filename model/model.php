@@ -490,50 +490,14 @@ function getProfileUpdate($ids)
     function deleteAllMessages($ID)
     {
         $bdd=dbConnect();
-        //RECHERCHER LES MESSAGES DE L'UTILISATEUR
-        $reponse=$bdd->prepare('SELECT privateMessage
-                                FROM sendPrivate, privateMessages
-                                WHERE user=:ID AND privateMessage=privateMessages.id');
+        //SUPPRIMER LES MESSAGES ENVOYES PAR L'UTILISATEUR
+        $reponse=$bdd->prepare('DELETE FROM privateMessages
+        WHERE sender=:ID');
         $reponse->execute(['ID'=>$ID]);
-        $c=array();
-        $k=0;
-        while($donnees=$reponse->fetch())
-        {
-            $c[$k]=$donnees['privateMessage'];
-            $k++;
-        }
-        //RECHERCHER LES MESSAGES RECU PAR L'UTILISATEUR
-        $reponse=$bdd->prepare('SELECT privateMessage
-                                FROM sendPrivate, privateMessages
-                                WHERE receiver=:ID AND privateMessage=privateMessages.id');
+        //SUPPRIMER LES MESSAGE RECU PAR L'UTILISATEUR
+        $reponse=$bdd->prepare('DELETE FROM privateMessages
+        WHERE receiver=:ID');
         $reponse->execute(['ID'=>$ID]);
-        $d=array();
-        $l=0;
-        while($donnees=$reponse->fetch())
-        {
-            $d[$l]=$donnees['privateMessage'];
-            $l++;
-        }
-        //SUPPRIMER LES MESSAGES DE L'UTILISATEUR
-        $reponse=$bdd->prepare('DELETE FROM sendPrivate
-                                WHERE user=:ID');
-        $reponse->execute(['ID'=>$ID]);
-        for($k=0;$k<sizeof($c);$k++)
-        {
-            $reponse=$bdd->prepare('DELETE FROM privateMessages
-                                    WHERE id=:id');
-            $reponse->execute(['id'=>$c[$k]]);
-        }
-        //SUPPRIMER LES MESSAGES RECU PAR L'UTILISATEUR
-        $reponse=$bdd->prepare('DELETE FROM sendPrivate
-                                WHERE receiver=:ID');
-        $reponse->execute(['ID'=>$ID]);
-        for($l=0;$l<sizeof($d);$l++)
-        {
-            $reponse=$bdd->prepare('DELETE FROM privateMessages
-                                    WHERE id=:id');
-            $reponse->execute(['id'=>$d[$l]]);
-        }
     }
 
     //SUPPRIMER EVENEMENTS / LES PARTICIPATIONS DANS LES EVENEMENTS

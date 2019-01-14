@@ -1,6 +1,4 @@
 <?php
-    //récupérer données pour DATE dans updateEventView
-    //changer input date par input number
     //PAGE DE MODIFICATION D'UN EVENEMENT
     $title="Modifier un événement";
     ob_start();
@@ -19,17 +17,18 @@
         <h2>Modifier un événement</h2>
         <p class="lead"></p>
     </div>
-
+   
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
         </div>
         <div class="col-md-12 order-md-1">
             <form enctype="multipart/form-data" action="index.php?action=updateEvent" method="POST">
                 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
-                        <label for="title">Nom</label>
-                        <input type="text" class="form-control" id="title" name="title" value="<?php echo $event[0]; ?>" maxlength="45" required>
+                        <label for="newName">Nom</label>
+                        <input type="text" class="form-control" id="newTitle" name="title" value="<?=$event[0]?>" required>
                         <div class="invalid-feedback">
                             Nommez votre événement.
                         </div>
@@ -37,8 +36,8 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
-                        <label for="eventDate">Date</label>
-                        <input type="date" class="form-control" id="eventDate" name="eventDate" placeholder="YYYY-MM-JJ HH:MM:SS" value="<?php echo $event[1]; ?>" required>
+                        <label for="newName">Date</label>
+                        <input type="date" class="form-control" id="newEventDate" name="eventDate" value="<?=strftime("%Y-%m-%d %H:%M",strtotime($event[1]))?>" placeholder="YYYY-MM-JJ HH:MM:SS" required>
                         <div class="invalid-feedback">
                             Fixez une date.
                         </div>
@@ -46,8 +45,8 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-md-6 mb-3">
-                        <label for="place">Lieu de rendez-vous</label>
-                        <input type="text" class="form-control" id="place" name="place" value="<?php echo $event[2]; ?>" maxlength="45">
+                        <label for="newName">Lieu de rendez-vous</label>
+                        <input type="text" class="form-control" id="newPlace" name="place" value="<?php echo $event[2]; ?>">
                         <div class="invalid-feedback">
                             Donnez une adresse.
                         </div>
