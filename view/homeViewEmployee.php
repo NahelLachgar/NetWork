@@ -145,7 +145,7 @@ ob_start();
                                             <div class="row justify-content-center">
                                                 <div>
                                                     <div class="col-md-12">
-                                                        <img  width="600" src="./img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo de profil">
+                                                        <img  width="100%" src="./img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo de profil">
                                                     </div>
                                                 </div>
                                             </div>

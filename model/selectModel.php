@@ -68,7 +68,7 @@ function getGroupMessages($groupId)
     $db = dbConnect();
     $messages = $db->prepare('SELECT * FROM groupAdd
     WHERE  group = :groupId AND status = "message"
-    ORDER BY sendDate ASC');
+    ORDER BY addDate ASC');
     $messages->execute(array(
         "groupId" => $groupId
     ));
@@ -292,7 +292,8 @@ function getProfileUpdate($ids)
 function getGroup($groupId)
 {
     $db = dbConnect();
-    $req = $db->prepare("SELECT * FROM `groups` WHERE id LIKE ?");
+    $req = $db->prepare("SELECT g.*,gA.* FROM groups g JOIN groupAdd gA 
+    ON g.id = gA.group WHERE id LIKE ?");
     $req->execute(array($groupId));
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
     return $req;
