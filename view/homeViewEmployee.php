@@ -145,7 +145,7 @@ ob_start();
                                             <div class="row justify-content-center">
                                                 <div>
                                                     <div class="col-md-12">
-                                                        <img  width="200" src="./img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo de profil">
+                                                        <img  width="600" src="./img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo de profil">
                                                     </div>
                                                 </div>
                                             </div>
@@ -323,5 +323,5 @@ if (isset($employeesSuggests)) :
     </div>
     <?php 
     $content = ob_get_clean();
-    include_once('view/template.php');
+    require_once('view/template.php');
     ?>

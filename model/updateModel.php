@@ -1,8 +1,8 @@
 <?php
-include_once('model/dbConnect.php');
-include_once('model/insertModel.php');
-include_once('model/selectModel.php');
-include_once('model/deleteModel.php');
+require_once('model/dbConnect.php');
+require_once('model/insertModel.php');
+require_once('model/selectModel.php');
+require_once('model/deleteModel.php');
 // MODIFICATION DES CHAMPS DU PROFIL EXCEPTE LE CHAMP photo
 function updateProfiles($lastName, $name, $email, $pass, $photo, $phone, $job, $company, $town, $id)
 {

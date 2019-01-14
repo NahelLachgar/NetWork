@@ -1,24 +1,24 @@
 <?php
-include_once('controller/insertController.php');
-include_once('controller/selectController.php');
-include_once('controller/deleteController.php');
-include_once('model/insertModel.php');
-include_once('model/updateModel.php');
-include_once('model/deleteModel.php');
-include_once('model/selectModel.php');
+require_once('controller/insertController.php');
+require_once('controller/selectController.php');
+require_once('controller/deleteController.php');
+require_once('model/insertModel.php');
+require_once('model/updateModel.php');
+require_once('model/deleteModel.php');
+require_once('model/selectModel.php');
 //FUNCTION AFFICHE LES INFOS A MODIFIER
 function updateToProfile($id)
 {
     $recup = getProfileUpdate($id);
     $status = checkStatus($id);
-    include_once('./view/profilUpdateView.php');
+    require_once('./view/profilUpdateView.php');
 }
 
 function getProfileSearch($id)
 {
     $recup = getProfileUpdate($id);
     $status = checkStatus($id);
-    include_once('./view/profilePageView.php');
+    require_once('./view/profilePageView.php');
 }
 
 	// MODIFIER SON PROFIL
@@ -56,7 +56,7 @@ function validateProfile($lastname, $name, $email, $pass, $confirmPass, $phone, 
 
 	
 	// MODIFIER UN GROUPE
-function updateGroup($name, $admin, $groupId)
+function updateGroup($groupName, $admin, $groupId)
 {
     $groupPhoto = $_FILES['photo']['name'];
     if ($groupPhoto) {
@@ -65,11 +65,13 @@ function updateGroup($name, $admin, $groupId)
         // ON RAJOUTE UN . DEVANT L'EXTENSION 
         $ext = "." . $ext; 
         // ON MET LA PHOTO DANS UN DOSSIER IMG
-        $path = "./img/groups/" . $name . $ext;
+        $path = "./img/groups/" . $groupName . $ext;
         move_uploaded_file($_FILES['photo']['tmp_name'], $path);
-        $groupPhoto = $name . $ext;
+        $groupPhoto = $groupName . $ext;
+
     }
-    updateGroups($name, $admin, $groupId, $groupPhoto);
+    updateGroups($groupName, $admin, $groupId, $groupPhoto);
+
     header('Location:index.php?action=groups');
 }
     //AFFICHER LA PAGE DE MODIFICATION D'UN EVENEMENT
@@ -104,7 +106,7 @@ function groupManage($groupId,$id) {
     }
     $status = checkStatus($id);
     $group = getGroup($groupId);
-    include_once('./view/manageGroupView.php');
+    require_once('./view/manageGroupView.php');
 }
 
 ?>

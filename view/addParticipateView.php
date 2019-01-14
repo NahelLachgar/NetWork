@@ -80,5 +80,5 @@
 <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
 <?php
     $content=ob_get_clean();
-    include_once('view/template.php');
+    require_once('view/template.php');
 ?>

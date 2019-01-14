@@ -65,14 +65,14 @@ ob_start();
                         
                         <div class="mb-3">
                             <label for="name">Nom du groupe</label>
-                                <input type="text" class="form-control" id="name" name="nameG" placeholder="" include_onced>
+                                <input type="text" class="form-control" id="name" name="nameG" placeholder="" require_onced>
                             <div class="invalid-feedback">                            
                             </div>
                             <span id="aideName"></span>
                         </div>
                         <div class="mb-3">
                             <label for="photo">Photo du groupe</label>
-                                <input type="file" class="form-control" id="photo" name="photo" placeholder="" include_onced>
+                                <input type="file" class="form-control" id="photo" name="photo" placeholder="" require_onced>
                         </div>
                     <a class="creer"><button class="btn btn-primary btn-lg btn-block" name="creer" type="submit">Créer</button></a></form>
                 </div>
@@ -85,5 +85,5 @@ ob_start();
    
 <?php 
 $content = ob_get_clean();
-include_once('view/template.php');
+require_once('view/template.php');
 ?>
