@@ -1,8 +1,11 @@
 <?php
 session_start();
+include_once('controller/updateController.php');
+include_once('controller/insertController.php');
+include_once('controller/selectController.php');
+include_once('controller/deleteController.php');
 //2 case 'post'
 //manque un break à case 'send'
-require('controller/controller.php');
     if (isset($_GET['action'])) {
         switch ($_GET['action']) {
            case 'disconnect':
@@ -21,14 +24,19 @@ require('controller/controller.php');
                 search(htmlspecialchars($_SESSION['id']),htmlspecialchars($_POST['research']));
                 break;
             case 'profilePage':
-                contactHome($_SESSION['id'],$_POST['contactId']);
+                contactHome($_SESSION['id'],$_POST['contactId'],$_POST['token']);
                 break;
             case 'post':
-            if (trim(htmlspecialchars($_POST['content'])) != "") {
-                addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
-            } else {
-                home(htmlspecialchars($_SESSION['id']));
-            }
+                $imagePost = $_FILES['photo']['name'];
+                if($imagePost){
+                    addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
+                } else {
+                    if (trim(htmlspecialchars($_POST['content'])) != "") {
+                        addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
+                    } else {
+                        home(htmlspecialchars($_SESSION['id']));
+                    } 
+                }
                 break;
             case 'contactList':
                 showContacts(htmlspecialchars($_SESSION['id']));
@@ -43,16 +51,17 @@ require('controller/controller.php');
                validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newPass'],$_POST['confirmNewPass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
                 break;
             case 'signUpCompany':
-                require('./view/signUpCompanyView.html');
+                include_once('./view/signUpCompanyView.html');
                 break;
             case 'signUpEmployee':
-                require('./view/signUpEmployeeView.html');
-                break;
-            case 'post':
-                addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
+                include_once('./view/signUpEmployeeView.html');
                 break;
             case 'addContact':
+            if (isset($_POST['contactId'])) {
                 addToContacts(htmlspecialchars($_POST['contactId']),$_SESSION['id']);
+            } else {
+                addToContacts(htmlspecialchars($_GET['contactId']),$_SESSION['id']);
+            }
                 break; 
             case 'removeContact':
                 removeContact(htmlspecialchars($_POST['contactId']),$_SESSION['id']);
@@ -67,7 +76,11 @@ require('controller/controller.php');
                 if (!isset($_GET['contactId'])) {
                     $contacts = getContacts($_SESSION['id']);
                     $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
+                    if ($contactsFetch) {
                     $_GET['contactId'] = $contactsFetch[0]['id']; 
+                    } else {
+                        $_GET['contactId'] = 0; 
+                    }
                 } 
                     showMessages($_SESSION['id'],$_GET['contactId']);
                 break;
@@ -75,7 +88,8 @@ require('controller/controller.php');
                 addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break;
             case 'send':
-                require('view/send.php');
+                include_once('view/send.php');
+                break;
             case 'groups':
                 sessionGroup($_SESSION['id']);
                 break;
@@ -157,12 +171,15 @@ require('controller/controller.php');
             case 'leaveTheGroups':
                 RemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
                 break;
+            case 'showGroupMessages':
+                getGroupMessages($_SESSION['id'],$_GET['groupId']);
+                break;
             default:
                 home($_SESSION['id']);
         }
     } else {
         if (!isset($_SESSION['name'])) {
-        require('view/signInView.php');
+        include_once('view/signInView.php');
         } else {
             header('Location:index.php?action=home');
     }

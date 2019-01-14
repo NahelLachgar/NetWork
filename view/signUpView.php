@@ -42,7 +42,7 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">Prenom</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" required>
+                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" include_onced>
                 <div class="invalid-feedback">
                   Entrez votre prenom .
                 </div>
@@ -50,7 +50,7 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label for="lastName">Nom</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" name="lastName" required>
+                <input type="text" class="form-control" id="lastName" placeholder="" name="lastName" include_onced>
                 <div class="invalid-feedback">
                   Entrez votre nom.
                 </div>
@@ -64,7 +64,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text">@</span>
                 </div>
-                <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email" required>
+                <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email" include_onced>
                 <div class="invalid-feedback" style="width: 100%;">
                   Entrez votre adresse mail.
                 </div>
@@ -74,7 +74,7 @@
 
             <div class="mb-3">
               <label for="phone">Numero de telephone</label>
-              <input type="text" class="form-control" id="phone" name="phone" required>
+              <input type="text" class="form-control" id="phone" name="phone" include_onced>
               <div class="invalid-feedback">
                 Entrez votre numero de telephone.
               </div>
@@ -89,7 +89,7 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="mdp">Mot de passe</label>
-                <input type="password" class="form-control" id="mdp" name="password" required>
+                <input type="password" class="form-control" id="mdp" name="password" include_onced>
                 <div class="invalid-feedback">
                   Entrez un mot de passe.
                 </div>
@@ -97,7 +97,7 @@
               
               <div class="col-md-6 mb-3">
                <label for="mdp2">Confirmation du mot de passe</label>
-                <input type="password" class="form-control" id="mdp2" name="confirmPassword" /*onclick="password()"*/ required>
+                <input type="password" class="form-control" id="mdp2" name="confirmPassword" /*onclick="password()"*/ include_onced>
                 <div class="invalid-feedback">
                   Entrez votre mot de passe.
                 </div>
@@ -108,7 +108,7 @@
             <div class="row">
               <div class="col-md-3 mb-3">
                 <label for="Status">Statut</label>
-                <select name="status" class="custom-select d-block w-100" id="Status" required>
+                <select name="status" class="custom-select d-block w-100" id="Status" include_onced>
                   <option value="">Choisissez un statut</option>
                   <option value="1">entreprise</option>
                   <option value="2">employé</option>
@@ -119,7 +119,7 @@
               </div>
               <div class="col-md-4 mb-3">
                 <label for="job">Emploi</label>
-              <input type="text" class="form-control" id="job" name="job" required>
+              <input type="text" class="form-control" id="job" name="job" include_onced>
               <div class="invalid-feedback">
                 Entrez votre profession.
               </div>
@@ -127,7 +127,7 @@
               </div>
               <div class="col-md-5 mb-3">
                 <label for="entreprise">Entreprise</label>
-                <input type="text" name="company" class="form-control" id="company" required>
+                <input type="text" name="company" class="form-control" id="company" include_onced>
                 <div class="invalid-feedback">
                   Entrez votre d'entreprise de travail.
                 </div>
@@ -136,7 +136,7 @@
             </div>
             <div class="mb-3">
               <label for="ville">Ville</label>
-              <input type="text" class="form-control" id="town" name="town" required>
+              <input type="text" class="form-control" id="town" name="town" include_onced>
               <div class="invalid-feedback">
                 Entrez votre ville.
               </div>

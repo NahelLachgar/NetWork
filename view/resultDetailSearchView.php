@@ -99,5 +99,5 @@ ob_start();
 <?php
 endif;
 $content = ob_get_clean();
-require('view/template.php');
+include_once('view/template.php');
 ?>

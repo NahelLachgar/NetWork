@@ -11,13 +11,32 @@ ob_start();
       </div>
         <br>
       <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
-
-        </div>
-        <div class="col-md-12 order-md-1">
+        <div class="col-md-12">
         
           <form action="index.php?action=updateGroup" method="POST">
-            <div class="row justify-content-center">
+     
+              <div class="row justify-content-center">
+                  <div class="col-md-12-center">
+                      <button class="btn btn-link" id="photoUpdate">
+                      <img class="rounded-circle" width="100" src="./img/groups/<?= $group[0]['photo'] ?>" alt="Photo du groupe">
+                      </button>
+                  <input style="display:none" type="file" class="form-control-file" name="photo" id="photoUpdateFile"> 
+                  </div>
+              </div>   
+          </div>      
+          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script>
+            jQuery(function($){
+                $('#photoUpdateFile').click(function(e){
+                });
+                
+                $('#photoUpdate').click(function(e){
+                    $('#photoUpdateFile').trigger('click'); // équivalent de  $('#lien1').click();
+                });
+            });
+            </script>
+  </div>
+  <div class="row justify-content-center">
               <div class="col-md-3 mb-3">
                 <label for="lastName">Nom</label>
                 <input type="text" class="form-control" id="groupName" placeholder="" name="groupName" value="<?= $group[0]['title'] ?>">
@@ -32,7 +51,7 @@ ob_start();
                 </select>
               </div>
             </div>
-
+          
             <input type="hidden" name="groupId" value="<?= $group[0]['id'] ?>">
 
           <div class="row justify-content-center">
@@ -66,11 +85,11 @@ ob_start();
       </div>
 
     </div>
-
+          </div>
 
 
 
 <?php 
     $content = ob_get_clean();
-    require('view/template.php');
+    include_once('view/template.php');
 ?>

@@ -8,8 +8,8 @@
 	<center>
 		<h1>Se connecter</h1>
 		<form action="?action=checkUser" method="POST">
-			<input type="mail" name="email" placeholder="email" required><br>
-			<input type="password" name="password" placeholder="Mot de passe" required><br>
+			<input type="mail" name="email" placeholder="email" include_onced><br>
+			<input type="password" name="password" placeholder="Mot de passe" include_onced><br>
 			<input type="submit" name="SignUp" value="Se connecter"><br>
 		</form>
 		<a href="index.php?action=signUp">Inscrivez-vous</a>
@@ -54,9 +54,9 @@
       <?php endif; ?>
 
       <label for="inputEmail" class="sr-only">Adresse mail</label>
-      <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Adresse mail" required autofocus>
+      <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Adresse mail" include_onced autofocus>
       <label for="inputPassword" class="sr-only">Mot de passe</label>
-      <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Mot de passe" required>
+      <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Mot de passe" include_onced>
     <button class="btn btn-lg btn-primary btn-block" name="SignUp" type="submit">Se connecter</button>
     Afficher le mot de passe <input type="checkbox" id="showPass"><br>
     <a href="index.php?action=signUpEmployee">Inscrivez-vous en tant que membre</a>

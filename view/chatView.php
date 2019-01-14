@@ -2,40 +2,18 @@
 $title = "Messages";
 ob_start();
 ?>
-<script>
-
-function myFunction() {
-// ON DÉCLARE LES VARIABLES
-  var input, filter, ul, li, a, i, txtValue;
-  input = document.getElementById('contactSearch');
-  filter = input.value.toUpperCase();
-  ul = document.getElementById("contactList");
-  li = ul.getElementsByTagName('li');
-
-// ON PARCOURE LA LISTE EN MASQUANT CEUX QUI NE CORRESPONDENT PAS À LA RECHERCHE
-  for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName("p")[0];
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
-}
-</script>
+<script src="js/filter.js"></script>
 <div id="frame">
 	<div id="sidepanel">
 		<div id="profile">
 			<div class="wrap">
-			
 				<img id="profile-img" src="./img/profile/<?= $userProfile['photo'] ?>" class="online rounded-circle" width="45" alt="" />
 				<p><?= $userProfile['name'] . ' ' . $userProfile['lastName'] ?></p>
 			</div>
 		</div>
 		<div id="search">
 			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input id="contactSearch" onkeyup="myFunction()" type="text" placeholder="Recherchez un contact..." />
+			<input id="contactSearch" onkeyup="filter()" type="text" placeholder="Recherchez un contact..." />
 		</div>
 		<div id="contacts">
 			<ul id="contactList">
@@ -51,12 +29,22 @@ function myFunction() {
 						</div>
 					</div>
 				</li>
-			</a>
+			</a>		
+		<?php endfor;	
+				 for ($i = 0; $i < count($groups); $i++) : ?>
+			<a class="contactLink" style="text-decoration:none;color:white" href='index.php?action=showGroupMessages&groupId=<?=$contactProfile[$i]['id']?>'>
 
-			
-			
-				
-                <?php endfor ?>
+				<li class="contact">
+					<div class="wrap">
+						<span class="contact-status online"></span>
+						<img class="rounded-circle" width="45"src="./img/profile/<?= $userProfile['photo'] ?>" alt="" />
+						<div class="meta">
+						<p class="name"><?= $groups[$i]['title']?></p>
+						</div>
+					</div>
+				</li>
+			</a>		
+				<?php endfor ?>	
 			</ul>
 		</div>
 		
@@ -78,6 +66,11 @@ function myFunction() {
 			}
 			?>
 				<li id="<?= $messagesFetch['id'] ?>" class=<?= $class ?>>
+				<?php if($messagesFetch['sender']==$_SESSION['id']):?>
+					<img src="./img/profile/<?=$userProfile['photo']?>" alt="">
+				<?php else:?>
+				<img src="./img/profile/<?=$receiverProfile['photo']?>" alt="">
+				<?php endif?>
 					<p><?= $messagesFetch['content'] ?></p>
 				</li>
                     <?php endwhile ?>
@@ -96,71 +89,8 @@ function myFunction() {
 	</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-	/*$(window).on('keydown', function(e) {
-		if (e.which == 13) {
-			return false;
-		}
-	});*/
-	function load() {
-				setInterval(function(){
-				var lastId = $('#messages li:last').attr('id');
-				var contactId = $('#contactId').val();
-				$.ajax({
-					url : "view/load.php",
-					type : "POST",
-					data : "contactId=" + contactId + "&messageId=" + lastId,
-					dataType:"html",
-					success : function(html){
-						$('.messages ul').append(html);
-					}
-				});
-			},1000)
-	}
-			load();
-
-	$('#send').click(function(e){
-			var content = $('#content').val();
-			var contactId = $('#contactId').val();
-			if ($.trim(content) != "") {			
-				$.ajax({
-				url : "view/send.php", // on donne l'URL du fichier de traitement
-				type : "POST", // la requête est de type POST
-				data : "content=" + content + "&contactId=" + contactId // et on envoie nos données
-				});
-			}
-		$('#content').val("");
-	});
-
-	$('#content').keydown(function(e){
-		if (e.which == 13) {
-			e.preventDefault();
-			var content = $('#content').val();
-			var contactId = $('#contactId').val();
-			if ($.trim(content) != "") {			
-				$.ajax({
-				url : "view/send.php", // on donne l'URL du fichier de traitement
-				type : "POST", // la requête est de type POST
-				data : "content=" + content + "&contactId=" + contactId // et on envoie nos données
-				});
-			}
-			$('#content').val("");
-		}
-
-	});
-	
-
-
-
-
-
-
-
-
-});
-</script>
+<script src="js/chat.js"></script>
  <?php 
 $content = ob_get_clean();
-require('./view/template.php');
+include_once('./view/template.php');
 ?>

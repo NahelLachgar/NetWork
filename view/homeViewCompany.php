@@ -22,12 +22,9 @@ ob_start();
                 <div class="card">
                     <div class="card-body">
                     <img class="rounded-circle" width="45"src="./img/profile/<?= $profile['photo'] ?>" alt="" />
-						<?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
+						<?= $profile['name'] ?></div>
                         <div class="h6">
                             <ul class="list-group list-group-flush">
-                                <li>
-                                    <?= $profile['job'] ?>
-                                </li>
                                 <li>
                                     <?= $profile['company'] ?>
                                 </li>
@@ -74,7 +71,7 @@ ob_start();
                                 <div class="form-group">
                                     <label class="sr-only" for="message">Post</label>
                                     <form action="index.php?action=post" method="POST">
-                                    <textarea name="content" class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?" required></textarea>
+                                    <textarea name="content" class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?" include_onced></textarea>
                                 </div>
 
                             </div>
@@ -102,7 +99,7 @@ ob_start();
                 </div>
                 <!----------------->
 
-            <?php if ($contactsNb>0) :?>
+          
                
 
                 <!--- ---------FIL D'ACTUALITÉ--------- -->
@@ -136,20 +133,32 @@ ob_start();
                         </div>
                         <div class="card-body">
                             <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> <?= strftime("Le %d %b à %R",strtotime($contactsPosts[$i]['postDate'])) ?></div>
-                            <p class="card-text">
-                                <?= $contactsPosts[$i]['content'] ?>
-                            </p>
-                        </div>
+                            <div class="card-text">
+                                <?php if ($contactsPosts[$i]['type'] == "text"): ?>
+                                    <?= $contactsPosts[$i]['content'] ?>
+                                <?php else : ?>
+                                    <div class="row justify-content-center">
+                                        <div>
+                                            <div class="col-md-12">
+                                                <img  width="200" src="./img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo de profil">
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif ?>
+                            </div>
+                        </div> <!-- CARD BODY -->
                         <div class="card-footer">
                         <form action="index.php?action=comment" method="post">
                             <div class="input-group">
                                 <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">
                                 <input type="hidden" name="postId" value="<?=$contactsPosts[$i]['id']?>">
-                                <div class="input-group-append">
+                                
+                            <input type="hidden" name="company" value=" ">
                                 <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
                                     <i class="fa fa-comment"></i>
                                 </button>
                         </form>
+                        
                 </div>
                 </div>
                         </div>
@@ -163,144 +172,8 @@ ob_start();
                 </div>
             </div>
                 <!--------------------------------->
-
-
-               
-
-
-
-<!--------- SUGGESTIONS DE CONTACTS----------->
-<?php if (count($employeesSuggests)>1) :?>
-
-<div class="col-md-3">
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-innitemer">
-    <div class="carousel- active">
-    <div class="card gedf-card">
-            <div class="card-body">
-                        <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[$i]['photo'] ?>" alt="" />                       
-                        <h5 class="card-title"><?= $employeesSuggests[0]['name'] . ' ' . $employeesSuggests[0]['lastName'] ?></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[0]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
-                        <form action="index.php?addContact" method="POST">
-                        <input type="hidden">
-                            <button type="button" class="btn btn-link" name="contactId" value="<?= $employeesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
-                        </form>
-            </div>
-        </div>
-    </div>
-    <?php 
-    for ($i = 0; $i < count($employeesSuggests); $i++) : ?>
-    <div class="carousel-item">
-    <div class="card gedf-card">
-                        <div class="card-body">
-                        <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[$i]['photo'] ?>" alt="" />
-                        <h5 class="card-title"><?= $employeesSuggests[$i]['name'] . ' ' . $employeesSuggests[$i]['lastName'] ?></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[$i]['job'] . ' chez ' . $employeesSuggests[$i]['company'] ?></h6>
-                        <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[$i]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
-                        </div>
-    </div>    
-    </div> 
-    <?php endfor; ?>
-    
-
-    
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-                <?php elseif (count($employeeSuggest)==1): ?>
-                <div class="card gedf-card">
-                        <div class="card-body">
-                        <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[$i]['photo'] ?>" alt="" />                       
-                         <h5 class="card-title"><?= $employeesSuggests[0]['name'] . ' ' . $employeesSuggests[0]['lastName'] ?></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[$i]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
-                        <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
-                        </div>
-    </div>    
-                <?php endif; ?>
-
-
-<!--------------------------> 
-
-<!--------- SUGGESTIONS D'ENTREPRISE----------->
-<?php if (count($companiesSuggests)>1) :?>
-
-<div class="col-md-3">
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <?php for ($i = 0; $i < count($companiesSuggests); $i++) : ?>
-    <li data-target="#carouselExampleIndicators" data-slide-to="<?=$companiesSuggests[$i]?>"></li>
-    <?php endfor ?>
-  </ol>
-  <div class="carousel-innitemer">
-    <div class="carousel- active">
-    <div class="card gedf-card">
-            <div class="card-body">
-            <img class="rounded-circle" width="45"src="./img/profile/<?= $companiesSuggests[$i]['photo'] ?>" alt="" />
-                        <h5 class="card-title"><?= $companiesSuggests[0]['name'] . ' ' . $companiesSuggests[0]['lastName'] ?></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[0]['job'] . ' chez ' . $companiesSuggests[0]['company'] ?></h6>
-                        <form action="index.php?addContact" method="POST">
-                        <input type="hidden">
-                            <button type="button" class="btn btn-link" name="contactId" value="<?= $companiesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
-                        </form>
-            </div>
-        </div>
-    </div>
-    <?php 
-    for ($i = 0; $i < count($companiesSuggests); $i++) : ?>
-    <div class="carousel-item">
-    <div class="card gedf-card">
-                        <div class="card-body">
-                        <img class="rounded-circle" width="45"src="./img/profile/<?= $companiesSuggests[$i]['photo'] ?>" alt="" />
-                        <h5 class="card-title"><?= $companiesSuggests[$i]['name'] . ' ' . $companiesSuggests[$i]['lastName'] ?></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[$i]['job'] . ' chez ' . $companiesSuggests[$i]['company'] ?></h6>
-                        <a href="index.php?action=addcontacts&id=<?= $companiesSuggests[$i]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
-                        </div>
-    </div>    
-    </div> 
-    <?php endfor; ?>
-    
-
-    
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>
-                <?php elseif (count($companiesSuggests)==1): ?>
-                <div class="card gedf-card">
-                        <div class="card-body">
-                        <img class="rounded-circle" width="45"src="./img/profile/<?= $companiesSuggests[$i]['photo'] ?>" alt="" />
-                        <h5 class="card-title"><?= $companiesSuggests[0]['name'] . ' ' . $companiesSuggests[0]['lastName'] ?></h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[$i]['job'] . ' chez ' . $companiesSuggests[0]['company'] ?></h6>
-                        <a href="index.php?action=addcontacts&id=<?= $companiesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
-                        </div>
-    </div>    
-                <?php endif; 
-                        endif;
-                ?>
-<!--------------------------> 
-
- 
     </div>
     <?php 
     $content = ob_get_clean();
-    require('view/template.php');
+    include_once('view/template.php');
     ?>
