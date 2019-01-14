@@ -71,7 +71,7 @@ ob_start();
                                 <div class="form-group">
                                     <label class="sr-only" for="message">Post</label>
                                     <form action="index.php?action=post" method="POST">
-                                    <textarea name="content" class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?" include_onced></textarea>
+                                    <textarea name="content" class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?" require_onced></textarea>
                                 </div>
 
                             </div>
@@ -140,7 +140,7 @@ ob_start();
                                     <div class="row justify-content-center">
                                         <div>
                                             <div class="col-md-12">
-                                                <img  width="200" src="./img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo de profil">
+                                                <img  width="600" src="./img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo de profil">
                                             </div>
                                         </div>
                                     </div>
@@ -175,5 +175,5 @@ ob_start();
     </div>
     <?php 
     $content = ob_get_clean();
-    include_once('view/template.php');
+    require_once('view/template.php');
     ?>

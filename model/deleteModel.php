@@ -1,8 +1,8 @@
 <?php
-include_once('model/dbConnect.php');
-include_once('model/insertModel.php');
-include_once('model/deleteModel.php');
-include_once('model/updateModel.php');
+require_once('model/dbConnect.php');
+require_once('model/insertModel.php');
+require_once('model/deleteModel.php');
+require_once('model/updateModel.php');
 
 //UNFOLLOW UN CONTACT
 function unfollow($contactId, $idUser)
