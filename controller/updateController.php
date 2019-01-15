@@ -72,27 +72,7 @@ function updateGroup($name, $admin, $groupId)
     updateGroups($name, $admin, $groupId, $groupPhoto);
     header('Location:index.php?action=groups');
 }
-    //AFFICHER LA PAGE DE MODIFICATION D'UN EVENEMENT
-function updateEventView($ID, $id)
-{
-    $event = infoEvent($id);
-    $status = checkStatus($ID);
-    include('view/updateEventView.php');
-}
 
-	//MODIFIER UN EVENEMENT
-function modifyEvent($id, $title, $eventDate, $place)
-{
-		//VERIFIER LSI LA VARIABLE place EST VIDE OU NON PUIS MODIFIER L'EVENEMENT
-    if (isset($place)) {
-			//AVEC place
-        updateEvent($id, $title, $eventDate, $place);
-    } else {
-			//SANS place
-        updateEvent($id, $title, $eventDate, "");
-    }
-    eventView($_SESSION['id'], $id, 'admin');
-}
 function groupManage($groupId,$id) {
     $idGroup = $groupId;
     $members = selectContactGroup($groupId);
@@ -107,4 +87,17 @@ function groupManage($groupId,$id) {
     include_once('./view/manageGroupView.php');
 }
 
+//MODIFIER UN EVENEMENT
+function modifyEvent($id, $title, $eventDate, $place)
+{
+    //VERIFIER LSI LA VARIABLE place EST VIDE OU NON PUIS MODIFIER L'EVENEMENT
+    if (isset($place)) {
+        //AVEC place
+        updateEvent($id, $title, $eventDate, $place);
+    } else {
+        //SANS place
+        updateEvent($id, $title, $eventDate, "");
+    }
+    eventView($_SESSION['id'], $id, 'admin');
+}
 ?>

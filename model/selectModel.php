@@ -150,7 +150,6 @@ function getContactsPosts($userId)
     } else if (count($contactsFetch)==0) {
         $posts = getUserPosts($userId);
         $contactsPosts = $posts -> fetchAll(PDO::FETCH_ASSOC);
-        var_dump($contactsPosts);
     }
     return $contactsPosts;
 }

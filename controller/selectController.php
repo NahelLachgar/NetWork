@@ -216,6 +216,7 @@ function checkUserExists($email, $password){
 		}
 	}
 }
+
 //AFFICHER LA PAGE CREATION D'UN EVENEMENT
 function createEventView($id, $role)
 {
@@ -229,44 +230,19 @@ function createEventView($id, $role)
     }
 }
 
-//CREER UN EVENEMENT
-function createEvent($id, $title, $eventDate, $place)
+//AFFICHER LA PAGE DE MODIFICATION D'UN EVENEMENT
+function updateEventView($ID, $id)
 {
-    //VERIFIER LE REMPLISSAGE DE LA SAISIE DE LA VARIABLE PLACE PUIS CREER L'EVENEMENT
-    if(isset($place) && empty($place)!=true) {
-        //AVEC LE CHAMP 'PLACE' REMPLI
-        insertEvent($id, $title, $eventDate, $place);
-    }
-    else {
-        //SANS LE CHAMP 'PLACE' REMPLI
-        insertEvent($id, $title, $eventDate, "");
-    }
-    $_SESSION['erreur']="L'événement '".$title."' a bien été créé.";
-    header('location: index.php?action=showEvents');
+    $event = infoEvent($id);
+    $status = checkStatus($ID);
+    include('view/updateEventView.php');
 }
+
 //AFFICHER LA PAGE D'AJOUT DE PARTICIPATION
 function addParticipateView($ID, $id)
 {
     $contact=infoContact($ID, $id);
     $status=checkStatus($ID);
     include('view/addParticipateView.php');
-}
-
-//AJOUTER DES PARTICIPATIONS A UN EVENEMENT
-function addParticipate($ID, $contact, $id)
-{
-    //VERIFIER QU'IL Y A AU MOINS UNE CASE COCHEE
-    if($contact!=="") {
-        //AJOUTER LES CONTACTS DANS L'EVENEMENT
-        foreach($contact as $valeur) {
-           insertParticipate($valeur, $id);
-        }
-        $_SESSION['erreur']="Vos contacts ont bien été ajouté à votre événement.";
-        eventView($ID, $id, 'admin');
-    }
-    else {
-        $_SESSION['erreur']="Vous n'avez sélectionné aucun contact à ajouter aux participants de votre événement.";
-        addParticipateView($ID, $id);
-    }
 }
 ?>

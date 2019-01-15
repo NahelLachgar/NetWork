@@ -110,7 +110,6 @@ function removeContact($contactId, $userId)
 function createGroups($groupName, $userId)
 {
     // PHOTO
-    var_dump($_FILES);
     $groupPhoto = $_FILES['photo']['name'];
     if ($groupPhoto) {
     // ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
@@ -150,5 +149,39 @@ function addContactsToGroup($contact, $status, $groupId)
         contactAddGroup($contact[$i], $status, $groupId);
     }
     sessionGroup($_SESSION['id'], $_SESSION['id']);
+}
+
+//CREER UN EVENEMENT
+function createEvent($id, $title, $eventDate, $place)
+{
+    //VERIFIER LE REMPLISSAGE DE LA SAISIE DE LA VARIABLE PLACE PUIS CREER L'EVENEMENT
+    if(isset($place) && empty($place)!=true) {
+        //AVEC LE CHAMP 'PLACE' REMPLI
+        insertEvent($id, $title, $eventDate, $place);
+    }
+    else {
+        //SANS LE CHAMP 'PLACE' REMPLI
+        insertEvent($id, $title, $eventDate, "");
+    }
+    $_SESSION['erreur']="L'événement '".$title."' a bien été créé.";
+    header('location: index.php?action=showEvents');
+}
+
+//AJOUTER DES PARTICIPATIONS A UN EVENEMENT
+function addParticipate($ID, $contact, $id)
+{
+    //VERIFIER QU'IL Y A AU MOINS UNE CASE COCHEE
+    if($contact!=="") {
+        //AJOUTER LES CONTACTS DANS L'EVENEMENT
+        foreach($contact as $valeur) {
+           insertParticipate($valeur, $id);
+        }
+        $_SESSION['erreur']="Vos contacts ont bien été ajouté à votre événement.";
+        eventView($ID, $id, 'admin');
+    }
+    else {
+        $_SESSION['erreur']="Vous n'avez sélectionné aucun contact à ajouter aux participants de votre événement.";
+        addParticipateView($ID, $id);
+    }
 }
 ?>

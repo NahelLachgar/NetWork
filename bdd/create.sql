@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`groups` (
   `title` VARCHAR(45) NOT NULL,
   `createDate` DATE NULL,
   `admin` INT NOT NULL,
-    `photo` VARCHAR(255) NULL,
+  `photo` VARCHAR(255) NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
   UNIQUE INDEX `titre_UNIQUE` (`title` ASC) )
