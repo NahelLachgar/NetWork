@@ -150,4 +150,10 @@ function addContactsToGroup($contact, $status, $groupId)
     }
     sessionGroup($_SESSION['id'], $_SESSION['id']);
 }
+
+	//AJOUTER LES CONTACTS DANS UN GROUPE PENDANT LA MODIF DE GROUPE
+function addToGroup($contact, $status, $groupId, $userId){
+        contactAddGroup($contact, $status, $groupId);
+        groupManage($groupId,$userId);
+    }
 ?>

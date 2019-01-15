@@ -133,6 +133,7 @@ function sessionGroup($id) {
 function groupManage($groupId,$id) {
     $idGroup = $groupId;
     $members = selectContactGroup($groupId);
+    
     for($i = 0; $i < count($members); $i++) {
         $memberProfile[] = getProfile($members[$i]['user']);
     }
@@ -141,6 +142,30 @@ function groupManage($groupId,$id) {
     }
     $status = checkStatus($id);
     $group = getGroup($groupId);
+
+    $contacts = getContacts($id);
+    $contact = $contacts->fetchAll();
+
+    $a = count($res);
+    $b = count($contact);
+
+    $contactProfile = "";
+
+    if(count($res) != count($contact)){
+        foreach ($res as $member){
+            for($i = 0; $i < count($res)-1; $i++){
+                if($member['id'] == $contact[$i]['id']){
+                    unset($contact[$i]); 
+                    $contact = array_values($contact);  
+                }
+            }
+        }
+
+        for($i = 0; $i < count($contact); $i++) {
+            $contactProfile[] = getProfile($contact[0][$i]);
+        }
+    }
+
     require_once('./view/manageGroupView.php');
 }
 
