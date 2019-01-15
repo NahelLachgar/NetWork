@@ -50,14 +50,14 @@ ob_start();
         </div>        
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
-    jQuery(function($){
-        $('#photoUpdateFile').click(function(e){
-        });
+    //jQuery(function($){
+       // $('#photoUpdateFile').click(function(e){
+        // });
          
         $('#photoUpdate').click(function(e){
             $('#photoUpdateFile').click(); // équivalent de  $('#lien1').click();
         });
-    });
+    //});
     </script>
             <div class="row">
               <div class="col-md-6 mb-3">
@@ -103,14 +103,14 @@ ob_start();
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="mdp">Mot de passe</label>
-                <input type="password" class="form-control" id="mdp" name="newPass" require_onced>
+                <input type="password" class="form-control" id="mdp" name="newPass" required require_onced>
                 <div class="invalid-feedback">
                   Entrez un mot de passe.
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                <label for="mdp2">Confirmation du mot de passe</label>
-                <input type="password" class="form-control" id="mdp2" name="confirmNewPass" require_onced>
+                <input type="password" class="form-control" id="mdp2" name="confirmNewPass" required require_onced>
                 <div class="invalid-feedback">
                   Rentrez de nouveau le mot de passe.
                 </div>

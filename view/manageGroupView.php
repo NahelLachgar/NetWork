@@ -23,14 +23,14 @@ ob_start();
           </div>      
           <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
             <script>
-                jQuery(function($){
-                    $('#photoUpdateFile').click(function(e){
-                    });
+                //jQuery(function($){
+                //  $('#photoUpdateFile').click(function(e){
+                //  });
                     
                     $('#photoUpdate').click(function(e){
                         $('#photoUpdateFile').click(); // équivalent de  $('#lien1').click();
                     });
-                });
+                // });
             </script>
   </div>
   <div class="row justify-content-center">
