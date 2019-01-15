@@ -1,11 +1,11 @@
 <?php
-include_once('controller/deleteController.php');
-include_once('controller/selectController.php');
-include_once('controller/updateController.php');
-include_once('model/insertModel.php');
-include_once('model/updateModel.php');
-include_once('model/deleteModel.php');
-include_once('model/selectModel.php');
+require_once('controller/deleteController.php');
+require_once('controller/selectController.php');
+require_once('controller/updateController.php');
+require_once('model/insertModel.php');
+require_once('model/updateModel.php');
+require_once('model/deleteModel.php');
+require_once('model/selectModel.php');
 function addPost($content, $type, $userId)
 {
     // PHOTO
@@ -39,7 +39,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 	// ON VERIFIE QUE LES DONNEES NE SOIT PAS VIDE
     if (empty($firstName) || empty($lastName) || empty($email) || empty($phone) || empty($password) || empty($confirmPassword) || empty($status) || empty($job) || empty($company) || empty($town)) {
         $errors['empty'] = "Vérifier que les champs sont bien remplis.";
-        include_once('view/signUpView.php');
+        require_once('view/signUpView.php');
     }
 
 	// ON SECURISE LES DONNEES 
@@ -85,7 +85,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
         }
 	// ON ENVOIE LES DONNES DANS LA BDD
         addUser($firstName, $lastName, $email, $phone, $profilePhoto, $hashpassword, $status, $job, $company, $town);
-        include_once('view/signInView.php');
+        require_once('view/signInView.php');
 
     }
 }
@@ -138,7 +138,7 @@ function createGroups($groupName, $userId)
         }
     }
     $status = checkStatus($userId);
-    include_once('./view/addContactGroupView.php');
+    require_once('./view/addContactGroupView.php');
 }
         
 	//AJOUTER LES CONTACTS DANS UN GROUPE

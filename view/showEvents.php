@@ -154,7 +154,7 @@
         echo "<br/><center>Vous ne participez à aucun événement.</center>";
     }
     $content=ob_get_clean();
-    include_once('view/template.php');
+    require_once('view/template.php');
 ?>
                     </div>
                 </div>

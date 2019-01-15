@@ -42,36 +42,34 @@ ob_start();
             <div class="col-md-12 mb-3">
                 <div class="row justify-content-center">
                     <div class="col-md-12-center">
-                        <button class="btn btn-link" id="photoUpdate">
-                        <img class="rounded-circle" width="100" src="./img/profile/<?= $recup['photo'] ?>" alt="Photo de profil">
-                        </button>
-                    <input style="display:none" type="file" class="form-control-file" name="photo" id="photoUpdateFile"> 
+                      <img class="rounded-circle" width="100" src="./img/profile/<?= $recup['photo'] ?>" alt="Photo de profil" id="photoUpdate">
+                      <input style="display:none" type="file" class="form-control-file" name="photo" id="photoUpdateFile"> 
                     </div>
                 </div>   
             </div>
         </div>        
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
-    jQuery(function($){
-        $('#photoUpdateFile').click(function(e){
-        });
+    //jQuery(function($){
+       // $('#photoUpdateFile').click(function(e){
+        // });
          
         $('#photoUpdate').click(function(e){
-            $('#photoUpdateFile').trigger('click'); // équivalent de  $('#lien1').click();
+            $('#photoUpdateFile').click(); // équivalent de  $('#lien1').click();
         });
-    });
+    //});
     </script>
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="newName">Prénom</label>
-                <input type="text" class="form-control" id="newName" name="newsurname" value="<?= $recup['name'] ?>" include_onced>
+                <input type="text" class="form-control" id="newName" name="newsurname" value="<?= $recup['name'] ?>" require_onced>
                 <div class="invalid-feedback">
                   Entrez votre prénom.
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="lastName">Nom</label>
-                <input type="text" class="form-control" id="lastName" value="<?= $recup['lastName'] ?>" name="newname" include_onced>
+                <input type="text" class="form-control" id="lastName" value="<?= $recup['lastName'] ?>" name="newname" require_onced>
                 <div class="invalid-feedback">
                   Entrez votre nom.
                 </div>
@@ -84,7 +82,7 @@ ob_start();
                 <div class="input-group-prepend">
                   <span class="input-group-text">@</span>
                 </div>
-                <input type="email" class="form-control" id="email" name="newmail" value="<?= $recup['email'] ?>" include_onced>
+                <input type="email" class="form-control" id="email" name="newmail" value="<?= $recup['email'] ?>" require_onced>
                 <div class="invalid-feedback" style="width: 100%;">
                   Entrez votre adresse e-mail.
                 </div>
@@ -94,7 +92,7 @@ ob_start();
 
             <div class="col-md-6 mb-3">
               <label for="phone">Numéro de téléphone</label>
-              <input type="text" class="form-control" id="phone" name="newphone" value="<?= $recup['phone'] ?>"  include_onced>
+              <input type="text" class="form-control" id="phone" name="newphone" value="<?= $recup['phone'] ?>"  require_onced>
               <div class="invalid-feedback">
                 Entrez votre numéro de téléphone.
               </div>
@@ -105,14 +103,14 @@ ob_start();
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="mdp">Mot de passe</label>
-                <input type="password" class="form-control" id="mdp" name="newPass" include_onced>
+                <input type="password" class="form-control" id="mdp" name="newPass" required require_onced>
                 <div class="invalid-feedback">
                   Entrez un mot de passe.
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                <label for="mdp2">Confirmation du mot de passe</label>
-                <input type="password" class="form-control" id="mdp2" name="confirmNewPass" include_onced>
+                <input type="password" class="form-control" id="mdp2" name="confirmNewPass" required require_onced>
                 <div class="invalid-feedback">
                   Rentrez de nouveau le mot de passe.
                 </div>
@@ -122,21 +120,21 @@ ob_start();
             <div class="row">
               <div class="col-md-4 mb-3">
                 <label for="emploi">Emploi</label>
-              <input type="text" class="form-control" id="emploi" name="newjob" value="<?= $recup['job'] ?>" include_onced>
+              <input type="text" class="form-control" id="emploi" name="newjob" value="<?= $recup['job'] ?>" require_onced>
               <div class="invalid-feedback">
                 Entrez votre profession.
               </div>
               </div>
               <div class="col-md-4 mb-3">
                 <label for="entreprise">Entreprise</label>
-                <input type="text" name="newcompany" value="<?= $recup['company'] ?>" class="form-control" id="company" include_onced>
+                <input type="text" name="newcompany" value="<?= $recup['company'] ?>" class="form-control" id="company" require_onced>
                 <div class="invalid-feedback">
                   Entrez votre nom d'entreprise.
                 </div>
               </div>
             <div class="col-md-4 mb-3">
               <label for="ville">Ville</label>
-              <input type="text" class="form-control" id="town" name="newtown" value="<?= $recup['town'] ?>" include_onced>
+              <input type="text" class="form-control" id="town" name="newtown" value="<?= $recup['town'] ?>" require_onced>
               <div class="invalid-feedback">
                 Entrez votre ville.
               </div>
@@ -166,5 +164,5 @@ ob_start();
 
     <?php 
     $content = ob_get_clean();
-    include_once('view/template.php');
+    require_once('view/template.php');
     ?>

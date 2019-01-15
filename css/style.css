@@ -3,7 +3,7 @@ a {
   text-decoration: none;
 }
 		body {
-					background-color:#F5F6FA;
+					background-color:#f5f6fa;
 		}
 		.logo {
 					color:#F5F6FA;
@@ -16,6 +16,12 @@ a {
     .header {
       position:sticky;
     }
+    .carousel-control-prev {
+      background-color: #2c3e50;
+    }
+    .carousel-control-next {
+      background-color: #2c3e50;
+    } 
 
         .h7 {
             font-size: 0.8rem;

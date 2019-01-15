@@ -1,11 +1,11 @@
 <?php
-include_once('controller/insertController.php');
-include_once('controller/deleteController.php');
-include_once('controller/updateController.php');
-include_once('model/insertModel.php');
-include_once('model/updateModel.php');
-include_once('model/deleteModel.php');
-include_once('model/selectModel.php');
+require_once('controller/insertController.php');
+require_once('controller/deleteController.php');
+require_once('controller/updateController.php');
+require_once('model/insertModel.php');
+require_once('model/updateModel.php');
+require_once('model/deleteModel.php');
+require_once('model/selectModel.php');
 // AFFICHE LA PAGE D'ACCUEIL ET EXÉCUTE LES FONCTIONS
 
 function home($userId) {
@@ -25,9 +25,9 @@ function home($userId) {
 	$followedCompaniesNb = getFollowedCompaniesCount($userId);
 	$status = checkStatus($userId);
 	if($profile['status'] == "employee"){
-		include_once('view/homeViewEmployee.php');
+		require_once('view/homeViewEmployee.php');
 	}else{
-		include_once('view/homeViewCompany.php');
+		require_once('view/homeViewCompany.php');
 	}
 }
 
@@ -35,7 +35,6 @@ function showMessages ($userId,$contactId) {
 	$groups = getGroupsName($userId);
 	$userProfile = getProfile($userId);
     $contacts = getContacts($userId);
-    $contactsFetch = $contacts -> fetch();
     $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
     if ($contactsFetch) {
     $receiverProfile = getProfile($_GET['contactId']);
@@ -45,25 +44,34 @@ function showMessages ($userId,$contactId) {
 	}
 	$messages = getMessages($userId,$contactId);
 	$status = checkStatus($userId);
-	include_once('./view/chatView.php');
+	require_once('./view/chatView.php');
 	} else {
-		echo('Vous n\'avez aucun message.<br><a href="index.php?action=home">Retour</a>');
+        $status = checkStatus($userId); 
+        $title="messages";
+        $content = '<center>Vous n\'avez aucun contact.<br><a href="index.php?action=home">Retour</a></center>';
+        require('view/template.php');
 	}
 }
 function showGroupMessages ($userId,$groupId) {
 	$groups = getGroupsName($userId);
 	$userProfile = getProfile($userId);
-	$contacts = getContacts($userId);
-	$receiverProfile = getProfile($_GET['contactId']);
-
-	$contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
+    $contacts = getContacts($userId);
+    $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
+    if ($contactsFetch) {
+    $receiverProfile = getProfile($_GET['contactId']);
 	for ($i=0;$i<count($contactsFetch);$i++) {
 		$profile = getProfile($contactsFetch[$i]['id']);
 		$contactProfile[$i] = $profile;
 	}
-	$groupMessages = getGroupsMessages($groupId);
+	$messages = getGroupMessages($userId,$groupId);
 	$status = checkStatus($userId);
-	include_once('./view/groupChatView.php');
+	require_once('./view/groupChatView.php');
+	} else {
+        $status = checkStatus($userId); 
+        $title="messages";
+        $content = '<center>Vous n\'avez aucun contact.<br><a href="index.php?action=home">Retour</a></center>';
+        require('view/template.php');
+	}
 }
 
 function contactHome($id,$contactId,$token) {
@@ -73,7 +81,7 @@ function contactHome($id,$contactId,$token) {
 	$followedCompaniesNb = getFollowedCompaniesCount($contactId);
 	$status = checkStatus($id);
 	$pass = $token;
-	include_once('view/profilePageView.php');	
+	require_once('view/profilePageView.php');	
 }
 //BARRE DE RECHERCHE
 function search($ids,$data)
@@ -84,11 +92,11 @@ function search($ids,$data)
     $contact = getContactToUser($ids);
     $status = checkStatus($ids);
     if(($res == TRUE) && (empty($contact))){
-        include_once('./view/resultSearchView.php');
+        require_once('./view/resultSearchView.php');
     } else if( ($res == TRUE) && (!empty($contact)) ){
-         include_once('./view/resultDetailSearchView.php');
+         require_once('./view/resultDetailSearchView.php');
     } else{
-        include_once('./view/resultDetailSearchView.php');
+        require_once('./view/resultDetailSearchView.php');
     }
 }
 // AFFICHER LES ENTREPRISES
@@ -100,7 +108,7 @@ function showCompanies($id){
     
     }
     $status = checkStatus($id);
-    include_once("./view/showCompanies.php");
+    require_once("./view/showCompanies.php");
 }
 
 // AFFICHER LES CONTACTS
@@ -110,7 +118,7 @@ function contactList($userId)
     $status = checkStatus($userId);
     if($list == TRUE) 
     {
-        include_once('./view/contactsListView.php');		
+        require_once('./view/contactsListView.php');		
     }
 }
 // GROUPE
@@ -118,8 +126,24 @@ function sessionGroup($id) {
     $status = checkStatus($id);
     $groups = getGroups($id);
     $adminGroup = getAdminGroup($id);
-    include_once('./view/homeGroup.php');
+    require_once('./view/homeGroup.php');
 }
+
+// AFFICHAGE GROUPE
+function groupManage($groupId,$id) {
+    $idGroup = $groupId;
+    $members = selectContactGroup($groupId);
+    for($i = 0; $i < count($members); $i++) {
+        $memberProfile[] = getProfile($members[$i]['user']);
+    }
+    foreach( $memberProfile as $member){
+        $res[] = $member;
+    }
+    $status = checkStatus($id);
+    $group = getGroup($groupId);
+    require_once('./view/manageGroupView.php');
+}
+
 //SELECTIONNE TOUS LES GROUPES DONT L'USER FAIT PARTI
 function getGroupsContact($userId){
     $groups = getGroups($userId);
@@ -137,7 +161,7 @@ function getMembersToGroups($groupId,$id){
     }
     $status = checkStatus($id);
     $admin = getProfile($members['0']['admin']);
-    include_once('./view/membersGroupView.php');
+    require_once('./view/membersGroupView.php');
 }
 
 // MONTRER LES CONTACTS
@@ -148,8 +172,35 @@ function showContacts($id){
         
     }
     $status = checkStatus($id);
-    include_once("./view/showContacts.php");
+    require_once("./view/showContacts.php");
 }
+// CHECK SI LE COMPTE EXISTE
+function checkUserExists($email, $password){
+
+	// LE  SYSTÈME FAIT UNE PAUSE D'UNE SECONDE A CHAQUE TENTATIVE DE CONNEXION POUR EVITER UNE ATTAQUE PAR FORCE BRUTE
+	sleep(1);
+
+	// ON SECURISE LES DONNEES 
+	$email = htmlspecialchars($email);
+	$password = htmlspecialchars($password);
+	$errors = array();
+
+	$user = checkUser($email);
+
+	if($user === false){
+		$errors['compte'] = "Votre compte n'existe pas !";
+		require_once('view/signInView.php');		
+	} else {
+		if(password_verify($password, $user['password'])){
+			$_SESSION['id'] = $user['id'];
+			header('Location:index.php?action=home');
+		} else { 
+			$errors['wrongPassWord'] = "Les identifiants saisis sont incorrects.";
+			require_once('view/signInView.php');			
+		}
+	}
+}
+
 //AFFICHER LA PAGE DES EVENEMENTS
 function showEvents($id)
 {
@@ -189,32 +240,6 @@ function eventView($ID, $id, $role)
     */
     $status=checkStatus($ID);
     include('view/eventView.php');
-}
-// CHECK SI LE COMPTE EXISTE
-function checkUserExists($email, $password){
-
-	// LE  SYSTÈME FAIT UNE PAUSE D'UNE SECONDE A CHAQUE TENTATIVE DE CONNEXION POUR EVITER UNE ATTAQUE PAR FORCE BRUTE
-	sleep(1);
-
-	// ON SECURISE LES DONNEES 
-	$email = htmlspecialchars($email);
-	$password = htmlspecialchars($password);
-	$errors = array();
-
-	$user = checkUser($email);
-
-	if($user === false){
-		$errors['compte'] = "Votre compte n'existe pas !";
-		include_once('view/signInView.php');		
-	} else {
-		if(password_verify($password, $user['password'])){
-			$_SESSION['id'] = $user['id'];
-			header('Location:index.php?action=home');
-		} else { 
-			$errors['wrongPassWord'] = "Les identifiants saisis sont incorrects.";
-			include_once('view/signInView.php');			
-		}
-	}
 }
 
 //AFFICHER LA PAGE CREATION D'UN EVENEMENT

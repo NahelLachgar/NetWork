@@ -105,7 +105,7 @@ ob_start();
                     if (isset($contactsPosts)) {
                         if ($contactsPosts > 1) {
                             for ($i = 0; $i < count($contactsPosts); $i++) :
-                    ?>
+                            ?>
                             <div class="card gedf-card">
                                 <div class="card-header">
                                     <div class="d-flex justify-content-between align-items-center">
@@ -137,15 +137,15 @@ ob_start();
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> <?= strftime("Le %d %b à %R",strtotime($contactsPosts[$i]['postDate'])) ?></div>
+                                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> <?= strftime("Le %d %b à %R", strtotime($contactsPosts[$i]['postDate'])) ?></div>
                                     <div class="card-text">
-                                        <?php if ($contactsPosts[$i]['type'] == "text"): ?>
+                                        <?php if ($contactsPosts[$i]['type'] == "text") : ?>
                                             <?= $contactsPosts[$i]['content'] ?>
                                         <?php else : ?>
                                             <div class="row justify-content-center">
                                                 <div>
                                                     <div class="col-md-12">
-                                                        <img  width="200" src="./img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo de profil">
+                                                    <img  width="100%" src="./img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo de profil">
                                                     </div>
                                                 </div>
                                             </div>
@@ -167,14 +167,14 @@ ob_start();
                                 </div>
                             </div>
                             <?php 
-                            endfor; 
+                            endfor;
                         } else {
                             echo "abcd";
                         }
                     } else {
                         echo ("Vous n'avez aucune publication a afficher");
-                     }        
-                            ?>
+                    }
+                    ?>
                 </div>
             </div>
                 </div>
@@ -189,18 +189,18 @@ ob_start();
 <?php
 if (isset($employeesSuggests)) :
     if (count($employeesSuggests) > 1) : ?>
-
             <div class="col-md-3">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <?php for ($i = 0; $i < count($employeesSuggests); $i++) :?>
+                <li data-target="#carouselExampleIndicators" data-slide-to="<?= $i ?>" class="active"></li>
+            <?php endfor ?>
             </ol>
             <div class="carousel-innitemer">
                 <div class="carousel- active">
                 <div class="card gedf-card">
                         <div class="card-body">
+                        <center>
                                     <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[0]['photo'] ?>" alt="" />
                                     <h5 class="card-title"><?= $employeesSuggests[0]['name'] . ' ' . $employeesSuggests[0]['lastName'] ?></h5>
                                     <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[0]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
@@ -208,6 +208,7 @@ if (isset($employeesSuggests)) :
                                     <input type="hidden" name="contactId" value="<?= $employeesSuggests[0]['id'] ?>">
                                         <button type="submit" class="btn btn-link" name="contactId" value="<?= $employeesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
                                     </form>
+                                    </center>
                         </div>
                     </div>
                 </div>
@@ -216,7 +217,7 @@ if (isset($employeesSuggests)) :
                 <div class="carousel-item">
                 <div class="card gedf-card">
                                     <div class="card-body">
-                                    <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[$i]['photo'] ?>" alt="" />
+                                    <img class="rounded-circle" width="45" src="./img/profile/<?= $employeesSuggests[$i]['photo'] ?>" alt="" />
                                     <h5 class="card-title"><?= $employeesSuggests[$i]['name'] . ' ' . $employeesSuggests[$i]['lastName'] ?></h5>
                                     <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[$i]['job'] . ' chez ' . $employeesSuggests[$i]['company'] ?></h6>
                                     <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[$i]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
@@ -250,7 +251,7 @@ if (isset($employeesSuggests)) :
 
 
             <!--------------------------> 
-
+<br>
             <!--------- SUGGESTIONS D'ENTREPRISE----------->
             <?php 
             if (isset($companiesSuggests)) :
@@ -268,6 +269,7 @@ if (isset($employeesSuggests)) :
                 <div class="carousel- active">
                 <div class="card gedf-card">
                         <div class="card-body">
+                            <center>
                         <img class="rounded-circle" width="45"src="./img/profile/<?= $companiesSuggests[$i]['photo'] ?>" alt="" />
                                     <h5 class="card-title"><?= $companiesSuggests[0]['name'] . ' ' . $companiesSuggests[0]['lastName'] ?></h5>
                                     <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[0]['job'] . ' chez ' . $companiesSuggests[0]['company'] ?></h6>
@@ -275,6 +277,7 @@ if (isset($employeesSuggests)) :
                                     <input type="hidden" name="contactId" value="<?= $companiesSuggests[0]['id'] ?>">
                                         <button type="submit" class="btn btn-link" name="contactId" value="<?= $companiesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
                                     </form>
+                            </center>
                         </div>
                     </div>
                 </div>
@@ -282,11 +285,14 @@ if (isset($employeesSuggests)) :
                 for ($i = 0; $i < count($companiesSuggests); $i++) : ?>
                 <div class="carousel-item">
                 <div class="card gedf-card">
+                    
                                     <div class="card-body">
+                                    <center>
                                     <img class="rounded-circle" width="45"src="./img/profile/<?= $companiesSuggests[$i]['photo'] ?>" alt="" />
                                     <h5 class="card-title"><?= $companiesSuggests[$i]['name'] . ' ' . $companiesSuggests[$i]['lastName'] ?></h5>
                                     <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[$i]['job'] . ' chez ' . $companiesSuggests[$i]['company'] ?></h6>
                                     <a href="index.php?action=addcontacts&id=<?= $companiesSuggests[$i]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+            </center>
                                     </div>
                 </div>    
                 </div> 
@@ -307,10 +313,13 @@ if (isset($employeesSuggests)) :
                             <?php elseif (count($companiesSuggests) == 1) : ?>
                             <div class="card gedf-card">
                                     <div class="card-body">
-                                    <img class="rounded-circle" width="45"src="./img/profile/<?= $companiesSuggests[$i]['photo'] ?>" alt="" />
+                                    <center>
+                                    <img class="rounded-circle" width="45"src="./img/profile/<?= $companiesSuggests[0]['photo'] ?>" alt="" />
                                     <h5 class="card-title"><?= $companiesSuggests[0]['name'] . ' ' . $companiesSuggests[0]['lastName'] ?></h5>
-                                    <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[$i]['job'] . ' chez ' . $companiesSuggests[0]['company'] ?></h6>
+                                    <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[0]['job'] . ' chez ' . $companiesSuggests[0]['company'] ?></h6>
                                     <a href="index.php?action=addcontacts&id=<?= $companiesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+            </center>
+
                                     </div>
                 </div>    
                             <?php endif;
@@ -323,5 +332,5 @@ if (isset($employeesSuggests)) :
     </div>
     <?php 
     $content = ob_get_clean();
-    include_once('view/template.php');
+    require_once('view/template.php');
     ?>

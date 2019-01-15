@@ -3,8 +3,7 @@ $title = "Recherche";
 ob_start();
 ?>
 
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-        crossorigin="anonymous">
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -19,16 +18,28 @@ ob_start();
                         <div class="card-body">
             <?php if ($result['status'] == 'employee') : ?>
                             <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
-                            <form action="index.php?action=profilePage" method="POST" > 
-                            <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>"> 
-                            <a href="index.php?action=profilePage&contactId=<?= $result['contactId']?>&token=1s"  class="btn btn-link"><?= $result['name'] . ' ' . $result['lastName'] ?></a>
+                            <form action="index.php?action=profilePage" method="POST">
+                            <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>">
+                            <input type="hidden" name="token" value="1"> 
+                            <input type="submit" class="btn btn-link" value="<?= $result['name'] . ' ' . $result['lastName'] ?>">
                              </form></h5>
-                            <p class="card-text"><?= $result['job'] . ' chez ' . $result['company'] ?></p>
-                            <a href="index.php?action=addContact&id=<?= $result['contactId'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                        <p class="card-text"><?= $result['job'] . ' chez ' . $result['company'] ?></p>
+                        <form action="index.php?action=addContact" method="POST">
+                            <input type="hidden" name="contactId" value="<?=$result['contactId']?>">
+                            <button type="submit" class="btn btn-link"><img src="./img/icon/users.png"></button>
+                        </form>
              <?php else : ?>
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://bit.ly/22hadqw" alt="Photo de profil">&nbsp&nbsp&nbsp<a href="index.php?action=profilePage&id=<?= $result['contactId'] ?>"><?= $result['name'] ?> <!--<a href=""><img src="./img/icon/users.png">--></a></h5>
-                            <a href="index.php?action=addContact&id=<?= $result['contactId'] ?>" class="card-link">Suivre</a>
-                
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="https://bit.ly/22hadqw" alt="Photo de profil">&nbsp&nbsp&nbsp
+                            <form action="index.php?action=profilePage" method="POST">
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                                <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>">
+                                <input type="hidden" name="token" value="1">
+                                <input type="submit" class="btn btn-link" value="<?= $result['name'] . ' ' . $result['lastName'] ?>"> 
+                            </form></h5>
+                            <form action="index.php?action=addContact" method="POST">
+                            <input type="hidden" name="contactId" value="<?=$result['contactId']?>">
+                            <button type="submit" class="btn btn-link">Suivre</button>
+                            </form>                
                         <?php endif;?>
 
                         </div>
@@ -45,5 +56,5 @@ ob_start();
             
     <?php 
     $content = ob_get_clean();
-    include_once('view/template.php');
+    require_once('view/template.php');
     ?>

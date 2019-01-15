@@ -43,8 +43,9 @@ ob_start();
                     <div class="card-body">       
                         <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                         <form action="index.php?action=profilePage" method="POST">
-                            <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>"><input type="hidden" name="token" value="0"> 
-                            <input type="submit" class="btn btn-link" value="<?= $result['name'] . ' ' . $result['lastName'] ?>"> </form></h5>
+                            <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>">
+                            <input type="hidden" name="token" value="0"> 
+                            <input type="submit" class="btn btn-link" value="<?= $result['name'] . ' ' . $result['lastName'] ?>"> </h5>
                         </form>
                         <form action="index.php?action=removeContact" method="POST">
                             <input type="hidden" name="contactId" value="<?=$result['contactId']?>">
@@ -99,5 +100,5 @@ ob_start();
 <?php
 endif;
 $content = ob_get_clean();
-include_once('view/template.php');
+require_once('view/template.php');
 ?>

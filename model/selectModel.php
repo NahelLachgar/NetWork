@@ -1,8 +1,8 @@
 <?php
-include_once('model/dbConnect.php');
-include_once('model/insertModel.php');
-include_once('model/deleteModel.php');
-include_once('model/updateModel.php');
+require_once('model/dbConnect.php');
+require_once('model/insertModel.php');
+require_once('model/deleteModel.php');
+require_once('model/updateModel.php');
 //RÉCUPÉRATION DES INFOS SUR L'UTILISATEUR 
 function getProfile($userId)
 {
@@ -24,8 +24,6 @@ function getContacts($userId)
     ));
     return $contactsId;
 }
-
-
 
 
 // COMPTE LES ID DANS LA TABLE PUBLICATIONS
@@ -68,7 +66,7 @@ function getGroupMessages($groupId)
     $db = dbConnect();
     $messages = $db->prepare('SELECT * FROM groupAdd
     WHERE  group = :groupId AND status = "message"
-    ORDER BY sendDate ASC');
+    ORDER BY addDate ASC');
     $messages->execute(array(
         "groupId" => $groupId
     ));
@@ -153,68 +151,73 @@ function getContactsPosts($userId)
     }
     return $contactsPosts;
 }
+
+//VÉRIFIE SI LES 2 UTILISATEURS SONT AMIS
+function checkContacts($userId,$contactId) {
+$db = dbConnect();
+$req = ('SELECT * FROM contacts 
+    WHERE contact = :userId AND user = contactId
+    UNION 
+    SELECT * FROM contacts 
+    WHERE contact = :contactId AND user = userId');
+$req -> execute(array(
+    "userId"=>$userId,
+    "contactId"=>$contactId
+));
+$check = $req->fetch();
+return $check;
+}
+
 //SUGGESTIONS D'EMPLOYÉS POUR L'UTILISATEUR 
 function getEmployeeSuggests($userId)
 {
     $db = dbConnect();
     $contacts = getContacts($userId);
-    $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
-    if ($contactsFetch > 1) {
         $employeeSuggests = $db->prepare('SELECT DISTINCT u.* 
     FROM users u JOIN contacts c ON u.id = c.user WHERE c.contact = :id AND c.user NOT LIKE :userId AND u.status LIKE "employee"
     UNION
     SELECT DISTINCT u.* 
     FROM users u JOIN contacts c  ON u.id = c.contact WHERE c.user = :id AND c.contact NOT LIKE :userId AND u.status LIKE "employee"');
-        for ($i = 0; $i < count($contactsFetch) - 1; $i++) {
+    $employees = [];
+    while ($contactsFetch = $contacts -> fetch()) {
             $employeeSuggests->execute(array(
-                "id" => $contactsFetch[$i]['id'],
+                "id" => $contactsFetch['id'],
                 "userId" => $userId
             ));
             $employeeSuggestsFetch = $employeeSuggests->fetchAll(PDO::FETCH_ASSOC);
-            $employees[$i] = $employeeSuggestsFetch;
+            $employees += $employeeSuggestsFetch;
         }
-        if (isset($employees)) {
-            if (count($employees) > 0) {
-                for ($i = 0; $i < (count($employees) - 1); $i++) {
-                    $employees[0] = array_merge($employees[$i], $employees[0]);
 
-                }
-                $employees = array_merge($employees[$i], $employees[0]);
-            }
+        if (isset($employees)) {
+            
             return $employees;
         }
-    }
+    
 }
 //SUGGESTIONS D'ENTREPRISE POUR L'UTILISATEUR 
 function getCompanySuggests($userId)
 {
     $db = dbConnect();
     $contacts = getContacts($userId);
-    $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
-    $companySuggests = $db->prepare('SELECT DISTINCT u.* 
+        $companySuggests = $db->prepare('SELECT DISTINCT u.* 
     FROM users u JOIN contacts c ON u.id = c.user WHERE c.contact = :id AND c.user NOT LIKE :userId AND u.status LIKE "company"
     UNION
     SELECT DISTINCT u.* 
     FROM users u JOIN contacts c  ON u.id = c.contact WHERE c.user = :id AND c.contact NOT LIKE :userId AND u.status LIKE "company"');
-    for ($i = 0; $i < count($contactsFetch) - 1; $i++) {
-        $companySuggests->execute(array(
-            "id" => $contactsFetch[$i]['id'],
-            "userId" => $userId
-        ));
-        $companySuggestsFetch = $companySuggests->fetchAll(PDO::FETCH_ASSOC);
-        $companies[$i] = $companySuggestsFetch;
-    }
-    if (isset($companies)) {
-        if (count($companies) > 0) {
-            for ($i = 0; $i < (count($companies) - 1); $i++) {
-                $companies[0] = array_merge($companies[$i], $companies[0]);
-
-            }
-            $companies = array_merge($companies[$i], $companies[0]);
+    $companies = [];
+    while ($contactsFetch = $contacts -> fetch()) {
+            $companySuggests->execute(array(
+                "id" => $contactsFetch['id'],
+                "userId" => $userId
+            ));
+            $companySuggestsFetch = $companySuggests->fetchAll(PDO::FETCH_ASSOC);
+            $companies += $companySuggestsFetch;
         }
 
-        return $companies;
-    }
+        if (isset($companies)) {
+            
+            return $companies;
+        }
 }
 //NOMBRE DE CONTACTS
 function getContactsCount($userId)
@@ -292,7 +295,8 @@ function getProfileUpdate($ids)
 function getGroup($groupId)
 {
     $db = dbConnect();
-    $req = $db->prepare("SELECT * FROM `groups` WHERE id LIKE ?");
+    $req = $db->prepare("SELECT g.*,gA.* FROM groups g JOIN groupAdd gA 
+    ON g.id = gA.group WHERE g.id LIKE ?");
     $req->execute(array($groupId));
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
     return $req;

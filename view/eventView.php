@@ -201,7 +201,7 @@
         echo "Personne ne participe à cet événement.<br/><br/>";
     }
     $content=ob_get_clean();
-    include_once('view/template.php');
+    require_once('view/template.php');
 ?>                    
                             <form enctype="multipart/form-data" action="index.php" method="GET">
                                 <input type="hidden" name="action" value="showEvents">
