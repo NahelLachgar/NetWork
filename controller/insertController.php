@@ -110,7 +110,6 @@ function removeContact($contactId, $userId)
 function createGroups($groupName, $userId)
 {
     // PHOTO
-    var_dump($_FILES);
     $groupPhoto = $_FILES['photo']['name'];
     if ($groupPhoto) {
     // ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
