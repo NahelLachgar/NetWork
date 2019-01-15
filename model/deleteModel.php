@@ -153,7 +153,7 @@ function deleteAllEvents($ID)
     $reponse->execute(['ID'=>$ID]);
 }
 
- //SUPPRIMER LES GROUPES / CHANGER L'ADMINISTRATEUR DANS LES GROUPES
+ //SUPPRIMER UTILISATEUR DES GROUPES / SUPPRIMER LES GROUPES / CHANGER L'ADMINISTRATEUR DANS LES GROUPES
  function deleteAllGroups($ID)
  {
      $bdd=dbConnect();
@@ -169,38 +169,30 @@ function deleteAllEvents($ID)
         $a[$i][1]=false;
         $i++;
     }
-    //SAVOIR SI LES GROUPES ONT DES MEMBRES OU NON
+    //RECHERCHER LE MEMBRE LE PLUS ANCIEN DU GROUPE HORMIS L'ADMINISTRATEUR
     for($j=0;$j<$i;$j++) {
-        $reponse=$bdd->prepare('SELECT COUNT(user) AS nbUser
+        $reponse=$bdd->query('SELECT user, groupAdd.group AS idGroup
                                 FROM groupAdd
-                                WHERE groupAdd.group=:id');
-        $reponse->execute(['id'=>$a[$j][0]]);
-        $k=0;
+                                ORDER BY id ASC');
+        $find=false;
         while($donnees=$reponse->fetch()) {
-            if($donnees['nbUser']>1) {
-                $a[$k][1]=true;
+            if($find==false) {
+                if($donnees['user']==$ID && $donnees['idGroup']==$a[$j][0]) {
+                    $find=true;
+                }
             }
-            $k++;
+            else {
+                if($donnees['idGroup']==$a[$j][0]) {
+                    $a[$j][1]=true;
+                    $a[$j][2]=$donnees['user'];
+                    break;
+                }
+            }
         }
     }
-    //RECHERCHER L'UN DES PLUS ANCIENS MEMBRES DES GROUPES
+    //SUPPRIMER L'UTILISATEUR DE SES GROUPES
     for($j=0;$j<$i;$j++) {
-        $reponse=$bdd->prepare('SELECT user
-                                FROM groupAdd
-                                WHERE groupAdd.group=:id
-                                ORDER BY addDate ASC
-                                LIMIT 1');
-        $reponse->execute(['id'=>$a[$j][0]]);
-        $k=0;
-        while($donnees=$reponse->fetch()) {
-            if($a[$k][1]==true) {
-                $a[$k][2]=$donnees['user'];
-            }
-            $k++;
-        }
-    }
-    for($j=0;$j<$i;$j++) {
-        if($a[$i][1]==true) {
+        if($a[$j][1]==true) {
             //CHANGER L'ADMINISTRATEUR AVEC UN AUTRE MEMBRE
             $reponse=$bdd->prepare('UPDATE groups
                                     SET admin=:id
@@ -211,10 +203,14 @@ function deleteAllEvents($ID)
         else {
             //SUPPRIMER LES GROUPES DE L'UTILISATEUR OU IL N'Y A AUCUN MEMBRE
             $reponse=$bdd->prepare('DELETE FROM groups
-                                    WHERE id=:id');
-            $reponse->execute(['id'=>$a[$j][0]]);
+                                    WHERE admin=:group');
+            $reponse->execute(['group'=>$a[$j][0]]);
         }
     }
+    //SUPPRIMER L'UTILISATEUR DES GROUPES EN TANT QUE MEMBRE
+    $reponse=$bdd->prepare('DELETE FROM groupAdd
+                            WHERE user=:ID');
+    $reponse->execute(['ID'=>$ID]);
  }
 
  //SUPPRIMER LES CONTACTS

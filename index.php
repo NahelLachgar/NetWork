@@ -92,16 +92,14 @@ include_once('controller/deleteController.php');
                 sessionGroup($_SESSION['id']);
                 break;
             case 'deleteView':
-//A MODIFIER / AJOUTER BOUTON ACTIVER/DESACTIVER LE COMPTE
+                //AJOUTER BOUTON ACTIVER/DESACTIVER LE COMPTE
                 deleteView($_SESSION['id']);
                 break;
             case 'deleteAccount':
-//A TESTER groups
-// GROUPES MARCHE PAS
                 deleteAccount($_SESSION['id']);
                 break;
             case 'desactivateAccount':
-//A FAIRE
+                //A FAIRE
                 desactivateAccount($_SESSION['id'], $_POST['state']);
                 break;
             case 'showEvents':

@@ -31,7 +31,8 @@ CREATE TABLE IF NOT EXISTS `NetWork`.`users` (
   `status` ENUM('company', 'employee') NOT NULL,
   `job` VARCHAR(45) NULL,
   `company` VARCHAR(45) NULL,
-  `active` ENUM('activated', 'disabled') NULL,
+  `town` VARCHAR(45) NULL,
+  `active` ENUM('activated', 'disabled') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) ,
   UNIQUE INDEX `mail_UNIQUE` (`email` ASC) )
