@@ -128,6 +128,22 @@ function sessionGroup($id) {
     $adminGroup = getAdminGroup($id);
     require_once('./view/homeGroup.php');
 }
+
+// AFFICHAGE GROUPE
+function groupManage($groupId,$id) {
+    $idGroup = $groupId;
+    $members = selectContactGroup($groupId);
+    for($i = 0; $i < count($members); $i++) {
+        $memberProfile[] = getProfile($members[$i]['user']);
+    }
+    foreach( $memberProfile as $member){
+        $res[] = $member;
+    }
+    $status = checkStatus($id);
+    $group = getGroup($groupId);
+    require_once('./view/manageGroupView.php');
+}
+
 //SELECTIONNE TOUS LES GROUPES DONT L'USER FAIT PARTI
 function getGroupsContact($userId){
     $groups = getGroups($userId);
