@@ -9,6 +9,14 @@ require_once('model/selectModel.php');
 //FUNCTION AFFICHE LES INFOS A MODIFIER
 function updateToProfile($id)
 {
+    $profile=getProfile($id);
+    $contactsNb=getContactsCount($id);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($id);
+        $companiesSuggests=getCompanySuggests($id);
+        $employeesSuggests=getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($id);
     $recup = getProfileUpdate($id);
     $status = checkStatus($id);
     require_once('./view/profilUpdateView.php');
@@ -74,27 +82,18 @@ function updateGroup($groupName, $admin, $groupId)
 
     header('Location:index.php?action=groups');
 }
-    //AFFICHER LA PAGE DE MODIFICATION D'UN EVENEMENT
-function updateEventView($ID, $id)
-{
-    $event = infoEvent($id);
-    $status = checkStatus($ID);
-    include('view/updateEventView.php');
-}
 
-	//MODIFIER UN EVENEMENT
+//MODIFIER UN EVENEMENT
 function modifyEvent($id, $title, $eventDate, $place)
 {
-		//VERIFIER LSI LA VARIABLE place EST VIDE OU NON PUIS MODIFIER L'EVENEMENT
+    //VERIFIER SI LA VARIABLE place EST VIDE OU NON PUIS MODIFIER L'EVENEMENT
     if (isset($place)) {
-			//AVEC place
+        //AVEC place
         updateEvent($id, $title, $eventDate, $place);
     } else {
-			//SANS place
+        //SANS place
         updateEvent($id, $title, $eventDate, "");
     }
     eventView($_SESSION['id'], $id, 'admin');
 }
-
-
 ?>

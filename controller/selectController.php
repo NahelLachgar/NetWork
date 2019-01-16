@@ -32,6 +32,14 @@ function home($userId) {
 }
 
 function showMessages ($userId,$contactId) {
+    $profile=getProfile($userId);
+    $contactsNb=getContactsCount($userId);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($userId);
+        $companiesSuggests=getCompanySuggests($userId);
+        $employeesSuggests=getEmployeeSuggests($userId);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($userId);
 	$groups = getGroupsName($userId);
 	$userProfile = getProfile($userId);
     $contacts = getContacts($userId);
@@ -86,6 +94,14 @@ function contactHome($id,$contactId,$token) {
 //BARRE DE RECHERCHE
 function search($ids,$data)
 {
+    $profile=getProfile($ids);
+    $contactsNb=getContactsCount($ids);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($ids);
+        $companiesSuggests=getCompanySuggests($ids);
+        $employeesSuggests=getEmployeeSuggests($ids);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($ids);
     $ids = htmlspecialchars($ids);
     $data = htmlspecialchars($data);
     $res = getSearch($ids,$data);
@@ -101,6 +117,14 @@ function search($ids,$data)
 }
 // AFFICHER LES ENTREPRISES
 function showCompanies($id){
+    $profile=getProfile($id);
+    $contactsNb=getContactsCount($id);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($id);
+        $companiesSuggests=getCompanySuggests($id);
+        $employeesSuggests=getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($id);
     $contacts = getContacts($id);
 
     foreach ($contacts as $contact) {
@@ -123,6 +147,14 @@ function contactList($userId)
 }
 // GROUPE
 function sessionGroup($id) {
+    $profile=getProfile($id);
+    $contactsNb=getContactsCount($id);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($id);
+        $companiesSuggests=getCompanySuggests($id);
+        $employeesSuggests=getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($id);
     $status = checkStatus($id);
     $groups = getGroups($id);
     $adminGroup = getAdminGroup($id);
@@ -131,6 +163,14 @@ function sessionGroup($id) {
 
 // AFFICHAGE GROUPE
 function groupManage($groupId,$id) {
+    $profile=getProfile($id);
+    $contactsNb=getContactsCount($id);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($id);
+        $companiesSuggests=getCompanySuggests($id);
+        $employeesSuggests=getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($id);
     $idGroup = $groupId;
     $members = selectContactGroup($groupId);
     
@@ -192,6 +232,14 @@ function getMembersToGroups($groupId,$id){
 
 // MONTRER LES CONTACTS
 function showContacts($id){
+    $profile=getProfile($id);
+    $contactsNb=getContactsCount($id);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($id);
+        $companiesSuggests=getCompanySuggests($id);
+        $employeesSuggests=getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($id);
     $contacts = getContacts($id);
     foreach ($contacts as $contact) {
         $res[] = getProfile($contact['id']);
@@ -200,6 +248,33 @@ function showContacts($id){
     $status = checkStatus($id);
     require_once("./view/showContacts.php");
 }
+// CHECK SI LE COMPTE EXISTE
+function checkUserExists($email, $password){
+
+	// LE  SYSTÈME FAIT UNE PAUSE D'UNE SECONDE A CHAQUE TENTATIVE DE CONNEXION POUR EVITER UNE ATTAQUE PAR FORCE BRUTE
+	sleep(1);
+
+	// ON SECURISE LES DONNEES 
+	$email = htmlspecialchars($email);
+	$password = htmlspecialchars($password);
+	$errors = array();
+
+	$user = checkUser($email);
+
+	if($user === false){
+		$errors['compte'] = "Votre compte n'existe pas !";
+		require_once('view/signInView.php');		
+	} else {
+		if(password_verify($password, $user['password'])){
+			$_SESSION['id'] = $user['id'];
+			header('Location:index.php?action=home');
+		} else { 
+			$errors['wrongPassWord'] = "Les identifiants saisis sont incorrects.";
+			require_once('view/signInView.php');			
+		}
+	}
+}
+
 //AFFICHER LA PAGE DES EVENEMENTS
 function showEvents($id)
 {
@@ -240,36 +315,34 @@ function eventView($ID, $id, $role)
     $status=checkStatus($ID);
     include('view/eventView.php');
 }
-// CHECK SI LE COMPTE EXISTE
-function checkUserExists($email, $password){
 
-	// LE  SYSTÈME FAIT UNE PAUSE D'UNE SECONDE A CHAQUE TENTATIVE DE CONNEXION POUR EVITER UNE ATTAQUE PAR FORCE BRUTE
-	sleep(1);
-
-	// ON SECURISE LES DONNEES 
-	$email = htmlspecialchars($email);
-	$password = htmlspecialchars($password);
-	$errors = array();
-
-	$user = checkUser($email);
-
-	if($user === false){
-		$errors['compte'] = "Votre compte n'existe pas !";
-		require_once('view/signInView.php');		
-	} else {
-		if(password_verify($password, $user['password'])){
-			$_SESSION['id'] = $user['id'];
-			header('Location:index.php?action=home');
-		} else { 
-			$errors['wrongPassWord'] = "Les identifiants saisis sont incorrects.";
-			require_once('view/signInView.php');			
-		}
-	}
+//AFFICHER LA PAGE DE SUPPRESSION DE COMPTE
+function deleteView($id)
+{
+    $profile = getProfile($id);
+    $contactsNb = getContactsCount($id);
+    if ($contactsNb > 0) {
+        $contactsPosts = getContactsPosts($id);
+        $companiesSuggests = getCompanySuggests($id);
+        $employeesSuggests = getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb = getFollowedCompaniesCount($id);
+    $status = checkStatus($id);
+    include('view/deleteView.php');
 }
+
 //AFFICHER LA PAGE CREATION D'UN EVENEMENT
 function createEventView($id, $role)
 {
     $status=checkStatus($id);
+    $profile=getProfile($id);
+    $contactsNb=getContactsCount($id);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($id);
+        $companiesSuggests=getCompanySuggests($id);
+        $employeesSuggests=getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($id);
     if($role=='admin') {
         include('view/createEventView.php');
     }
@@ -279,44 +352,35 @@ function createEventView($id, $role)
     }
 }
 
-//CREER UN EVENEMENT
-function createEvent($id, $title, $eventDate, $place)
+//AFFICHER LA PAGE DE MODIFICATION D'UN EVENEMENT
+function updateEventView($ID, $id)
 {
-    //VERIFIER LE REMPLISSAGE DE LA SAISIE DE LA VARIABLE PLACE PUIS CREER L'EVENEMENT
-    if(isset($place) && empty($place)!=true) {
-        //AVEC LE CHAMP 'PLACE' REMPLI
-        insertEvent($id, $title, $eventDate, $place);
+    $profile=getProfile($ID);
+    $contactsNb=getContactsCount($ID);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($ID);
+        $companiesSuggests=getCompanySuggests($ID);
+        $employeesSuggests=getEmployeeSuggests($ID);
     }
-    else {
-        //SANS LE CHAMP 'PLACE' REMPLI
-        insertEvent($id, $title, $eventDate, "");
-    }
-    $_SESSION['erreur']="L'événement '".$title."' a bien été créé.";
-    header('location: index.php?action=showEvents');
+    $followedCompaniesNb=getFollowedCompaniesCount($ID);
+    $event = infoEvent($id);
+    $status = checkStatus($ID);
+    include('view/updateEventView.php');
 }
+
 //AFFICHER LA PAGE D'AJOUT DE PARTICIPATION
 function addParticipateView($ID, $id)
 {
+    $profile=getProfile($ID);
+    $contactsNb=getContactsCount($ID);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($ID);
+        $companiesSuggests=getCompanySuggests($ID);
+        $employeesSuggests=getEmployeeSuggests($ID);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($ID);
     $contact=infoContact($ID, $id);
     $status=checkStatus($ID);
     include('view/addParticipateView.php');
-}
-
-//AJOUTER DES PARTICIPATIONS A UN EVENEMENT
-function addParticipate($ID, $contact, $id)
-{
-    //VERIFIER QU'IL Y A AU MOINS UNE CASE COCHEE
-    if($contact!=="") {
-        //AJOUTER LES CONTACTS DANS L'EVENEMENT
-        foreach($contact as $valeur) {
-           insertParticipate($valeur, $id);
-        }
-        $_SESSION['erreur']="Vos contacts ont bien été ajouté à votre événement.";
-        eventView($ID, $id, 'admin');
-    }
-    else {
-        $_SESSION['erreur']="Vous n'avez sélectionné aucun contact à ajouter aux participants de votre événement.";
-        addParticipateView($ID, $id);
-    }
 }
 ?>

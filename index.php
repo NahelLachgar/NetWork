@@ -4,8 +4,6 @@ require_once('controller/updateController.php');
 require_once('controller/insertController.php');
 require_once('controller/selectController.php');
 require_once('controller/deleteController.php');
-//2 case 'post'
-//manque un break à case 'send'
     if (isset($_GET['action'])) {
         switch ($_GET['action']) {
            case 'disconnect':
@@ -94,10 +92,15 @@ require_once('controller/deleteController.php');
                 sessionGroup($_SESSION['id']);
                 break;
             case 'deleteView':
+                //AJOUTER BOUTON ACTIVER/DESACTIVER LE COMPTE
                 deleteView($_SESSION['id']);
                 break;
             case 'deleteAccount':
                 deleteAccount($_SESSION['id']);
+                break;
+            case 'desactivateAccount':
+                //A FAIRE
+                desactivateAccount($_SESSION['id'], $_POST['state']);
                 break;
             case 'showEvents':
                 //PRENDRE EN COMPTE LES INVITATIONS
