@@ -149,23 +149,24 @@ function groupManage($groupId,$id) {
     $a = count($res);
     $b = count($contact);
 
-    $contactProfile = "";
+    $contactProfile = [];
 
     if(count($res) != count($contact)){
         foreach ($res as $member){
-            for($i = 0; $i < count($res)-1; $i++){
-                if($member['id'] == $contact[$i]['id']){
+            for($i = 0; $i < count($contact); $i++){
+                if($contact[$i]['id'] == $member['id']){
                     unset($contact[$i]); 
-                    $contact = array_values($contact);  
+                    $contact = array_values($contact);
                 }
             }
         }
 
         for($i = 0; $i < count($contact); $i++) {
-            $contactProfile[] = getProfile($contact[0][$i]);
+            $contactProfile[] = getProfile($contact[$i]['id']);
         }
     }
 
+    // var_dump($contactProfile);
     require_once('./view/manageGroupView.php');
 }
 

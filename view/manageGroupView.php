@@ -49,7 +49,7 @@ ob_start();
               </div>
             </div>
           
-            <input type="hidden" name="groupId" value="<?= $group[0]['id'] ?>">
+            <input type="hidden" name="groupId" value="<?= $group[0]['group'] ?>">
 
           <div class="row justify-content-center">
               <div class="col-md-3">
@@ -79,7 +79,7 @@ ob_start();
             </div> 
             <hr>
 
-            <?php if($contactProfile) : ?>
+            <?php if(!empty($contactProfile)) : ?>
         
             <div class="row">
                 <?php foreach ($contactProfile as $contact) :?>
@@ -96,7 +96,7 @@ ob_start();
             </div> 
 
                 <?php else :
-                echo "vous n'avez aucun ami a rajouter a ce groupe.";
+                echo "Vous n'avez aucun ami à rajouter a ce groupe.";
                 
                 endif;
             ?>
