@@ -26,7 +26,7 @@
         <form action="index.php?action=showMessages" method="POST"></form>
         <a id="buttonMessages" href="index.php?action=showMessages"> 
           <button class="btn btn-link" type="submit"  id="button-addon">
-          <img width="30px" src="img/icon/message.svg"> <span style="position:relative; bottom: 10px; color:#2c3e50; background-color: white; border-radius: .80rem; padding-left: 10%; padding-right: 10%; text-decoration:none"><?= $contactsNb ?></span>
+          <img width="30px" src="img/icon/message.svg"> 
            </button></a>
         <form class="form-inline" action="index.php?action=search" method="POST">
             <div class="input-group">
