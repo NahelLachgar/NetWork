@@ -18,28 +18,40 @@ function updateProfiles($lastName, $name, $email, $pass, $photo, $phone, $job, $
     }
     return $req;
 }
- // MODIFIER LE GROUPE
- function updateGroups($name,$admin,$groupId,$groupPhoto){
-    $db = dbConnect();
-    if($groupPhoto){
-    $req = $db->prepare("UPDATE groups SET title = ?, admin = ?, photo = ?  WHERE id = ?");
-    $req->execute(array($name, $admin, $groupPhoto, $groupId));
-    } else {
-    $req = $db->prepare("UPDATE groups SET title = ?, admin = ?  WHERE id = ?");
-    $req->execute(array($name, $admin, $groupId));
-    }
+// MODIFIER LE GROUPE
+function updateGroups($name,$admin,$groupId,$groupPhoto){
+   $db = dbConnect();
+   if($groupPhoto){
+   $req = $db->prepare("UPDATE groups SET title = ?, admin = ?, photo = ?  WHERE id = ?");
+   $req->execute(array($name, $admin, $groupPhoto, $groupId));
+   } else {
+   $req = $db->prepare("UPDATE groups SET title = ?, admin = ?  WHERE id = ?");
+   $req->execute(array($name, $admin, $groupId));
+   }
 }
- //MODIFIER EVENEMENT
- function updateEvent($id, $title, $eventDate, $place)
- {
-     $bdd=dbConnect();
-     //MODIFIER LE TITRE, LA DATE ET L'EMPLACEMENT DE L'EVENEMENT
-     $reponse=$bdd->prepare('UPDATE events
-                             SET title=:title, eventDate=:eventDate, place=:place
-                             WHERE id=:id');
-     $reponse->execute(['title'=>$title,
-                         'eventDate'=>$eventDate,
-                         'place'=>$place,
-                         'id'=>$id]);
- }
+//MODIFIER EVENEMENT
+function updateEvent($id, $title, $eventDate, $place)
+{
+    $bdd=dbConnect();
+    //MODIFIER LE TITRE, LA DATE ET L'EMPLACEMENT DE L'EVENEMENT
+    $reponse=$bdd->prepare('UPDATE events
+                            SET title=:title, eventDate=:eventDate, place=:place
+                            WHERE id=:id');
+    $reponse->execute(['title'=>$title,
+                        'eventDate'=>$eventDate,
+                        'place'=>$place,
+                        'id'=>$id]);
+}
+
+//ACTIVER / DESACTIVER LE COMPTE DE L'UTILISATEUR
+function updateActive($id, $active)
+{
+    $bdd=dbConnect();
+    //MODIFIER L'ETAT DU COMPTE
+    $reponse=$bdd->prepare('UPDATE users
+                            SET active=:active
+                            WHERE id=:id');
+        $reponse->execute(['active'=>$active,
+                            'id'=>$id]);
+}
 ?>

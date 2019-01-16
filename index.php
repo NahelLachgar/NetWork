@@ -92,15 +92,13 @@ require_once('controller/deleteController.php');
                 sessionGroup($_SESSION['id']);
                 break;
             case 'deleteView':
-                //AJOUTER BOUTON ACTIVER/DESACTIVER LE COMPTE
                 deleteView($_SESSION['id']);
                 break;
             case 'deleteAccount':
                 deleteAccount($_SESSION['id']);
                 break;
             case 'desactivateAccount':
-                //A FAIRE
-                desactivateAccount($_SESSION['id'], $_POST['state']);
+                desactivateAccount($_SESSION['id'], $_POST['active']);
                 break;
             case 'showEvents':
                 //PRENDRE EN COMPTE LES INVITATIONS

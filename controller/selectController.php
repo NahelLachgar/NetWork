@@ -293,15 +293,16 @@ function eventView($ID, $id, $role)
 //AFFICHER LA PAGE DE SUPPRESSION DE COMPTE
 function deleteView($id)
 {
-    $profile = getProfile($id);
-    $contactsNb = getContactsCount($id);
-    if ($contactsNb > 0) {
-        $contactsPosts = getContactsPosts($id);
-        $companiesSuggests = getCompanySuggests($id);
-        $employeesSuggests = getEmployeeSuggests($id);
+    $profile=getProfile($id);
+    $contactsNb=getContactsCount($id);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($id);
+        $companiesSuggests=getCompanySuggests($id);
+        $employeesSuggests=getEmployeeSuggests($id);
     }
-    $followedCompaniesNb = getFollowedCompaniesCount($id);
-    $status = checkStatus($id);
+    $followedCompaniesNb=getFollowedCompaniesCount($id);
+    $status=checkStatus($id);
+    $state=checkActive($id);
     include('view/deleteView.php');
 }
 

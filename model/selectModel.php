@@ -496,4 +496,19 @@ function checkParticipate($id)
     }
     return $c;
 }
+
+//CHERCHER L'ETAT DU COMPTE DE L'UTILISATEUR
+function checkActive($id)
+{
+    $bdd=dbConnect();
+    //MODIFIER LE TITRE, LA DATE ET L'EMPLACEMENT DE L'EVENEMENT
+    $reponse=$bdd->prepare('SELECT active
+                            FROM users
+                            WHERE id=:id');
+    $reponse->execute(['id'=>$id]);
+    while ($donnees = $reponse->fetch()) {
+        $active=$donnees['active'];
+    }
+    return $active;
+}
 ?>
