@@ -70,7 +70,15 @@
                     </div>
                 </div>
                 <div class="py-2 text-center">
-                    <h2>Ou préférez-vous plutôt désactiver votre compte ?</h2>
+<?php
+if($state=="activated") {
+    echo "<h2>Ou préférez-vous plutôt désactiver votre compte ?</h2>";
+}
+else if($state=="disabled")
+{
+    echo "<h2>Ou préférez-vous plutôt activer votre compte ?</h2>";
+}
+?>
                     <p class="lead"></p>
                 </div>
                 <div class="row">
