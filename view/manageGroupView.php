@@ -49,7 +49,7 @@ ob_start();
               </div>
             </div>
           
-            <input type="hidden" name="groupId" value="<?= $group[0]['id'] ?>">
+            <input type="hidden" name="groupId" value="<?= $group[0]['group'] ?>">
 
           <div class="row justify-content-center">
               <div class="col-md-3">
@@ -59,7 +59,7 @@ ob_start();
     
           <div class="col-md-3">
                 <form action="index.php?action=deleteGroup" method="POST">
-                    <input type="hidden" name="groupId" value="<?= $group[0]['id'] ?>">
+                    <input type="hidden" name="groupId" value="<?= $group[0]['group'] ?>">
                   <button class="btn btn-danger btn-lg btn-block" name="delete" type="submit">Supprimer ce groupe</button>
                 </form>
               </div>
@@ -77,6 +77,29 @@ ob_start();
                     </div>
                 <?php endforeach; ?>
             </div> 
+            <hr>
+
+            <?php if(!empty($contactProfile)) : ?>
+        
+            <div class="row">
+                <?php foreach ($contactProfile as $contact) :?>
+                    <div class="col-md-2 mb-3">
+                        <?= $contact['name']." ".$contact['lastName'] ?> 
+                        <form action="index.php?action=addToGroup" method="POST">
+                            <input type="hidden" name="addContact" value="<?=$contact['id']?>">
+                            <input type="hidden" name="statut" value="2">
+                            <input type="hidden" name="groupId" value="<?= $idGroup ?>">
+                            <button type="submit" class="btn btn-link">ajouter ce membre</button>
+                        </form>
+                    </div>
+                <?php endforeach; ?>
+            </div> 
+
+                <?php else :
+                echo "Vous n'avez aucun ami à rajouter a ce groupe.";
+                
+                endif;
+            ?>
           </div>
         </div>
       </div>

@@ -173,6 +173,7 @@ function groupManage($groupId,$id) {
     $followedCompaniesNb=getFollowedCompaniesCount($id);
     $idGroup = $groupId;
     $members = selectContactGroup($groupId);
+    
     for($i = 0; $i < count($members); $i++) {
         $memberProfile[] = getProfile($members[$i]['user']);
     }
@@ -181,6 +182,31 @@ function groupManage($groupId,$id) {
     }
     $status = checkStatus($id);
     $group = getGroup($groupId);
+
+    $contacts = getContacts($id);
+    $contact = $contacts->fetchAll();
+
+    $a = count($res);
+    $b = count($contact);
+
+    $contactProfile = [];
+
+    if(count($res) != count($contact)){
+        foreach ($res as $member){
+            for($i = 0; $i < count($contact); $i++){
+                if($contact[$i]['id'] == $member['id']){
+                    unset($contact[$i]); 
+                    $contact = array_values($contact);
+                }
+            }
+        }
+
+        for($i = 0; $i < count($contact); $i++) {
+            $contactProfile[] = getProfile($contact[$i]['id']);
+        }
+    }
+
+    // var_dump($contactProfile);
     require_once('./view/manageGroupView.php');
 }
 
