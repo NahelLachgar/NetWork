@@ -32,6 +32,14 @@ function home($userId) {
 }
 
 function showMessages ($userId,$contactId) {
+    $profile=getProfile($userId);
+    $contactsNb=getContactsCount($userId);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($userId);
+        $companiesSuggests=getCompanySuggests($userId);
+        $employeesSuggests=getEmployeeSuggests($userId);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($userId);
 	$groups = getGroupsName($userId);
 	$userProfile = getProfile($userId);
     $contacts = getContacts($userId);
@@ -86,6 +94,14 @@ function contactHome($id,$contactId,$token) {
 //BARRE DE RECHERCHE
 function search($ids,$data)
 {
+    $profile=getProfile($ids);
+    $contactsNb=getContactsCount($ids);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($ids);
+        $companiesSuggests=getCompanySuggests($ids);
+        $employeesSuggests=getEmployeeSuggests($ids);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($ids);
     $ids = htmlspecialchars($ids);
     $data = htmlspecialchars($data);
     $res = getSearch($ids,$data);
@@ -101,6 +117,14 @@ function search($ids,$data)
 }
 // AFFICHER LES ENTREPRISES
 function showCompanies($id){
+    $profile=getProfile($id);
+    $contactsNb=getContactsCount($id);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($id);
+        $companiesSuggests=getCompanySuggests($id);
+        $employeesSuggests=getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($id);
     $contacts = getContacts($id);
 
     foreach ($contacts as $contact) {
@@ -123,6 +147,14 @@ function contactList($userId)
 }
 // GROUPE
 function sessionGroup($id) {
+    $profile=getProfile($id);
+    $contactsNb=getContactsCount($id);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($id);
+        $companiesSuggests=getCompanySuggests($id);
+        $employeesSuggests=getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($id);
     $status = checkStatus($id);
     $groups = getGroups($id);
     $adminGroup = getAdminGroup($id);
@@ -131,6 +163,14 @@ function sessionGroup($id) {
 
 // AFFICHAGE GROUPE
 function groupManage($groupId,$id) {
+    $profile=getProfile($id);
+    $contactsNb=getContactsCount($id);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($id);
+        $companiesSuggests=getCompanySuggests($id);
+        $employeesSuggests=getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($id);
     $idGroup = $groupId;
     $members = selectContactGroup($groupId);
     for($i = 0; $i < count($members); $i++) {
@@ -166,6 +206,14 @@ function getMembersToGroups($groupId,$id){
 
 // MONTRER LES CONTACTS
 function showContacts($id){
+    $profile=getProfile($id);
+    $contactsNb=getContactsCount($id);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($id);
+        $companiesSuggests=getCompanySuggests($id);
+        $employeesSuggests=getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($id);
     $contacts = getContacts($id);
     foreach ($contacts as $contact) {
         $res[] = getProfile($contact['id']);
@@ -242,10 +290,33 @@ function eventView($ID, $id, $role)
     include('view/eventView.php');
 }
 
+//AFFICHER LA PAGE DE SUPPRESSION DE COMPTE
+function deleteView($id)
+{
+    $profile = getProfile($id);
+    $contactsNb = getContactsCount($id);
+    if ($contactsNb > 0) {
+        $contactsPosts = getContactsPosts($id);
+        $companiesSuggests = getCompanySuggests($id);
+        $employeesSuggests = getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb = getFollowedCompaniesCount($id);
+    $status = checkStatus($id);
+    include('view/deleteView.php');
+}
+
 //AFFICHER LA PAGE CREATION D'UN EVENEMENT
 function createEventView($id, $role)
 {
     $status=checkStatus($id);
+    $profile=getProfile($id);
+    $contactsNb=getContactsCount($id);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($id);
+        $companiesSuggests=getCompanySuggests($id);
+        $employeesSuggests=getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($id);
     if($role=='admin') {
         include('view/createEventView.php');
     }
@@ -258,6 +329,14 @@ function createEventView($id, $role)
 //AFFICHER LA PAGE DE MODIFICATION D'UN EVENEMENT
 function updateEventView($ID, $id)
 {
+    $profile=getProfile($ID);
+    $contactsNb=getContactsCount($ID);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($ID);
+        $companiesSuggests=getCompanySuggests($ID);
+        $employeesSuggests=getEmployeeSuggests($ID);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($ID);
     $event = infoEvent($id);
     $status = checkStatus($ID);
     include('view/updateEventView.php');
@@ -266,6 +345,14 @@ function updateEventView($ID, $id)
 //AFFICHER LA PAGE D'AJOUT DE PARTICIPATION
 function addParticipateView($ID, $id)
 {
+    $profile=getProfile($ID);
+    $contactsNb=getContactsCount($ID);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($ID);
+        $companiesSuggests=getCompanySuggests($ID);
+        $employeesSuggests=getEmployeeSuggests($ID);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($ID);
     $contact=infoContact($ID, $id);
     $status=checkStatus($ID);
     include('view/addParticipateView.php');

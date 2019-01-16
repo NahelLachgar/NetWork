@@ -109,6 +109,14 @@ function removeContact($contactId, $userId)
     //CREER UN GROUPE
 function createGroups($groupName, $userId)
 {
+    $profile=getProfile($userId);
+    $contactsNb=getContactsCount($userId);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($userId);
+        $companiesSuggests=getCompanySuggests($userId);
+        $employeesSuggests=getEmployeeSuggests($userId);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($userId);
     // PHOTO
     $groupPhoto = $_FILES['photo']['name'];
     if ($groupPhoto) {

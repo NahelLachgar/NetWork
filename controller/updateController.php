@@ -9,6 +9,14 @@ require_once('model/selectModel.php');
 //FUNCTION AFFICHE LES INFOS A MODIFIER
 function updateToProfile($id)
 {
+    $profile=getProfile($id);
+    $contactsNb=getContactsCount($id);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($id);
+        $companiesSuggests=getCompanySuggests($id);
+        $employeesSuggests=getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($id);
     $recup = getProfileUpdate($id);
     $status = checkStatus($id);
     require_once('./view/profilUpdateView.php');
