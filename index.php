@@ -148,7 +148,7 @@ require_once('controller/deleteController.php');
                 break;
             */
             case 'createGroup':
-                createGroups($_POST['nameG'],$_SESSION['id']);
+                createGroups(htmlspecialchars($_POST['nameG']),$_SESSION['id']);
                 break;
                 case 'addContactsToGroups':
                 addContactsToGroup($_POST['addContacts'],$_POST['statut'],$_POST['groupId']);
@@ -160,7 +160,7 @@ require_once('controller/deleteController.php');
                 groupManage($_POST['groupId'],$_SESSION['id']);
                 break;
             case 'updateGroup':
-                updateGroup($_POST['groupName'],$_POST['admin'],$_POST['groupId']);
+                updateGroup(htmlspecialchars($_POST['groupName']),$_POST['admin'],$_POST['groupId']);
                 break;
             case 'deleteGroup':
                 deleteGroup($_POST['groupId']);
