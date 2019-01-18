@@ -66,6 +66,7 @@ ob_start();
                     </div>
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">
+                        <?php if(isset($errorExt)): echo "<h6 style='color:red;'>".$errorExt."</style>"; endif ?>
                             <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                 <div class="form-group">
                                     <label class="sr-only" for="message">Publier</label>
