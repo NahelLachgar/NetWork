@@ -10,7 +10,6 @@ require_once('controller/deleteController.php');
                 disconnect();
                 break;
             case 'home':
-                $error = "";
                 home(htmlspecialchars($_SESSION['id']),$error);
                 break;
             case 'checkUser':
@@ -27,18 +26,13 @@ require_once('controller/deleteController.php');
                 break;
             case 'post':
                 $imagePost = $_FILES['photo']['name'];
-                $imageExt = $_FILES['photo']['type'];
-                $ext = array("jpeg", "png");
-                $extension = explode('/', $imageExt);
-                $img = $extension[1];
-                if(in_array($img , $ext)){
+                if($imagePost){
                     addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
                 } else {
                     if (trim(htmlspecialchars($_POST['content'])) != "") {
                         addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
                     } else {
-                        $errorImg = "Erreur d'extension";
-                        home(htmlspecialchars($_SESSION['id']),$errorImg);
+                        home(htmlspecialchars($_SESSION['id']));
                     } 
                 }
                 break;
