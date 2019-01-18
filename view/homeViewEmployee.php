@@ -112,11 +112,11 @@ ob_start();
                                         <div class="d-flex justify-content-between align-items-center">
                                             <?php if ($contactsPosts[$i]['contactId'] !== $_SESSION['id']) : ?>
                                                 <div class="mr-2">
-                                                    <img class="rounded-circle" width="45" src="./img/profile/<?= $contactsPosts[$i]['photo'] ?>" alt="photo de profil">
+                                                    <img class="rounded-circle" width="45px" src="./img/profile/<?= $contactsPosts[$i]['photo'] ?>" alt="photo de profil">
                                                 </div>
                                             <?php else : ?>
                                                 <div class="mr-2">
-                                                    <img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="photo de profil">
+                                                    <img class="rounded-circle" width="45px" src="./img/profile/<?= $profile['photo'] ?>" alt="photo de profil">
                                                 </div>
                                             <?php endif ?>
                                             <div class="ml-2"> 
