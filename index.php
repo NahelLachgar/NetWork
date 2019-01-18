@@ -92,15 +92,13 @@ require_once('controller/deleteController.php');
                 sessionGroup($_SESSION['id']);
                 break;
             case 'deleteView':
-                //AJOUTER BOUTON ACTIVER/DESACTIVER LE COMPTE
                 deleteView($_SESSION['id']);
                 break;
             case 'deleteAccount':
                 deleteAccount($_SESSION['id']);
                 break;
             case 'desactivateAccount':
-                //A FAIRE
-                desactivateAccount($_SESSION['id'], $_POST['state']);
+                desactivateAccount($_SESSION['id'], $_POST['active']);
                 break;
             case 'showEvents':
                 //PRENDRE EN COMPTE LES INVITATIONS
@@ -151,7 +149,7 @@ require_once('controller/deleteController.php');
                 break;
             */
             case 'createGroup':
-                createGroups($_POST['nameG'],$_SESSION['id']);
+                createGroups(htmlspecialchars($_POST['nameG']),$_SESSION['id']);
                 break;
             case 'addContactsToGroups':
                 addContactsToGroup($_POST['addContacts'],$_POST['statut'],$_POST['groupId']);
@@ -166,7 +164,7 @@ require_once('controller/deleteController.php');
                 groupManage($_POST['groupId'],$_SESSION['id']);
                 break;
             case 'updateGroup':
-                updateGroup($_POST['groupName'],$_POST['admin'],$_POST['groupId']);
+                updateGroup(htmlspecialchars($_POST['groupName']),$_POST['admin'],$_POST['groupId']);
                 break;
             case 'deleteGroup':
                 deleteGroup($_POST['groupId']);

@@ -298,7 +298,7 @@ function getGroup($groupId)
     $req = $db->prepare("SELECT g.*,gA.* FROM groups g JOIN groupAdd gA 
     ON g.id = gA.group WHERE g.id LIKE ?");
     $req->execute(array($groupId));
-    $req = $req->fetchAll(PDO::FETCH_ASSOC);
+    $req = $req->fetch();
     return $req;
 }
 //SELECTIONNE LES GROUPES DONT L'UTILISATEUR FAIT PARTIE
@@ -495,5 +495,20 @@ function checkParticipate($id)
         $i++;
     }
     return $c;
+}
+
+//CHERCHER L'ETAT DU COMPTE DE L'UTILISATEUR
+function checkActive($id)
+{
+    $bdd=dbConnect();
+    //MODIFIER LE TITRE, LA DATE ET L'EMPLACEMENT DE L'EVENEMENT
+    $reponse=$bdd->prepare('SELECT active
+                            FROM users
+                            WHERE id=:id');
+    $reponse->execute(['id'=>$id]);
+    while ($donnees = $reponse->fetch()) {
+        $active=$donnees['active'];
+    }
+    return $active;
 }
 ?>

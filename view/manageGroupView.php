@@ -16,7 +16,7 @@ ob_start();
           <form enctype="multipart/form-data" action="index.php?action=updateGroup" method="POST">   
               <div class="row justify-content-center">
                   <div class="col-md-12-center">
-                      <img class="rounded-circle" width="100" src="./img/groups/<?= $group[0]['photo'] ?>" alt="Photo du groupe" id="photoUpdate">
+                      <img class="rounded-circle" width="100" src="./img/groups/<?= $group['photo'] ?>" alt="Photo du groupe" id="photoUpdate">
                         <input style="display:none" type="file" class="form-control-file" name="photo" id="photoUpdateFile"> 
                   </div>
               </div>   
@@ -36,7 +36,7 @@ ob_start();
   <div class="row justify-content-center">
               <div class="col-md-3 mb-3">
                 <label for="lastName">Nom</label>
-                <input type="text" class="form-control" id="groupName" name="groupName" value="<?= $group[0]['title'] ?>">
+                <input type="text" class="form-control" id="groupName" name="groupName" value="<?= $group['title'] ?>">
               </div>
               <div class="col-md-3 mb-3">
                 <label for="admin">Changer d'admin:</label><br>
@@ -49,7 +49,7 @@ ob_start();
               </div>
             </div>
           
-            <input type="hidden" name="groupId" value="<?= $group[0]['group'] ?>">
+            <input type="hidden" name="groupId" value="<?= $group['group'] ?>">
 
           <div class="row justify-content-center">
               <div class="col-md-3">
@@ -59,12 +59,15 @@ ob_start();
     
           <div class="col-md-3">
                 <form action="index.php?action=deleteGroup" method="POST">
-                    <input type="hidden" name="groupId" value="<?= $group[0]['group'] ?>">
+                    <input type="hidden" name="groupId" value="<?= $group['group'] ?>">
                   <button class="btn btn-danger btn-lg btn-block" name="delete" type="submit">Supprimer ce groupe</button>
                 </form>
               </div>
         </div>
               <hr>
+
+              <?php if(!empty($res)) : ?>
+
             <div class="row">
                 <?php foreach( $res as $member) :?>
                     <div class="col-md-2 mb-3">
@@ -77,6 +80,13 @@ ob_start();
                     </div>
                 <?php endforeach; ?>
             </div> 
+
+            <?php else :
+                echo "Aucun de vos contacts est dans ce groupe.";
+                
+                endif;
+            ?>
+
             <hr>
 
             <?php if(!empty($contactProfile)) : ?>
@@ -89,7 +99,7 @@ ob_start();
                             <input type="hidden" name="addContact" value="<?=$contact['id']?>">
                             <input type="hidden" name="statut" value="2">
                             <input type="hidden" name="groupId" value="<?= $idGroup ?>">
-                            <button type="submit" class="btn btn-link">ajouter ce membre</button>
+                            <button type="submit" class="btn btn-link">ajouter au groupe</button>
                         </form>
                     </div>
                 <?php endforeach; ?>
