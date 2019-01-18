@@ -67,6 +67,53 @@
                         </form>
                         <div class="col-md-4 order-md-2 mb-4">
                         </div>
+                    </div>
+                </div>
+                <div class="py-2 text-center">
+<?php
+if($state=="activated") {
+    echo "<h2>Ou préférez-vous plutôt désactiver votre compte ?</h2>";
+}
+else if($state=="disabled")
+{
+    echo "<h2>Ou préférez-vous plutôt activer votre compte ?</h2>";
+}
+?>
+                    <p class="lead"></p>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 order-md-1">
+                        <form enctype="multipart/form-data" action="index.php?action=desactivateAccount" method="POST">
+<?php
+    echo "<input type='hidden' name='active' value='".$state."'>";
+?>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+<?php
+if($state=="activated") {
+    echo "<input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Désactiver'>";
+}
+else if($state=="disabled")
+{
+    echo "<input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Activer'>";
+}
+?>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-md-4 order-md-2 mb-4">
+                        </div>
+<?php
+    if(isset($_SESSION['erreur']) && $_SESSION['erreur']!=="") {
+        echo "<center>".$_SESSION['erreur']."</center>";
+        $_SESSION['erreur']="";
+    }
+    else {
+        echo "<br/>";
+    }
+?>
+                        <div class="col-md-4 order-md-2 mb-4">
+                        </div>
                         <form enctype="multipart/form-data" action="index.php" method="GET">
                             <input type="hidden" name="action" value="home">
                             <div class="row justify-content-center">
