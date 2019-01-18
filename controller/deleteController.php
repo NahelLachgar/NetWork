@@ -14,6 +14,8 @@ function deleteGroup($groupId)
     deleteGroups($groupId);
     header('Location:index.php?action=groups');
 }
+
+// SUPPRIMER UN MEMBRE DU GROUPE COTE ADMIN 
 function adminRemoveToGroup($contactId, $groupId, $id)
 {
     $remove = removeFromGroup($contactId, $groupId);
@@ -21,6 +23,7 @@ function adminRemoveToGroup($contactId, $groupId, $id)
     groupManage($groupId, $id);
 }
 
+// QUITTER LE GROUPE
 function RemoveToGroup($contactId, $groupId, $id)
 {
     $remove = removeFromGroup($contactId, $groupId);
