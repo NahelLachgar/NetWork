@@ -298,7 +298,7 @@ function getGroup($groupId)
     $req = $db->prepare("SELECT g.*,gA.* FROM groups g JOIN groupAdd gA 
     ON g.id = gA.group WHERE g.id LIKE ?");
     $req->execute(array($groupId));
-    $req = $req->fetchAll(PDO::FETCH_ASSOC);
+    $req = $req->fetch();
     return $req;
 }
 //SELECTIONNE LES GROUPES DONT L'UTILISATEUR FAIT PARTIE

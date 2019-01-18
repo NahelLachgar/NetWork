@@ -165,22 +165,58 @@ function sessionGroup($id) {
 function groupManage($groupId,$id) {
     $profile=getProfile($id);
     $contactsNb=getContactsCount($id);
+    $res = [];
+
     if($contactsNb>0) {
         $contactsPosts=getContactsPosts($id);
         $companiesSuggests=getCompanySuggests($id);
         $employeesSuggests=getEmployeeSuggests($id);
     }
+    
     $followedCompaniesNb=getFollowedCompaniesCount($id);
     $idGroup = $groupId;
     $members = selectContactGroup($groupId);
-    for($i = 0; $i < count($members); $i++) {
-        $memberProfile[] = getProfile($members[$i]['user']);
+    
+    if (!empty($members)){
+        for($i = 0; $i < count($members); $i++) {
+            $memberProfile[] = getProfile($members[$i]['user']);
+        }
+        foreach( $memberProfile as $member){
+            $res[] = $member;
+        }
     }
-    foreach( $memberProfile as $member){
-        $res[] = $member;
-    }
+
     $status = checkStatus($id);
     $group = getGroup($groupId);
+    
+    $contacts = getContacts($id);
+    $contact = $contacts->fetchAll();
+    $contactProfile = [];
+
+    var_dump($group);
+    var_dump($groupId);
+
+    if (!empty($members)){
+        if(count($res) != count($contact)){
+            foreach ($res as $member){
+                for($i = 0; $i < count($contact); $i++){
+                    if($contact[$i]['id'] == $member['id']){
+                        unset($contact[$i]); 
+                        $contact = array_values($contact);
+                    }
+                }
+            }
+
+            for($i = 0; $i < count($contact); $i++) {
+                $contactProfile[] = getProfile($contact[$i]['id']);
+            }
+        }
+    } else {
+        for($i = 0; $i < count($contact); $i++) {
+            $contactProfile[] = getProfile($contact[$i]['id']);
+        }
+    }
+
     require_once('./view/manageGroupView.php');
 }
 
@@ -293,16 +329,16 @@ function eventView($ID, $id, $role)
 //AFFICHER LA PAGE DE SUPPRESSION DE COMPTE
 function deleteView($id)
 {
-    $profile=getProfile($id);
-    $contactsNb=getContactsCount($id);
-    if($contactsNb>0) {
-        $contactsPosts=getContactsPosts($id);
-        $companiesSuggests=getCompanySuggests($id);
-        $employeesSuggests=getEmployeeSuggests($id);
+    $profile = getProfile($id);
+    $contactsNb = getContactsCount($id);
+    if ($contactsNb > 0) {
+        $contactsPosts = getContactsPosts($id);
+        $companiesSuggests = getCompanySuggests($id);
+        $employeesSuggests = getEmployeeSuggests($id);
     }
-    $followedCompaniesNb=getFollowedCompaniesCount($id);
-    $status=checkStatus($id);
-    $state=checkActive($id);
+    $followedCompaniesNb = getFollowedCompaniesCount($id);
+    $status = checkStatus($id);
+    $state = checkActive($id);
     include('view/deleteView.php');
 }
 
