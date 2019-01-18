@@ -33,14 +33,7 @@ function home($userId) {
 
 function showMessages ($userId,$contactId) {
     $profile=getProfile($userId);
-    $contactsNb=getContactsCount($userId);
-    if($contactsNb>0) {
-        $contactsPosts=getContactsPosts($userId);
-        $companiesSuggests=getCompanySuggests($userId);
-        $employeesSuggests=getEmployeeSuggests($userId);
-    }
-    $followedCompaniesNb=getFollowedCompaniesCount($userId);
-	$groups = getGroupsName($userId);
+   $groups = getGroupsName($userId);
 	$userProfile = getProfile($userId);
     $contacts = getContacts($userId);
     $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);

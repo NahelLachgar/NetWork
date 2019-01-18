@@ -86,7 +86,7 @@ require_once('controller/deleteController.php');
                 addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break;
             case 'send':
-                require_once('view/send.php');
+                require_once('ajax/send.php');
                 break;
             case 'groups':
                 sessionGroup($_SESSION['id']);

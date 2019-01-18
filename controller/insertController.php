@@ -110,14 +110,6 @@ function removeContact($contactId, $userId)
 function createGroups($groupName, $userId)
 {
     $profile=getProfile($userId);
-    $contactsNb=getContactsCount($userId);
-    if($contactsNb>0) {
-        $contactsPosts=getContactsPosts($userId);
-        $companiesSuggests=getCompanySuggests($userId);
-        $employeesSuggests=getEmployeeSuggests($userId);
-    }
-    $followedCompaniesNb=getFollowedCompaniesCount($userId);
-    // PHOTO
     $groupPhoto = $_FILES['photo']['name'];
     if ($groupPhoto) {
     // ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
