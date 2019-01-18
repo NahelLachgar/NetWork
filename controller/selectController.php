@@ -193,9 +193,6 @@ function groupManage($groupId,$id) {
     $contact = $contacts->fetchAll();
     $contactProfile = [];
 
-    var_dump($group);
-    var_dump($groupId);
-
     if (!empty($members)){
         if(count($res) != count($contact)){
             foreach ($res as $member){

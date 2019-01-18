@@ -99,7 +99,7 @@ ob_start();
                             <input type="hidden" name="addContact" value="<?=$contact['id']?>">
                             <input type="hidden" name="statut" value="2">
                             <input type="hidden" name="groupId" value="<?= $idGroup ?>">
-                            <button type="submit" class="btn btn-link">ajouter ce membre</button>
+                            <button type="submit" class="btn btn-link">ajouter au groupe</button>
                         </form>
                     </div>
                 <?php endforeach; ?>
