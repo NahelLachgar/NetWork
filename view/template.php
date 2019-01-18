@@ -18,6 +18,8 @@
   
         <a id="buttonHome" href="index.php?action=home" class="home"><img width="30px" src="img/icon/home.svg" alt="Photo de profil"></a>
         <a id="buttonGroup" href="index.php?action=groups" class="groups"><img width="30px" src="img/icon/group.svg" alt="Groupe"></a>
+        <a id="buttonNotifications" href="index.php?action=notificationsPage" class="notifications"><img width="30px" src="img/icon/notifications.svg" alt="Groupe"></a>
+
 <?php
     if($status=="employee") {
         echo "<a id='buttonEvent' href='index.php?action=showEvents' class='home'><img width=30px src='img/icon/event.svg' alt='Photo de profil'></a>";
