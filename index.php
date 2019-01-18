@@ -185,7 +185,8 @@ require_once('controller/deleteController.php');
                 getGroupMessages($_SESSION['id'],$_GET['groupId']);
                 break;
             default:
-                home($_SESSION['id']);
+            $error = "";
+                home($_SESSION['id'],$error);
         }
     } else {
         if (!isset($_SESSION['name'])) {

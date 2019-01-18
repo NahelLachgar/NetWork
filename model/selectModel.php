@@ -359,8 +359,8 @@ function checkStatus($ID)
 
     $reponse->execute(['ID' => $ID]);
     $a = false;
-    while ($donnees = $reponse->fetch()) {
-        $a = $donnees['status'];
+    while ($data = $reponse->fetch()) {
+        $a = $data['status'];
     }
     return $a;
 }
@@ -376,9 +376,9 @@ function selectMember($ID)
     $reponse->execute(['ID' => $ID]);
     $a = false;
     $i = 0;
-    while ($donnees = $reponse->fetch()) {
-        $a[$i][0] = $donnees['event'];
-        $a[$i][1] = $donnees['title'];
+    while ($data = $reponse->fetch()) {
+        $a[$i][0] = $data['event'];
+        $a[$i][1] = $data['title'];
         $i++;
     }
     return $a;
@@ -395,9 +395,9 @@ function selectAdmin($ID)
     $reponse->execute(['ID' => $ID]);
     $b = false;
     $j = 0;
-    while ($donnees = $reponse->fetch()) {
-        $b[$j][0] = $donnees['id'];
-        $b[$j][1] = $donnees['title'];
+    while ($data = $reponse->fetch()) {
+        $b[$j][0] = $data['id'];
+        $b[$j][1] = $data['title'];
         $j++;
     }
     return $b;
@@ -413,10 +413,10 @@ function infoEvent($id)
                             WHERE id=:id');
     $reponse->execute(['id' => $id]);
     $a = array();
-    while ($donnees = $reponse->fetch()) {
-        $a[0] = $donnees['title'];
-        $a[1] = $donnees['eventDate'];
-        $a[2] = $donnees['place'];
+    while ($data = $reponse->fetch()) {
+        $a[0] = $data['title'];
+        $a[1] = $data['eventDate'];
+        $a[2] = $data['place'];
     }
     return $a;
 }
@@ -444,10 +444,10 @@ function infoContact($ID, $id)
     ]);
     $a = array();
     $i = 0;
-    while ($donnees = $reponse->fetch()) {
-        $a[$i][0] = $donnees['id'];
-        $a[$i][1] = $donnees['lastName'];
-        $a[$i][2] = $donnees['name'];
+    while ($data = $reponse->fetch()) {
+        $a[$i][0] = $data['id'];
+        $a[$i][1] = $data['lastName'];
+        $a[$i][2] = $data['name'];
         $i++;
     }
     return $a;
@@ -461,18 +461,18 @@ function checkAdmin($id)
                             FROM events
                             WHERE id=:id');
     $reponse->execute(['id' => $id]);
-    while ($donnees = $reponse->fetch()) {
-        $a = $donnees['admin'];
+    while ($data = $reponse->fetch()) {
+        $a = $data['admin'];
     }
     //RECUPERER LE NOM ET PRENOM DE L'ADMINISTRATEUR
     $reponse = $bdd->prepare('SELECT lastName, name
                             FROM users
                             WHERE id=:admin');
     $reponse->execute(['admin' => $a]);
-    while ($donnees = $reponse->fetch()) {
+    while ($data = $reponse->fetch()) {
         $b[0] = $a;
-        $b[1] = $donnees['lastName'];
-        $b[2] = $donnees['name'];
+        $b[1] = $data['lastName'];
+        $b[2] = $data['name'];
     }
     return $b;
 }
@@ -488,10 +488,10 @@ function checkParticipate($id)
     $reponse->execute(['id' => $id]);
     $c = false;
     $i = 0;
-    while ($donnees = $reponse->fetch()) {
-        $c[$i][0] = $donnees['user'];
-        $c[$i][1] = $donnees['lastName'];
-        $c[$i][2] = $donnees['name'];
+    while ($data = $reponse->fetch()) {
+        $c[$i][0] = $data['user'];
+        $c[$i][1] = $data['lastName'];
+        $c[$i][2] = $data['name'];
         $i++;
     }
     return $c;
@@ -506,8 +506,8 @@ function checkActive($id)
                             FROM users
                             WHERE id=:id');
     $reponse->execute(['id'=>$id]);
-    while ($donnees = $reponse->fetch()) {
-        $active=$donnees['active'];
+    while ($data = $reponse->fetch()) {
+        $active=$data['active'];
     }
     return $active;
 }

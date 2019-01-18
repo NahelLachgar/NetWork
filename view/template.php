@@ -18,7 +18,7 @@
   
         <a id="buttonHome" href="index.php?action=home" class="home"><img width="30px" src="img/icon/home.svg" alt="Photo de profil"></a>
         <a id="buttonGroup" href="index.php?action=groups" class="groups"><img width="30px" src="img/icon/group.svg" alt="Groupe"></a>
-        <a id="buttonNotifications" href="index.php?action=notificationsPage" class="notifications"><img width="30px" src="img/icon/notifications.svg" alt="Groupe"></a>
+        <a style="text-decoration:none" id="buttonNotifications" href="index.php?action=notificationsPage" class="notifications"><img width="30px" src="img/icon/notifications.svg" alt="notifications"><span id="notificationsNumber" style="background-color:#e74c3c;color:#2c3e50;border-radius:25px;padding:0px 5px 0px">10</span></a>
 
 <?php
     if($status=="employee") {

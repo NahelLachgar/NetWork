@@ -86,9 +86,9 @@ function contactAddGroup($memberId,$status,$groupID) {
                              FROM events
                              WHERE admin=:ID');
      $reponse->execute(['ID'=>$ID]);
-     while($donnees=$reponse->fetch())
+     while($data=$reponse->fetch())
      {
-         $c=$donnees['id'];
+         $c=$data['id'];
      }
      //AJOUTER L'UTILISATEUR EN TANT QUE PARTICIPANT
      $reponse=$bdd->prepare('INSERT INTO `participate` (user, event)

@@ -30,18 +30,18 @@ function getProfile($userId)
 $messages = null;
 
 // on inscrit tous les nouveaux messages dans une variable
-while($donnees = $req->fetch())
+while($data = $req->fetch())
 {
-    $profile = getProfile($donnees['user']);
-    if ($donnees['user'] == $_SESSION['id']) {
+    $profile = getProfile($data['user']);
+    if ($data['user'] == $_SESSION['id']) {
         $class="sent";
     } else {
         $class="replies";
     }
-    $messages .= '<li id="'.$donnees["id"].'" class="'.$class.'">
+    $messages .= '<li id="'.$data["id"].'" class="'.$class.'">
     <img src="./img/profile/'.$profile["photo"].'" alt="">
 
-    <p>' . $donnees['content'] . '</p></li>';
+    <p>' . $data['content'] . '</p></li>';
 }
 echo $messages; // on retourne les messages à notre script JS
 }
