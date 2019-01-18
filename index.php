@@ -32,7 +32,7 @@ require_once('controller/deleteController.php');
                     if (trim(htmlspecialchars($_POST['content'])) != "") {
                         addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
                     } else {
-                        home(htmlspecialchars($_SESSION['id']);
+                        home(htmlspecialchars($_SESSION['id']));
                     } 
                 }
                 break;
