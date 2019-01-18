@@ -11,7 +11,11 @@ ob_start();
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-    <br><br>
+    <br>
+<?php
+    if($state=='activated') {
+?>
+    <br>
         <?php if ($res == true) :
             foreach ($res as $result) : ?>
            <div class="card gedf-card">
@@ -51,10 +55,11 @@ ob_start();
         endforeach;
         else :
             echo $return;
-        endif; ?>
-    
-            
-    <?php 
+        endif;
+    }
+    else {
+        echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";
+    }
     $content = ob_get_clean();
     require_once('view/template.php');
     ?>

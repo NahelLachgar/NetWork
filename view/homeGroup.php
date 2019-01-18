@@ -7,7 +7,9 @@ ob_start();
         <link rel="stylesheet" type="text/css" href="css/group.css" />
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <SCRIPT LANGUAGE="JavaScript" SRC="js/group.js"></SCRIPT>       
-
+<?php
+if($state=='activated') {
+?>
 <div class="container">
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
@@ -83,7 +85,11 @@ ob_start();
     </div>
 </div>
    
-<?php 
+<?php
+}
+else {
+    echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";
+}
 $content = ob_get_clean();
 require_once('view/template.php');
 ?>

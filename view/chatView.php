@@ -1,6 +1,7 @@
 <?php 
 $title = "Messages";
 ob_start();
+if($state=='activated') {
 ?>
 <script src="js/filter.js"></script>
 <div id="frame">
@@ -90,7 +91,11 @@ ob_start();
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script src="js/chat.js"></script>
- <?php 
+<?php
+}
+else {
+    echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";
+}
 $content = ob_get_clean();
 require_once('./view/template.php');
 ?>

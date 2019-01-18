@@ -98,14 +98,6 @@ function addToContacts($contactId, $userId)
     }
 }
 
-    //FUNCTION UNFOLLOW UN CONTACT
-function removeContact($contactId, $userId)
-{
-    $unf = unfollow($contactId, $userId);
-    if ($unf) {
-        header('Location:index.php?action=home');
-    }
-}
     //CREER UN GROUPE
 function createGroups($groupName, $userId)
 {

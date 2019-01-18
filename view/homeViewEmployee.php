@@ -50,6 +50,9 @@ ob_start();
                 </div>
             </div>
             <div class="col-md-6 gedf-main">
+<?php
+if($state=='activated') {
+?>
             <!------------------->
         <div style="overflow: scroll; height:1000px" class="posts">
                 <!--- PUBLICATION-->
@@ -328,7 +331,12 @@ if (isset($employeesSuggests)) :
                             ?>
 <!--------------------------> 
 
- 
+<?php
+}
+else {
+    echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";
+}
+?>
     </div>
     <?php 
     $content = ob_get_clean();

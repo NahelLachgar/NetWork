@@ -13,11 +13,13 @@ ob_start();
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
         
-    <br><br>
-    <?php if (empty($res)) :
-            echo "Vous n'avez pas de contact!";
+    <br>
+    <?php
+    if($state=='activated') {
+        if (empty($res)) :
+            echo "Vous n'avez pas de contact !";
             ?>
-
+        <br>
         <?php elseif ($res == true) :
             foreach ($res as $result) : ?>
 
@@ -39,10 +41,11 @@ ob_start();
         endforeach;
         else :
             echo $return;
-        endif; ?>
-
-            
-    <?php 
+        endif;
+    }
+    else {
+        echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";
+    }
     $content = ob_get_clean();
     require_once('view/template.php');
     ?>

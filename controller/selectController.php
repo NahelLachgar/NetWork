@@ -7,7 +7,6 @@ require_once('model/updateModel.php');
 require_once('model/deleteModel.php');
 require_once('model/selectModel.php');
 // AFFICHE LA PAGE D'ACCUEIL ET EXÉCUTE LES FONCTIONS
-
 function home($userId) {
 	$profile = getProfile($userId);
     $contactsNb = getContactsCount($userId);
@@ -24,11 +23,36 @@ function home($userId) {
     }
 	$followedCompaniesNb = getFollowedCompaniesCount($userId);
 	$status = checkStatus($userId);
+    $state = checkActive($userId);
 	if($profile['status'] == "employee"){
 		require_once('view/homeViewEmployee.php');
 	}else{
 		require_once('view/homeViewCompany.php');
 	}
+}
+
+function getProfileSearch($id)
+{
+    $recup = getProfileUpdate($id);
+    $status = checkStatus($id);
+    require_once('./view/profilePageView.php');
+}
+
+//FUNCTION AFFICHE LES INFOS A MODIFIER
+function updateToProfile($id)
+{
+    $profile=getProfile($id);
+    $contactsNb=getContactsCount($id);
+    if($contactsNb>0) {
+        $contactsPosts=getContactsPosts($id);
+        $companiesSuggests=getCompanySuggests($id);
+        $employeesSuggests=getEmployeeSuggests($id);
+    }
+    $followedCompaniesNb=getFollowedCompaniesCount($id);
+    $recup = getProfileUpdate($id);
+    $status = checkStatus($id);
+    $state = checkActive($id);
+    require_once('./view/profilUpdateView.php');
 }
 
 function showMessages ($userId,$contactId) {
@@ -52,6 +76,7 @@ function showMessages ($userId,$contactId) {
 	}
 	$messages = getMessages($userId,$contactId);
 	$status = checkStatus($userId);
+    $state = checkActive($userId);
 	require_once('./view/chatView.php');
 	} else {
         $status = checkStatus($userId); 
@@ -60,6 +85,7 @@ function showMessages ($userId,$contactId) {
         require('view/template.php');
 	}
 }
+
 function showGroupMessages ($userId,$groupId) {
 	$groups = getGroupsName($userId);
 	$userProfile = getProfile($userId);
@@ -107,6 +133,7 @@ function search($ids,$data)
     $res = getSearch($ids,$data);
     $contact = getContactToUser($ids);
     $status = checkStatus($ids);
+    $state = checkActive($ids);
     if(($res == TRUE) && (empty($contact))){
         require_once('./view/resultSearchView.php');
     } else if( ($res == TRUE) && (!empty($contact)) ){
@@ -132,11 +159,12 @@ function showCompanies($id){
     
     }
     $status = checkStatus($id);
+    $state = checkActive($id);
     require_once("./view/showCompanies.php");
 }
 
 // AFFICHER LES CONTACTS
-function contactList($userId)
+/*function contactList($userId)
 {
     $list = getContacts($userId);
     $status = checkStatus($userId);
@@ -144,7 +172,8 @@ function contactList($userId)
     {
         require_once('./view/contactsListView.php');		
     }
-}
+}*/
+
 // GROUPE
 function sessionGroup($id) {
     $profile=getProfile($id);
@@ -158,6 +187,7 @@ function sessionGroup($id) {
     $status = checkStatus($id);
     $groups = getGroups($id);
     $adminGroup = getAdminGroup($id);
+    $state = checkActive($id);
     require_once('./view/homeGroup.php');
 }
 
@@ -256,6 +286,7 @@ function showContacts($id){
         
     }
     $status = checkStatus($id);
+    $state = checkActive($id);
     require_once("./view/showContacts.php");
 }
 // CHECK SI LE COMPTE EXISTE
@@ -301,6 +332,7 @@ function showEvents($id)
     $event=selectMember($id);
     //$invit=selectInvit($id, 'event');
     $status=checkStatus($id);
+    $state = checkActive($id);
     include('view/showEvents.php');
 }
 //AFFICHER LA PAGE PERSONNELLE DE L'EVENEMENT
