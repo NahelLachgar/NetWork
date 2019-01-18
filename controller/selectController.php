@@ -165,48 +165,58 @@ function sessionGroup($id) {
 function groupManage($groupId,$id) {
     $profile=getProfile($id);
     $contactsNb=getContactsCount($id);
+    $res = [];
+
     if($contactsNb>0) {
         $contactsPosts=getContactsPosts($id);
         $companiesSuggests=getCompanySuggests($id);
         $employeesSuggests=getEmployeeSuggests($id);
     }
+    
     $followedCompaniesNb=getFollowedCompaniesCount($id);
     $idGroup = $groupId;
     $members = selectContactGroup($groupId);
     
-    for($i = 0; $i < count($members); $i++) {
-        $memberProfile[] = getProfile($members[$i]['user']);
+    if (!empty($members)){
+        for($i = 0; $i < count($members); $i++) {
+            $memberProfile[] = getProfile($members[$i]['user']);
+        }
+        foreach( $memberProfile as $member){
+            $res[] = $member;
+        }
     }
-    foreach( $memberProfile as $member){
-        $res[] = $member;
-    }
+
     $status = checkStatus($id);
     $group = getGroup($groupId);
-
+    
     $contacts = getContacts($id);
     $contact = $contacts->fetchAll();
-
-    $a = count($res);
-    $b = count($contact);
-
     $contactProfile = [];
 
-    if(count($res) != count($contact)){
-        foreach ($res as $member){
-            for($i = 0; $i < count($contact); $i++){
-                if($contact[$i]['id'] == $member['id']){
-                    unset($contact[$i]); 
-                    $contact = array_values($contact);
+    var_dump($group);
+    var_dump($groupId);
+
+    if (!empty($members)){
+        if(count($res) != count($contact)){
+            foreach ($res as $member){
+                for($i = 0; $i < count($contact); $i++){
+                    if($contact[$i]['id'] == $member['id']){
+                        unset($contact[$i]); 
+                        $contact = array_values($contact);
+                    }
                 }
             }
-        }
 
+            for($i = 0; $i < count($contact); $i++) {
+                $contactProfile[] = getProfile($contact[$i]['id']);
+            }
+        }
+    } else {
         for($i = 0; $i < count($contact); $i++) {
             $contactProfile[] = getProfile($contact[$i]['id']);
         }
     }
 
-    // var_dump($contactProfile);
     require_once('./view/manageGroupView.php');
 }
 
