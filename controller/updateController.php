@@ -87,13 +87,30 @@ function updateGroup($groupName, $admin, $groupId)
 function modifyEvent($id, $title, $eventDate, $place)
 {
     //VERIFIER SI LA VARIABLE place EST VIDE OU NON PUIS MODIFIER L'EVENEMENT
-    if (isset($place)) {
+    if(isset($place)) {
         //AVEC place
         updateEvent($id, $title, $eventDate, $place);
-    } else {
+    }
+    else {
         //SANS place
         updateEvent($id, $title, $eventDate, "");
     }
+    $_SESSION['erreur']="L'événement a bien été modifié.";
     eventView($_SESSION['id'], $id, 'admin');
+}
+
+function desactivateAccount($id, $active)
+{
+    if($active=="activated") {
+        //DESACTIVER LE COMPTE
+        updateActive($id, "disabled");
+        $_SESSION['erreur']="Votre compte a bien été désactivé.";
+    }
+    else if($active=="disabled") {
+        //ACTIVER LE COMPTE
+        updateActive($id, "activated");
+        $_SESSION['erreur']="Votre compte a bien été activé.";
+    }
+    header('Location:index.php?action=deleteView');
 }
 ?>

@@ -338,6 +338,7 @@ function deleteView($id)
     }
     $followedCompaniesNb = getFollowedCompaniesCount($id);
     $status = checkStatus($id);
+    $state = checkActive($id);
     include('view/deleteView.php');
 }
 
