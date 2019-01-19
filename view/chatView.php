@@ -81,7 +81,7 @@ ob_start();
 			<form>
 				<input type="text" name="content" id="content" placeholder="Écrivez votre message" />
 				<input type="hidden" name="contactId" id="contactId" value=<?= $_GET['contactId'] ?>>
-				<img style="position:relative; left:1%;top:5%" width="2%" src="img/icon/imageFile.svg"> 
+				<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
 				<button type="button" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</form>
 			</div>
