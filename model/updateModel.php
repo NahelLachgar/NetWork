@@ -23,7 +23,9 @@ function updateGroups($name,$nAdmin,$lAdmin,$status,$groupId,$groupPhoto){
    $db = dbConnect();
    if($groupPhoto){
        $req = $db->prepare("UPDATE groups SET title = ?, admin = ?, photo = ?  WHERE id = ?");
-       $req->execute(array($name, $admin, $groupPhoto, $groupId));
+       $req->execute(array($name, $nAdmin, $groupPhoto, $groupId));
+       updateStatutLastAdminGroup($status,$lAdmin,$groupId);
+        updateStatutNewAdminGroup($nAdmin,$groupId);
     } else{
         $req = $db->prepare("UPDATE groups SET title = ?, admin = ?  WHERE id = ?");
         $req->execute(array($name, $nAdmin, $groupId));
