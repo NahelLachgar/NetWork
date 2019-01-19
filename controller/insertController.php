@@ -152,9 +152,9 @@ function addContactsToGroup($contact, $status, $groupId)
 }
 
 	//AJOUTER LES CONTACTS DANS UN GROUPE PENDANT LA MODIF DE GROUPE
-function addToGroup($contact, $status, $groupId, $userId){
+function addToGroup($contact, $status, $groupId, $admin,$userId){
         contactAddGroup($contact, $status, $groupId);
-        groupManage($groupId,$userId);
+        groupManage($groupId,$admin,$userId);
     }
 //CREER UN EVENEMENT
 function createEvent($id, $title, $eventDate, $place)

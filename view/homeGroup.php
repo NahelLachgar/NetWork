@@ -21,6 +21,7 @@ ob_start();
                 <?php foreach ($adminGroup as $groupAdmin) : ?>
                 <form method="POST" action="index.php?action=groupsManage">
                     <input type="hidden" name="groupId" value="<?= $groupAdmin['id'] ?>" >
+                    <input type="hidden" name="adminGroup" value="<?= $groupAdmin['admin'] ?>" >
                     <input type="submit" class="btn btn-link" value="<?= $groupAdmin['title'] ?>" >
                 </form><br>
                 <?php endforeach; ?>
