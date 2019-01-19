@@ -102,14 +102,6 @@ function addToContacts($contactId, $userId)
 function createGroups($groupName, $userId)
 {
     $profile=getProfile($userId);
-    $contactsNb=getContactsCount($userId);
-    if($contactsNb>0) {
-        $contactsPosts=getContactsPosts($userId);
-        $companiesSuggests=getCompanySuggests($userId);
-        $employeesSuggests=getEmployeeSuggests($userId);
-    }
-    $followedCompaniesNb=getFollowedCompaniesCount($userId);
-    // PHOTO
     $groupPhoto = $_FILES['photo']['name'];
     if ($groupPhoto) {
     // ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
@@ -151,6 +143,11 @@ function addContactsToGroup($contact, $status, $groupId)
     sessionGroup($_SESSION['id'], $_SESSION['id']);
 }
 
+    //AJOUTER LES CONTACTS DANS UN GROUPE PENDANT LA MODIF DE GROUPE
+function addToGroup($contact, $status, $groupId, $userId){
+        contactAddGroup($contact, $status, $groupId);
+        groupManage($groupId,$userId);
+}
 //CREER UN EVENEMENT
 function createEvent($id, $title, $eventDate, $place)
 {

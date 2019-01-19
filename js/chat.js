@@ -5,7 +5,7 @@ $(document).ready(function(){
 				var lastId = $('#messages li:last').attr('id');
 				var contactId = $('#contactId').val();
 				$.ajax({
-					url : "view/load.php",
+					url : "ajax/load.php",
 					type : "POST",
 					data : "contactId=" + contactId + "&messageId=" + lastId,
 					dataType:"html",
@@ -22,7 +22,7 @@ $(document).ready(function(){
 			var contactId = $('#contactId').val();
 			if ($.trim(content) != "") {			
 				$.ajax({
-				url : "view/send.php", // on donne l'URL du fichier de traitement
+				url : "ajax/send.php", // on donne l'URL du fichier de traitement
 				type : "POST", // la requête est de type POST
 				data : "content=" + content + "&contactId=" + contactId // et on envoie nos données
 				});
@@ -39,7 +39,7 @@ $(document).ready(function(){
 			var contactId = $('#contactId').val();
 			if ($.trim(content) != "") {			
 				$.ajax({
-				url : "view/send.php", // on donne l'URL du fichier de traitement
+				url : "ajax/send.php", // on donne l'URL du fichier de traitement
 				type : "POST", // la requête est de type POST
 				data : "content=" + content + "&contactId=" + contactId // et on envoie nos données
 				});

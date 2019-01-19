@@ -7,6 +7,7 @@ require_once('model/updateModel.php');
 require_once('model/deleteModel.php');
 require_once('model/selectModel.php');
 // AFFICHE LA PAGE D'ACCUEIL ET EXÉCUTE LES FONCTIONS
+
 function home($userId) {
 	$profile = getProfile($userId);
     $contactsNb = getContactsCount($userId);
@@ -57,33 +58,26 @@ function updateToProfile($id)
 
 function showMessages ($userId,$contactId) {
     $profile=getProfile($userId);
-    $contactsNb=getContactsCount($userId);
-    if($contactsNb>0) {
-        $contactsPosts=getContactsPosts($userId);
-        $companiesSuggests=getCompanySuggests($userId);
-        $employeesSuggests=getEmployeeSuggests($userId);
-    }
-    $followedCompaniesNb=getFollowedCompaniesCount($userId);
-	$groups = getGroupsName($userId);
-	$userProfile = getProfile($userId);
+   $groups = getGroupsName($userId);
+    $userProfile = getProfile($userId);
     $contacts = getContacts($userId);
     $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
     if ($contactsFetch) {
     $receiverProfile = getProfile($_GET['contactId']);
-	for ($i=0;$i<count($contactsFetch);$i++) {
-		$profile = getProfile($contactsFetch[$i]['id']);
-		$contactProfile[$i] = $profile;
-	}
-	$messages = getMessages($userId,$contactId);
-	$status = checkStatus($userId);
+    for ($i=0;$i<count($contactsFetch);$i++) {
+        $profile = getProfile($contactsFetch[$i]['id']);
+        $contactProfile[$i] = $profile;
+    }
+    $messages = getMessages($userId,$contactId);
+    $status = checkStatus($userId);
     $state = checkActive($userId);
-	require_once('./view/chatView.php');
-	} else {
+    require_once('./view/chatView.php');
+    } else {
         $status = checkStatus($userId); 
         $title="messages";
         $content = '<center>Vous n\'avez aucun contact.<br><a href="index.php?action=home">Retour</a></center>';
         require('view/template.php');
-	}
+    }
 }
 
 function showGroupMessages ($userId,$groupId) {
@@ -223,9 +217,6 @@ function groupManage($groupId,$id) {
     $contact = $contacts->fetchAll();
     $contactProfile = [];
 
-    var_dump($group);
-    var_dump($groupId);
-
     if (!empty($members)){
         if(count($res) != count($contact)){
             foreach ($res as $member){
@@ -319,42 +310,42 @@ function checkUserExists($email, $password){
 //AFFICHER LA PAGE DES EVENEMENTS
 function showEvents($id)
 {
-    $profile=getProfile($id);
-    $contactsNb=getContactsCount($id);
-    if($contactsNb>0) {
-        $contactsPosts=getContactsPosts($id);
-        $companiesSuggests=getCompanySuggests($id);
-        $employeesSuggests=getEmployeeSuggests($id);
+    $profile = getProfile($id);
+    $contactsNb = getContactsCount($id);
+    if($contactsNb > 0) {
+        $contactsPosts = getContactsPosts($id);
+        $companiesSuggests = getCompanySuggests($id);
+        $employeesSuggests = getEmployeeSuggests($id);
     }
-    $followedCompaniesNb=getFollowedCompaniesCount($id);
-    $role=2;
-    $admin=selectAdmin($id);
-    $event=selectMember($id);
+    $followedCompaniesNb = getFollowedCompaniesCount($id);
+    $role = 2;
+    $admin = selectAdmin($id);
+    $event = selectMember($id);
     //$invit=selectInvit($id, 'event');
-    $status=checkStatus($id);
+    $status = checkStatus($id);
     $state = checkActive($id);
     include('view/showEvents.php');
 }
 //AFFICHER LA PAGE PERSONNELLE DE L'EVENEMENT
 function eventView($ID, $id, $role)
 {
-    $profile=getProfile($ID);
-    $contactsNb=getContactsCount($ID);
-    if($contactsNb>0) {
-        $contactsPosts=getContactsPosts($ID);
-        $companiesSuggests=getCompanySuggests($ID);
-        $employeesSuggests=getEmployeeSuggests($ID);
+    $profile = getProfile($ID);
+    $contactsNb = getContactsCount($ID);
+    if($contactsNb > 0) {
+        $contactsPosts = getContactsPosts($ID);
+        $companiesSuggests = getCompanySuggests($ID);
+        $employeesSuggests = getEmployeeSuggests($ID);
     }
-    $followedCompaniesNb=getFollowedCompaniesCount($ID);
-    $event=infoEvent($id);
-    $admin=checkAdmin($id);
-    $participate=checkParticipate($id);
+    $followedCompaniesNb = getFollowedCompaniesCount($ID);
+    $event = infoEvent($id);
+    $admin = checkAdmin($id);
+    $participate = checkParticipate($id);
     /*
-    if($role=='participate') {
-        $invit=invitation($ID, $id, 'event');
+    if($role == 'participate') {
+        $invit = invitation($ID, $id, 'event');
     }
     */
-    $status=checkStatus($ID);
+    $status = checkStatus($ID);
     include('view/eventView.php');
 }
 
@@ -377,15 +368,15 @@ function deleteView($id)
 //AFFICHER LA PAGE CREATION D'UN EVENEMENT
 function createEventView($id, $role)
 {
-    $status=checkStatus($id);
-    $profile=getProfile($id);
-    $contactsNb=getContactsCount($id);
-    if($contactsNb>0) {
-        $contactsPosts=getContactsPosts($id);
-        $companiesSuggests=getCompanySuggests($id);
-        $employeesSuggests=getEmployeeSuggests($id);
+    $profile = getProfile($id);
+    $contactsNb = getContactsCount($id);
+    if($contactsNb > 0) {
+        $contactsPosts = getContactsPosts($id);
+        $companiesSuggests = getCompanySuggests($id);
+        $employeesSuggests = getEmployeeSuggests($id);
     }
-    $followedCompaniesNb=getFollowedCompaniesCount($id);
+    $followedCompaniesNb = getFollowedCompaniesCount($id);
+    $status = checkStatus($id);
     if($role=='admin') {
         include('view/createEventView.php');
     }
@@ -398,14 +389,14 @@ function createEventView($id, $role)
 //AFFICHER LA PAGE DE MODIFICATION D'UN EVENEMENT
 function updateEventView($ID, $id)
 {
-    $profile=getProfile($ID);
-    $contactsNb=getContactsCount($ID);
-    if($contactsNb>0) {
-        $contactsPosts=getContactsPosts($ID);
-        $companiesSuggests=getCompanySuggests($ID);
-        $employeesSuggests=getEmployeeSuggests($ID);
+    $profile = getProfile($ID);
+    $contactsNb = getContactsCount($ID);
+    if($contactsNb > 0) {
+        $contactsPosts = getContactsPosts($ID);
+        $companiesSuggests = getCompanySuggests($ID);
+        $employeesSuggests = getEmployeeSuggests($ID);
     }
-    $followedCompaniesNb=getFollowedCompaniesCount($ID);
+    $followedCompaniesNb = getFollowedCompaniesCount($ID);
     $event = infoEvent($id);
     $status = checkStatus($ID);
     include('view/updateEventView.php');
@@ -414,16 +405,16 @@ function updateEventView($ID, $id)
 //AFFICHER LA PAGE D'AJOUT DE PARTICIPATION
 function addParticipateView($ID, $id)
 {
-    $profile=getProfile($ID);
-    $contactsNb=getContactsCount($ID);
-    if($contactsNb>0) {
-        $contactsPosts=getContactsPosts($ID);
-        $companiesSuggests=getCompanySuggests($ID);
-        $employeesSuggests=getEmployeeSuggests($ID);
+    $profile = getProfile($ID);
+    $contactsNb = getContactsCount($ID);
+    if($contactsNb > 0) {
+        $contactsPosts = getContactsPosts($ID);
+        $companiesSuggests = getCompanySuggests($ID);
+        $employeesSuggests = getEmployeeSuggests($ID);
     }
-    $followedCompaniesNb=getFollowedCompaniesCount($ID);
-    $contact=infoContact($ID, $id);
-    $status=checkStatus($ID);
+    $followedCompaniesNb = getFollowedCompaniesCount($ID);
+    $contact = infoContact($ID, $id);
+    $status = checkStatus($ID);
     include('view/addParticipateView.php');
 }
 ?>

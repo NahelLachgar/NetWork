@@ -5,7 +5,7 @@ $(document).ready(function(){
 				var lastId = $('#messages li:last').attr('id');
 				var groupId = $('#groupId').val();
 				$.ajax({
-					url : "view/load.php",
+					url : "ajax/load.php",
 					type : "POST",
 					data : "groupId=" + groupId + "&messageId=" + lastId,
 					dataType:"html",
@@ -22,7 +22,7 @@ $(document).ready(function(){
 			var groupId = $('#groupId').val();
 			if ($.trim(message) != "") {			
 				$.ajax({
-				url : "view/send.php", // on donne l'URL du fichier de traitement
+				url : "ajax/send.php", // on donne l'URL du fichier de traitement
 				type : "POST", // la requête est de type POST
 				data : "message=" + message + "&groupId=" + groupId // et on envoie nos données
 				});
@@ -39,7 +39,7 @@ $(document).ready(function(){
 			var groupId = $('#groupId').val();
 			if ($.trim(message) != "") {			
 				$.ajax({
-				url : "view/send.php", // on donne l'URL du fichier de traitement
+				url : "ajax/send.php", // on donne l'URL du fichier de traitement
 				type : "POST", // la requête est de type POST
 				data : "message=" + message + "&groupId=" + groupId // et on envoie nos données
 				});

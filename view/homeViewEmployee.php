@@ -69,6 +69,7 @@ if($state=='activated') {
                     </div>
                     <div class="card-body">
                         <div class="tab-content" id="myTabContent">
+                        <?php if(isset($errorExt)): echo "<h6 style='color:red;'>".$errorExt."</style>"; endif ?>
                             <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                 <div class="form-group">
                                     <label class="sr-only" for="message">Publier</label>
@@ -189,68 +190,80 @@ if($state=='activated') {
 
 
 <!--------- SUGGESTIONS DE CONTACTS----------->
+
 <?php
 if (isset($employeesSuggests)) :
     if (count($employeesSuggests) > 1) : ?>
             <div class="col-md-3">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-            <?php for ($i = 0; $i < count($employeesSuggests); $i++) :?>
-                <li data-target="#carouselExampleIndicators" data-slide-to="<?= $i ?>" class="active"></li>
-            <?php endfor ?>
-            </ol>
-            <div class="carousel-innitemer">
-                <div class="carousel- active">
-                <div class="card gedf-card">
-                        <div class="card-body">
-                        <center>
-                                    <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[0]['photo'] ?>" alt="" />
-                                    <h5 class="card-title"><?= $employeesSuggests[0]['name'] . ' ' . $employeesSuggests[0]['lastName'] ?></h5>
-                                    <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[0]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
-                                    <form action="index.php?action=addContact" method="POST">
-                                    <input type="hidden" name="contactId" value="<?= $employeesSuggests[0]['id'] ?>">
-                                        <button type="submit" class="btn btn-link" name="contactId" value="<?= $employeesSuggests[0]['id'] ?>"> <img src="./img/icon/users.png"></button>
-                                    </form>
-                                    </center>
-                        </div>
+  <ol class="carousel-indicators">
+ <!-------> 
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+<!------->
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+  <div class="carousel-item active">
+    <div class="card gedf-card">
+                    
+                    <div class="card-body">
+                    <center>
+                    <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[0]['photo'] ?>" alt="" />
+                    <h5 class="card-title"><?= $employeesSuggests[0]['name'] . ' ' . $employeesSuggests[0]['lastName'] ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[0]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
+                    <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+</center>
                     </div>
-                </div>
-                <?php 
-                for ($i = 0; $i < count($employeesSuggests); $i++) : ?>
-                <div class="carousel-item">
-                <div class="card gedf-card">
-                                    <div class="card-body">
-                                    <img class="rounded-circle" width="45" src="./img/profile/<?= $employeesSuggests[$i]['photo'] ?>" alt="" />
-                                    <h5 class="card-title"><?= $employeesSuggests[$i]['name'] . ' ' . $employeesSuggests[$i]['lastName'] ?></h5>
-                                    <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[$i]['job'] . ' chez ' . $employeesSuggests[$i]['company'] ?></h6>
-                                    <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[$i]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
-                                    </div>
-                </div>    
-                </div> 
-                <?php endfor; ?>
-                
+                    </div>   
 
-                
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-            </div>
-                            <?php elseif (count($employeeSuggest) == 1) : ?>
-                            <div class="card gedf-card">
-                                    <div class="card-body">
-                                    <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[$i]['photo'] ?>" alt="" />
-                                    <h5 class="card-title"><?= $employeesSuggests[0]['name'] . ' ' . $employeesSuggests[0]['lastName'] ?></h5>
-                                    <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[$i]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
-                                    <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
-                                    </div>
+  <!------->
+
+    <div class="carousel-item">
+    <div class="card gedf-card">
+                    <div class="card-body">
+                    <center>
+                    <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[1]['photo'] ?>" alt="" />
+                    <h5 class="card-title"><?= $employeesSuggests[1]['name'] . ' ' . $employeesSuggests[1]['lastName'] ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[1]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
+                    <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[1]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+</center>
+                    </div>
+                    </div>   
+
+                    <div class="carousel-item">
+    <div class="card gedf-card">
+                    
+                    <div class="card-body">
+                    <center>
+                    <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[1]['photo'] ?>" alt="" />
+                    <h5 class="card-title"><?= $employeesSuggests[1]['name'] . ' ' . $employeesSuggests[1]['lastName'] ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[1]['job'] . ' chez ' . $employeesSuggests[1]['company'] ?></h6>
+                    <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[1]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+</center>
+                    </div>
+                    </div>   
+
+
+</div>
+
+
+<!------->  
+   
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
                 </div>    
-                            <?php endif; ?>
+                            <?php endif;
+                            endif;
+                            ?>
 
 
             <!--------------------------> 
@@ -326,7 +339,6 @@ if (isset($employeesSuggests)) :
                                     </div>
                 </div>    
                             <?php endif;
-                            endif;
                             endif;
                             ?>
 <!--------------------------> 

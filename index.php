@@ -10,7 +10,7 @@ require_once('controller/deleteController.php');
                 disconnect();
                 break;
             case 'home':
-                home(htmlspecialchars($_SESSION['id']));
+                home(htmlspecialchars($_SESSION['id']),$error);
                 break;
             case 'checkUser':
                 checkUserExists(htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']));
@@ -86,7 +86,7 @@ require_once('controller/deleteController.php');
                 addMessage(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break;
             case 'send':
-                require_once('view/send.php');
+                require_once('ajax/send.php');
                 break;
             case 'groups':
                 sessionGroup($_SESSION['id']);
@@ -149,10 +149,13 @@ require_once('controller/deleteController.php');
                 break;
             */
             case 'createGroup':
-                createGroups($_POST['nameG'],$_SESSION['id']);
+                createGroups(htmlspecialchars($_POST['nameG']),$_SESSION['id']);
                 break;
-                case 'addContactsToGroups':
+            case 'addContactsToGroups':
                 addContactsToGroup($_POST['addContacts'],$_POST['statut'],$_POST['groupId']);
+                break;
+            case 'addToGroup':
+                addToGroup($_POST['addContact'],$_POST['statut'],$_POST['groupId'],$_SESSION['id']);
                 break;
             case 'getGroupId':
                 getMembersToGroups($_POST['groupId'],$_SESSION['id']);
@@ -161,7 +164,7 @@ require_once('controller/deleteController.php');
                 groupManage($_POST['groupId'],$_SESSION['id']);
                 break;
             case 'updateGroup':
-                updateGroup($_POST['groupName'],$_POST['admin'],$_POST['groupId']);
+                updateGroup(htmlspecialchars($_POST['groupName']),$_POST['admin'],$_POST['groupId']);
                 break;
             case 'deleteGroup':
                 deleteGroup($_POST['groupId']);
