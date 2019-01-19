@@ -64,9 +64,10 @@ function validateProfile($lastname, $name, $email, $pass, $confirmPass, $phone, 
 
 	
 	// MODIFIER UN GROUPE
-function updateGroup($groupName, $admin, $groupId)
+function updateGroup($groupName,$newAdmin, $lastAdmin, $groupId)
 {
     $groupPhoto = $_FILES['photo']['name'];
+    $status = "member";
     if ($groupPhoto) {
         // ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
         list($name, $ext) = explode(".", $groupPhoto);    
@@ -78,7 +79,7 @@ function updateGroup($groupName, $admin, $groupId)
         $groupPhoto = $groupName . $ext;
 
     }
-    updateGroups($groupName, $admin, $groupId, $groupPhoto);
+    updateGroups($groupName, $newAdmin,$lastAdmin,$status, $groupId, $groupPhoto);
 
     header('Location:index.php?action=groups');
 }

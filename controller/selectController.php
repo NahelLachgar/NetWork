@@ -155,8 +155,9 @@ function sessionGroup($id) {
 }
 
 // AFFICHAGE GROUPE
-function groupManage($groupId,$id) {
+function groupManage($groupId,$admin,$id) {
     $profile=getProfile($id);
+    $adminG = $admin;
     $contactsNb=getContactsCount($id);
     $res = [];
 

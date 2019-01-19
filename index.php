@@ -155,22 +155,22 @@ require_once('controller/deleteController.php');
                 addContactsToGroup($_POST['addContacts'],$_POST['statut'],$_POST['groupId']);
                 break;
             case 'addToGroup':
-                addToGroup($_POST['addContact'],$_POST['statut'],$_POST['groupId'],$_SESSION['id']);
+                addToGroup($_POST['addContact'],$_POST['statut'],$_POST['groupId'],$_POST['adminGroup'],$_SESSION['id']);
                 break;
             case 'getGroupId':
                 getMembersToGroups($_POST['groupId'],$_SESSION['id']);
                 break;
             case 'groupsManage':
-                groupManage($_POST['groupId'],$_SESSION['id']);
+                groupManage($_POST['groupId'],$_POST['adminGroup'],$_SESSION['id']);
                 break;
             case 'updateGroup':
-                updateGroup(htmlspecialchars($_POST['groupName']),$_POST['admin'],$_POST['groupId']);
+                updateGroup(htmlspecialchars($_POST['groupName']),$_POST['newAdmin'],$_POST['lastAdmin'],$_POST['groupId']);
                 break;
             case 'deleteGroup':
                 deleteGroup($_POST['groupId']);
                 break;
             case 'removeToGroups':
-                adminRemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
+                adminRemoveToGroup($_POST['contactId'],$_POST['groupId'],$_POST['adminGroup'],$_SESSION['id']);
                 break;
             case 'leaveTheGroups':
                 RemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);

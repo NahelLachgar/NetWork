@@ -18,17 +18,31 @@ function updateProfiles($lastName, $name, $email, $pass, $photo, $phone, $job, $
     }
     return $req;
 }
-// MODIFIER LE GROUPE
-function updateGroups($name,$admin,$groupId,$groupPhoto){
+// MODIFIER LE GROUPE PART1 (CHANGE L'ADMIN DANS LA TABLE GROUPE)
+function updateGroups($name,$nAdmin,$lAdmin,$status,$groupId,$groupPhoto){
    $db = dbConnect();
    if($groupPhoto){
-   $req = $db->prepare("UPDATE groups SET title = ?, admin = ?, photo = ?  WHERE id = ?");
-   $req->execute(array($name, $admin, $groupPhoto, $groupId));
-   } else {
-   $req = $db->prepare("UPDATE groups SET title = ?, admin = ?  WHERE id = ?");
-   $req->execute(array($name, $admin, $groupId));
-   }
+       $req = $db->prepare("UPDATE groups SET title = ?, admin = ?, photo = ?  WHERE id = ?");
+       $req->execute(array($name, $admin, $groupPhoto, $groupId));
+    } else{
+        $req = $db->prepare("UPDATE groups SET title = ?, admin = ?  WHERE id = ?");
+        $req->execute(array($name, $nAdmin, $groupId));
+        updateStatutLastAdminGroup($status,$lAdmin,$groupId);
+        updateStatutNewAdminGroup($nAdmin,$groupId);
+    }
 }
+
+function updateStatutLastAdminGroup($status,$lAdmin,$groupId){
+    $db = dbConnect();
+    $req = $db->prepare("UPDATE groupadd SET status = ? WHERE groupadd.user = ? AND groupadd.group = ?");
+    $req->execute(array($status, $lAdmin, $groupId));
+}
+function updateStatutNewAdminGroup($nAdmin,$groupId){
+    $db = dbConnect();
+    $req = $db->prepare("UPDATE groupadd SET status = NULL WHERE groupadd.user = ? AND groupadd.group = ?");
+    $req->execute(array($nAdmin, $groupId));
+}
+
 //MODIFIER EVENEMENT
 function updateEvent($id, $title, $eventDate, $place)
 {

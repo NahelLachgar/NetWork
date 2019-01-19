@@ -40,7 +40,7 @@ ob_start();
               </div>
               <div class="col-md-3 mb-3">
                 <label for="admin">Changer d'admin:</label><br>
-                <select id="admin" class="form-control" name="admin">
+                <select id="admin" class="form-control" name="newAdmin">
                     <option value="<?= $_SESSION['id'] ?>" selected>Vous</option>
                     <?php foreach( $res as $member) :?>
                         <option value="<?=$member['id']?>"><?= $member['name']." ".$member['lastName'] ?> </option>
@@ -50,6 +50,7 @@ ob_start();
             </div>
           
             <input type="hidden" name="groupId" value="<?= $group['group'] ?>">
+            <input type="hidden" name="lastAdmin" value="<?= $adminG ?>">
 
           <div class="row justify-content-center">
               <div class="col-md-3">
@@ -75,6 +76,7 @@ ob_start();
                         <form action="index.php?action=removeToGroups" method="POST">
                             <input type="hidden" name="contactId" value="<?=$member['id']?>">
                             <input type="hidden" name="groupId" value="<?= $idGroup ?>">
+                            <input type="hidden" name="adminGroup" value="<?= $adminG ?>">
                             <button type="submit" class="btn btn-link">retirer du groupe</button>
                         </form>
                     </div>
@@ -99,6 +101,7 @@ ob_start();
                             <input type="hidden" name="addContact" value="<?=$contact['id']?>">
                             <input type="hidden" name="statut" value="2">
                             <input type="hidden" name="groupId" value="<?= $idGroup ?>">
+                            <input type="hidden" name="adminGroup" value="<?= $adminG ?>">
                             <button type="submit" class="btn btn-link">ajouter au groupe</button>
                         </form>
                     </div>
