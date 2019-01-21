@@ -4,7 +4,7 @@ require_once('controller/updateController.php');
 require_once('controller/insertController.php');
 require_once('controller/selectController.php');
 require_once('controller/deleteController.php');
-    if (isset($_GET['action'])) {
+   if (isset($_GET['action'])){
         switch ($_GET['action']) {
            case 'disconnect':
                 disconnect();
@@ -183,8 +183,8 @@ require_once('controller/deleteController.php');
                 home($_SESSION['id'],$error);
         }
     } else {
-        if (!isset($_SESSION['name'])) {
-        require_once('view/signInView.php');
+        if (!isset($_SESSION['id'])) {
+            require_once('view/signInView.php');
         } else {
             header('Location:index.php?action=home');
     }

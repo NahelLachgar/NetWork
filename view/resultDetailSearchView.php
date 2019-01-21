@@ -93,10 +93,12 @@ ob_start();
             endif;
             endforeach;
         else: ?>
-        <center><div class="card gedf-card">
-            <div class="card-body">       
-           <b> Aucun resultat trouvé </b>
-            </div></center>
+       <center><div class='col align-self-end'><div class='card border-danger mb-6' style='max-width: 18rem;'>
+            <div class='card-body text-danger'>
+              <h5 class='card-title'>Oups!</h5>
+              <p class='card-text'>Aucun resultat trouve.</p>
+            </div>
+          </div></div></center>
 <?php
 endif;
 $content = ob_get_clean();

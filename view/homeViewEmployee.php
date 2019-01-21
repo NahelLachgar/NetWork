@@ -154,6 +154,11 @@ ob_start();
                                     </div>
                                 </div> <!-- CARD BODY -->
                                 <div class="card-footer">
+                                <div class="card" style="width: 18rem;">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">Cras justo odio</li>
+                                            </ul>
+                                    </div>
                                 <form action="index.php?action=comment" method="post">
                                     <div class="input-group">
                                         <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">
