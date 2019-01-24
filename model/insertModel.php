@@ -42,7 +42,7 @@ function addUser($lastName, $firstName, $email, $phone, $photo, $password, $stat
     // ON SE CONNECTE
     $db = dbConnect();
     // ON INSERT LES DONNES DANS LA BDD
-    $insertUser = $db->prepare('INSERT INTO users (name, lastName, email, phone, photo, password, status, job, company, town) VALUES (?,?,?,?,?,?,?,?,?,?)');
+    $insertUser = $db->prepare('INSERT INTO users (name, lastName, email, phone, photo, password, status, job, company, town, active) VALUES (?,?,?,?,?,?,?,?,?,?, "activated")');
     $insertUser->execute(array($firstName, $lastName, $email, $phone, $photo, $password, $status, $job, $company, $town));
 }
 //CREER UN GROUPE
