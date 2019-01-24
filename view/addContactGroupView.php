@@ -78,7 +78,9 @@ ob_start();
                 <?php endforeach; ?>
                 <input type="submit" class="btn btn-primary btn-lg btn-block" name="ajouter" value="Ajouter">
                 <?php else:
-                echo "Vous n'avez aucun contact! ";
+                echo "<u>Vous n'avez aucun contact!</ul> <br>
+                <a href='index.php?action=groups' class='groups'>retour</a>";
+
                 endif;?>
                 </div>
             </form>

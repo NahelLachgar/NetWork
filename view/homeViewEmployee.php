@@ -64,14 +64,13 @@ ob_start();
                             </li>
                         </ul>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body"><?php if(!empty($errorExt)): echo "<i><h6 style='color:red;'>".$errorExt."</h6></i>"; endif ?>
                         <div class="tab-content" id="myTabContent">
-                        <?php if(isset($errorExt)): echo "<h6 style='color:red;'>".$errorExt."</style>"; endif ?>
                             <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                 <div class="form-group">
                                     <label class="sr-only" for="message">Publier</label>
                                     <form enctype="multipart/form-data" action="index.php?action=post" method="POST">
-                                    <textarea name="content" class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?"></textarea>
+                                    <textarea name="content"  class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?"></textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
@@ -154,11 +153,13 @@ ob_start();
                                     </div>
                                 </div> <!-- CARD BODY -->
                                 <div class="card-footer">
-                                <div class="card" style="width: 18rem;">
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">Cras justo odio</li>
-                                            </ul>
-                                    </div>
+                                <!-- commentaires-->
+                                    <div class="card" style="width: 18rem;">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Cras justo odio</li>
+                                                </ul>
+                                        </div>
+                                <!-- -->
                                 <form action="index.php?action=comment" method="post">
                                     <div class="input-group">
                                         <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">
