@@ -18,7 +18,10 @@
   
         <a id="buttonHome" href="index.php?action=home" class="home"><img width="30px" src="img/icon/home.svg" alt="Photo de profil"></a>
         <a id="buttonGroup" href="index.php?action=groups" class="groups"><img width="30px" src="img/icon/group.svg" alt="Groupe"></a>
-        <a style="text-decoration:none" id="buttonNotifications" href="index.php?action=notificationsPage" class="notifications"><img width="30px" src="img/icon/notifications.svg" alt="notifications"><span id="notificationsNumber" style="background-color:#e74c3c;color:#2c3e50;border-radius:25px;padding:0px 5px 0px">10</span></a>
+        <a style="text-decoration:none" id="buttonNotifications" href="index.php?action=notificationsPage" class="notifications">
+        <img width="30px" src="img/icon/notifications.svg" alt="notifications">
+        <span class="badge badge-danger">10</span>
+        </a>
 
 <?php
     if($status=="employee") {
@@ -27,9 +30,10 @@
 ?>
         <form action="index.php?action=showMessages" method="POST"></form>
         <a id="buttonMessages" href="index.php?action=showMessages"> 
-          <button class="btn btn-link" type="submit"  id="button-addon">
+           <button class="btn btn-link" type="submit"  id="button-addon">
           <img width="30px" src="img/icon/message.svg"> 
-           </button></a>
+           </button></a> 
+           
         <form class="form-inline" action="index.php?action=search" method="POST">
             <div class="input-group">
                 <input type="text" placeholder="Rechercher..." name="research" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">

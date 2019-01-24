@@ -10,6 +10,7 @@ require_once('controller/deleteController.php');
                 disconnect();
                 break;
             case 'home':
+            $error = "";
                 home(htmlspecialchars($_SESSION['id']),$error);
                 break;
             case 'checkUser':
