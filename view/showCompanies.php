@@ -14,7 +14,12 @@ ob_start();
         crossorigin="anonymous"></script>
     <br>
     <?php if (empty($res)) :
-            echo "vous ne suivez aucune entreprise!";
+            echo " <center><div class='col align-self-end'><div class='card border-danger mb-6' style='max-width: 18rem;'>
+            <div class='card-body text-danger'>
+              <h5 class='card-title'>Oups!</h5>
+              <p class='card-text'>Vous ne suivez aucune entreprise.</p>
+            </div>
+          </div></div></center>";
             ?>
         <?php elseif ($res == true) :
             foreach ($res as $result) : ?>

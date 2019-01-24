@@ -8,7 +8,7 @@ require_once('model/deleteModel.php');
 require_once('model/selectModel.php');
 // AFFICHE LA PAGE D'ACCUEIL ET EXÉCUTE LES FONCTIONS
 
-function home($userId) {
+function home($userId,$errorExt) {
 	$profile = getProfile($userId);
     $contactsNb = getContactsCount($userId);
     
@@ -267,7 +267,7 @@ function checkUserExists($email, $password){
 		require_once('view/signInView.php');		
 	} else {
 		if(password_verify($password, $user['password'])){
-			$_SESSION['id'] = $user['id'];
+            $_SESSION['id'] = $user['id'];
 			header('Location:index.php?action=home');
 		} else { 
 			$errors['wrongPassWord'] = "Les identifiants saisis sont incorrects.";
