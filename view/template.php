@@ -54,14 +54,14 @@
   <script src="bootstrapNotify/dist/bootstrap-notify.js"></script>
   <script>
       $("#btnNotif").on("click",function() {
-          var txt = "abcd";
+          var txt = "Oooooooooh";
         $.notify({
     // options
     icon: "img/profile/NetWork.png",
     message: txt,
-    url: 'https://google.com',
+    url: 'https://youtu.be/_FR6cZSw37Y?t=31',
 },{
-  // settings
+	// settings
     type: 'info',
     url_target: '_self'
 });      
