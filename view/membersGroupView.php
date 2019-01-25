@@ -26,7 +26,7 @@ ob_start();
                 <input type="text" class="form-control" id="groupName" name="groupName" value="<?= $group['title'] ?>" READONLY>
               </div>
               <div class="col-md-3 mb-3">
-                <label for="admin">Admin</label><br>
+                <label for="admin">Administrateur</label><br>
                 <input type="text" class="form-control" id="groupName" name="groupName" value="<?= $admin['name']." ".$admin['lastName'] ?>" READONLY>
               </div>
             </div>

@@ -35,11 +35,11 @@ ob_start();
   </div>
   <div class="row justify-content-center">
               <div class="col-md-3 mb-3">
-                <label for="lastName">Nom</label>
+                <label for="lastName">Nom du groupe</label>
                 <input type="text" class="form-control" id="groupName" name="groupName" value="<?= $group['title'] ?>">
               </div>
               <div class="col-md-3 mb-3">
-                <label for="admin">Changer d'admin:</label><br>
+                <label for="admin">Administrateur:</label><br>
                 <select id="admin" class="form-control" name="newAdmin">
                     <option value="<?= $_SESSION['id'] ?>" selected>Vous</option>
                     <?php foreach( $res as $member) :?>
@@ -73,6 +73,11 @@ ob_start();
         </div>
               <hr>
 
+            <div class="py-12 text-center">
+                <h5>Membre(s) du groupe</h5>
+                <p class="lead"></p>
+            </div>
+
               <?php if(!empty($res)) : ?>
 
             <div class="row">
@@ -96,6 +101,11 @@ ob_start();
             ?>
 
             <hr>
+
+            <div class="py-12 text-center">
+                <h5>Suggestion de membre</h5>
+                <p class="lead"></p>
+            </div>
 
             <?php if(!empty($contactProfile)) : ?>
         
