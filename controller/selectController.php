@@ -385,4 +385,11 @@ function addParticipateView($ID, $id)
     $status=checkStatus($ID);
     include('view/addParticipateView.php');
 }
+
+//SELECTIONNE TOUS LES COMMENTAIRES D"UNE PUBLICATION
+/*function getComments(){
+    $comments = getCommentsToPublications();
+   // require_once('view/homeViewEmployee.php');
+    //var_dump($comments);
+}*/
 ?>
