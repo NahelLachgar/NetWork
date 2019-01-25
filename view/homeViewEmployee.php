@@ -3,17 +3,6 @@ $title = "Accueil";
 ob_start();
 ?>
 
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
-        crossorigin="anonymous">
-        
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
- 
-
 <!-- PROFIL-->
 
     <div class="container-fluid gedf-wrapper">
@@ -64,13 +53,13 @@ ob_start();
                             </li>
                         </ul>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body"><?php if(!empty($errorExt)): echo "<i><h6 style='color:red;'>".$errorExt."</h6></i>"; endif ?>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
                                 <div class="form-group">
                                     <label class="sr-only" for="message">Publier</label>
                                     <form enctype="multipart/form-data" action="index.php?action=post" method="POST">
-                                    <textarea name="content" class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?"></textarea>
+                                    <textarea name="content"  class="form-control" id="message" rows="3" placeholder="Que souhaitez-vous publier ?"></textarea>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
@@ -152,7 +141,25 @@ ob_start();
                                         <?php endif ?>
                                     </div>
                                 </div> <!-- CARD BODY -->
+                                <!-- commentaires-->
                                 <div class="card-footer">
+                                <p>
+                                    <ul style="display:inline" class="list-group list-group-flush">
+                                        <li style="list-style:none"> 
+                                            <img class="rounded-circle" width="45px" src="./img/profile/<?= $profile['photo'] ?>" alt="photo de profil">
+                                            <span class="h6 m-0">Prénom Nom</span>
+                                            <li class="list-group-item">Commentaire</li>
+                                        </li> 
+                                </div>
+                                <div class="card-footer">
+                                    <li style="list-style:none"> 
+                                        <img class="rounded-circle" width="45px" src="./img/profile/<?= $profile['photo'] ?>" alt="photo de profil">
+                                        <span class="h6 m-0">Prénom Nom</span>
+                                        <li class="list-group-item">Commentaire</li>
+                                    </li> 
+                                </ul>
+                                </p>
+                                <!-- -->
                                 <form action="index.php?action=comment" method="post">
                                     <div class="input-group">
                                         <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">

@@ -4,13 +4,14 @@ require_once('controller/updateController.php');
 require_once('controller/insertController.php');
 require_once('controller/selectController.php');
 require_once('controller/deleteController.php');
-    if (isset($_GET['action'])) {
+   if (isset($_GET['action'])){
         switch ($_GET['action']) {
            case 'disconnect':
                 disconnect();
                 break;
             case 'home':
-                home(htmlspecialchars($_SESSION['id']));
+                $errorExt = "";
+                home(htmlspecialchars($_SESSION['id']),$errorExt);
                 break;
             case 'checkUser':
                 checkUserExists(htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']));
@@ -26,15 +27,18 @@ require_once('controller/deleteController.php');
                 break;
             case 'post':
                 $imagePost = $_FILES['photo']['name'];
-                if($imagePost){
-                    addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
-                } else {
-                    if (trim(htmlspecialchars($_POST['content'])) != "") {
+                $ext = explode(".", $imagePost);
+                $listExt = array("png","jpg","PNG","JPG","jpeg","JPEG");
+                    if(in_array($ext[1], $listExt)){
                         addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
                     } else {
-                        home(htmlspecialchars($_SESSION['id']));
-                    } 
-                }
+                        if (trim(htmlspecialchars($_POST['content'])) != "") {
+                            addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
+                        } else {
+                            $errorExt = "impossible de publier ce contenu !";
+                            home(htmlspecialchars($_SESSION['id']),$errorExt);
+                        } 
+                    }
                 break;
             case 'contactList':
                 showContacts(htmlspecialchars($_SESSION['id']));
@@ -179,12 +183,11 @@ require_once('controller/deleteController.php');
                 getGroupMessages($_SESSION['id'],$_GET['groupId']);
                 break;
             default:
-            $error = "";
-                home($_SESSION['id'],$error);
+                home($_SESSION['id']);
         }
     } else {
-        if (!isset($_SESSION['name'])) {
-        require_once('view/signInView.php');
+        if (!isset($_SESSION['id'])) {
+            require_once('view/signInView.php');
         } else {
             header('Location:index.php?action=home');
     }
