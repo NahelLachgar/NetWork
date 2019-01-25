@@ -3,8 +3,6 @@
     $title="Modifier un événement";
     ob_start();
 ?>
-
-
 <div class="container">
     <div class="py-2 text-center">
         <h2>Modifier un événement</h2>

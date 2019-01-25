@@ -26,6 +26,9 @@ ob_start();
                         </div>
                     </div> -->
 
+<?php
+    if($state=='activated') {
+?>
     <div class="container">
       <div class="py-2 text-center">
 
@@ -163,6 +166,10 @@ ob_start();
 
 
     <?php 
+    }
+    else {
+        echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";
+    }
     $content = ob_get_clean();
     require_once('view/template.php');
     ?>
