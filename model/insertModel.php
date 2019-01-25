@@ -65,6 +65,7 @@ function contactAddGroup($memberId,$status,$groupID) {
     $req = $db->prepare("INSERT INTO `groupAdd` (`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(), $memberId, $status, $groupID)");
     $req->execute(array($memberId,$status,$groupID));
 }
+
 //AJOUT D'UN CONTACT
 function addContact($contactId, $idUser)
 {

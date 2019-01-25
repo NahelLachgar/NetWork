@@ -50,9 +50,9 @@ function deleteAllComs($ID)
     $reponse->execute(['ID'=>$ID]);
     $e=array();
     $m=0;
-    while($donnees=$reponse->fetch())
+    while($data=$reponse->fetch())
     {
-        $e[$m]=$donnees['com'];
+        $e[$m]=$data['com'];
         $m++;
     }
     //SUPPRIMER LES COMMENTAIRES DE L'UTILISATEUR
@@ -77,9 +77,9 @@ function deleteAllComs($ID)
      $reponse->execute(['ID'=>$ID]);
      $f=array();
      $n=0;
-     while($donnees=$reponse->fetch())
+     while($data=$reponse->fetch())
      {
-         $f[$n]=$donnees['publication'];
+         $f[$n]=$data['publication'];
          $n++;
      }
      //RECHERCHER LES COMMENTAIRES SUR LES PUBLICATIONS DE L'UTILISATEUR
@@ -91,9 +91,9 @@ function deleteAllComs($ID)
                                  FROM coms, comment, post
                                  WHERE post.publication=:id AND comment.publication=post.publication AND com=coms.id');
          $reponse->execute(['id'=>$f[$n]]);
-         while($donnees=$reponse->fetch())
+         while($data=$reponse->fetch())
          {
-             $g[$o]=$donnees['com'];
+             $g[$o]=$data['com'];
              $o++;
          }
      }
@@ -144,8 +144,8 @@ function deleteAllComs($ID)
     $reponse->execute(['ID'=>$ID]);
     $b=array();
     $j=0;
-    while($donnees=$reponse->fetch()) {
-        $b[$j]=$donnees['id'];
+    while($data=$reponse->fetch()) {
+        $b[$j]=$data['id'];
         $j++;
     }
     //SUPPRIMER LES EVENEMENTS OU L'UTILISATEUR EST L'ADMINISTRATEUR
@@ -174,8 +174,8 @@ function deleteAllComs($ID)
     $reponse->execute(['ID'=>$ID]);
     $a=array(array());
     $i=0;
-    while($donnees=$reponse->fetch()) {
-        $a[$i][0]=$donnees['id'];
+    while($data=$reponse->fetch()) {
+        $a[$i][0]=$data['id'];
         $a[$i][1]=false;
         $i++;
     }
@@ -185,16 +185,16 @@ function deleteAllComs($ID)
                                 FROM groupAdd
                                 ORDER BY addDate ASC');
         $find=false;
-        while($donnees=$reponse->fetch()) {
+        while($data=$reponse->fetch()) {
             if($find==false) {
-                if($donnees['user']==$ID && $donnees['idGroup']==$a[$j][0]) {
+                if($data['user']==$ID && $data['idGroup']==$a[$j][0]) {
                     $find=true;
                 }
             }
             else {
-                if($donnees['idGroup']==$a[$j][0]) {
+                if($data['idGroup']==$a[$j][0]) {
                     $a[$j][1]=true;
-                    $a[$j][2]=$donnees['user'];
+                    $a[$j][2]=$data['user'];
                     break;
                 }
             }
