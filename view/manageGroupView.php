@@ -73,6 +73,11 @@ ob_start();
         </div>
               <hr>
 
+            <div class="py-12 text-center">
+                <h5>Membre(s) du groupe</h5>
+                <p class="lead"></p>
+            </div>
+
               <?php if(!empty($res)) : ?>
 
             <div class="row">
@@ -96,6 +101,11 @@ ob_start();
             ?>
 
             <hr>
+
+            <div class="py-12 text-center">
+                <h5>Suggestion de membre</h5>
+                <p class="lead"></p>
+            </div>
 
             <?php if(!empty($contactProfile)) : ?>
         
