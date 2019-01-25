@@ -26,11 +26,13 @@ function addPost($content, $type, $userId)
     post($content, $type, $userId);
     header('Location:index.php?action=home');
 }
+
 function addComment($content, $userId, $postId)
 {
     comment($content, $userId, $postId);
     header('Location:index.php?action=home');
 }
+
 // CHECK LES INFOS D'INSCRIPTION
 function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirmPassword, $status, $job, $company, $town){
 
@@ -89,6 +91,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 
     }
 }
+
 //FUNCTION AJOUT DE CONTACT
 function addToContacts($contactId, $userId)
 {
@@ -118,16 +121,20 @@ function createGroups($groupName, $userId)
     }
     // ON ENVOIE LES DONNES DANS LA BDD
     $create = createGroup($groupName, $userId, $groupPhoto);
-		//$addAdmin = contactAddGroup()
+        //$addAdmin = contactAddGroup()
     $contacts = getContacts($userId);
     $contacts = $contacts->fetchAll(PDO::FETCH_ASSOC);
-    for ($i = 0; $i < count($contacts); $i++) {
-        $contactProfile[] = getProfile($contacts[$i]['id']);
-    }
-    foreach ($contactProfile as $contact) {
-        if ($contact['status'] == "employee") {
-            $res[] = $contact;
+    if(!empty($contacts)){
+        for ($i = 0; $i < count($contacts); $i++) {
+            $contactProfile[] = getProfile($contacts[$i]['id']);
         }
+        foreach ($contactProfile as $contact) {
+            if ($contact['status'] == "employee") {
+                $res[] = $contact;
+            }
+        }
+    } else{
+        $res = FALSE;
     }
     $status = checkStatus($userId);
     require_once('./view/addContactGroupView.php');
@@ -144,10 +151,10 @@ function addContactsToGroup($contact, $status, $groupId)
 }
 
     //AJOUTER LES CONTACTS DANS UN GROUPE PENDANT LA MODIF DE GROUPE
-function addToGroup($contact, $status, $groupId, $userId){
+function addToGroup($contact, $status, $groupId, $admin,$userId){
         contactAddGroup($contact, $status, $groupId);
-        groupManage($groupId,$userId);
-}
+        groupManage($groupId,$admin,$userId);
+    }
 //CREER UN EVENEMENT
 function createEvent($id, $title, $eventDate, $place)
 {

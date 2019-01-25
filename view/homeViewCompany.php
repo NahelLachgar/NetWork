@@ -80,7 +80,7 @@ if($state=='activated') {
                                 <div class="form-group">
                                     <div class="custom-file">
                                         <input type="file" accept="image/*" name="photo" class="custom-file-input" id="customFile">
-                                        <label class="custom-file-label" for="customFile">Upload image</label>
+                                        <label class="custom-file-label" for="customFile">Publiez une image</label>
                                     </div>
                                 </div>
                                 <div class="py-4"></div>

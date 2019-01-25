@@ -25,11 +25,11 @@ function deleteGroup($groupId)
 }
 
 // SUPPRIMER UN MEMBRE DU GROUPE COTE ADMIN 
-function adminRemoveToGroup($contactId, $groupId, $id)
+function adminRemoveToGroup($contactId, $groupId, $admin, $id)
 {
     $remove = removeFromGroup($contactId, $groupId);
     $status = checkStatus($id);
-    groupManage($groupId, $id);
+    groupManage($groupId,$admin,$id);
 }
 
 // QUITTER LE GROUPE

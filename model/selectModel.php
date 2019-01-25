@@ -12,6 +12,7 @@ function getProfile($userId)
     $profileFetch = $profile->fetch();
     return $profileFetch;
 }
+
 //RÉCUPÉRATION DES CONTACTS DE L'UTILISATEUR
 function getContacts($userId)
 {
@@ -24,7 +25,6 @@ function getContacts($userId)
     ));
     return $contactsId;
 }
-
 
 // COMPTE LES ID DANS LA TABLE PUBLICATIONS
 function countPublications() {
@@ -47,6 +47,7 @@ function getUserPosts($contactId)
     $posts->execute(array($contactId));
     return $posts;
 }
+
 //RÉCUPÉRATION DES MESSAGES QU'A REÇUS OU ENVOYÉS L'UTILISATEUR
 function getMessages($userId, $contactId)
 {
@@ -194,6 +195,7 @@ function getEmployeeSuggests($userId)
         }
     
 }
+
 //SUGGESTIONS D'ENTREPRISE POUR L'UTILISATEUR 
 function getCompanySuggests($userId)
 {
@@ -219,6 +221,7 @@ function getCompanySuggests($userId)
             return $companies;
         }
 }
+
 //NOMBRE DE CONTACTS
 function getContactsCount($userId)
 {
@@ -235,7 +238,8 @@ function getContactsCount($userId)
     $contactsFetch2 = $contactsCount2->fetch();
     $contactsCount = $contactsFetch1['contactsNb'] + $contactsFetch2['contactsNb'];
     return $contactsCount;
-} 
+}
+
 //NOMBRE D'ENTREPRISES SUIVIES
 function getFollowedCompaniesCount($userId)
 {
@@ -252,7 +256,8 @@ function getFollowedCompaniesCount($userId)
     $followedCompaniesFetch2 = $followedCompaniesCount2->fetch();
     $followedCompaniesCount = $followedCompaniesFetch1['companiesNb'] + $followedCompaniesFetch2['companiesNb'];
     return $followedCompaniesCount;
-} 
+}
+
  //RECHERCHE D'UN UTILISATEUR OU UNE ENTREPRISE AVEC SON NOM OU SON PRENOM
 function getSearch($userId, $name)
 {
@@ -263,6 +268,7 @@ function getSearch($userId, $name)
     $req = $req->fetchAll();
     return $req;
 }
+
 function getContactToUser($idUser)
 {
     $db = dbConnect();
@@ -289,8 +295,6 @@ function getProfileUpdate($ids)
     return $post;
 }
 
-    //GESTION DES GROUPES
-
     //RECUPERE LES INFOS D'UN GROUPE
 function getGroup($groupId)
 {
@@ -301,6 +305,7 @@ function getGroup($groupId)
     $req = $req->fetch();
     return $req;
 }
+
 //SELECTIONNE LES GROUPES DONT L'UTILISATEUR FAIT PARTIE
 function getGroups($id)
 {
@@ -319,6 +324,7 @@ function getGroupsName($contactId)
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
     return $req;
 }
+
 function getAdminGroup($contactId)
 {
     $db = dbConnect();
@@ -327,6 +333,7 @@ function getAdminGroup($contactId)
     $req = $req->fetchAll();
     return $req;
 }
+
 // DETECTION SI L'UTILISATEUR EXSITE
 function checkUser($email)
 {
@@ -340,6 +347,7 @@ function checkUser($email)
     // ON RETURN LE MOT DE PASSE
     return $fetchSelectUser;
 }
+
 //AFFICHER LES MEMBRES D"UN GROUPE
 function selectContactGroup($groupId)
 {
@@ -349,6 +357,7 @@ function selectContactGroup($groupId)
     $req = $req->fetchAll();
     return $req;
 }
+
 function checkStatus($ID)
 {
     $bdd = dbConnect();
@@ -364,6 +373,7 @@ function checkStatus($ID)
     }
     return $a;
 }
+
 //AFFICHER EVENEMENTS AYANT POUR PARTICIPANT L'UTILISATEUR
 function selectMember($ID)
 {
@@ -452,6 +462,7 @@ function infoContact($ID, $id)
     }
     return $a;
 }
+
 //AFFICHER ADMINISTRATEUR
 function checkAdmin($id)
 {
@@ -476,6 +487,7 @@ function checkAdmin($id)
     }
     return $b;
 }
+
 //AFFICHER PARTICIPANTS
 function checkParticipate($id)
 {

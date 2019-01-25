@@ -16,9 +16,13 @@ ob_start();
     <?php
     if($state=='activated') {
         if (empty($res)) :
-            echo "Vous ne suivez aucune entreprise !";
+            echo " <center><div class='col align-self-end'><div class='card border-danger mb-6' style='max-width: 18rem;'>
+            <div class='card-body text-danger'>
+              <h5 class='card-title'>Oups!</h5>
+              <p class='card-text'>Vous ne suivez aucune entreprise.</p>
+            </div>
+          </div></div></center>";
             ?>
-        <br>
         <?php elseif ($res == true) :
             foreach ($res as $result) : ?>
             <?php if ($result['status'] == 'company') : ?>

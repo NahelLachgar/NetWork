@@ -8,28 +8,28 @@ require_once('model/deleteModel.php');
 require_once('model/selectModel.php');
 // AFFICHE LA PAGE D'ACCUEIL ET EXÉCUTE LES FONCTIONS
 
-function home($userId) {
-	$profile = getProfile($userId);
+function home($userId,$errorExt) {
+    $profile = getProfile($userId);
     $contactsNb = getContactsCount($userId);
     
         $contactsPosts = getContactsPosts($userId);
 
    
-	if ($contactsNb>0) {
-	$companiesSuggests = getCompanySuggests($userId);
-	$employeesSuggests = getEmployeeSuggests($userId);
+    if ($contactsNb>0) {
+    $companiesSuggests = getCompanySuggests($userId);
+    $employeesSuggests = getEmployeeSuggests($userId);
     } 
     else {
         $userPosts = getUserPosts($userId);
     }
-	$followedCompaniesNb = getFollowedCompaniesCount($userId);
-	$status = checkStatus($userId);
+    $followedCompaniesNb = getFollowedCompaniesCount($userId);
+    $status = checkStatus($userId);
     $state = checkActive($userId);
-	if($profile['status'] == "employee"){
-		require_once('view/homeViewEmployee.php');
-	}else{
-		require_once('view/homeViewCompany.php');
-	}
+    if($profile['status'] == "employee"){
+        require_once('view/homeViewEmployee.php');
+    }else{
+        require_once('view/homeViewCompany.php');
+    }
 }
 
 function getProfileSearch($id)
@@ -111,6 +111,7 @@ function contactHome($id,$contactId,$token) {
 	$pass = $token;
 	require_once('view/profilePageView.php');	
 }
+
 //BARRE DE RECHERCHE
 function search($ids,$data)
 {
@@ -136,6 +137,7 @@ function search($ids,$data)
         require_once('./view/resultDetailSearchView.php');
     }
 }
+
 // AFFICHER LES ENTREPRISES
 function showCompanies($id){
     $profile=getProfile($id);
@@ -186,8 +188,9 @@ function sessionGroup($id) {
 }
 
 // AFFICHAGE GROUPE
-function groupManage($groupId,$id) {
+function groupManage($groupId,$admin,$id) {
     $profile=getProfile($id);
+    $adminG = $admin;
     $contactsNb=getContactsCount($id);
     $res = [];
 
@@ -280,6 +283,7 @@ function showContacts($id){
     $state = checkActive($id);
     require_once("./view/showContacts.php");
 }
+
 // CHECK SI LE COMPTE EXISTE
 function checkUserExists($email, $password){
 

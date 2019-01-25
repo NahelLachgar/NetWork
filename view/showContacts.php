@@ -17,9 +17,14 @@ ob_start();
     <?php
     if($state=='activated') {
         if (empty($res)) :
-            echo "Vous n'avez pas de contact !";
+            echo " <center><div class='col align-self-end'><div class='card border-danger mb-6' style='max-width: 18rem;'>
+            <div class='card-body text-danger'>
+              <h5 class='card-title'>Oups!</h5>
+              <p class='card-text'>Vous n'avez aucun contact.</p>
+            </div>
+          </div></div></center>";
             ?>
-        <br>
+    <br>
         <?php elseif ($res == true) :
             foreach ($res as $result) : ?>
 

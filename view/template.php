@@ -18,7 +18,7 @@
   
         <a id="buttonHome" href="index.php?action=home" class="home"><img width="30px" src="img/icon/home.svg" alt="Photo de profil"></a>
         <a id="buttonGroup" href="index.php?action=groups" class="groups"><img width="30px" src="img/icon/group.svg" alt="Groupe"></a>
-        <a id="buttonNotifications" href="index.php?action=notificationsPage" class="notifications"><img width="30px" src="img/icon/notifications.svg" alt="Groupe"></a>
+        <a style="text-decoration:none" id="buttonNotifications" href="index.php?action=notificationsPage" class="notifications"><img width="30px" src="img/icon/notifications.svg" alt="notifications"><span id="notificationsNumber" style="background-color:#e74c3c;color:#2c3e50;border-radius:25px;padding:0px 5px 0px">10</span></a>
 
 <?php
     if($status=="employee") {
@@ -32,7 +32,7 @@
            </button></a>
         <form class="form-inline" action="index.php?action=search" method="POST">
             <div class="input-group">
-                <input type="text" placeholder="Rechercher..." name="research" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <input type="text" placeholder="Rechercher..." name="research" required class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
                         <i class="fa fa-search"></i>

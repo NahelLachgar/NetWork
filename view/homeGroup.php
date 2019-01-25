@@ -10,19 +10,53 @@ ob_start();
 <?php
 if($state=='activated') {
 ?>
-<div class="container">
+<!-- PROFIL-->
+<div class="container-fluid gedf-wrapper">
     <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="h5">
+                    <img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                    <?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
+                    <div class="h7">
+                        <?= $profile['job'] . ' chez ' . $profile['company'] ?>
+                    </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="h6 text-muted"><a href="index.php?action=companyList">Entreprises</a></div>
+                        <div class="h5"><?= $followedCompaniesNb ?></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h6 text-muted"><a href="index.php?action=contactList">Contacts</a></div>
+                        <div class="h5"><?= $contactsNb ?></div>
+    
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h6 text-muted"><a href="index.php?action=updateProfile">Modifier le profil</a></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h6 text-muted"><a href="index.php?action=deleteView">Supprimer le compte</a></div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h6 text-muted"><a href="index.php?action=disconnect">Déconnexion</a></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6 gedf-main">
             <br><h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Vos groupes</span></h4>
             
-            <?php
+            <?php 
             if($adminGroup):
                 if ($adminGroup['0']['admin'] == $_SESSION['id']) : ?>
 
                 <?php foreach ($adminGroup as $groupAdmin) : ?>
                 <form method="POST" action="index.php?action=groupsManage">
                     <input type="hidden" name="groupId" value="<?= $groupAdmin['id'] ?>" >
+                    <input type="hidden" name="adminGroup" value="<?= $groupAdmin['admin'] ?>" >
                     <input type="submit" class="btn btn-link" value="<?= $groupAdmin['title'] ?>" >
                 </form><br>
                 <?php endforeach; ?>
@@ -52,12 +86,13 @@ if($state=='activated') {
                 endif; ?>
                 <?php 
                     if(empty($groups) && empty($adminGroup)){
-                        echo "Vous n'avez aucun groupe";
+                        echo "Vous n'appartenez à aucun groupe.";
                     }
                 ?>
         </div>
-        <div class="col-md-8 order-md-1">
-            <a class="trigger_popup_fricc"><button class="btn btn-link">Créer un groupe</button></a>
+        <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title=" Creer votre cercle restreint ! Creer votre groupe ;-) !">
+            <a class="trigger_popup_fricc"><button class="btn btn-primary btn-lg btn-block" style="pointer-events: none;" type="button" disabled>Créer un groupe</button></a>
+            </span>
 
             <div class="hover_bkgr_fricc">
                 <span class="helper"></span>
@@ -81,10 +116,8 @@ if($state=='activated') {
                 
             
             </div>
-        </div>
     </div>
 </div>
-   
 <?php
 }
 else {

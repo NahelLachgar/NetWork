@@ -4,13 +4,14 @@ require_once('controller/updateController.php');
 require_once('controller/insertController.php');
 require_once('controller/selectController.php');
 require_once('controller/deleteController.php');
-    if (isset($_GET['action'])) {
+   if (isset($_GET['action'])){
         switch ($_GET['action']) {
            case 'disconnect':
                 disconnect();
                 break;
             case 'home':
-                home(htmlspecialchars($_SESSION['id']),$error);
+                $errorExt = "";
+                home(htmlspecialchars($_SESSION['id']),$errorExt);
                 break;
             case 'checkUser':
                 checkUserExists(htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']));
@@ -26,15 +27,18 @@ require_once('controller/deleteController.php');
                 break;
             case 'post':
                 $imagePost = $_FILES['photo']['name'];
-                if($imagePost){
-                    addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
-                } else {
-                    if (trim(htmlspecialchars($_POST['content'])) != "") {
+                $ext = explode(".", $imagePost);
+                $listExt = array("png","jpg","PNG","JPG","jpeg","JPEG");
+                    if(in_array($ext[1], $listExt)){
                         addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
                     } else {
-                        home(htmlspecialchars($_SESSION['id']));
-                    } 
-                }
+                        if (trim(htmlspecialchars($_POST['content'])) != "") {
+                            addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
+                        } else {
+                            $errorExt = "impossible de publier ce contenu !";
+                            home(htmlspecialchars($_SESSION['id']),$errorExt);
+                        } 
+                    }
                 break;
             case 'contactList':
                 showContacts(htmlspecialchars($_SESSION['id']));
@@ -46,7 +50,7 @@ require_once('controller/deleteController.php');
                 updateToProfile($_SESSION['id']);
                 break;
             case 'profilemodif':
-               validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newPass'],$_POST['confirmNewPass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
+                validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newPass'],$_POST['confirmNewPass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
                 break;
             case 'signUpCompany':
                 require_once('./view/signUpCompanyView.html');
@@ -155,22 +159,22 @@ require_once('controller/deleteController.php');
                 addContactsToGroup($_POST['addContacts'],$_POST['statut'],$_POST['groupId']);
                 break;
             case 'addToGroup':
-                addToGroup($_POST['addContact'],$_POST['statut'],$_POST['groupId'],$_SESSION['id']);
+                addToGroup($_POST['addContact'],$_POST['statut'],$_POST['groupId'],$_POST['adminGroup'],$_SESSION['id']);
                 break;
             case 'getGroupId':
                 getMembersToGroups($_POST['groupId'],$_SESSION['id']);
                 break;
             case 'groupsManage':
-                groupManage($_POST['groupId'],$_SESSION['id']);
+                groupManage($_POST['groupId'],$_POST['adminGroup'],$_SESSION['id']);
                 break;
             case 'updateGroup':
-                updateGroup(htmlspecialchars($_POST['groupName']),$_POST['admin'],$_POST['groupId']);
+                updateGroup(htmlspecialchars($_POST['groupName']),$_POST['newAdmin'],$_POST['lastAdmin'],$_POST['groupId']);
                 break;
             case 'deleteGroup':
                 deleteGroup($_POST['groupId']);
                 break;
             case 'removeToGroups':
-                adminRemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
+                adminRemoveToGroup($_POST['contactId'],$_POST['groupId'],$_POST['adminGroup'],$_SESSION['id']);
                 break;
             case 'leaveTheGroups':
                 RemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
@@ -182,8 +186,8 @@ require_once('controller/deleteController.php');
                 home($_SESSION['id']);
         }
     } else {
-        if (!isset($_SESSION['name'])) {
-        require_once('view/signInView.php');
+        if (!isset($_SESSION['id'])) {
+            require_once('view/signInView.php');
         } else {
             header('Location:index.php?action=home');
     }
