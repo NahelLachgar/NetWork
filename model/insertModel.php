@@ -66,6 +66,11 @@ function contactAddGroup($memberId,$status,$groupID) {
     $req->execute(array($memberId,$status,$groupID));
 }
 
+//AJOUT UNE NOTIFICATION 
+function addNotif ($contactId,$content,$url) {
+    $db = dbConnect();
+    $req = $db->prepare ('INSERT INTO ')
+}
 //AJOUT D'UN CONTACT
 function addContact($contactId, $idUser)
 {
