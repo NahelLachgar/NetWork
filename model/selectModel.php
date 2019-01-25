@@ -521,4 +521,13 @@ function checkActive($id)
     }
     return $active;
 }
+
+//RECUPERE TOUS LES COMMENTAIRES D'UNE PUBLICATION
+/*function getCommentsToPublications($publicationId){
+    $db = dbConnect();
+    $comments = $db->prepare("SELECT coms.content,coms.comDate,coms.user FROM coms JOIN comment ON coms.id = comment.com JOIN publications ON comment.publication=publications.id JOIN post ON publications.id=post.publication JOIN users ON post.user=users.id WHERE publications.id=?"); 
+    $comments->execute(array($publicationId));
+    $comments = $comments->fetchAll();
+    return $comments;
+}*/
 ?>

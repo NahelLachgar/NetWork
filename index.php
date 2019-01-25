@@ -18,6 +18,7 @@ require_once('controller/deleteController.php');
             case 'home':
                 $errorExt = "";
                 home(htmlspecialchars($_SESSION['id']),$errorExt);
+                //getComments();
                 break;
             case 'checkUser':
                 checkUserExists(htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']));
@@ -189,7 +190,8 @@ require_once('controller/deleteController.php');
                 getGroupMessages($_SESSION['id'],$_GET['groupId']);
                 break;
             default:
-                home($_SESSION['id']);
+                $errorExt = "";
+                home(htmlspecialchars($_SESSION['id']),$errorExt);
         }
     } else {
         if (!isset($_SESSION['id'])) {
