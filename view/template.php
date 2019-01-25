@@ -55,11 +55,12 @@
   <script>
       $("#btnNotif").on("click",function() {
           var txt = "Oooooooooh";
+          var url = "";
         $.notify({
     // options
     icon: "img/profile/NetWork.png",
     message: txt,
-    url: 'https://youtu.be/_FR6cZSw37Y?t=31',
+    url: url,
 },{
 	// settings
     type: 'info',
