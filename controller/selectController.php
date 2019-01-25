@@ -260,6 +260,7 @@ function getMembersToGroups($groupId,$id){
     foreach( $memberProfile as $member){
         $res[] = $member;
     }
+    $group = getGroup($groupId);
     $status = checkStatus($id);
     $admin = getProfile($members['0']['admin']);
     require_once('./view/membersGroupView.php');

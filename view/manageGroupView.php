@@ -16,7 +16,7 @@ ob_start();
           <form enctype="multipart/form-data" action="index.php?action=updateGroup" method="POST">   
               <div class="row justify-content-center">
                   <div class="col-md-12-center">
-                      <img class="rounded-circle" width="100" src="./img/groups/<?= $group['photo'] ?>" alt="Photo du groupe" id="photoUpdate">
+                      <img class="rounded-circle" width="150" src="./img/groups/<?= $group['photo'] ?>" alt="Photo du groupe" id="photoUpdate">
                         <input style="display:none" type="file" class="form-control-file" name="photo" id="photoUpdateFile"> 
                   </div>
               </div>   
@@ -53,17 +53,23 @@ ob_start();
             <input type="hidden" name="lastAdmin" value="<?= $adminG ?>">
 
           <div class="row justify-content-center">
-              <div class="col-md-3">
+              <div class="col-md-2">
                   <button class="btn btn-primary btn-lg btn-block" name="update" type="submit">Modifier</button>
               </div>       
           </form>
     
-          <div class="col-md-3">
+          <div class="col-md-2">
                 <form action="index.php?action=deleteGroup" method="POST">
                     <input type="hidden" name="groupId" value="<?= $group['group'] ?>">
-                  <button class="btn btn-danger btn-lg btn-block" name="delete" type="submit">Supprimer ce groupe</button>
+                  <button class="btn btn-danger btn-lg btn-block" name="delete" type="submit">Supprimer</button>
                 </form>
               </div>
+
+              <div class="col-md-2">
+                <form action="index.php?action=deleteGroup" method="POST">
+                    <button class="btn btn-secondary btn-lg btn-block" name="update" type="submit">Retour</button>
+                </form>
+              </div>  
         </div>
               <hr>
 
