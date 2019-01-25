@@ -10,10 +10,6 @@ require_once('controller/deleteController.php');
                 disconnect();
                 break;
             case 'home':
-<<<<<<< HEAD
-
-=======
->>>>>>> clotilde
                 $errorExt = "";
                 home(htmlspecialchars($_SESSION['id']),$errorExt);
                 break;
