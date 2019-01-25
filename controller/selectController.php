@@ -108,7 +108,8 @@ function contactHome($id,$contactId,$token) {
 	$contactPosts = getUserPosts($contactId);
 	$contactsNb = getContactsCount($contactId);
 	$followedCompaniesNb = getFollowedCompaniesCount($contactId);
-	$status = checkStatus($id);
+    $status = checkStatus($id);
+    $state = checkActive($contactId);
 	$pass = $token;
 	require_once('view/profilePageView.php');	
 }
