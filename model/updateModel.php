@@ -18,6 +18,7 @@ function updateProfiles($lastName, $name, $email, $pass, $photo, $phone, $job, $
     }
     return $req;
 }
+
 // MODIFIER LE GROUPE PART1 (CHANGE L'ADMIN DANS LA TABLE GROUPE)
 function updateGroups($name,$nAdmin,$lAdmin,$status,$groupId,$groupPhoto){
    $db = dbConnect();
@@ -39,6 +40,7 @@ function updateStatutLastAdminGroup($status,$lAdmin,$groupId){
     $req = $db->prepare("UPDATE groupadd SET status = ? WHERE groupadd.user = ? AND groupadd.group = ?");
     $req->execute(array($status, $lAdmin, $groupId));
 }
+
 function updateStatutNewAdminGroup($nAdmin,$groupId){
     $db = dbConnect();
     $req = $db->prepare("UPDATE groupadd SET status = NULL WHERE groupadd.user = ? AND groupadd.group = ?");

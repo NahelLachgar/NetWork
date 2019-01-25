@@ -26,11 +26,13 @@ function addPost($content, $type, $userId)
     post($content, $type, $userId);
     header('Location:index.php?action=home');
 }
+
 function addComment($content, $userId, $postId)
 {
     comment($content, $userId, $postId);
     header('Location:index.php?action=home');
 }
+
 // CHECK LES INFOS D'INSCRIPTION
 function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirmPassword, $status, $job, $company, $town){
 
@@ -89,6 +91,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 
     }
 }
+
 //FUNCTION AJOUT DE CONTACT
 function addToContacts($contactId, $userId)
 {
@@ -98,14 +101,6 @@ function addToContacts($contactId, $userId)
     }
 }
 
-    //FUNCTION UNFOLLOW UN CONTACT
-function removeContact($contactId, $userId)
-{
-    $unf = unfollow($contactId, $userId);
-    if ($unf) {
-        header('Location:index.php?action=home');
-    }
-}
     //CREER UN GROUPE
 function createGroups($groupName, $userId)
 {
@@ -126,7 +121,7 @@ function createGroups($groupName, $userId)
     }
     // ON ENVOIE LES DONNES DANS LA BDD
     $create = createGroup($groupName, $userId, $groupPhoto);
-		//$addAdmin = contactAddGroup()
+        //$addAdmin = contactAddGroup()
     $contacts = getContacts($userId);
     $contacts = $contacts->fetchAll(PDO::FETCH_ASSOC);
     if(!empty($contacts)){
@@ -155,7 +150,7 @@ function addContactsToGroup($contact, $status, $groupId)
     sessionGroup($_SESSION['id'], $_SESSION['id']);
 }
 
-	//AJOUTER LES CONTACTS DANS UN GROUPE PENDANT LA MODIF DE GROUPE
+    //AJOUTER LES CONTACTS DANS UN GROUPE PENDANT LA MODIF DE GROUPE
 function addToGroup($contact, $status, $groupId, $admin,$userId){
         contactAddGroup($contact, $status, $groupId);
         groupManage($groupId,$admin,$userId);

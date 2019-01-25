@@ -180,7 +180,7 @@ function deleteAllComs($ID)
     for($j=0;$j<$i;$j++) {
         $reponse=$bdd->query('SELECT user, groupAdd.group AS idGroup
                                 FROM groupAdd
-                                ORDER BY id ASC');
+                                ORDER BY addDate ASC');
         $find=false;
         while($data=$reponse->fetch()) {
             if($find==false) {

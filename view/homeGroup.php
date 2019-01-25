@@ -7,7 +7,9 @@ ob_start();
         <link rel="stylesheet" type="text/css" href="css/group.css" />
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <SCRIPT LANGUAGE="JavaScript" SRC="js/group.js"></SCRIPT>       
-
+<?php
+if($state=='activated') {
+?>
 <!-- PROFIL-->
 <div class="container-fluid gedf-wrapper">
     <div class="row">
@@ -84,7 +86,7 @@ ob_start();
                 endif; ?>
                 <?php 
                     if(empty($groups) && empty($adminGroup)){
-                        echo "Vous n'avez aucun groupe";
+                        echo "Vous n'appartenez à aucun groupe.";
                     }
                 ?>
         </div>
@@ -116,8 +118,11 @@ ob_start();
             </div>
     </div>
 </div>
-   
-<?php 
+<?php
+}
+else {
+    echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";
+}
 $content = ob_get_clean();
 require_once('view/template.php');
 ?>

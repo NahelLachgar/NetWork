@@ -4,13 +4,12 @@ ob_start();
 ?>
 
 <!-- PROFIL-->
-
     <div class="container-fluid gedf-wrapper">
         <div class="row">
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="h5"><img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp<!-- src="https://picsum.photos/50/50" -->
+                        <div class="h5"><img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
 						<?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                         <div class="h7">
                             <?= $profile['job'] . ' chez ' . $profile['company'] ?>
@@ -39,6 +38,9 @@ ob_start();
                 </div>
             </div>
             <div class="col-md-6 gedf-main">
+<?php
+if($state=='activated') {
+?>
             <!------------------->
         <div style="overflow: scroll; height:1000px" class="posts">
                 <!--- PUBLICATION-->
@@ -134,7 +136,7 @@ ob_start();
                                             <div class="row justify-content-center">
                                                 <div>
                                                     <div class="col-md-12">
-                                                    <img  width="100%" src="./img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo de profil">
+                                                    <img  width="100%" src="./img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo">
                                                     </div>
                                                 </div>
                                             </div>
@@ -344,9 +346,14 @@ if (isset($employeesSuggests)) :
                             <?php endif;
                             endif;
                             ?>
-<!--------------------------> 
+<!-------------------------->
 
- 
+<?php
+}
+else {
+    echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";
+}
+?>
     </div>
     <?php 
     $content = ob_get_clean();

@@ -54,8 +54,8 @@
   <script src="bootstrapNotify/dist/bootstrap-notify.js"></script>
   <script>
       $("#btnNotif").on("click",function() {
-          var txt = "Oooooooooh";
-          var url = "";
+          var txt = "Kévin .....";
+          var url = "http://localhost:8888/PI/NetWork/index.php?action=showMessages&contactId=2";
         $.notify({
     // options
     icon: "img/profile/NetWork.png",
