@@ -54,8 +54,23 @@
   <script src="bootstrapNotify/dist/bootstrap-notify.js"></script>
   <script>
       $("#btnNotif").on("click",function() {
-          var txt = "Oooooooooh";
-          var url = "";
+          var txt = "Aurélien .....";
+          var url = "http://localhost:8888/PI/NetWork/index.php?action=showMessages&contactId=2";
+        $.notify({
+    // options
+    icon: "img/profile/NetWork.png",
+    message: txt,
+    url: url,
+},{
+	// settings
+    type: 'info',
+    url_target: '_self'
+});      
+    });
+
+    $("#btnNotif").on("click",function() {
+          var txt = "SALOPE"
+          var url = "http://localhost:8888/PI/NetWork/index.php?action=showMessages&contactId=2";
         $.notify({
     // options
     icon: "img/profile/NetWork.png",
