@@ -13,7 +13,9 @@ ob_start();
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
     <br>
-    <?php if (empty($res)) :
+    <?php
+    if($state=='activated') {
+        if (empty($res)) :
             echo " <center><div class='col align-self-end'><div class='card border-danger mb-6' style='max-width: 18rem;'>
             <div class='card-body text-danger'>
               <h5 class='card-title'>Oups!</h5>
@@ -40,10 +42,11 @@ ob_start();
         endforeach;
 
         
-        endif; ?>
-
-            
-    <?php 
+        endif;
+    }
+    else {
+        echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";
+    }
     $content = ob_get_clean();
     require_once('view/template.php');
     ?>

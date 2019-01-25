@@ -3,8 +3,6 @@
     $title="Supprimer le compte";
     ob_start();
 ?>
-
-
 <!-- PROFIL-->
 <div class="container-fluid gedf-wrapper">
     <div class="row">
@@ -86,8 +84,7 @@ else if($state=="disabled")
 if($state=="activated") {
     echo "<input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Désactiver'>";
 }
-else if($state=="disabled")
-{
+else if($state=="disabled") {
     echo "<input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Activer'>";
 }
 ?>

@@ -15,7 +15,11 @@ ob_start();
         
 
     </form>
-    <br><br>
+    <br>
+<?php
+    if($state=='activated') {
+?>
+<br>
         <?php
            if(!empty($res)):
             foreach ($res as $result) : 
@@ -101,6 +105,10 @@ ob_start();
           </div></div></center>
 <?php
 endif;
+}
+else {
+    echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";
+}
 $content = ob_get_clean();
 require_once('view/template.php');
 ?>

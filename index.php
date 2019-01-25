@@ -50,7 +50,7 @@ require_once('controller/deleteController.php');
                 updateToProfile($_SESSION['id']);
                 break;
             case 'profilemodif':
-               validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newPass'],$_POST['confirmNewPass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
+                validateProfile($_POST['newname'],$_POST['newsurname'],$_POST['newmail'],$_POST['newPass'],$_POST['confirmNewPass'],$_POST['newphone'],$_POST['newjob'],$_POST['newcompany'],$_POST['newtown'],$_SESSION['id']);
                 break;
             case 'signUpCompany':
                 require_once('./view/signUpCompanyView.html');

@@ -3,8 +3,6 @@
     $title="Evénements";
     ob_start();
 ?>
-
-
 <!-- PROFIL-->
 <div class="container-fluid gedf-wrapper">
     <div class="row">

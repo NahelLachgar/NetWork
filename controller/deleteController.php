@@ -7,6 +7,15 @@ require_once('model/updateModel.php');
 require_once('model/deleteModel.php');
 require_once('model/selectModel.php');
 
+//FUNCTION UNFOLLOW UN CONTACT
+function removeContact($contactId, $userId)
+{
+    $unf = unfollow($contactId, $userId);
+    if ($unf) {
+        header('Location:index.php?action=home');
+    }
+}
+
 // SUPPRIMER UN GROUPE
 function deleteGroup($groupId)
 {
