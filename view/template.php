@@ -5,8 +5,11 @@
         <title><?= $title ?></title>
         <meta charset="utf-8">
     <title><?= $title ?></title>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>   
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'>
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
@@ -14,6 +17,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
+  
   <nav class="navbar navbar-light bg-bleu">
   
         <a id="buttonHome" href="index.php?action=home" class="home"><img width="30px" src="img/icon/home.svg" alt="Photo de profil"></a>
@@ -22,6 +26,7 @@
         <img width="30px" src="img/icon/notifications.svg" alt="notifications">
         <span class="badge badge-danger">10</span>
         </a>
+        <button id="btnNotif">test</button>
 
 <?php
     if($status=="employee") {
@@ -46,5 +51,21 @@
         </form>
     </nav>
   <?= $content ?>
+  <script src="bootstrapNotify/dist/bootstrap-notify.js"></script>
+  <script>
+      $("#btnNotif").on("click",function() {
+          var txt = "abcd";
+        $.notify({
+    // options
+    icon: "img/profile/NetWork.png",
+    message: txt,
+    url: 'https://google.com',
+},{
+	// settings
+    type: 'info',
+    url_target: '_self'
+});      
+    });
+   </script>
     </body>
 </html>
