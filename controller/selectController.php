@@ -8,6 +8,7 @@ require_once('model/deleteModel.php');
 require_once('model/selectModel.php');
 // AFFICHE LA PAGE D'ACCUEIL ET EXÉCUTE LES FONCTIONS
 
+
 function home($userId,$errorExt) {
 	$profile = getProfile($userId);
     $contactsNb = getContactsCount($userId);
