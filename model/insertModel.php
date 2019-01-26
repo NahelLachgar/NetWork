@@ -69,7 +69,7 @@ function contactAddGroup($memberId,$status,$groupID) {
 //AJOUT UNE NOTIFICATION 
 function addNotif ($user,$content,$url,$icon="") {
     $db = dbConnect();
-    $req = $db->prepare ('INSERT INTO notifications (`user`,`contact`,`content`,`url`,`icon`,`status`)
+    $req = $db->prepare ('INSERT INTO notifications (`user`,`contact`,`content`,`url`,`status`,`icon`)
     VALUES (:user,:contact,:content,:url,"unseen",:icon)');
     $req -> execute(array(
         "user"=>$user,

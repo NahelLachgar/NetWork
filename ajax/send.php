@@ -11,7 +11,7 @@ if( isset($_POST['content']) && isset($_POST['contactId']) ){
         "sender"=>$_SESSION['id']
     ));
 
-    $profile = getProfile($userId);
+    $profile = getProfile($_SESSION['id']);
     $userProfile = getProfile($contactId);
     if ($userProfile['status']== "employee") {
 
