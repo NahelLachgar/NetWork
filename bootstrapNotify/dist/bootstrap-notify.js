@@ -34,11 +34,11 @@
 			z_index: 1031,
 			delay: 5000,
 			timer: 1000,
-			url_target: '_blank',
+			url_target: '_self',
 			mouse_over: null,
 			animate: {
-				enter: 'animated fadeInDown',
-				exit: 'animated fadeOutUp'
+				enter: 'animated rollIn',
+				exit: 'animated rollOut'
 			},
 			onShow: null,
 			onShown: null,
@@ -172,7 +172,7 @@
 				if (this.$ele.find('[data-notify="icon"]').is('img')) {
 					this.$ele.find('[data-notify="icon"]').attr('src', this.settings.content.icon);
 				}else{
-					this.$ele.find('[data-notify="icon"]').append('<img src="'+this.settings.content.icon+'" alt="Notify Icon" />');
+					this.$ele.find('[data-notify="icon"]').append('<img width=50px src="'+this.settings.content.icon+'" alt="Notify Icon" />');
 				}	
 			}
 		},

@@ -29,7 +29,11 @@ require_once('controller/deleteController.php');
                 search(htmlspecialchars($_SESSION['id']),htmlspecialchars($_POST['research']));
                 break;
             case 'profilePage':
+                if (isset($_POST)) {
                 contactHome($_SESSION['id'],$_POST['contactId'],$_POST['token']);
+                } else if (isset($_GET)) {
+                    contactHome($_SESSION['id'],$_GET['contactId'],$_POST['token']); 
+                }
                 break;
             case 'post':
                 $imagePost = $_FILES['photo']['name'];
