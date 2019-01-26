@@ -39,7 +39,7 @@ $(document).ready(function(){
 			var contactId = $('#contactId').val();
 			if ($.trim(content) != "") {			
 				$.ajax({
-				url : "ajax/send.php", // on donne l'URL du fichier de traitement
+				url : "index.php?action=send", // on donne l'URL du fichier de traitement
 				type : "POST", // la requête est de type POST
 				data : "content=" + content + "&contactId=" + contactId // et on envoie nos données
 				});

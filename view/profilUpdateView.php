@@ -144,17 +144,11 @@ ob_start();
             </div>
         </div>
                 <div class="row justify-content-center">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">Modifier</button>
                     </div>
-                
+                </div>
             </form>
-            <div class="col-md-2">
-                <form action="index.php?action=home" method="POST">
-                    <button class="btn btn-secondary btn-lg btn-block" name="update" type="submit">Retour</button>
-                </form>
-              </div> 
-            </div>
         </div>
     </div>
 

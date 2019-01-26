@@ -141,12 +141,10 @@ function createGroups($groupName, $userId)
 	//AJOUTER LES CONTACTS DANS UN GROUPE
 function addContactsToGroup($contact, $status, $groupId)
 {
-    if(!empty($contact)){
     $comt = COUNT($contact);
     for ($i = 0; $i < $comt; $i++) {
         contactAddGroup($contact[$i], $status, $groupId);
     }
-    } 
     sessionGroup($_SESSION['id'], $_SESSION['id']);
 }
 

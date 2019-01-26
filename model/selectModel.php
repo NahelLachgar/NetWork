@@ -308,7 +308,7 @@ function getGroup($groupId)
 function getGroups($id)
 {
     $db = dbConnect();
-    $req = $db->prepare("SELECT DISTINCT groupadd.group,groups.title FROM groupadd INNER JOIN groups ON groupadd.group=groups.id WHERE groups.admin !=? AND groupadd.user = ?  AND groupadd.status = 'member'");
+    $req = $db->prepare("SELECT DISTINCT groupadd.group,groups.title FROM groupadd INNER JOIN groups ON groupadd.group=groups.id WHERE groups.admin !=? AND groupadd.user = ?  AND groupadd.status = 'member';");
     $req->execute(array($id,$id));
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
     return $req;
@@ -521,13 +521,4 @@ function checkActive($id)
     }
     return $active;
 }
-
-//RECUPERE TOUS LES COMMENTAIRES D'UNE PUBLICATION
-/*function getCommentsToPublications($publicationId){
-    $db = dbConnect();
-    $comments = $db->prepare("SELECT coms.content,coms.comDate,coms.user FROM coms JOIN comment ON coms.id = comment.com JOIN publications ON comment.publication=publications.id JOIN post ON publications.id=post.publication JOIN users ON post.user=users.id WHERE publications.id=?"); 
-    $comments->execute(array($publicationId));
-    $comments = $comments->fetchAll();
-    return $comments;
-}*/
 ?>

@@ -18,7 +18,6 @@ require_once('controller/deleteController.php');
             case 'home':
                 $errorExt = "";
                 home(htmlspecialchars($_SESSION['id']),$errorExt);
-                //getComments();
                 break;
             case 'checkUser':
                 checkUserExists(htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']));
@@ -169,11 +168,7 @@ require_once('controller/deleteController.php');
                 createGroups(htmlspecialchars($_POST['nameG']),$_SESSION['id']);
                 break;
             case 'addContactsToGroups':
-                if(!empty($_POST['addContacts'])){
                 addContactsToGroup($_POST['addContacts'],$_POST['statut'],$_POST['groupId']);
-                } else {
-                    sessionGroup($_SESSION['id']);
-                }
                 break;
             case 'addToGroup':
                 addToGroup($_POST['addContact'],$_POST['statut'],$_POST['groupId'],$_POST['adminGroup'],$_SESSION['id']);
@@ -199,9 +194,11 @@ require_once('controller/deleteController.php');
             case 'showGroupMessages':
                 getGroupMessages($_SESSION['id'],$_GET['groupId']);
                 break;
+            case 'loadNotif':
+                require_once('ajax/loadNotif.php');
+                break;
             default:
-                $errorExt = "";
-                home(htmlspecialchars($_SESSION['id']),$errorExt);
+                home($_SESSION['id']);
         }
     } else {
         if (!isset($_SESSION['id'])) {
