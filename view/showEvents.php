@@ -66,29 +66,6 @@
         else {
             echo "<br/><br/>";
         }
-        //PRENDRE EN COMPTE LES INVITATIONS
-        /*
-        echo "<div class="col-md-4 order-md-2 mb-4">
-            </div>
-            <form enctype="multipart/form-data" action="index.php?action=joinInvitation" method="POST">
-                <input type='hidden' name='id' value='".$event[$i][0]."'>
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Rejoindre l&apos;événement">
-                    </div>
-                </div>
-            </form>
-            <div class="col-md-4 order-md-2 mb-4">
-            </div>
-            <form enctype="multipart/form-data" action="index.php?action=declineInvitation" method="POST">
-                <input type='hidden' name='id' value='".$event[$i][0]."'>
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Décliner l&apos;événement">
-                    </div>
-                </div>
-            </form>";
-        */
         if($admin!=false) {
             echo "<div class='py-2 text-center'>
                         <h3>J'organise</h3>

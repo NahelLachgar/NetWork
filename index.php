@@ -69,12 +69,15 @@ require_once('controller/deleteController.php');
                 removeContact(htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break; 
             case 'comment':
+//A FAIRE
                 addcomment(htmlspecialchars($_POST['comment']),$_SESSION['id'],$_POST['postId']);
                 break; 
             case 'contactContacts':
+//A FAIRE
                 showContacts($_SESSION['id'],$_POST['contactId']);
                 break;
             case 'showMessages':
+//A FAIRE
                 if (!isset($_GET['contactId'])) {
                     $contacts = getContacts($_SESSION['id']);
                     $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
@@ -93,9 +96,11 @@ require_once('controller/deleteController.php');
                 require_once('ajax/send.php');
                 break;
             case 'groups':
+//A FAIRE
                 sessionGroup($_SESSION['id']);
                 break;
             case 'deleteView':
+//A FAIRE
                 deleteView($_SESSION['id']);
                 break;
             case 'deleteAccount':
@@ -105,7 +110,7 @@ require_once('controller/deleteController.php');
                 desactivateAccount($_SESSION['id'], $_POST['active']);
                 break;
             case 'showEvents':
-                //PRENDRE EN COMPTE LES INVITATIONS
+//A FAIRE
                 showEvents($_SESSION['id']);
                 break;
             case 'createEventView':
@@ -115,7 +120,7 @@ require_once('controller/deleteController.php');
                 createEvent($_SESSION['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
                 break;
             case 'eventView':
-                //PRENDRE EN COMPTE LES INVITATIONS
+//A FAIRE
                 eventView($_SESSION['id'], $_POST['id'], $_POST['role']);
                 break;
             case 'quitEvent':
@@ -131,6 +136,7 @@ require_once('controller/deleteController.php');
                 modifyEvent($_POST['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
                 break;
             case 'addParticipateView':
+//A FAIRE
                 addParticipateView($_SESSION['id'], $_POST['id']);
                 break;
             case 'addParticipate':
@@ -142,20 +148,12 @@ require_once('controller/deleteController.php');
                     addParticipate($_SESSION['id'], "", $_POST['id']);
                 }
                 break;
-            /*
-            case 'joinInvitation':
-            //A FAIRE
-                join($_SESSION['id'], $_GET['id'], $_GET['type']);
-                break;
-            case 'declineInvitation':
-            //A FAIRE
-                decline($_SESSION['id'], $_GET['id'], $_GET['type']);
-                break;
-            */
             case 'createGroup':
+//A FAIRE
                 createGroups(htmlspecialchars($_POST['nameG']),$_SESSION['id']);
                 break;
             case 'addContactsToGroups':
+//A FAIRE
                 addContactsToGroup($_POST['addContacts'],$_POST['statut'],$_POST['groupId']);
                 break;
             case 'addToGroup':
@@ -165,6 +163,7 @@ require_once('controller/deleteController.php');
                 getMembersToGroups($_POST['groupId'],$_SESSION['id']);
                 break;
             case 'groupsManage':
+//A FAIRE
                 groupManage($_POST['groupId'],$_POST['adminGroup'],$_SESSION['id']);
                 break;
             case 'updateGroup':
@@ -180,10 +179,12 @@ require_once('controller/deleteController.php');
                 RemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
                 break;
             case 'showGroupMessages':
+//A FAIRE
                 getGroupMessages($_SESSION['id'],$_GET['groupId']);
                 break;
             default:
-                home($_SESSION['id']);
+                $errorExt = "";
+                home($_SESSION['id'],$errorExt);
         }
     } else {
         if (!isset($_SESSION['id'])) {

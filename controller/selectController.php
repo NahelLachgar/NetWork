@@ -8,6 +8,23 @@ require_once('model/deleteModel.php');
 require_once('model/selectModel.php');
 // AFFICHE LA PAGE D'ACCUEIL ET EXÉCUTE LES FONCTIONS
 
+
+
+/*<?php
+if($state=='activated') {
+    echo "<div class='h5'>";
+}
+else
+{
+    echo "<div class='h5' style='color:#798081;'>";
+}
+?>
+
+
+$state = checkActive($id);
+*/
+
+
 function home($userId,$errorExt) {
 	$profile = getProfile($userId);
     $contactsNb = getContactsCount($userId);
@@ -108,6 +125,7 @@ function contactHome($id,$contactId,$token) {
 	$contactsNb = getContactsCount($contactId);
 	$followedCompaniesNb = getFollowedCompaniesCount($contactId);
 	$status = checkStatus($id);
+    $state = checkActive($contactId);
 	$pass = $token;
 	require_once('view/profilePageView.php');	
 }
@@ -158,17 +176,6 @@ function showCompanies($id){
     $state = checkActive($id);
     require_once("./view/showCompanies.php");
 }
-
-// AFFICHER LES CONTACTS
-/*function contactList($userId)
-{
-    $list = getContacts($userId);
-    $status = checkStatus($userId);
-    if($list == TRUE) 
-    {
-        require_once('./view/contactsListView.php');		
-    }
-}*/
 
 // GROUPE
 function sessionGroup($id) {

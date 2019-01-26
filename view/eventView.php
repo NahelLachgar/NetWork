@@ -108,33 +108,6 @@
                     <button type='submit' class='btn btn-link'>".$admin[1]." ".$admin[2]."</button> 
                 </form>
             </div>";
-        //PRENDRE EN COMPTE LES INVITATIONS
-        /*
-        if($invit!=false) {
-            echo "<div class='row'>
-                    <div class='col-md-12 order-md-1'>
-                        <form enctype='multipart/form-data' action='index.php?action=joinInvitation' method='POST'>
-                            <input type='hidden' name='id' value='".$invit[$i][0]."'>
-                            <input type='hidden' name='type' value='event'>
-                            <div class='row justify-content-center'>
-                                <div class='col-md-6'>
-                                    <input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Rejoindre l&apos;événement'>
-                                </div>
-                            </div>
-                        </form>";
-            echo "<div class='col-md-4 order-md-2 mb-4'>
-                </div>
-                <form enctype='multipart/form-data' action='index.php?action=declineInvitation' method='POST'>
-                    <input type='hidden' name='id' value='".$invit[$i][0]."'>
-                    <input type='hidden' name='type' value='event'>
-                    <div class='row justify-content-center'>
-                        <div class='col-md-6'>
-                            <input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Décliner l&apos;événement'>
-                        </div>
-                    </div>
-                </form>";
-        }
-        else{*/
         //SUPPRIMER L'UTILISATEUR DANS LA LISTE DES PARTICIPANTS DE L'EVENEMENT
             echo "<div class='row'>
                         <div class='col-md-12 order-md-1'>

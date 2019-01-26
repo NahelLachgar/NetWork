@@ -23,6 +23,7 @@ ob_start();
             </div>
           </div></div></center>";
             ?>
+    <br>
         <?php elseif ($res == true) :
             foreach ($res as $result) : ?>
             <?php if ($result['status'] == 'company') : ?>
@@ -31,8 +32,16 @@ ob_start();
                             <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                             <form action="index.php?action=profilePage" method="POST">
                                 <input type="hidden" name="contactId" value="<?=$result['id'] ?>">
-                                <input type="hidden" name="token" value="0"> 
-                                <button type="submit" class="btn btn-link"><?= $result['name']. ' ' . $result['lastName'] ?></button> 
+                                <input type="hidden" name="token" value="0">
+<?php
+$stateSearch = checkActive($result['id']);
+if($stateSearch=='activated') {
+    echo "<input type='submit' class='btn btn-link' value='".$result['name']." ".$result['lastName']."'>";
+}
+else {
+    echo "<input type='submit' class='btn btn-link' style='color:#798081;' value='".$result['name']." ".$result['lastName']."'>";
+}
+?>
                             </form>
                         <?php endif;?>
                         </div>
