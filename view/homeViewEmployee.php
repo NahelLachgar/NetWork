@@ -217,7 +217,7 @@ if (isset($employeesSuggests)) :
                     <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[0]['photo'] ?>" alt="" />
                     <h5 class="card-title"><?= $employeesSuggests[0]['name'] . ' ' . $employeesSuggests[0]['lastName'] ?></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[0]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
-                    <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                    <a href="index.php?action=addContact&contactId=<?= $employeesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
 </center>
                     </div>
                     </div>   
@@ -231,7 +231,7 @@ if (isset($employeesSuggests)) :
                     <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[1]['photo'] ?>" alt="" />
                     <h5 class="card-title"><?= $employeesSuggests[1]['name'] . ' ' . $employeesSuggests[1]['lastName'] ?></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[1]['job'] . ' chez ' . $employeesSuggests[0]['company'] ?></h6>
-                    <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[1]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                    <a href="index.php?action=addContact&contactId=<?= $employeesSuggests[1]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
 </center>
                     </div>
                     </div>   
@@ -244,7 +244,7 @@ if (isset($employeesSuggests)) :
                     <img class="rounded-circle" width="45"src="./img/profile/<?= $employeesSuggests[1]['photo'] ?>" alt="" />
                     <h5 class="card-title"><?= $employeesSuggests[1]['name'] . ' ' . $employeesSuggests[1]['lastName'] ?></h5>
                     <h6 class="card-subtitle mb-2 text-muted"><?= $employeesSuggests[1]['job'] . ' chez ' . $employeesSuggests[1]['company'] ?></h6>
-                    <a href="index.php?action=addcontacts&id=<?= $employeesSuggests[1]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                    <a href="index.php?action=addContact&contactId=<?= $employeesSuggests[1]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
 </center>
                     </div>
                     </div>   
@@ -312,7 +312,7 @@ if (isset($employeesSuggests)) :
                                     <img class="rounded-circle" width="45"src="./img/profile/<?= $companiesSuggests[$i]['photo'] ?>" alt="" />
                                     <h5 class="card-title"><?= $companiesSuggests[$i]['name'] . ' ' . $companiesSuggests[$i]['lastName'] ?></h5>
                                     <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[$i]['job'] . ' chez ' . $companiesSuggests[$i]['company'] ?></h6>
-                                    <a href="index.php?action=addcontacts&id=<?= $companiesSuggests[$i]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                                    <a href="index.php?action=addContact&contactId=<?= $companiesSuggests[$i]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
             </center>
                                     </div>
                 </div>    
@@ -338,7 +338,7 @@ if (isset($employeesSuggests)) :
                                     <img class="rounded-circle" width="45"src="./img/profile/<?= $companiesSuggests[0]['photo'] ?>" alt="" />
                                     <h5 class="card-title"><?= $companiesSuggests[0]['name'] . ' ' . $companiesSuggests[0]['lastName'] ?></h5>
                                     <h6 class="card-subtitle mb-2 text-muted"><?= $companiesSuggests[0]['job'] . ' chez ' . $companiesSuggests[0]['company'] ?></h6>
-                                    <a href="index.php?action=addcontacts&id=<?= $companiesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
+                                    <a href="index.php?action=addContact&contactId=<?= $companiesSuggests[0]['id'] ?>" class="card-link"> <img src="./img/icon/users.png"> </a>
             </center>
 
                                     </div>

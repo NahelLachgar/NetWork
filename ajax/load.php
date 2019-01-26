@@ -1,13 +1,9 @@
 <?php
-session_start();
 if(isset($_POST['messageId']) && isset($_POST['contactId'])){ 
 $contactId = (int) $_POST['contactId'];
 $messageId = (int) $_POST['messageId']; // on s'assure que c'est un nombre entier
 // on récupère les messages ayant un id plus grand que celui donné
-function dbConnect() {
-    $db = new PDO('mysql:host=localhost;dbname=NetWork;charset=utf8', 'root', 'root'); 
-    return $db;
-}
+
 $db = dbConnect();
 $req = $db->prepare('SELECT DISTINCT * FROM privateMessages 
 WHERE sender = :userId AND receiver = :contactId
@@ -23,14 +19,7 @@ $req->execute(array(
     'userId' => $_SESSION['id']
 ));
 
-function getProfile($userId)
-{
-    $db = dbConnect();
-    $profile = $db->prepare('SELECT * FROM users WHERE id =?');
-    $profile->execute(array($userId));
-    $profileFetch = $profile->fetch();
-    return $profileFetch;
-}
+
 $messages = null;
 
 // on inscrit tous les nouveaux messages dans une variable

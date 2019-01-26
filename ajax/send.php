@@ -1,9 +1,8 @@
 <?php
-session_start();
 if( isset($_POST['content']) && isset($_POST['contactId']) ){
         $content = $_POST['content'];
         $contactId = $_POST['contactId'];
-        $db = new PDO('mysql:host=localhost;dbname=NetWork;charset=utf8', 'root', 'root'); 
+        $db = dbConnect();
         $sendMessage = $db->prepare('INSERT into privateMessages (content,receiver,sendDate,sender)
                                 VALUES (:content,:receiver,NOW(),:sender)');
     $sendMessage->execute(array(
@@ -11,6 +10,18 @@ if( isset($_POST['content']) && isset($_POST['contactId']) ){
         "receiver"=>$contactId,
         "sender"=>$_SESSION['id']
     ));
+
+    $profile = getProfile($userId);
+    $userProfile = getProfile($contactId);
+    if ($userProfile['status']== "employee") {
+
+    $content = $profile['name'].' '.$profile['lastName'].' vous a envoyé un message.';
+    $url = 'index.php?action=showMessages&contactId='.$profile['id'];
+    $icon = $profile['photo'];
+    
+    $notif = addNotif($contactId,$content,$url,$icon);
+    }
+    
     if ($sendMessage) {
         echo "Success";
     } else {

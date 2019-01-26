@@ -96,9 +96,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
 function addToContacts($contactId, $userId)
 {
     $add = addContact($contactId, $userId);
-    if ($add == true) {
         header('Location:index.php?action=home');
-    }
 }
 
     //CREER UN GROUPE

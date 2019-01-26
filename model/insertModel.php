@@ -67,17 +67,34 @@ function contactAddGroup($memberId,$status,$groupID) {
 }
 
 //AJOUT UNE NOTIFICATION 
-function addNotif ($contactId,$content,$url) {
+function addNotif ($user,$content,$url,$icon="") {
     $db = dbConnect();
-    $req = $db->prepare ('INSERT INTO ')
+    $req = $db->prepare ('INSERT INTO notifications (`user`,`contact`,`content`,`url`,`status`,`icon`)
+    VALUES (:user,:contact,:content,:url,"unseen",:icon)');
+    $req -> execute(array(
+        "user"=>$user,
+        "contact"=>$_SESSION['id'],
+        "content"=>$content,
+        "url"=>$url,
+        "icon"=>$icon
+    ));
 }
 //AJOUT D'UN CONTACT
-function addContact($contactId, $idUser)
+function addContact($contactId, $userId)
 {
     $db = dbConnect();
-    $req = $db->prepare('INSERT INTO contacts(contact,user) VALUES(?,?)');
-    $req->execute(array($contactId, $idUser));
-    return $req;
+    $req = $db->prepare('INSERT INTO contacts (`contact`,`user`,`status`) VALUES(?,?,"waiting")');
+    $req->execute(array($contactId, $userId));
+    $profile = getProfile($userId);
+    $userProfile = getProfile($contactId);
+    if ($userProfile['status']== "employee") {
+
+    $content = $profile['name'].' '.$profile['lastName'].' souhaite vous ajouter à ses contacts. Cliquez ici pour répondre.';
+    $url = 'index.php?action=notificationsPage';
+    $icon = $profile['photo'];
+
+    $notif = addNotif($contactId,$content,$url,$icon);
+    }
 }
 
 //CREER UN EVENEMENT

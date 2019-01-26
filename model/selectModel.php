@@ -267,13 +267,13 @@ function getSearch($userId, $name)
     return $req;
 }
 
-function getContactToUser($idUser)
+function getContactToUser($userId)
 {
     $db = dbConnect();
     $req = $db->prepare('SELECT user AS id FROM contacts WHERE contact LIKE ? 
     UNION
     SELECT contact AS id FROM contacts WHERE user LIKE ?');
-    $req->execute(array($idUser, $idUser));
+    $req->execute(array($userId, $userId));
     $post = $req->fetchAll();
     if ($post) {
         foreach ($post as $res) {

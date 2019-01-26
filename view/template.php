@@ -26,10 +26,9 @@
         <img width="30px" src="img/icon/notifications.svg" alt="notifications">
         <span class="badge badge-danger">10</span>
         </a>
-        <button id="btnNotif">test</button>
 
 <?php
-    if($status=="employee") {
+    if($_SESSION['status']=="employee") {
         echo "<a id='buttonEvent' href='index.php?action=showEvents' class='home'><img width=30px src='img/icon/event.svg' alt='Photo de profil'></a>";
     }
 ?>

@@ -5,11 +5,11 @@ require_once('model/deleteModel.php');
 require_once('model/updateModel.php');
 
 //UNFOLLOW UN CONTACT
-function unfollow($contactId, $idUser)
+function unfollow($contactId, $userId)
 {
     $db = dbConnect();
     $req = $db->prepare('DELETE FROM contacts WHERE contact = ? AND user = ? OR contact = ? AND user = ?');
-    $req->execute(array($contactId, $idUser,$idUser,$contactId));
+    $req->execute(array($contactId, $userId,$userId,$contactId));
     return $req;
 }
 

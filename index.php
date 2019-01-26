@@ -46,8 +46,14 @@ require_once('controller/deleteController.php');
                         } 
                     }
                 break;
+            case 'load':
+                  require('ajax/load.php');
+                  break;
             case 'contactList':
                 showContacts(htmlspecialchars($_SESSION['id']));
+                break;
+            case 'notificationsPage':
+                require_once('view/notificationsView.php');
                 break;
             case 'companyList':
                 showCompanies(htmlspecialchars($_SESSION['id']));
