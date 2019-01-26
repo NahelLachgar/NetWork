@@ -64,6 +64,12 @@ function contactAddGroup($memberId,$status,$groupID) {
     $db = dbConnect();
     $req = $db->prepare("INSERT INTO `groupAdd` (`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(), $memberId, $status, $groupID)");
     $req->execute(array($memberId,$status,$groupID));
+    $lastId = $db->lastInsertId();
+    $content = "vous avez ete ajoute dans le groupe";
+    $url = "index.php?action=groups";
+    //le champ contact remplace l'id du groupe
+    $insertNotif = $db->prepare("INSERT INTO `notifications` (`user`, `contact`, `content`, `url`) VALUES (?, ?, ?, ?)");
+    $insertNotif->execute(array($memberId,$groupID,$content,$url));
 }
 
 //AJOUT UNE NOTIFICATION 

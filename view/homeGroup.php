@@ -62,7 +62,7 @@ if($state=='activated') {
                 <?php endforeach; ?>
 
                 <?php endif; ?>
-            <?php 
+             <?php 
             foreach ($groups as $group) : ?>
                 <form method="POST" action="index.php?action=getGroupId">
                     <input type="hidden" name="groupId" value="<?= $group['group'] ?>" >
@@ -71,9 +71,9 @@ if($state=='activated') {
             <?php endforeach; 
             else:
             echo "";
-            endif; ?>
+            endif;  ?>
             <?php
-                if($groups):
+                if(!$adminGroup):
                     
                 foreach ($groups as $group) : ?>
                     <form method="POST" action="index.php?action=getGroupId">
