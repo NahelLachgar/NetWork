@@ -147,8 +147,15 @@ ob_start();
                     <div class="col-md-3">
                         <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">Modifier</button>
                     </div>
-                </div>
-            </form>
+                    </form>
+                
+            
+            <div class="col-md-3">
+                <form action="index.php?action=home" method="POST">
+                    <button class="btn btn-secondary btn-lg btn-block" name="update" type="submit">Retour</button>
+                </form>
+            </div>
+            </div> 
         </div>
     </div>
 
