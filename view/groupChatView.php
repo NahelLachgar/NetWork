@@ -44,7 +44,7 @@ else {
 			</a>		
 		<?php endfor;	
 				 for ($i = 0; $i < count($groups); $i++) : ?>
-			<a class="contactLink" style="text-decoration:none;color:white" href='index.php?action=showGroupMessages&groupId=<?=$contactProfile[$i]['id']?>'>
+			<a class="contactLink" style="text-decoration:none;color:white" href='index.php?action=showGroupMessages&groupId=<?=$groups[$i]['id']?>'>
 
 				<li class="contact">
 					<div class="wrap">
@@ -63,35 +63,30 @@ else {
 	</div>
 	<div class="content">
 		<div class="contact-profile">
-		<img class="rounded-circle" width="45"src="./img/profile/<?= $receiverProfile['photo'] ?>" alt="" />
+		<img class="rounded-circle" width="45"src="./img/profile/<?= $groupProfile['photo'] ?>" alt="" />
 <?php
-$stateSearch = checkActive($receiverProfile['id']);
-if($stateSearch=='activated') {
-    echo "<p>".$receiverProfile['name']." ".$receiverProfile['lastName']."</p>";
-}
-else {
-    echo "<p style='color:#798081'>".$receiverProfile['name']." ".$receiverProfile['lastName']."</p>";
-}
+    echo "<p>".$groupProfile['title']."</p>";
+
 ?>
         </div>
         
 		<div class="messages">
 			<ul id="messages">
 			 <?php 
-			while ($messagesFetch = $messages->fetch()) :
-				if ($messagesFetch['sender'] == $_SESSION['id']) {
+			while ($groupMessagesFetch = $messages->fetch()) :
+				if ($messagesFetch['user'] == $_SESSION['id']) {
 				$class = "sent";
 			} else {
 				$class = "replies";
 			}
 			?>
 				<li id="<?= $messagesFetch['id'] ?>" class=<?= $class ?>>
-				<?php if($messagesFetch['sender']==$_SESSION['id']):?>
+				<?php if($messagesFetch['user']==$_SESSION['id']):?>
 					<img src="./img/profile/<?=$userProfile['photo']?>" alt="">
 				<?php else:?>
-				<img src="./img/profile/<?=$receiverProfile['photo']?>" alt="">
+				<img src="./img/profile/<?=$groupProfile['photo']?>" alt="">
 				<?php endif?>
-					<p><?= $messagesFetch['content'] ?></p>
+					<p><?= $messagesFetch['message'] ?></p>
 				</li>
                     <?php endwhile ?>
 			</ul>
@@ -99,8 +94,8 @@ else {
 		<div class="message-input">
 			<div class="wrap">
 			<form>
-				<input type="text" name="content" id="content" placeholder="Écrivez votre message" />
-				<input type="hidden" name="contactId" id="contactId" value=<?= $_GET['contactId'] ?>>
+				<input type="text" name="message" id="message" placeholder="Écrivez votre message" />
+				<input type="hidden" name="groupId" id="groupId" value=<?= $_GET['groupId'] ?>>
 				<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
 				<button type="button" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</form>

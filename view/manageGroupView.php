@@ -82,22 +82,25 @@ ob_start();
 
             <div class="row">
                 <?php foreach( $res as $member) :?>
-                    <div class="col-md-2 mb-3">
-<?php
-$stateSearch = checkActive($member['id']);
-if($stateSearch=='activated') {
-    echo "<div>".$member['name']." ".$member['lastName']."</div>";
-}
-else {
-    echo "<div style='color:#798081'>".$member['name']." ".$member['lastName']."</div>";
-}
-?>
+                <div class="col-md-2 mb-3 card text-center" style="margin-right: 5px;margin-bottom: 5px;">
+                        <img class="card-img-top rounded-circle" src="./img/profile/<?= $member['photo'] ?>" alt="Card image cap">
+                        <div class="card-body border-top">
+                            <?php
+                            $stateSearch = checkActive($member['id']);
+                            if($stateSearch=='activated') {
+                                echo '<h6 class="card-title text-center">'.$member['lastName']."<br>".$member['name']."</h6>";
+                            }
+                            else {
+                                echo '<h6 class="card-title text-center" style="color:#798081">'.$member['lastName']."<br>".$member['name']."</h6>";
+                            }
+                            ?>    
                         <form action="index.php?action=removeToGroups" method="POST">
                             <input type="hidden" name="contactId" value="<?=$member['id']?>">
                             <input type="hidden" name="groupId" value="<?= $idGroup ?>">
                             <input type="hidden" name="adminGroup" value="<?= $adminG ?>">
-                            <button type="submit" class="btn btn-link">retirer du groupe</button>
+                            <button type="submit" class="btn btn-link">Retirer</button>
                         </form>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div> 
@@ -119,23 +122,26 @@ else {
         
             <div class="row">
                 <?php foreach ($contactProfile as $contact) :?>
-                    <div class="col-md-2 mb-3">
-<?php
-$stateSearch = checkActive($contact['id']);
-if($stateSearch=='activated') {
-    echo "<div>".$contact['name']." ".$contact['lastName']."</div>";
-}
-else {
-    echo "<div style='color:#798081'>".$contact['name']." ".$contact['lastName']."</div>";
-}
-?>
-                        <form action="index.php?action=addToGroup" method="POST">
-                            <input type="hidden" name="addContact" value="<?=$contact['id']?>">
-                            <input type="hidden" name="statut" value="2">
-                            <input type="hidden" name="groupId" value="<?= $idGroup ?>">
-                            <input type="hidden" name="adminGroup" value="<?= $adminG ?>">
-                            <button type="submit" class="btn btn-link">ajouter au groupe</button>
-                        </form>
+                    <div class="col-md-2 mb-3 card text-center" style="margin-right: 5px;margin-bottom: 5px;">
+                        <img class="card-img-top rounded-circle" src="./img/profile/<?= $contact['photo'] ?>" alt="Card image cap">
+                        <div class="card-body border-top">
+                            <?php
+                            $stateSearch = checkActive($contact['id']);
+                            if($stateSearch=='activated') {
+                                echo '<h6 class="card-title text-center">'.$contact['lastName']."<br>".$contact['name']."</h6>";
+                            }
+                            else {
+                                echo '<h6 class="card-title text-center" style="color:#798081">'.$contact['lastName']."<br>".$contact['name']."</h6>";
+                            }
+                            ?>                           
+                            <form action="index.php?action=addToGroup" method="POST">
+                                <input type="hidden" name="addContact" value="<?=$contact['id']?>">
+                                <input type="hidden" name="statut" value="2">
+                                <input type="hidden" name="groupId" value="<?= $idGroup ?>">
+                                <input type="hidden" name="adminGroup" value="<?= $adminG ?>">
+                                <input type="submit" class="btn btn-link" value="Ajouter">
+                            </form>                       
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div> 

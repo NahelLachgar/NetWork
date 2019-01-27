@@ -78,12 +78,12 @@ function showGroupMessages ($userId,$groupId) {
     $contacts = getContacts($userId);
     $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
     if ($contactsFetch) {
-    $receiverProfile = getProfile($_GET['contactId']);
+    $groupProfile = getGroup($_GET['groupId']);
 	for ($i=0;$i<count($contactsFetch);$i++) {
 		$profile = getProfile($contactsFetch[$i]['id']);
 		$contactProfile[$i] = $profile;
 	}
-	$messages = getGroupMessages($userId,$groupId);
+	$messages = getGroupMessages($groupId);
 	require_once('./view/groupChatView.php');
 	} else {
         $title="messages";
