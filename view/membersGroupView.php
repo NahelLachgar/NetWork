@@ -10,7 +10,15 @@ ob_start();
     <h4 class="d-flex justify-content-between align-items-center mb-3">
     <span class="text-muted">Administrateur</span></h4>
 <?php else: ?>
-    <?= $admin['name']." ".$admin['lastName'] ?> 
+<?php
+    $stateSearch = checkActive($admin['id']);
+    if($stateSearch=='activated') {
+        echo "<div>".$admin['name']." ".$admin['lastName']."</div>";
+    }
+    else {
+        echo "<div style='color:#798081'>".$admin['name']." ".$admin['lastName']."</div>";
+    }
+?>
     <h4 class="d-flex justify-content-between align-items-center mb-3">
     <span class="text-muted">Administrateur</span></h4>
 <?php endif; ?>
@@ -24,7 +32,16 @@ ob_start();
              <button type="submit" class="btn btn-link">Quitter le groupe</button>
         </form><br>
     <?php else: ?>
-        <?= $member['name']." ".$member['lastName'] ?><br>
+<?php
+    $stateSearch = checkActive($member['id']);
+    if($stateSearch=='activated') {
+        echo "<div>".$member['name']." ".$member['lastName']."</div>";
+    }
+    else {
+        echo "<div style='color:#798081'>".$member['name']." ".$member['lastName']."</div>";
+    }
+?>
+    <br>
     <?php endif; ?>
 <?php endforeach; ?>
 

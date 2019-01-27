@@ -104,9 +104,15 @@
     else if($role=='participate') {
         //AFFICHER L'ADMINISTRATEUR
         echo "<form action='index.php?action=profilePage' method='POST'>
-                    <input type='hidden' name='contactId' value=".$admin[0].">
-                    <button type='submit' class='btn btn-link'>".$admin[1]." ".$admin[2]."</button> 
-                </form>
+                    <input type='hidden' name='contactId' value=".$admin[0].">";
+        $stateSearch = checkActive($admin[0]);
+        if($stateSearch=='activated') {
+            echo "<button type='submit' class='btn btn-link'>".$admin[1]." ".$admin[2]."</button>";
+        }
+        else {
+            echo "<button type='submit' class='btn btn-link' style='color:#798081;'>".$admin[1]." ".$admin[2]."</button>";
+        }
+        echo "</form>
             </div>";
         //SUPPRIMER L'UTILISATEUR DANS LA LISTE DES PARTICIPANTS DE L'EVENEMENT
             echo "<div class='row'>
@@ -121,7 +127,6 @@
                                     </div>
                                 </div>
                             </form>";
-        //}
     }
 ?>
                         <div class="col-md-4 order-md-2 mb-4">
@@ -135,9 +140,15 @@
             //AFFICHER LES PARTICIPANTS
             if($participate[$i][0]!==$_SESSION['id']) {
                 echo "<form action='index.php?action=profilePage' method='POST'>
-                        <input type='hidden' name='contactId' value='".$participate[$i][0]."'>
-                        <button type='submit' class='btn btn-link'>".$participate[$i][1]." ".$participate[$i][2]."</button> 
-                    </form>";
+                        <input type='hidden' name='contactId' value='".$participate[$i][0]."'>";
+                $stateSearch = checkActive($participate[$i][0]);
+                if($stateSearch=='activated') {
+                    echo "<button type='submit' class='btn btn-link'>".$participate[$i][1]." ".$participate[$i][2]."</button>";
+                }
+                else {
+                    echo "<button type='submit' class='btn btn-link' style='color:#798081;'>".$participate[$i][1]." ".$participate[$i][2]."</button>";
+                }
+                echo "</form>";
             }
             else {
                 echo "<form action='index.php' method='GET'>

@@ -436,7 +436,7 @@ function infoContact($ID, $id)
     //RECUPERER LES CONTACTS DE L'UTILISATEUR QUI NE FONT PAS PARTIS DE CET EVENEMENT
     $reponse = $bdd->prepare('SELECT users.id AS id, lastName, name
                             FROM users, contacts
-                            WHERE status!="company"
+                            WHERE users.status!="company" AND contacts.status="accepted"
                             AND ((contact=:ID AND users.id=user
                                     AND users.id NOT IN (SELECT user
                                                         FROM participate
@@ -446,10 +446,8 @@ function infoContact($ID, $id)
                                                         FROM participate
                                                         WHERE event=:id)))
                             ORDER BY lastName, name');
-    $reponse->execute([
-        'ID' => $ID,
-        'id' => $id
-    ]);
+    $reponse->execute(['ID' => $ID,
+                        'id' => $id]);
     $a = array();
     $i = 0;
     while ($data = $reponse->fetch()) {

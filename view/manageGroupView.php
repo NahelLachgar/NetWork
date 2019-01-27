@@ -72,7 +72,15 @@ ob_start();
             <div class="row">
                 <?php foreach( $res as $member) :?>
                     <div class="col-md-2 mb-3">
-                        <?= $member['name']." ".$member['lastName'] ?> 
+<?php
+$stateSearch = checkActive($member['id']);
+if($stateSearch=='activated') {
+    echo "<div>".$member['name']." ".$member['lastName']."</div>";
+}
+else {
+    echo "<div style='color:#798081'>".$member['name']." ".$member['lastName']."</div>";
+}
+?>
                         <form action="index.php?action=removeToGroups" method="POST">
                             <input type="hidden" name="contactId" value="<?=$member['id']?>">
                             <input type="hidden" name="groupId" value="<?= $idGroup ?>">
@@ -96,7 +104,15 @@ ob_start();
             <div class="row">
                 <?php foreach ($contactProfile as $contact) :?>
                     <div class="col-md-2 mb-3">
-                        <?= $contact['name']." ".$contact['lastName'] ?> 
+<?php
+$stateSearch = checkActive($contact['id']);
+if($stateSearch=='activated') {
+    echo "<div>".$contact['name']." ".$contact['lastName']."</div>";
+}
+else {
+    echo "<div style='color:#798081'>".$contact['name']." ".$contact['lastName']."</div>";
+}
+?>
                         <form action="index.php?action=addToGroup" method="POST">
                             <input type="hidden" name="addContact" value="<?=$contact['id']?>">
                             <input type="hidden" name="statut" value="2">

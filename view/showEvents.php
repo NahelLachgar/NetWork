@@ -9,7 +9,14 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
-                    <div class="h5">
+<?php
+if($state=='activated') {
+    echo "<div class='h5'>";
+}
+else {
+    echo "<div class='h5' style='color:#798081;'>";
+}
+?>
                     <img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                     <?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                     <div class="h7">

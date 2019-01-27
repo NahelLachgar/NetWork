@@ -332,7 +332,6 @@ function showEvents($id)
     $role = 2;
     $admin = selectAdmin($id);
     $event = selectMember($id);
-    //$invit=selectInvit($id, 'event');
     $status = checkStatus($id);
     $state = checkActive($id);
     include('view/showEvents.php');
@@ -351,11 +350,6 @@ function eventView($ID, $id, $role)
     $event = infoEvent($id);
     $admin = checkAdmin($id);
     $participate = checkParticipate($id);
-    /*
-    if($role == 'participate') {
-        $invit = invitation($ID, $id, 'event');
-    }
-    */
     $status = checkStatus($ID);
     include('view/eventView.php');
 }
@@ -379,14 +373,6 @@ function deleteView($id)
 //AFFICHER LA PAGE CREATION D'UN EVENEMENT
 function createEventView($id, $role)
 {
-    $profile = getProfile($id);
-    $contactsNb = getContactsCount($id);
-    if($contactsNb > 0) {
-        $contactsPosts = getContactsPosts($id);
-        $companiesSuggests = getCompanySuggests($id);
-        $employeesSuggests = getEmployeeSuggests($id);
-    }
-    $followedCompaniesNb = getFollowedCompaniesCount($id);
     $status = checkStatus($id);
     if($role=='admin') {
         include('view/createEventView.php');
@@ -400,14 +386,6 @@ function createEventView($id, $role)
 //AFFICHER LA PAGE DE MODIFICATION D'UN EVENEMENT
 function updateEventView($ID, $id)
 {
-    $profile = getProfile($ID);
-    $contactsNb = getContactsCount($ID);
-    if($contactsNb > 0) {
-        $contactsPosts = getContactsPosts($ID);
-        $companiesSuggests = getCompanySuggests($ID);
-        $employeesSuggests = getEmployeeSuggests($ID);
-    }
-    $followedCompaniesNb = getFollowedCompaniesCount($ID);
     $event = infoEvent($id);
     $status = checkStatus($ID);
     include('view/updateEventView.php');
@@ -416,14 +394,6 @@ function updateEventView($ID, $id)
 //AFFICHER LA PAGE D'AJOUT DE PARTICIPATION
 function addParticipateView($ID, $id)
 {
-    $profile = getProfile($ID);
-    $contactsNb = getContactsCount($ID);
-    if($contactsNb > 0) {
-        $contactsPosts = getContactsPosts($ID);
-        $companiesSuggests = getCompanySuggests($ID);
-        $employeesSuggests = getEmployeeSuggests($ID);
-    }
-    $followedCompaniesNb = getFollowedCompaniesCount($ID);
     $contact = infoContact($ID, $id);
     $status = checkStatus($ID);
     include('view/addParticipateView.php');
