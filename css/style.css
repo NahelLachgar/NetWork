@@ -708,6 +708,7 @@ cp-pen-styles > body {
 }
 #frame .content .messages ul li.sent img {
   margin: 6px 8px 0 0;
+  width: 40px;
 }
 #frame .content .messages ul li.sent p {
   background: #2c3e50;
@@ -716,6 +717,7 @@ cp-pen-styles > body {
 #frame .content .messages ul li.replies img {
   float: right;
   margin: 6px 0 0 8px;
+  width: 40px;
 }
 #frame .content .messages ul li.replies p {
   background: #f5f5f5;
@@ -730,12 +732,12 @@ cp-pen-styles > body {
   display: inline-block;
   padding: 10px 15px;
   border-radius: 20px;
-  max-width: 205px;
+  max-width: 1042px;
   line-height: 130%;
 }
 @media screen and (min-width: 735px) {
   #frame .content .messages ul li p {
-    max-width: 300px;
+    max-width: 1042px;
   }
 }
 #frame .content .message-input {
