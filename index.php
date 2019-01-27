@@ -36,6 +36,7 @@ require_once('controller/deleteController.php');
                 }
                 break;
             case 'post':
+            if(!empty($_POST['content']) || !empty($_FILES['photo']['name'])){
                 $imagePost = $_FILES['photo']['name'];
                 $ext = explode(".", $imagePost);
                 $listExt = array("png","jpg","PNG","JPG","jpeg","JPEG");
@@ -49,6 +50,10 @@ require_once('controller/deleteController.php');
                             home(htmlspecialchars($_SESSION['id']),$errorExt);
                         } 
                     }
+                } else {
+                    $errorExt = "contenu vide !";
+                    home(htmlspecialchars($_SESSION['id']),$errorExt);
+                }
                 break;
             case 'load':
                   require('ajax/load.php');
@@ -202,7 +207,8 @@ require_once('controller/deleteController.php');
                 require_once('ajax/loadNotif.php');
                 break;
             default:
-                home($_SESSION['id']);
+            $errorExt = "";
+            home(htmlspecialchars($_SESSION['id']),$errorExt);
         }
     } else {
         if (!isset($_SESSION['id'])) {
