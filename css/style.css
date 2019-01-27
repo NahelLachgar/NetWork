@@ -223,7 +223,7 @@ a {
           }
           #frame #sidepanel #profile .wrap #status-options.active {
             opacity: 1;
-            visibility: visible;
+            visibility: ;
             margin: 75px 0 0 0;
           }
           @media screen and (max-width: 735px) {
