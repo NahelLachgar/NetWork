@@ -25,15 +25,7 @@ ob_start();
               </div>
               <div class="col-md-3 mb-3">
                 <label for="admin">Administrateur</label><br>
-<?php
-    $stateSearch = checkActive($admin['id']);
-    if($stateSearch=='activated') {
-        echo "<div><input type='text' class='form-control' id='groupName' name='groupName' value=".$admin['name']." ".$admin['lastName']." READONLY></div>";
-    }
-    else {
-        echo "<div style='color:#798081'><input type='text' class='form-control' id='groupName' name='groupName' value=".$admin['name']." ".$admin['lastName']." READONLY></div>";
-    }
-?>
+                <input type='text' class='form-control' id='groupName' name='groupName' value="<?= $admin['name']." ".$admin['lastName'] ?>" READONLY>
               </div>
             </div>
           
@@ -61,16 +53,19 @@ ob_start();
 
             <div class="row">
                 <?php foreach( $res as $member) :?>
-                    <div class="col-md-2 mb-3">
-<?php
-    $stateSearch = checkActive($member['id']);
-    if($stateSearch=='activated') {
-        echo "<div>".$member['name']." ".$member['lastName']."</div>";
-    }
-    else {
-        echo "<div style='color:#798081'>".$member['name']." ".$member['lastName']."</div>";
-    }
-?>
+                <div class="col-md-2 mb-3 card text-center" style="margin-right: 5px;margin-bottom: 5px;">
+                        <img class="card-img-top rounded-circle" src="./img/profile/<?= $member['photo'] ?>" alt="Card image cap">
+                        <div class="card-body border-top">
+                            <?php
+                            $stateSearch = checkActive($member['id']);
+                            if($stateSearch=='activated') {
+                                echo '<h6 class="card-title text-center">'.$member['lastName']."<br>".$member['name']."</h6>";
+                            }
+                            else {
+                                echo '<h6 class="card-title text-center" style="color:#798081">'.$member['lastName']."<br>".$member['name']."</h6>";
+                            }
+                            ?>    
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div> 
