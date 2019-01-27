@@ -21,7 +21,7 @@ $(document).ready(function(){
 	$('#send').click(function(e){
 			var message = $('#message').val();
 			var groupId = $('#groupId').val();
-			if ($.trim(message) != "") {			
+			if ($.trim(message) != "") {	
 				$.ajax({
 				url : "index.php?action=sendGroup",
 				type : "POST", // la requête est de type POST
