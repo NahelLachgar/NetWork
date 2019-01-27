@@ -14,7 +14,7 @@ ob_start();
         crossorigin="anonymous"></script>
     <br>
     <?php
-    if($state=='activated') {
+    if($_SESSION['state']=='activated') {
         if (empty($res)) :
             echo " <center><div class='col align-self-end'><div class='card border-danger mb-6' style='max-width: 18rem;'>
             <div class='card-body text-danger'>

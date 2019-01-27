@@ -8,7 +8,7 @@ ob_start();
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <SCRIPT LANGUAGE="JavaScript" SRC="js/group.js"></SCRIPT>       
 <?php
-if($state=='activated') {
+if($_SESSION['state']=='activated') {
 ?>
 <!-- PROFIL-->
 <div class="container-fluid gedf-wrapper">

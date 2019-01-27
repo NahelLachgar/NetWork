@@ -13,7 +13,7 @@ ob_start();
         crossorigin="anonymous"></script>
     <br>
 <?php
-    if($state=='activated') {
+    if($_SESSION['state']=='activated') {
 ?>
     <br>
         <?php if ($res == true) :

@@ -313,7 +313,13 @@ function getGroups($id)
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
     return $req;
 }
-
+function getNotifs() {
+    $db = dbConnect();
+    $req = $db->prepare("SELECT DISTINCT * FROM notifications WHERE user = ? AND `type` NOT LIKE 'message' AND `type` NOT LIKE 'groupMessage' ");
+    $req->execute(array($_SESSION['id']));
+    $req = $req->fetchAll(PDO::FETCH_ASSOC);
+    return $req; 
+}
 function getGroupsName($contactId)
 {
     $db = dbConnect();

@@ -2,10 +2,10 @@ function loadNotif() {
     setInterval(function(){
     $.ajax({
         url : "index.php?action=loadNotif",
-        type : "POST",
-        dataType:"html",
-        success : function(html){
-            var notif = JSON.parse(html);
+        dataType:"json",
+        success : function(json){
+            if (notif != null) {
+            var notif = JSON.parse(json);
             var content = notif.content;
             var url = notif.url;
             var icon = notif.icon;
@@ -37,7 +37,8 @@ function loadNotif() {
 		'</div>' +
         '<a href="{3}" target="{4}" data-notify="url"></a>' +
     '</div>'
-            });  
+            });
+        }  
         }
     });
 },100)
@@ -48,10 +49,8 @@ function loadNotifNb() {
     setInterval(function(){
     $.ajax({
         url : "index.php?action=loadNotifNb",
-        type : "POST",
         dataType:"html",
         success : function(html){
-            console.log(html);
             $("#nbNotifs").text(html);
               }
     });
