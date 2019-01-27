@@ -4,17 +4,6 @@ require_once('model/deleteModel.php');
 require_once('model/selectModel.php');
 require_once('model/updateModel.php');
 
-function sendMessage($content,$contactId,$userId) {
-    $db = dbConnect();
-    $sendMessage = $db->prepare('INSERT into privateMessages (content,receiver,sendDate,sender)
-                                VALUES (:content,:receiver,NOW(),:sender)');
-    $sendMessage->execute(array(
-        "content"=>$content,
-        "receiver"=>$contactId,
-        "sender"=>$userId
-    ));
-}
-
 // PUBLIER DU CONTENU
 function post($content, $type, $userId)
 {
@@ -144,5 +133,13 @@ function insertParticipate($ID, $id)
                             VALUES (:user, :event)');
     $reponse->execute(['user'=>$ID,
                         'event'=>$id]);
+    $event = infoEvent($id);
+    $eventTitle = $event['title'];
+    $content = $profile['name'].' '.$profile['lastName'].' vous a ajouté à l\'évènement.'.$eventTitle;
+    $url = 'index.php?action=notificationsPage';
+    $icon = $profile['photo'];
+    $type = "contactAdd";
+
+    $notif = addNotif($contactId,$content,$url,$icon,$type);
 }
 ?>
