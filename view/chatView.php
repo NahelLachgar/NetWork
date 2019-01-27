@@ -1,7 +1,7 @@
 <?php 
 $title = "Messages";
 ob_start();
-if($state=='activated') {
+if($_SESSION['state']=='activated') {
 ?>
 <script src="js/filter.js"></script>
 <div id="frame">

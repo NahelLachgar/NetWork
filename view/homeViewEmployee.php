@@ -39,7 +39,7 @@ ob_start();
             </div>
             <div class="col-md-6 gedf-main">
 <?php
-if($state=='activated') {
+if($_SESSION['state']=='activated') {
 ?>
             <!------------------->
         <div style="overflow: scroll; height:1000px" class="posts">

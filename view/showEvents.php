@@ -40,7 +40,7 @@
         </div>
         <div class="col-md-6 gedf-main">
 <?php
-    if($state=='activated') {
+    if($_SESSION['state']=='activated') {
 ?>
             <div class="container">
                 <div class="py-2 text-center">

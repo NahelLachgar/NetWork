@@ -63,7 +63,7 @@ require_once('controller/deleteController.php');
                 showContacts(htmlspecialchars($_SESSION['id']));
                 break;
             case 'notificationsPage':
-                require_once('view/notificationsView.php');
+                showNotifs();
                 break;
             case 'companyList':
                 showCompanies(htmlspecialchars($_SESSION['id']));

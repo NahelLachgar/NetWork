@@ -17,7 +17,7 @@ ob_start();
     </form>
     <br>
 <?php
-    if($state=='activated') {
+    if($_SESSION['state']=='activated') {
 ?>
 <br>
         <?php
