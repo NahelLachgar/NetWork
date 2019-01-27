@@ -36,24 +36,22 @@ require_once('controller/deleteController.php');
                 }
                 break;
             case 'post':
-            if(!empty($_POST['content']) || !empty($_FILES['photo']['name'])){
-                $imagePost = $_FILES['photo']['name'];
-                $ext = explode(".", $imagePost);
-                $listExt = array("png","jpg","PNG","JPG","jpeg","JPEG");
-                    if(in_array($ext[1], $listExt)){
-                        addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
-                    } else {
-                        if (trim(htmlspecialchars($_POST['content'])) != "") {
+                if(!empty($_POST['content']) || !empty($_FILES['photo']['name'])){
+                    $imagePost = $_FILES['photo']['name'];
+                        if($imagePost){
                             addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
                         } else {
-                            $errorExt = "impossible de publier ce contenu !";
-                            home(htmlspecialchars($_SESSION['id']),$errorExt);
-                        } 
+                            if (trim(htmlspecialchars($_POST['content'])) != "") {
+                                addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
+                            } else {
+                                $errorExt = "impossible de publier ce contenu !";
+                                home(htmlspecialchars($_SESSION['id']),$errorExt);
+                            } 
+                        }
+                    } else {
+                        $errorExt = "contenu vide !";
+                        home(htmlspecialchars($_SESSION['id']),$errorExt);
                     }
-                } else {
-                    $errorExt = "contenu vide !";
-                    home(htmlspecialchars($_SESSION['id']),$errorExt);
-                }
                 break;
             case 'load':
                   require('ajax/load.php');
