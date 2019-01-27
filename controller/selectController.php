@@ -72,6 +72,7 @@ function showMessages ($userId,$contactId) {
 }
 
 function showGroupMessages ($userId,$groupId) {
+    $profile=getProfile($userId);
 	$groups = getGroupsName($userId);
 	$userProfile = getProfile($userId);
     $contacts = getContacts($userId);
