@@ -18,7 +18,6 @@ require_once('controller/deleteController.php');
             case 'home':
                 $errorExt = "";
                 home(htmlspecialchars($_SESSION['id']),$errorExt);
-                //getComments();
                 break;
             case 'checkUser':
                 checkUserExists(htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']));
@@ -30,21 +29,28 @@ require_once('controller/deleteController.php');
                 search(htmlspecialchars($_SESSION['id']),htmlspecialchars($_POST['research']));
                 break;
             case 'profilePage':
+                if (isset($_POST)) {
                 contactHome($_SESSION['id'],$_POST['contactId'],$_POST['token']);
+                } else if (isset($_GET)) {
+                    contactHome($_SESSION['id'],$_GET['contactId'],$_POST['token']); 
+                }
                 break;
             case 'post':
-                $imagePost = $_FILES['photo']['name'];
-                $ext = explode(".", $imagePost);
-                $listExt = array("png","jpg","PNG","JPG","jpeg","JPEG");
-                    if(in_array($ext[1], $listExt)){
-                        addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
-                    } else {
-                        if (trim(htmlspecialchars($_POST['content'])) != "") {
+                if(!empty($_POST['content']) || !empty($_FILES['photo']['name'])){
+                    $imagePost = $_FILES['photo']['name'];
+                        if($imagePost){
                             addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
                         } else {
-                            $errorExt = "impossible de publier ce contenu !";
-                            home(htmlspecialchars($_SESSION['id']),$errorExt);
-                        } 
+                            if (trim(htmlspecialchars($_POST['content'])) != "") {
+                                addPost(htmlspecialchars($_POST['content']),htmlspecialchars($_POST['type']),htmlspecialchars($_SESSION['id']));
+                            } else {
+                                $errorExt = "impossible de publier ce contenu !";
+                                home(htmlspecialchars($_SESSION['id']),$errorExt);
+                            } 
+                        }
+                    } else {
+                        $errorExt = "contenu vide !";
+                        home(htmlspecialchars($_SESSION['id']),$errorExt);
                     }
                 break;
             case 'load':
@@ -169,11 +175,7 @@ require_once('controller/deleteController.php');
                 createGroups(htmlspecialchars($_POST['nameG']),$_SESSION['id']);
                 break;
             case 'addContactsToGroups':
-                if(!empty($_POST['addContacts'])){
                 addContactsToGroup($_POST['addContacts'],$_POST['statut'],$_POST['groupId']);
-                } else {
-                    sessionGroup($_SESSION['id']);
-                }
                 break;
             case 'addToGroup':
                 addToGroup($_POST['addContact'],$_POST['statut'],$_POST['groupId'],$_POST['adminGroup'],$_SESSION['id']);
@@ -199,9 +201,12 @@ require_once('controller/deleteController.php');
             case 'showGroupMessages':
                 getGroupMessages($_SESSION['id'],$_GET['groupId']);
                 break;
+            case 'loadNotif':
+                require_once('ajax/loadNotif.php');
+                break;
             default:
-                $errorExt = "";
-                home(htmlspecialchars($_SESSION['id']),$errorExt);
+            $errorExt = "";
+            home(htmlspecialchars($_SESSION['id']),$errorExt);
         }
     } else {
         if (!isset($_SESSION['id'])) {

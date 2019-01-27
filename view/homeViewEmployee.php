@@ -113,9 +113,9 @@ if($state=='activated') {
                                             <div class="ml-2"> 
                                             <?php if ($contactsPosts[$i]['contactId'] !== $_SESSION['id']) : ?>
                                                 <form action="index.php?action=profilePage" method="POST">
-                                                    <div class="h5 m-0"><button style="color:black;font-size:1.1em;text-decoration:none" type="submit" class="btn btn-link"><?= $contactsPosts[$i]['name'] . ' ' . $contactsPosts[$i]['lastName'] ?></button></div>
-                                                    <input type="hidden" name="contactId" value="<?= $contactsPosts[$i]['id'] ?>">
+                                            <input type="hidden" name="contactId" value="<?= $contactsPosts[$i]['id'] ?>">
                                                     <input type="hidden" name="token" value="0">
+                                                    <div class="h5 m-0"><button style="color:black;font-size:1.1em;text-decoration:none" type="submit" class="btn btn-link"><?= $contactsPosts[$i]['name'] . ' ' . $contactsPosts[$i]['lastName'] ?></button></div>
                                                 </form>
                                             <?php else : ?>
                                                 <div class="h5 m-0"><?= $contactsPosts[$i]['name'] . ' ' . $contactsPosts[$i]['lastName'] ?></div>

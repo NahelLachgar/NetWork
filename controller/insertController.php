@@ -15,16 +15,25 @@ function addPost($content, $type, $userId)
         $contents = countPublications();
         $content = $contents[0];
     // ON SEPARE LE NOM DE L'IMAGE DE SON EXTENSION
-        list($name, $ext) = explode(".", $imagePost);    
-   // ON RAJOUTE UN . DEVANT L'EXTENSION 
-        $ext = "." . $ext; 
-    // ON MET LA PHOTO DANS UN DOSSIER IMG/POSTS
-        $path = "./img/posts/" . $content . $ext;
-        move_uploaded_file($_FILES['photo']['tmp_name'], $path);
-        $content = $content . $ext;
-    }
+        list($name, $ext) = explode(".", $imagePost);
+        $listExt = array("png","jpg","PNG","JPG","jpeg","JPEG");
+            if(in_array($ext, $listExt)){    
+            // ON RAJOUTE UN . DEVANT L'EXTENSION 
+            $ext = "." . $ext; 
+            // ON MET LA PHOTO DANS UN DOSSIER IMG/POSTS
+            $path = "./img/posts/" . $content . $ext;
+            move_uploaded_file($_FILES['photo']['tmp_name'], $path);
+            $content = $content . $ext;
+            post($content, $type, $userId);
+            header('Location:index.php?action=home');
+            } else{
+                $errorExt = "impossible de publier ce contenu !";
+                home(htmlspecialchars($_SESSION['id']),$errorExt);
+            }
+    } else{
     post($content, $type, $userId);
     header('Location:index.php?action=home');
+    }
 }
 
 function addComment($content, $userId, $postId)
@@ -141,12 +150,10 @@ function createGroups($groupName, $userId)
 	//AJOUTER LES CONTACTS DANS UN GROUPE
 function addContactsToGroup($contact, $status, $groupId)
 {
-    if(!empty($contact)){
     $comt = COUNT($contact);
     for ($i = 0; $i < $comt; $i++) {
         contactAddGroup($contact[$i], $status, $groupId);
     }
-    } 
     sessionGroup($_SESSION['id'], $_SESSION['id']);
 }
 

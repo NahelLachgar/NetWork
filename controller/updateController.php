@@ -58,12 +58,7 @@ function updateGroup($groupName,$newAdmin, $lastAdmin, $groupId)
     }
     updateGroups($groupName, $newAdmin,$lastAdmin,$status, $groupId, $groupPhoto);
 
-    if($newAdmin == $_SESSION['id']){
-    groupManage($groupId,$newAdmin,$_SESSION['id']);
-    } else if($newAdmin != $_SESSION['id']){
-        getMembersToGroups($groupId,$_SESSION['id']);
-    }
-    //header('Location:index.php?action=groupsManage');
+    header('Location:index.php?action=groups');
 }
 
 //MODIFIER UN EVENEMENT

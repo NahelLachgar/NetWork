@@ -11,15 +11,16 @@ if( isset($_POST['content']) && isset($_POST['contactId']) ){
         "sender"=>$_SESSION['id']
     ));
 
-    $profile = getProfile($userId);
+    $profile = getProfile($_SESSION['id']);
     $userProfile = getProfile($contactId);
     if ($userProfile['status']== "employee") {
 
     $content = $profile['name'].' '.$profile['lastName'].' vous a envoyé un message.';
     $url = 'index.php?action=showMessages&contactId='.$profile['id'];
     $icon = $profile['photo'];
+    $type = "message";
     
-    $notif = addNotif($contactId,$content,$url,$icon);
+    $notif = addNotif($contactId,$content,$url,$icon,$type);
     }
     
     if ($sendMessage) {

@@ -64,32 +64,27 @@ function contactAddGroup($memberId,$status,$groupID) {
     $db = dbConnect();
     $req = $db->prepare("INSERT INTO `groupAdd` (`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(), $memberId, $status, $groupID)");
     $req->execute(array($memberId,$status,$groupID));
-    $lastId = $db->lastInsertId();
-    $content = "vous avez ete ajoute dans le groupe";
-    $url = "index.php?action=groups";
-    //le champ contact remplace l'id du groupe
-    $insertNotif = $db->prepare("INSERT INTO `notifications` (`user`, `contact`, `content`, `url`) VALUES (?, ?, ?, ?)");
-    $insertNotif->execute(array($memberId,$groupID,$content,$url));
 }
 
 //AJOUT UNE NOTIFICATION 
-function addNotif ($user,$content,$url,$icon="") {
+function addNotif ($user,$content,$url,$icon="",$type) {
     $db = dbConnect();
-    $req = $db->prepare ('INSERT INTO notifications (`user`,`contact`,`content`,`url`,`status`,`icon`)
-    VALUES (:user,:contact,:content,:url,"unseen",:icon)');
+    $req = $db->prepare ('INSERT INTO notifications (`user`,`contact`,`content`,`url`,`status`,`icon`,`type`)
+    VALUES (:user,:contact,:content,:url,"unseen",:icon,:type)');
     $req -> execute(array(
         "user"=>$user,
         "contact"=>$_SESSION['id'],
         "content"=>$content,
         "url"=>$url,
-        "icon"=>$icon
+        "icon"=>$icon,
+        "type"=>$type
     ));
 }
 //AJOUT D'UN CONTACT
 function addContact($contactId, $userId)
 {
     $db = dbConnect();
-    $req = $db->prepare('INSERT INTO contacts (`contact`,`user`,`status`) VALUES(?,?,"waiting")');
+    $req = $db->prepare('INSERT INTO contacts(contact,user,`status`) VALUES(?,?,"waiting")');
     $req->execute(array($contactId, $userId));
     $profile = getProfile($userId);
     $userProfile = getProfile($contactId);
@@ -98,8 +93,9 @@ function addContact($contactId, $userId)
     $content = $profile['name'].' '.$profile['lastName'].' souhaite vous ajouter à ses contacts. Cliquez ici pour répondre.';
     $url = 'index.php?action=notificationsPage';
     $icon = $profile['photo'];
+    $type = "contactAdd";
 
-    $notif = addNotif($contactId,$content,$url,$icon);
+    $notif = addNotif($contactId,$content,$url,$icon,$type);
     }
 }
 
