@@ -36,15 +36,28 @@ body {
 }
 
 /* NAV */
+.nav {
+  width: 60%;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
 
 .navbar {
   justify-content: space-between;
 }
 
-.nav {
-  width: 35%;
-  align-items: center;
-  justify-content: space-between;
+@media (min-width: 900px) {
+  .navbar {
+    justify-content: space-between;
+  }
+
+  .nav {
+    width: 30%;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
 }
 
 .nav-link,

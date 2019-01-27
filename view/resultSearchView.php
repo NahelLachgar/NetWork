@@ -47,6 +47,7 @@ else {
                                 <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>">
                                 <input type="hidden" name="token" value="1">
 <?php
+$stateSearch = checkActive($result['contactId']);
 if($stateSearch=='activated') {
     echo "<input type='submit' class='btn btn-link' value='".$result['name']." ".$result['lastName']."'>";
 }

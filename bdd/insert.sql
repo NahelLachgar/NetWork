@@ -26,7 +26,7 @@ INSERT INTO `users` (`id`, `name`, `lastName`, `email`, `phone`, `photo`, `passw
 (4, 'Barao Da Silva', 'Kévin', 'kevin@gmail.com', '0623457689', 'kevin@gmail.com.png', '$2y$10$bJqHYyDP34r96NwFBgqWZewI8JunHsTEVooGd3qiuGVvyEXD1i8hS', 'employee', 'Développeur', 'NetWork', 'Trappes', 'activated'),
 (5, 'A', 'A', 'a@gmail.com', '0611111111', 'NetWork.png', '$2y$12$ZaAnkJXDqHc5MSND2SwA0eFA9NU.iORdZKQleLKabjEASH95eLSCW', 'employee', 'A', 'A', 'Le Plessis-Bouchard', 'disabled'),
 (6, 'Amazon', NULL, 'admin@amazon.com', NULL, 'admin@amazon.com.png', '$2y$12$ZaAnkJXDqHc5MSND2SwA0eFA9NU.iORdZKQleLKabjEASH95eLSCW', 'company', NULL, NULL, 'Los Angeles', 'disabled'),
-(7, 'Clotilde', 'Charavit', 'ccharavit@intechinfo.fr', '0645672268', 'NetWork.png', '$2y$12$v6yL2/xTQrpmsjjYeJHcZeRa32kw2WWN05d5FREWfFY95FKDR5NRG', 'employee', 'Ingénieur', 'NetWork', 'Sceaux', 'activated');
+(7, 'Clotilde', 'Charavit', 'ccharavit@intechinfo.fr', '0645672268', 'ccharavit@intechinfo.fr.jpg', '$2y$12$v6yL2/xTQrpmsjjYeJHcZeRa32kw2WWN05d5FREWfFY95FKDR5NRG', 'employee', 'Ingénieur', 'NetWork', 'Sceaux', 'activated');
 
 INSERT INTO `contacts` (`id`, `contact`, `user`,`status`) VALUES
 (13, 1, 2,"accepted"),
