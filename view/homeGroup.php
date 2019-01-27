@@ -73,7 +73,7 @@ if($_SESSION['state']=='activated') {
             echo "";
             endif; ?>
             <?php
-                if($groups):
+                if(!$adminGroup):
                     
                 foreach ($groups as $group) : ?>
                     <form method="POST" action="index.php?action=getGroupId">
