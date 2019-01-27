@@ -67,7 +67,7 @@ function contactAddGroup($memberId,$status,$groupID) {
 
     $groupInfo = getGroup($groupID);
     $profile = getProfile($_SESSION['id']);
-    $content = $profile['name'].' '.$profile['lastName'].' vous a ajouté au groupe'.$groupInfo['title'];
+    $content = $profile['name'].' '.$profile['lastName'].' vous a ajouté au groupe '.$groupInfo['title'];
     $url = 'index.php?action=showGroupMessages&groupId='.$groupID;
     $icon = $profile['photo'];
     $type = "groupAdd";
