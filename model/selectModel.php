@@ -308,7 +308,7 @@ function getGroup($groupId)
 function getGroups($id)
 {
     $db = dbConnect();
-    $req = $db->prepare("SELECT DISTINCT groupadd.group,groups.title FROM groupadd INNER JOIN groups ON groupadd.group=groups.id WHERE groups.admin !=? AND groupadd.user = ?  AND groupadd.status = 'member';");
+    $req = $db->prepare("SELECT DISTINCT groupadd.group,groups.* FROM groupadd INNER JOIN groups ON groupadd.group=groups.id WHERE groups.admin !=? AND groupadd.user = ?  AND groupadd.status = 'member';");
     $req->execute(array($id,$id));
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
     return $req;
@@ -332,7 +332,7 @@ function getGroupsName($contactId)
 function getAdminGroup($contactId)
 {
     $db = dbConnect();
-    $req = $db->prepare("SELECT DISTINCT groups.id, groups.title,groups.createDate,groups.admin FROM groupAdd INNER JOIN groups ON groupAdd.group = groups.id WHERE groups.admin = ?");
+    $req = $db->prepare("SELECT DISTINCT groups.* FROM groupAdd INNER JOIN groups ON groupAdd.group = groups.id WHERE groups.admin = ?");
     $req->execute(array($contactId));
     $req = $req->fetchAll();
     return $req;
