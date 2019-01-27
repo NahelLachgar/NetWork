@@ -22,7 +22,7 @@ ob_start();
                 <div class="card">
                     <div class="card-body">
 <?php
-if($state=='activated') {
+if($_SESSION['state']=='activated') {
     echo "<div class='h5'>";
 }
 else {
