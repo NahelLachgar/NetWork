@@ -2,8 +2,6 @@
 $title = "Groupe";
 ob_start();
 ?>
-
-
 <div class="container">
       <div class="py-12 text-center">
         <h2>Groupe</h2>
@@ -18,7 +16,7 @@ ob_start();
                       <img class="rounded-circle" width="150" src="./img/groups/<?= $group['photo'] ?>" alt="Photo du groupe">
                   </div>
               </div>   
-          </div>      
+          </div>
   </div>
   <div class="row justify-content-center">
               <div class="col-md-3 mb-3">
@@ -27,7 +25,15 @@ ob_start();
               </div>
               <div class="col-md-3 mb-3">
                 <label for="admin">Administrateur</label><br>
-                <input type="text" class="form-control" id="groupName" name="groupName" value="<?= $admin['name']." ".$admin['lastName'] ?>" READONLY>
+<?php
+    $stateSearch = checkActive($admin['id']);
+    if($stateSearch=='activated') {
+        echo "<div><input type='text' class='form-control' id='groupName' name='groupName' value=".$admin['name']." ".$admin['lastName']." READONLY></div>";
+    }
+    else {
+        echo "<div style='color:#798081'><input type='text' class='form-control' id='groupName' name='groupName' value=".$admin['name']." ".$admin['lastName']." READONLY></div>";
+    }
+?>
               </div>
             </div>
           
@@ -56,7 +62,15 @@ ob_start();
             <div class="row">
                 <?php foreach( $res as $member) :?>
                     <div class="col-md-2 mb-3">
-                        <?= $member['name']." ".$member['lastName'] ?>
+<?php
+    $stateSearch = checkActive($member['id']);
+    if($stateSearch=='activated') {
+        echo "<div>".$member['name']." ".$member['lastName']."</div>";
+    }
+    else {
+        echo "<div style='color:#798081'>".$member['name']." ".$member['lastName']."</div>";
+    }
+?>
                     </div>
                 <?php endforeach; ?>
             </div> 
@@ -73,9 +87,6 @@ ob_start();
 
     </div>
           </div>
-
-
-
 <?php 
     $content = ob_get_clean();
     require_once('view/template.php');

@@ -9,7 +9,14 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
-                    <div class="h5">
+<?php
+if($_SESSION['state']=='activated') {
+    echo "<div class='h5'>";
+}
+else {
+    echo "<div class='h5' style='color:#798081;'>";
+}
+?>
                     <img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                     <?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                     <div class="h7">
@@ -66,29 +73,6 @@
         else {
             echo "<br/><br/>";
         }
-        //PRENDRE EN COMPTE LES INVITATIONS
-        /*
-        echo "<div class="col-md-4 order-md-2 mb-4">
-            </div>
-            <form enctype="multipart/form-data" action="index.php?action=joinInvitation" method="POST">
-                <input type='hidden' name='id' value='".$event[$i][0]."'>
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Rejoindre l&apos;événement">
-                    </div>
-                </div>
-            </form>
-            <div class="col-md-4 order-md-2 mb-4">
-            </div>
-            <form enctype="multipart/form-data" action="index.php?action=declineInvitation" method="POST">
-                <input type='hidden' name='id' value='".$event[$i][0]."'>
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <input type="submit" class="btn btn-primary btn-lg btn-block" name="submit" value="Décliner l&apos;événement">
-                    </div>
-                </div>
-            </form>";
-        */
         if($admin!=false) {
             echo "<div class='py-2 text-center'>
                         <h3>J'organise</h3>
@@ -103,7 +87,7 @@
                         <input type='hidden' name='id' value='".$admin[$i][0]."'>
                         <input type='hidden' name='role' value='admin'>
                         <div class='row justify-content-center'>
-                            <div class='col-md-8'>
+                            <div class='col-md-9'>
                                 <input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Afficher la page de l&apos;événement'>
                             </div>
                         </div>

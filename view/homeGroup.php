@@ -6,10 +6,7 @@ ob_start();
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/group.css" />
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <SCRIPT LANGUAGE="JavaScript" SRC="js/group.js"></SCRIPT>       
-<?php
-if($_SESSION['state']=='activated') {
-?>
+        <SCRIPT LANGUAGE="JavaScript" SRC="js/group.js"></SCRIPT>
 <!-- PROFIL-->
 <div class="container-fluid gedf-wrapper">
     <div class="row">
@@ -45,6 +42,10 @@ if($_SESSION['state']=='activated') {
                 </ul>
             </div>
         </div>
+<br>
+<?php
+if($_SESSION['state']=='activated') {
+?>
         <div class="col-md-6 gedf-main">
             <br><h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Vos groupes</span></h4>
@@ -116,13 +117,15 @@ if($_SESSION['state']=='activated') {
                 
             
             </div>
-    </div>
-</div>
 <?php
 }
 else {
     echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";
 }
+?>
+    </div>
+</div>
+<?php
 $content = ob_get_clean();
 require_once('view/template.php');
 ?>

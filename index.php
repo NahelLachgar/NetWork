@@ -124,10 +124,9 @@ require_once('controller/deleteController.php');
                 deleteAccount($_SESSION['id']);
                 break;
             case 'desactivateAccount':
-                desactivateAccount($_SESSION['id'], $_POST['active']);
+                desactivateAccount($_SESSION['id']);
                 break;
             case 'showEvents':
-                //PRENDRE EN COMPTE LES INVITATIONS
                 showEvents($_SESSION['id']);
                 break;
             case 'createEventView':
@@ -137,7 +136,6 @@ require_once('controller/deleteController.php');
                 createEvent($_SESSION['id'], $_POST['title'], $_POST['eventDate'], $_POST['place']);
                 break;
             case 'eventView':
-                //PRENDRE EN COMPTE LES INVITATIONS
                 eventView($_SESSION['id'], $_POST['id'], $_POST['role']);
                 break;
             case 'quitEvent':
@@ -164,16 +162,6 @@ require_once('controller/deleteController.php');
                     addParticipate($_SESSION['id'], "", $_POST['id']);
                 }
                 break;
-            /*
-            case 'joinInvitation':
-            //A FAIRE
-                join($_SESSION['id'], $_GET['id'], $_GET['type']);
-                break;
-            case 'declineInvitation':
-            //A FAIRE
-                decline($_SESSION['id'], $_GET['id'], $_GET['type']);
-                break;
-            */
             case 'createGroup':
                 createGroups(htmlspecialchars($_POST['nameG']),$_SESSION['id']);
                 break;

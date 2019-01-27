@@ -24,8 +24,8 @@ INSERT INTO `users` (`id`, `name`, `lastName`, `email`, `phone`, `photo`, `passw
 (2, 'Fred', 'Mba', 'fred@gmail.com', '0612324561', 'fred@gmail.com.png', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'employee', 'Ingénieur', 'NetWork', 'Paris', 'activated'),
 (3, 'Google', NULL, 'admin@google.com', NULL, 'admin@google.com.png', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'company', NULL, NULL, 'New York', 'activated'),
 (4, 'Barao Da Silva', 'Kévin', 'kevin@gmail.com', '0623457689', 'kevin@gmail.com.png', '$2y$10$bJqHYyDP34r96NwFBgqWZewI8JunHsTEVooGd3qiuGVvyEXD1i8hS', 'employee', 'Développeur', 'NetWork', 'Trappes', 'activated'),
-(5, 'A', 'A', 'a@gmail.com', '0611111111', 'NetWork.png', '$2y$12$ZaAnkJXDqHc5MSND2SwA0eFA9NU.iORdZKQleLKabjEASH95eLSCW', 'employee', 'A', 'A', 'Le Plessis-Bouchard', 'activated'),
-(6, 'Amazon', NULL, 'admin@amazon.com', NULL, 'admin@amazon.com.png', '$2y$12$ZaAnkJXDqHc5MSND2SwA0eFA9NU.iORdZKQleLKabjEASH95eLSCW', 'company', NULL, NULL, 'Los Angeles', 'activated'),
+(5, 'A', 'A', 'a@gmail.com', '0611111111', 'NetWork.png', '$2y$12$ZaAnkJXDqHc5MSND2SwA0eFA9NU.iORdZKQleLKabjEASH95eLSCW', 'employee', 'A', 'A', 'Le Plessis-Bouchard', 'disabled'),
+(6, 'Amazon', NULL, 'admin@amazon.com', NULL, 'admin@amazon.com.png', '$2y$12$ZaAnkJXDqHc5MSND2SwA0eFA9NU.iORdZKQleLKabjEASH95eLSCW', 'company', NULL, NULL, 'Los Angeles', 'disabled'),
 (7, 'Clotilde', 'Charavit', 'ccharavit@intechinfo.fr', '0645672268', 'NetWork.png', '$2y$12$v6yL2/xTQrpmsjjYeJHcZeRa32kw2WWN05d5FREWfFY95FKDR5NRG', 'employee', 'Ingénieur', 'NetWork', 'Sceaux', 'activated');
 
 INSERT INTO `contacts` (`id`, `contact`, `user`,`status`) VALUES
