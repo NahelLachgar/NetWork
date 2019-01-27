@@ -45,7 +45,7 @@ ob_start();
             <div class="col-md-12 mb-3">
                 <div class="row justify-content-center">
                     <div class="col-md-12-center">
-                      <img class="rounded-circle" width="100" src="./img/profile/<?= $recup['photo'] ?>" alt="Photo de profil" id="photoUpdate">
+                      <img class="rounded-circle border border-dark shadow bg-white rounded" width="100" src="./img/profile/<?= $recup['photo'] ?>" alt="Photo de profil" id="photoUpdate">
                       <input style="display:none" type="file" class="form-control-file" name="photo" id="photoUpdateFile"> 
                     </div>
                 </div>   
