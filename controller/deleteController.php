@@ -16,6 +16,11 @@ function removeContact($contactId, $userId)
     }
 }
 
+function refuseContact($contactId) {
+    refuseContactAdd($contactId);
+    header('Location:index.php?action=notificationsPage');
+
+}
 // SUPPRIMER UN GROUPE
 function deleteGroup($groupId)
 {

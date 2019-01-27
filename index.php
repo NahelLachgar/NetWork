@@ -69,7 +69,7 @@ require_once('controller/deleteController.php');
                 acceptContact($_GET['contactId']);
                 break;
             case 'refuseContact':
-                removeContact($_GET['contactId'],$_SESSION['id']);
+            refuseContact($_GET['contactId']);
                 break;
             case 'companyList':
                 showCompanies(htmlspecialchars($_SESSION['id']));

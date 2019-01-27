@@ -17,9 +17,9 @@ function getProfile($userId)
 function getContacts($userId)
 {
     $db = dbConnect();
-    $contactsId = $db->prepare('SELECT user AS id FROM contacts WHERE contact = :id 
+    $contactsId = $db->prepare('SELECT user AS id FROM contacts WHERE `status` LIKE "accepted" AND contact = :id 
             UNION
-            SELECT contact AS id FROM contacts WHERE user = :id');
+            SELECT contact AS id FROM contacts WHERE `status` LIKE "accepted" AND user = :id');
     $contactsId->execute(array(
         "id" => $userId
     ));

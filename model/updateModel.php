@@ -15,7 +15,8 @@ function acceptContactAdd($contactId) {
     $profile = getProfile($_SESSION['id']);
         $content = $profile['name'].' '.$profile['lastName'].' a accepté votre demande d\'ajout.';
         $icon = $profile['photo'];
-        $type = "contactAdd";
+        $type = "contactAccept";
+        $url = "index.php?action=notificationsPage";
         $notif = addNotif($contactId,$content,$url,$icon,$type);
 }
 

@@ -13,18 +13,22 @@ function unfollow($contactId, $userId)
     $profile = getProfile($_SESSION['id']);
         $content = $profile['name'].' '.$profile['lastName'].' vous a retiré de sa liste de contact.';
         $icon = $profile['photo'];
-        $type = "contactAdd";
+        $type = "contactDelete";
         $notif = addNotif($contactId,$content,$url,$icon,$type);
+        deleteNotif($_SESSION['id'],$contactId,"contactAdd");
     return $req;
 }
 
 function refuseContactAdd($contactId) {
-    unfollow($contactId,$_SESSION['id']);
+    $db = dbConnect();
+    $req = $db->prepare('DELETE FROM contacts WHERE contact = ? AND user = ? OR contact = ? AND user = ?');
+    $req->execute(array($contactId,$_SESSION['id'],$_SESSION['id'],$contactId));   
     deleteNotif($_SESSION['id'],$contactId,"contactAdd");
     $profile = getProfile($_SESSION['id']);
         $content = $profile['name'].' '.$profile['lastName'].' a refusé votre demande d\'ajout.';
         $icon = $profile['photo'];
-        $type = "contactAdd";
+        $type = "contactRefuse";
+        $url = "index.php?action=notificationsPage";
         $notif = addNotif($contactId,$content,$url,$icon,$type);
 }
 

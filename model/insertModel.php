@@ -83,6 +83,7 @@ function addContact($contactId, $userId)
 {
     $db = dbConnect();
     $userProfile = getProfile($contactId);
+    $profile = getProfile($_SESSION['id']);
     if ($userProfile['status']== "employee") {
         $status = "waiting";
         $content = $profile['name'].' '.$profile['lastName'].' souhaite vous ajouter à ses contacts.';
