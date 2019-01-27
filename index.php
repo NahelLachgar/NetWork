@@ -56,6 +56,9 @@ require_once('controller/deleteController.php');
             case 'load':
                   require('ajax/load.php');
                   break;
+            case 'loadNotifNb':
+                  require('ajax/loadNotifsNb.php');
+                  break;
             case 'contactList':
                 showContacts(htmlspecialchars($_SESSION['id']));
                 break;

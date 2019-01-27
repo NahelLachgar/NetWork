@@ -24,7 +24,7 @@
         <a id="buttonGroup" href="index.php?action=groups" class="groups"><img width="30px" src="img/icon/group.svg" alt="Groupe"></a>
         <a style="text-decoration:none" id="buttonNotifications" href="index.php?action=notificationsPage" class="notifications">
         <img width="30px" src="img/icon/notifications.svg" alt="notifications">
-        <span class="badge badge-danger">10</span>
+        <span id="nbNotifs" class="badge badge-danger"></span>
         </a>
 
 <?php

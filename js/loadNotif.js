@@ -1,4 +1,4 @@
-function load() {
+function loadNotif() {
     setInterval(function(){
     $.ajax({
         url : "index.php?action=loadNotif",
@@ -42,4 +42,19 @@ function load() {
     });
 },100)
 }
-load();
+loadNotif();
+
+function loadNotifNb() {
+    setInterval(function(){
+    $.ajax({
+        url : "index.php?action=loadNotifNb",
+        type : "POST",
+        dataType:"html",
+        success : function(html){
+            console.log(html);
+            $("#nbNotifs").text(html);
+              }
+    });
+},100)
+}
+loadNotifNb();
