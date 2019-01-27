@@ -138,13 +138,14 @@ function insertParticipate($ID, $id)
                             VALUES (:user, :event)');
     $reponse->execute(['user'=>$ID,
                         'event'=>$id]);
+    $profile = getProfile($_SESSION['id']);
     $event = infoEvent($id);
-    $eventTitle = $event['title'];
-    $content = $profile['name'].' '.$profile['lastName'].' vous a ajouté à l\'évènement.'.$eventTitle;
+    $eventTitle = $event['2'];
+    $content = $profile['name'].' '.$profile['lastName'].' vous a ajouté à l\'évènement '.$eventTitle;
     $url = 'index.php?action=notificationsPage';
     $icon = $profile['photo'];
-    $type = "contactAdd";
+    $type = "eventAdd";
 
-    $notif = addNotif($contactId,$content,$url,$icon,$type);
+    $notif = addNotif($ID,$content,$url,$icon,$type);
 }
 ?>

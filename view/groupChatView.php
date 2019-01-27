@@ -2,6 +2,10 @@
 $title = "Messages";
 ob_start();
 ?>
+<br>
+<?php
+if($_SESSION['state']=='activated') {
+?>
 <script src="js/filter.js"></script>
 <div id="frame">
 	<div id="sidepanel">
@@ -45,7 +49,7 @@ else {
 				<li class="contact">
 					<div class="wrap">
 						<span class="contact-status online"></span>
-						<img class="rounded-circle" width="45"src="./img/profile/<?= $userProfile['photo'] ?>" alt="" />
+						<img class="rounded-circle" width="45"src="./img/groups/<?= $groups[$i]['photo'] ?>" alt="" />
 						<div class="meta">
 						<p class="name"><?= $groups[$i]['title']?></p>
 						</div>
@@ -97,7 +101,7 @@ else {
 			<form>
 				<input type="text" name="content" id="content" placeholder="Écrivez votre message" />
 				<input type="hidden" name="contactId" id="contactId" value=<?= $_GET['contactId'] ?>>
-				<i class="fa fa-paperclip attachment" aria-hidden="true"></i> 
+				<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
 				<button type="button" id="send"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</form>
 			</div>
@@ -106,7 +110,11 @@ else {
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script src="js/chat.js"></script>
- <?php 
+<?php
+}
+else {
+    echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";
+}
 $content = ob_get_clean();
 require_once('./view/template.php');
 ?>

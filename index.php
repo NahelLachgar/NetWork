@@ -5,7 +5,7 @@ require_once('controller/insertController.php');
 require_once('controller/selectController.php');
 require_once('controller/deleteController.php');
    if (isset($_GET['action'])){
-    if (!isset($_SESSION['id']) && $_GET['action'] !== "signInPage") {
+    if (!isset($_SESSION['id']) && $_GET['action'] !== "signInPage" && $_GET['action'] !== "signUpEmployee" && $_GET['action'] !== "signUpCompany") {
         header('Location:index.php?action=signInPage');
     }
         switch ($_GET['action']) {
@@ -67,6 +67,9 @@ require_once('controller/deleteController.php');
                 break;
             case 'acceptContact':
                 acceptContact($_GET['contactId']);
+                break;
+            case 'deleteNotif':
+                deleteNotification($_GET['notifId']);
                 break;
             case 'refuseContact':
             refuseContact($_GET['contactId']);
@@ -200,7 +203,7 @@ require_once('controller/deleteController.php');
                 RemoveToGroup($_POST['contactId'],$_POST['groupId'],$_SESSION['id']);
                 break;
             case 'showGroupMessages':
-                getGroupMessages($_SESSION['id'],$_GET['groupId']);
+                showGroupMessages($_SESSION['id'],$_GET['groupId']);
                 break;
             case 'loadNotif':
                 require_once('ajax/loadNotif.php');
