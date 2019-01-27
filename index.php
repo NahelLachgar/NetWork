@@ -36,7 +36,7 @@ require_once('controller/deleteController.php');
                 }
                 break;
             case 'post':
-                $imagePost = $_FILES['photo']['name'];
+                 $imagePost = $_FILES['photo']['name'];
                 $ext = explode(".", $imagePost);
                 $listExt = array("png","jpg","PNG","JPG","jpeg","JPEG");
                     if(in_array($ext[1], $listExt)){

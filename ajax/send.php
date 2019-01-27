@@ -18,8 +18,9 @@ if( isset($_POST['content']) && isset($_POST['contactId']) ){
     $content = $profile['name'].' '.$profile['lastName'].' vous a envoyé un message.';
     $url = 'index.php?action=showMessages&contactId='.$profile['id'];
     $icon = $profile['photo'];
+    $type = "message";
     
-    $notif = addNotif($contactId,$content,$url,$icon);
+    $notif = addNotif($contactId,$content,$url,$icon,$type);
     }
     
     if ($sendMessage) {
