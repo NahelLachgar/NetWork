@@ -1,106 +1,155 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="" />
 
     <title>Inscription</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
     <!-- Custom styles for this template -->
-    <link href="https://getbootstrap.com/docs/4.1/examples/checkout/form-validation.css" rel="stylesheet">
+    <link
+      href="https://getbootstrap.com/docs/4.1/examples/checkout/form-validation.css"
+      rel="stylesheet"
+    />
   </head>
 
   <body class="bg-light">
-
     <div class="container">
       <div class="py-12 text-center">
-        <img class="d-block mx-auto mb-4" src="" alt="" width="72" height="72">
+        <img
+          class="d-block mx-auto mb-4"
+          src=""
+          alt=""
+          width="72"
+          height="72"
+        />
         <h2>Inscription membre</h2>
         <p class="lead"></p>
       </div>
 
       <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
-
-        </div>
+        <div class="col-md-4 order-md-2 mb-4"></div>
         <div class="col-md-12 order-md-1">
-        
-          <form enctype="multipart/form-data" action="index.php?action=addUser" method="POST">
+          <form
+            enctype="multipart/form-data"
+            action="index.php?action=addUser"
+            method="POST"
+          >
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">Prenom</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" placeholder="" require_onced>
-                <div class="invalid-feedback">
-                  Entrez votre prenom .
-                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstName"
+                  name="firstName"
+                  placeholder=""
+                  require_onced
+                />
+                <div class="invalid-feedback">Entrez votre prenom .</div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="lastName">Nom</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" name="lastName" require_onced>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  placeholder=""
+                  name="lastName"
+                  require_onced
+                />
+                <div class="invalid-feedback">Entrez votre nom.</div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="mb-3 col-md-6">
+                <label for="email">Adresse email</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">@</span>
+                  </div>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="you@example.com"
+                    name="email"
+                    require_onced
+                  />
+                  <div class="invalid-feedback" style="width: 100%;">
+                    Entrez votre adresse mail.
+                  </div>
+                </div>
+                <span id="aideCourriel"></span>
+              </div>
+
+              <div class="mb-3 col-md-6">
+                <label for="phone">Numero de telephone</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="phone"
+                  name="phone"
+                  require_onced
+                />
                 <div class="invalid-feedback">
-                  Entrez votre nom.
+                  Entrez votre numero de telephone.
                 </div>
+                <span id="aidePhone"></span>
               </div>
             </div>
-
-          <div class="row">
-            <div class="mb-3 col-md-6">
-              <label for="email">Adresse email</label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">@</span>
-                </div>
-                <input type="email" class="form-control" id="email" placeholder="you@example.com" name="email" require_onced>
-                <div class="invalid-feedback" style="width: 100%;">
-                  Entrez votre adresse mail.
-                </div>
-              </div>
-              <span id="aideCourriel"></span>
-            </div>
-
-            <div class="mb-3 col-md-6">
-              <label for="phone">Numero de telephone</label>
-              <input type="text" class="form-control" id="phone" name="phone" require_onced>
-              <div class="invalid-feedback">
-                Entrez votre numero de telephone.
-              </div>
-              <span id="aidePhone"></span>
-            </div>
-          </div>
 
             <div class="mb-3">
-                <label for="file">Avatar</label>
-                <input type="file" class="form-control-file" name="photo" id="file">
+              <label for="file">Avatar</label>
+              <input
+                type="file"
+                class="form-control-file"
+                name="photo"
+                id="file"
+              />
             </div>
 
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="mdp">Mot de passe</label>
-                <input type="password" class="form-control" id="mdp" name="password" require_onced>
-                <div class="invalid-feedback">
-                  Entrez un mot de passe.
-                </div>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="mdp"
+                  name="password"
+                  require_onced
+                />
+                <div class="invalid-feedback">Entrez un mot de passe.</div>
               </div>
-              
+
               <div class="col-md-6 mb-3">
-               <label for="mdp2">Confirmation du mot de passe</label>
-                <input type="password" class="form-control" id="mdp2" name="confirmPassword" require_onced>
-                <div class="invalid-feedback">
-                  Entrez votre mot de passe.
-                </div>
+                <label for="mdp2">Confirmation du mot de passe</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="mdp2"
+                  name="confirmPassword"
+                  require_onced
+                />
+                <div class="invalid-feedback">Entrez votre mot de passe.</div>
               </div>
             </div>
             <div class="row">
-
-              <input type="hidden" name="status" value="2">
-<!--
+              <input type="hidden" name="status" value="2" />
+              <!--
               <div class="col-md-3 mb-3">
                 <label for="Status">Statut</label>
                 <select name="status" class="custom-select d-block w-100" id="Status" require_onced>
@@ -115,42 +164,75 @@
             -->
               <div class="col-md-4 mb-3">
                 <label for="emploi">Emploi</label>
-              <input type="text" class="form-control" id="emploi" name="job" require_onced>
-              <div class="invalid-feedback">
-                Entrez votre profession.
-              </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="emploi"
+                  name="job"
+                  require_onced
+                />
+                <div class="invalid-feedback">Entrez votre profession.</div>
               </div>
               <div class="col-md-4 mb-3">
                 <label for="entreprise">Entreprise</label>
-                <input type="text" name="company" class="form-control" id="company" require_onced>
+                <input
+                  type="text"
+                  name="company"
+                  class="form-control"
+                  id="company"
+                  require_onced
+                />
                 <div class="invalid-feedback">
                   Entrez votre d'entreprise de travail.
                 </div>
               </div>
-            <div class="col-md-4 mb-3">
-              <label for="ville">Ville</label>
-              <input type="text" class="form-control" id="town" name="town" require_onced>
-              <div class="invalid-feedback">
-                Entrez votre ville.
+              <div class="col-md-4 mb-3">
+                <label for="ville">Ville</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="town"
+                  name="town"
+                  require_onced
+                />
+                <div class="invalid-feedback">Entrez votre ville.</div>
               </div>
             </div>
-          </div>
-          <div class="row justify-content-center">
+            <div class="row justify-content-center">
               <div class="col-md-3">
-                  <button class="btn btn-primary btn-lg btn-block" name="SignIn" type="submit">S'inscrire</button>
+                <button
+                  class="btn btn-primary btn-lg btn-block"
+                  name="SignIn"
+                  type="submit"
+                >
+                  S'inscrire
+                </button>
               </div>
-          </div>
-          </form>
+              <div class="col-md-3">
+                  <form action="index.php?" method="POST">
+                      <button class="btn btn-secondary btn-lg btn-block" name="update" type="submit">Retour</button>
+                  </form>
+              </div> 
+            </form>
+            </div>
         </div>
       </div>
-
     </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.jQuery ||
+        document.write(
+          '<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>'
+        );
+    </script>
     <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/popper.min.js"></script>
     <script src="https://getbootstrap.com/docs/4.1/dist/js/bootstrap.min.js"></script>
     <script src="https://getbootstrap.com/docs/4.1/assets/js/vendor/holder.min.js"></script>
