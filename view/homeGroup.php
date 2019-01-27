@@ -50,18 +50,6 @@ if($_SESSION['state']=='activated') {
             <br><h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Vos groupes</span></h4>
             <div class="row">
-            
-          <!--  <div class="card" style="width: 10rem;">
-                <img class="card-img-top" src="./img/groups/<?= $groupAdmin['photo'] ?>" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title"><?= $groupAdmin['title'] ?></h5>
-                    <form method="POST" action="index.php?action=groupsManage">
-                        <input type="hidden" name="groupId" value="<?= $groupAdmin['id'] ?>" >
-                        <input type="hidden" name="adminGroup" value="<?= $groupAdmin['admin'] ?>" >
-                        <input type="submit" class="btn btn-link" value="Voir groupe">
-                    </form>
-                </div>
-            </div> -->
 
             <?php 
             if($adminGroup):
@@ -69,13 +57,13 @@ if($_SESSION['state']=='activated') {
 
                 <?php foreach ($adminGroup as $groupAdmin) : ?>
                     <div class="card" style="width: 10rem; margin-right: 5px;margin-bottom: 5px;">
-                        <img class="card-img-top" src="./img/groups/<?= $groupAdmin['photo'] ?>" alt="Card image cap">
+                        <img class="card-img-top border-bottom" src="./img/groups/<?= $groupAdmin['photo'] ?>" alt="Card image cap">
                         <div class="card-body">
-                            <h5 class="card-title"><?= $groupAdmin['title'] ?></h5>
+                            <h6 class="card-title text-center"><?= $groupAdmin['title'] ?></h6>
                             <form method="POST" action="index.php?action=groupsManage">
                                 <input type="hidden" name="groupId" value="<?= $groupAdmin['id'] ?>" >
                                 <input type="hidden" name="adminGroup" value="<?= $groupAdmin['admin'] ?>" >
-                                <input type="submit" class="btn btn-link" value="Voir ce groupe">
+                                <input type="submit" class="btn btn-primary" value="Voir ce groupe">
                             </form>
                         </div>
                     </div><br>
@@ -86,12 +74,12 @@ if($_SESSION['state']=='activated') {
             foreach ($groups as $group) : ?>
 
                 <div class="card" style="width: 10rem; margin-right: 5px;margin-bottom: 5px;">
-                <img class="card-img-top" src="./img/groups/<?= $group['photo'] ?>" alt="Photo du groupe">
+                <img class="card-img-top border-bottom" src="./img/groups/<?= $group['photo'] ?>" alt="Photo du groupe">
                     <div class="card-body">
-                        <h5 class="card-title"><?= $group['title'] ?></h5>
+                        <h6 class="card-title text-center"><?= $group['title'] ?></h6>
                         <form method="POST" action="index.php?action=getGroupId">
                             <input type="hidden" name="groupId" value="<?= $group['group'] ?>" >
-                            <input type="submit" class="btn btn-link" value="Voir ce groupe" >
+                            <input type="submit" class="btn btn-primary" value="Voir ce groupe" >
                         </form>
                     </div>
                 </div><br>
@@ -104,12 +92,12 @@ if($_SESSION['state']=='activated') {
                     
                 foreach ($groups as $group) : ?>
                     <div class="card" style="width: 10rem; margin-right: 5px;margin-bottom: 5px;">
-                    <img class="card-img-top" src="./img/groups/<?= $group['photo'] ?>" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title"><?= $group['title'] ?></h5>
+                    <img class="card-img-top border-bottom" src="./img/groups/<?= $group['photo'] ?>" alt="Card image cap">
+                        <div class="card-body text-center">
+                            <h6 class="card-title"><?= $group['title'] ?></h6>
                             <form method="POST" action="index.php?action=getGroupId">
                                 <input type="hidden" name="groupId" value="<?= $group['group'] ?>" >
-                                <input type="submit" class="btn btn-link" value="Voir ce groupe" >
+                                <input type="submit" class="btn btn-primary" value="Voir ce groupe" >
                             </form>
                         </div>
                     </div><br>
