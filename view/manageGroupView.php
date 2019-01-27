@@ -16,7 +16,7 @@ ob_start();
           <form enctype="multipart/form-data" action="index.php?action=updateGroup" method="POST">   
               <div class="row justify-content-center">
                   <div class="col-md-12-center">
-                      <img class="rounded-circle" width="150" src="./img/groups/<?= $group['photo'] ?>" alt="Photo du groupe" id="photoUpdate">
+                      <img class="rounded-circle border border-dark shadow bg-white rounded" width="150" src="./img/groups/<?= $group['photo'] ?>" alt="Photo du groupe" id="photoUpdate">
                         <input style="display:none" type="file" class="form-control-file" name="photo" id="photoUpdateFile"> 
                   </div>
               </div>   
