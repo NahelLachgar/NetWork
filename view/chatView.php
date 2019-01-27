@@ -38,7 +38,7 @@ if($state=='activated') {
 				<li class="contact">
 					<div class="wrap">
 						<span class="contact-status online"></span>
-						<img class="rounded-circle" width="45"src="./img/profile/<?= $userProfile['photo'] ?>" alt="" />
+						<img class="rounded-circle" width="45"src="./img/groups/<?= $groups[$i]['photo'] ?>" alt="" />
 						<div class="meta">
 						<p class="name"><?= $groups[$i]['title']?></p>
 						</div>
