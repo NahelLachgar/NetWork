@@ -83,7 +83,7 @@ function showGroupMessages ($userId,$groupId) {
 		$profile = getProfile($contactsFetch[$i]['id']);
 		$contactProfile[$i] = $profile;
 	}
-	$messages = getGroupMessages($groupId);
+    $messages = getGroupMessages($groupId);
 	require_once('./view/groupChatView.php');
 	} else {
         $title="messages";

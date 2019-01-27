@@ -65,9 +65,9 @@ function getMessages($userId, $contactId)
 function getGroupMessages($groupId)
 {
     $db = dbConnect();
-    $messages = $db->prepare('SELECT * FROM groupAdd
-    WHERE  group = :groupId AND status = "message"
-    ORDER BY addDate ASC');
+    $messages = $db->prepare('SELECT * FROM groupAdd JOIN users ON groupAdd.user = users.id
+    WHERE groupAdd.`group` = :groupId AND groupAdd.`status`= "message"
+    ORDER BY groupAdd.addDate ASC');
     $messages->execute(array(
         "groupId" => $groupId
     ));

@@ -73,7 +73,7 @@ else {
 		<div class="messages">
 			<ul id="messages">
 			 <?php 
-			while ($groupMessagesFetch = $messages->fetch()) :
+			while ($messagesFetch = $messages->fetch()) :
 				if ($messagesFetch['user'] == $_SESSION['id']) {
 				$class = "sent";
 			} else {
@@ -84,9 +84,9 @@ else {
 				<?php if($messagesFetch['user']==$_SESSION['id']):?>
 					<img src="./img/profile/<?=$userProfile['photo']?>" alt="">
 				<?php else:?>
-				<img src="./img/profile/<?=$groupProfile['photo']?>" alt="">
+				<img src="./img/profile/<?=$messagesFetch['photo']?>" alt="">
 				<?php endif?>
-					<p><?= $messagesFetch['message'] ?></p>
+					<p><strong><?=$messagesFetch['name'] ?></strong><br><?= $messagesFetch['message'] ?></p>
 				</li>
                     <?php endwhile ?>
 			</ul>
@@ -104,7 +104,7 @@ else {
 	</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script src="js/chat.js"></script>
+<script src="js/groupChat.js"></script>
 <?php
 }
 else {
