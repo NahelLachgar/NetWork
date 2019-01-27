@@ -78,6 +78,7 @@ function addNotif ($user,$content,$url=null,$icon="",$type) {
         "type"=>$type
     ));
 }
+
 //AJOUT D'UN CONTACT
 function addContact($contactId, $userId)
 {

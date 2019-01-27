@@ -34,7 +34,15 @@ ob_start();
                             <form action="index.php?action=profilePage" method="POST">
                                 <input type="hidden" name="token" value="0">
                                 <input type="hidden" name="contactId" value="<?=$result['id'] ?>">
-                                <button type="submit" class="btn btn-link"><?= $result['name'] . ' ' . $result['lastName']?></button> 
+<?php
+$stateSearch = checkActive($result['id']);
+if($stateSearch=='activated') {
+    echo "<input type='submit' class='btn btn-link' value='".$result['name']." ".$result['lastName']."'>";
+}
+else {
+    echo "<input type='submit' class='btn btn-link' style='color:#798081;' value='".$result['name']." ".$result['lastName']."'>";
+}
+?>
                             </form>
                             <p class="card-text"><?= $result['job'] . ' chez ' . $result['company'] ?></p>       
                         <?php endif;?>

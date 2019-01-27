@@ -32,7 +32,15 @@ ob_start();
                         <form action="index.php?action=profilePage" method="POST">
                             <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>"> 
                             <input type="hidden" name="token" value="0">
-                            <input type="submit" class="btn btn-link" value="<?= $result['name'] . ' ' . $result['lastName'] ?>"> 
+<?php
+$stateSearch = checkActive($result['contactId']);
+if($stateSearch=='activated') {
+    echo "<input type='submit' class='btn btn-link' value='".$result['name']." ".$result['lastName']."'>";
+}
+else {
+    echo "<input type='submit' class='btn btn-link' style='color:#798081;' value='".$result['name']." ".$result['lastName']."'>";
+}
+?>
                         </form></h5>
                         <p class="card-text"><?= $result['job'] . ' chez ' . $result['company'] ?></p>
                         <form action="index.php?action=removeContact" method="POST">
@@ -49,8 +57,15 @@ ob_start();
                         <form action="index.php?action=profilePage" method="POST">
                             <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>">
                             <input type="hidden" name="token" value="0"> 
-                            <input type="submit" class="btn btn-link" value="<?= $result['name'] . ' ' . $result['lastName'] ?>"> </h5>
-                        </form>
+<?php
+if($stateSearch=='activated') {
+    echo "<input type='submit' class='btn btn-link' value='".$result['name']." ".$result['lastName']."'>";
+}
+else {
+    echo "<input type='submit' class='btn btn-link' style='color:#798081;' value='".$result['name']." ".$result['lastName']."'>";
+}
+?>
+                        </form></h5>
                         <form action="index.php?action=removeContact" method="POST">
                             <input type="hidden" name="contactId" value="<?=$result['contactId']?>">
                             <button type="submit" class="btn btn-link">Ne plus suivre</button>
@@ -67,7 +82,15 @@ ob_start();
                         <form action="index.php?action=profilePage" method="POST">
                             <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>">
                             <input type="hidden" name="token" value="1"> 
-                            <input type="submit" class="btn btn-link" value="<?= $result['name'] . ' ' . $result['lastName'] ?>"> </form></h5>
+<?php
+$stateSearch = checkActive($result['contactId']);
+if($stateSearch=='activated') {
+    echo "<input type='submit' class='btn btn-link' value='".$result['name']." ".$result['lastName']."'>";
+}
+else {
+    echo "<input type='submit' class='btn btn-link' style='color:#798081;' value='".$result['name']." ".$result['lastName']."'>";
+}
+?>
                         <p class="card-text"><?= $result['job'] . ' chez ' . $result['company'] ?></p>
                         <form action="index.php?action=addContact" method="POST">
                             <input type="hidden" name="contactId" value="<?=$result['contactId']?>">
@@ -85,7 +108,14 @@ ob_start();
                         <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                             <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>">
                             <input type="hidden" name="token" value="1">
-                            <input type="submit" class="btn btn-link" value="<?= $result['name'] . ' ' . $result['lastName'] ?>"> 
+<?php
+if($stateSearch=='activated') {
+    echo "<input type='submit' class='btn btn-link' value='".$result['name']." ".$result['lastName']."'>";
+}
+else {
+    echo "<input type='submit' class='btn btn-link' style='color:#798081;' value='".$result['name']." ".$result['lastName']."'>";
+}
+?>
                         </form></h5>
                         <form action="index.php?action=addContact" method="POST">
                             <input type="hidden" name="contactId" value="<?=$result['contactId']?>">
@@ -99,7 +129,7 @@ ob_start();
         else: ?>
        <center><div class='col align-self-end'><div class='card border-danger mb-6' style='max-width: 18rem;'>
             <div class='card-body text-danger'>
-              <h5 class='card-title'>Oups!</h5>
+              <h5 class='card-title'>Oups !</h5>
               <p class='card-text'>Aucun résultat trouvé.</p>
             </div>
           </div></div></center>

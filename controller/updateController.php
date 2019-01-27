@@ -86,16 +86,18 @@ function modifyEvent($id, $title, $eventDate, $place)
     eventView($_SESSION['id'], $id, 'admin');
 }
 
-function desactivateAccount($id, $active)
+function desactivateAccount($id)
 {
-    if($active=="activated") {
+    if($_SESSION['state']=="activated") {
         //DESACTIVER LE COMPTE
         updateActive($id, "disabled");
+        $_SESSION['state']="disabled";
         $_SESSION['erreur']="Votre compte a bien été désactivé.";
     }
-    else if($active=="disabled") {
+    else if($_SESSION['state']=="disabled") {
         //ACTIVER LE COMPTE
         updateActive($id, "activated");
+        $_SESSION['state']="activated";
         $_SESSION['erreur']="Votre compte a bien été activé.";
     }
     header('Location:index.php?action=deleteView');

@@ -74,11 +74,20 @@ ob_start();
                 <?php if($res != FALSE):
                 foreach ($res as $add): ?>
                     <input type="checkbox" id="<?= $add['id'] ?>" name="addContacts[]" value="<?= $add['id'] ?>">
-                    <label for="<?= $add['id'] ?>"><?= $add['lastName'] ?> <?= $add['name'] ?></label><br>
+<?php
+$stateSearch = checkActive($add['id']);
+if($stateSearch=='activated') {
+    echo "<label for='".$add['id']."'>".$add['lastName']." ".$add['name']."</label>";
+}
+else {
+    echo "<label for='".$add['id']."' style='color:#798081'>".$add['lastName']." ".$add['name']."</label>";
+}
+?>
+                <br>
                 <?php endforeach; ?>
                 <input type="submit" class="btn btn-primary btn-lg btn-block" name="ajouter" value="Ajouter">
                 <?php else:
-                echo "<u>Vous n'avez aucun contact!</ul> <br>
+                echo "<u>Vous n'avez aucun contact.</ul> <br>
                 <a href='index.php?action=groups' class='groups'>retour</a>";
 
                 endif;?>

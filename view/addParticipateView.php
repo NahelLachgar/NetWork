@@ -21,8 +21,14 @@
                     for($i=0;$i<sizeof($contact);$i++) {
                         echo "<div class='row justify-content-center'>
                                 <div class='col-md-6 mb-3'>";
-                        echo "<center><input type='checkbox' name='contact[]' value='".$contact[$i][0]."'> ".$contact[$i][1]." ".$contact[$i][2]."<br/>
-                                    </center>
+                        $stateSearch = checkActive($contact[$i][0]);
+                        if($stateSearch=='activated') {
+                            echo "<center><input type='checkbox' name='contact[]' value='".$contact[$i][0]."'> ".$contact[$i][1]." ".$contact[$i][2]."<br/>";
+                        }
+                        else {
+                            echo "<center style='color:#798081'><input type='checkbox' name='contact[]' value='".$contact[$i][0]."'> ".$contact[$i][1]." ".$contact[$i][2]."<br/>";
+                        }
+                        echo "</center>
                                 </div>
                             </div>";
                     }

@@ -25,7 +25,15 @@ ob_start();
 						<span class="contact-status online"></span>
 						<img class="rounded-circle" width="45"src="./img/profile/<?= $contactProfile[$i]['photo'] ?>" alt="" />
 						<div class="meta">
-						<p class="name"><?= $contactProfile[$i]['name'] . ' ' . $contactProfile[$i]['lastName'] ?></p>
+<?php
+$stateSearch = checkActive($contactProfile[$i]['id']);
+if($stateSearch=='activated') {
+    echo "<p class='name'>".$contactProfile[$i]['name']." ".$contactProfile[$i]['lastName']."</p>";
+}
+else {
+    echo "<p class='name' style='color:#798081'>".$contactProfile[$i]['name']." ".$contactProfile[$i]['lastName']."</p>";
+}
+?>
 						</div>
 					</div>
 				</li>
@@ -52,7 +60,15 @@ ob_start();
 	<div class="content">
 		<div class="contact-profile">
 		<img class="rounded-circle" width="45"src="./img/profile/<?= $receiverProfile['photo'] ?>" alt="" />
-			<p><?= $receiverProfile['name'] . ' ' . $receiverProfile['lastName'] ?></p>
+<?php
+$stateSearch = checkActive($receiverProfile['id']);
+if($stateSearch=='activated') {
+    echo "<p>".$receiverProfile['name']." ".$receiverProfile['lastName']."</p>";
+}
+else {
+    echo "<p style='color:#798081'>".$receiverProfile['name']." ".$receiverProfile['lastName']."</p>";
+}
+?>
         </div>
         
 		<div class="messages">

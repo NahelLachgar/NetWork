@@ -6,10 +6,7 @@ ob_start();
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/group.css" />
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        <SCRIPT LANGUAGE="JavaScript" SRC="js/group.js"></SCRIPT>       
-<?php
-if($_SESSION['state']=='activated') {
-?>
+        <SCRIPT LANGUAGE="JavaScript" SRC="js/group.js"></SCRIPT>
 <!-- PROFIL-->
 <div class="container-fluid gedf-wrapper">
     <div class="row">
@@ -45,29 +42,59 @@ if($_SESSION['state']=='activated') {
                 </ul>
             </div>
         </div>
+<br>
+<?php
+if($_SESSION['state']=='activated') {
+?>
         <div class="col-md-6 gedf-main">
             <br><h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Vos groupes</span></h4>
+            <div class="row">
             
+          <!--  <div class="card" style="width: 10rem;">
+                <img class="card-img-top" src="./img/groups/<?= $groupAdmin['photo'] ?>" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title"><?= $groupAdmin['title'] ?></h5>
+                    <form method="POST" action="index.php?action=groupsManage">
+                        <input type="hidden" name="groupId" value="<?= $groupAdmin['id'] ?>" >
+                        <input type="hidden" name="adminGroup" value="<?= $groupAdmin['admin'] ?>" >
+                        <input type="submit" class="btn btn-link" value="Voir groupe">
+                    </form>
+                </div>
+            </div> -->
+
             <?php 
             if($adminGroup):
                 if ($adminGroup['0']['admin'] == $_SESSION['id']) : ?>
 
                 <?php foreach ($adminGroup as $groupAdmin) : ?>
-                <form method="POST" action="index.php?action=groupsManage">
-                    <input type="hidden" name="groupId" value="<?= $groupAdmin['id'] ?>" >
-                    <input type="hidden" name="adminGroup" value="<?= $groupAdmin['admin'] ?>" >
-                    <input type="submit" class="btn btn-link" value="<?= $groupAdmin['title'] ?>" >
-                </form><br>
+                    <div class="card" style="width: 10rem; margin-right: 5px;margin-bottom: 5px;">
+                        <img class="card-img-top" src="./img/groups/<?= $groupAdmin['photo'] ?>" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $groupAdmin['title'] ?></h5>
+                            <form method="POST" action="index.php?action=groupsManage">
+                                <input type="hidden" name="groupId" value="<?= $groupAdmin['id'] ?>" >
+                                <input type="hidden" name="adminGroup" value="<?= $groupAdmin['admin'] ?>" >
+                                <input type="submit" class="btn btn-link" value="Voir ce groupe">
+                            </form>
+                        </div>
+                    </div><br>
                 <?php endforeach; ?>
 
                 <?php endif; ?>
             <?php 
             foreach ($groups as $group) : ?>
-                <form method="POST" action="index.php?action=getGroupId">
-                    <input type="hidden" name="groupId" value="<?= $group['group'] ?>" >
-                    <input type="submit" class="btn btn-link" value="<?= $group['title'] ?>" >
-                </form><br>
+
+                <div class="card" style="width: 10rem; margin-right: 5px;margin-bottom: 5px;">
+                <img class="card-img-top" src="./img/groups/<?= $group['photo'] ?>" alt="Photo du groupe">
+                    <div class="card-body">
+                        <h5 class="card-title"><?= $group['title'] ?></h5>
+                        <form method="POST" action="index.php?action=getGroupId">
+                            <input type="hidden" name="groupId" value="<?= $group['group'] ?>" >
+                            <input type="submit" class="btn btn-link" value="Voir ce groupe" >
+                        </form>
+                    </div>
+                </div><br>
             <?php endforeach; 
             else:
             echo "";
@@ -76,10 +103,16 @@ if($_SESSION['state']=='activated') {
                 if(!$adminGroup):
                     
                 foreach ($groups as $group) : ?>
-                    <form method="POST" action="index.php?action=getGroupId">
-                        <input type="hidden" name="groupId" value="<?= $group['group'] ?>" >
-                        <input type="submit" class="btn btn-link" value="<?= $group['title'] ?>" >
-                    </form><br>
+                    <div class="card" style="width: 10rem; margin-right: 5px;margin-bottom: 5px;">
+                    <img class="card-img-top" src="./img/groups/<?= $group['photo'] ?>" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title"><?= $group['title'] ?></h5>
+                            <form method="POST" action="index.php?action=getGroupId">
+                                <input type="hidden" name="groupId" value="<?= $group['group'] ?>" >
+                                <input type="submit" class="btn btn-link" value="Voir ce groupe" >
+                            </form>
+                        </div>
+                    </div><br>
                 <?php endforeach; 
                 else:
                 echo "";
@@ -90,6 +123,9 @@ if($_SESSION['state']=='activated') {
                     }
                 ?>
         </div>
+    </div>
+
+        <!-- POP UP -->
         <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title=" Creer votre cercle restreint ! Creer votre groupe ;-) !">
             <a class="trigger_popup_fricc"><button class="btn btn-primary btn-lg btn-block" style="pointer-events: none;" type="button" disabled>Créer un groupe</button></a>
             </span>
@@ -116,13 +152,15 @@ if($_SESSION['state']=='activated') {
                 
             
             </div>
-    </div>
-</div>
 <?php
 }
 else {
     echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";
 }
+?>
+    </div>
+</div>
+<?php
 $content = ob_get_clean();
 require_once('view/template.php');
 ?>

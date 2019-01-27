@@ -9,7 +9,14 @@
         <div class="col-md-3">
             <div class="card">
                 <div class="card-body">
-                    <div class="h5">
+<?php
+if($_SESSION['state']=='activated') {
+    echo "<div class='h5'>";
+}
+else if($_SESSION['state']=='disabled') {
+    echo "<div class='h5' style='color:#798081;'>";
+}
+?>
                     <img class="rounded-circle" width="45"src="./img/profile/<?= $profile['photo'] ?>" alt="" />&nbsp&nbsp&nbsp
                     <?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                     <div class="h7">
@@ -62,11 +69,10 @@
                 </div>
                 <div class="py-2 text-center">
 <?php
-if($state=="activated") {
+if($_SESSION['state']=="activated") {
     echo "<h2>Ou préférez-vous plutôt désactiver votre compte ?</h2>";
 }
-else if($state=="disabled")
-{
+else if($_SESSION['state']=='disabled') {
     echo "<h2>Ou préférez-vous plutôt activer votre compte ?</h2>";
 }
 ?>
@@ -75,16 +81,13 @@ else if($state=="disabled")
                 <div class="row">
                     <div class="col-md-12 order-md-1">
                         <form enctype="multipart/form-data" action="index.php?action=desactivateAccount" method="POST">
-<?php
-    echo "<input type='hidden' name='active' value='".$state."'>";
-?>
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
 <?php
-if($state=="activated") {
+if($_SESSION['state']=="activated") {
     echo "<input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Désactiver'>";
 }
-else if($state=="disabled") {
+else if($_SESSION['state']=='disabled') {
     echo "<input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Activer'>";
 }
 ?>

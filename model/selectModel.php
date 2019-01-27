@@ -308,7 +308,7 @@ function getGroup($groupId)
 function getGroups($id)
 {
     $db = dbConnect();
-    $req = $db->prepare("SELECT DISTINCT groupadd.group,groups.title FROM groupadd INNER JOIN groups ON groupadd.group=groups.id WHERE groups.admin !=? AND groupadd.user = ?  AND groupadd.status = 'member';");
+    $req = $db->prepare("SELECT DISTINCT groupadd.group,groups.* FROM groupadd INNER JOIN groups ON groupadd.group=groups.id WHERE groups.admin !=? AND groupadd.user = ?  AND groupadd.status = 'member';");
     $req->execute(array($id,$id));
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
     return $req;
@@ -334,7 +334,7 @@ function getGroupsName($contactId)
 function getAdminGroup($contactId)
 {
     $db = dbConnect();
-    $req = $db->prepare("SELECT DISTINCT groups.id, groups.title,groups.createDate,groups.admin FROM groupAdd INNER JOIN groups ON groupAdd.group = groups.id WHERE groups.admin = ?");
+    $req = $db->prepare("SELECT DISTINCT groups.* FROM groupAdd INNER JOIN groups ON groupAdd.group = groups.id WHERE groups.admin = ?");
     $req->execute(array($contactId));
     $req = $req->fetchAll();
     return $req;
@@ -444,7 +444,7 @@ function infoContact($ID, $id)
     //RECUPERER LES CONTACTS DE L'UTILISATEUR QUI NE FONT PAS PARTIS DE CET EVENEMENT
     $reponse = $bdd->prepare('SELECT users.id AS id, lastName, name
                             FROM users, contacts
-                            WHERE status!="company"
+                            WHERE users.status!="company" AND contacts.status="accepted"
                             AND ((contact=:ID AND users.id=user
                                     AND users.id NOT IN (SELECT user
                                                         FROM participate
@@ -454,10 +454,8 @@ function infoContact($ID, $id)
                                                         FROM participate
                                                         WHERE event=:id)))
                             ORDER BY lastName, name');
-    $reponse->execute([
-        'ID' => $ID,
-        'id' => $id
-    ]);
+    $reponse->execute(['ID' => $ID,
+                        'id' => $id]);
     $a = array();
     $i = 0;
     while ($data = $reponse->fetch()) {

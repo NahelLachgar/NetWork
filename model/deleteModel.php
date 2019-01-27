@@ -61,10 +61,6 @@ function removeFromGroup($contactId, $groupId) {
     return $req;
 }
 
-
-
-
-
 //SUPPRIMER LES COMMENTAIRES
 function deleteAllComs($ID)
 {
