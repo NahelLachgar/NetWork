@@ -115,7 +115,7 @@ if($_SESSION['state']=='activated') {
 
         <!-- POP UP -->
         <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title=" Creer votre cercle restreint ! Creer votre groupe ;-) !">
-            <a class="trigger_popup_fricc"><button class="btn btn-primary btn-lg btn-block" style="pointer-events: none;" type="button" disabled>Créer un groupe</button></a>
+            <a class="trigger_popup_fricc"><button class="btn btn-primary btn-lg btn-block" style="pointer-events: none;" type="button">Créer un groupe</button></a>
             </span>
 
             <div class="hover_bkgr_fricc">
