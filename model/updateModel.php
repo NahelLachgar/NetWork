@@ -11,7 +11,7 @@ function acceptContactAdd($contactId) {
         "userId"=>$_SESSION['id'],
         "contactId"=>$contactId
     )); 
-    deleteNotif($_SESSION['id'],$contactId,"contactAdd");
+    deleteNotif("",$_SESSION['id'],$contactId,"contactAdd");
     $profile = getProfile($_SESSION['id']);
         $content = $profile['name'].' '.$profile['lastName'].' a accepté votre demande d\'ajout.';
         $icon = $profile['photo'];
