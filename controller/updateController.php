@@ -7,6 +7,10 @@ require_once('model/updateModel.php');
 require_once('model/deleteModel.php');
 require_once('model/selectModel.php');
 
+function acceptContact($contactId) {
+    acceptContactAdd($contactId);
+    home($_SESSION['id'],"");
+}
 	// MODIFIER SON PROFIL
 function validateProfile($lastname, $name, $email, $pass, $confirmPass, $phone, $job, $company, $town, $id)
 {

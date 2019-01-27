@@ -64,8 +64,8 @@ function contactAddGroup($memberId,$status,$groupID) {
     $notif = addNotif($memberId,$content,$url,$icon,$type);
 }
 
-//AJOUT UNE NOTIFICATION 
-function addNotif ($user,$content,$url,$icon="",$type) {
+//AJOUT UNE NOTIFICATION
+function addNotif ($user,$content,$url=null,$icon="",$type) {
     $db = dbConnect();
     $req = $db->prepare ('INSERT INTO notifications (`user`,`contact`,`content`,`url`,`status`,`icon`,`type`)
     VALUES (:user,:contact,:content,:url,"unseen",:icon,:type)');
@@ -82,20 +82,23 @@ function addNotif ($user,$content,$url,$icon="",$type) {
 function addContact($contactId, $userId)
 {
     $db = dbConnect();
-    $req = $db->prepare('INSERT INTO contacts(contact,user,`status`) VALUES(?,?,"waiting")');
-    $req->execute(array($contactId, $userId));
-    $profile = getProfile($userId);
     $userProfile = getProfile($contactId);
     if ($userProfile['status']== "employee") {
-
-    $content = $profile['name'].' '.$profile['lastName'].' souhaite vous ajouter à ses contacts.';
-    $url = 'index.php?action=notificationsPage';
-    $icon = $profile['photo'];
-    $type = "contactAdd";
-
-    $notif = addNotif($contactId,$content,$url,$icon,$type);
+        $status = "waiting";
+        $content = $profile['name'].' '.$profile['lastName'].' souhaite vous ajouter à ses contacts.';
+        $url = 'index.php?action=notificationsPage';
+        $icon = $profile['photo'];
+        $type = "contactAdd";
+    
+        $notif = addNotif($contactId,$content,$url,$icon,$type);
+        } else {
+            $status = "accepted";
+        }
+    $req = $db->prepare('INSERT INTO contacts(contact,user,`status`) VALUES(?,?,?)');
+    $req->execute(array($contactId, $userId,$status));
+    $profile = getProfile($userId);
     }
-}
+    
 
 //CREER UN EVENEMENT
 function insertEvent($ID, $title, $eventDate, $place)

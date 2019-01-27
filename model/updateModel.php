@@ -3,6 +3,23 @@ require_once('model/dbConnect.php');
 require_once('model/insertModel.php');
 require_once('model/selectModel.php');
 require_once('model/deleteModel.php');
+
+function acceptContactAdd($contactId) {
+    $db = dbConnect();
+    $req = $db->prepare('UPDATE contacts SET status = "accepted" WHERE contact = :userId AND user = :contactId OR contact=:contactId AND user =:userId');
+    $req->execute(array(
+        "userId"=>$_SESSION['id'],
+        "contactId"=>$contactId
+    )); 
+    deleteNotif($_SESSION['id'],$contactId,"contactAdd");
+    $profile = getProfile($_SESSION['id']);
+        $content = $profile['name'].' '.$profile['lastName'].' a accepté votre demande d\'ajout.';
+        $icon = $profile['photo'];
+        $type = "contactAdd";
+        $notif = addNotif($contactId,$content,$url,$icon,$type);
+}
+
+
 // MODIFICATION DES CHAMPS DU PROFIL EXCEPTE LE CHAMP photo
 function updateProfiles($lastName, $name, $email, $pass, $photo, $phone, $job, $company, $town, $id)
 {

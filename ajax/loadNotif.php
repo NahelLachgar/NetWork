@@ -1,7 +1,7 @@
 <?php
 
 $db = dbConnect();
-$req = $db->prepare('SELECT * FROM notifications WHERE user = ? AND status = "unseen"');
+$req = $db->prepare('SELECT * FROM notifications WHERE user = ? AND status LIKE "unseen"');
 $req->execute(array($_SESSION['id']));
 
 $url = null;

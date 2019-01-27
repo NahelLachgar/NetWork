@@ -21,7 +21,15 @@ ob_start();
                         <div class="card-body">
                             <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $notif['icon'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                             <?= $notif['content']?>
+                            <?php if($notif['type']== "contactAdd"):?>
+                            <br><br>
+                        <p>
+                            <a href='index.php?action=acceptContact&contactId=<?=$notif['contactId'] ?>'><button class="btn btn-light">Accepter</button></a>&nbsp
+                            <a href='index.php?action=refuseContact&contactId=<?=$notif['contactId'] ?>'><button class="btn btn-light">Refuser</button></a>
+                         </p>
+                        <?php endif ?>
                         </div>
+
                     </div>
             </div>
         <?php

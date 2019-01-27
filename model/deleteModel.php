@@ -9,10 +9,32 @@ function unfollow($contactId, $userId)
 {
     $db = dbConnect();
     $req = $db->prepare('DELETE FROM contacts WHERE contact = ? AND user = ? OR contact = ? AND user = ?');
-    $req->execute(array($contactId, $userId,$userId,$contactId));
+    $req->execute(array($contactId,$userId,$userId,$contactId));
+    $profile = getProfile($_SESSION['id']);
+        $content = $profile['name'].' '.$profile['lastName'].' vous a retiré de sa liste de contact.';
+        $icon = $profile['photo'];
+        $type = "contactAdd";
+        $notif = addNotif($contactId,$content,$url,$icon,$type);
     return $req;
 }
 
+function refuseContactAdd($contactId) {
+    unfollow($contactId,$_SESSION['id']);
+    deleteNotif($_SESSION['id'],$contactId,"contactAdd");
+    $profile = getProfile($_SESSION['id']);
+        $content = $profile['name'].' '.$profile['lastName'].' a refusé votre demande d\'ajout.';
+        $icon = $profile['photo'];
+        $type = "contactAdd";
+        $notif = addNotif($contactId,$content,$url,$icon,$type);
+}
+
+function deleteNotif($userId,$contactId,$type)
+{
+    $db = dbConnect();
+    $req = $db->prepare('DELETE FROM notifications WHERE user = ? AND contact = ? AND `type` LIKE ?');
+    $req->execute(array($userId,$contactId,$type));
+    return $req;
+}
 
 // SUPPRIMER DANS LA TABLE groupAdd
 function deleteGroupAdd($groupId){

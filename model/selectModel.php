@@ -226,7 +226,7 @@ function getContactsCount($userId)
     $db = dbConnect();
     $contactsCount1 = $db->prepare('SELECT COUNT(*) AS contactsNb FROM contacts 
     JOIN users ON contacts.user = users.id 
-    WHERE users.status LIKE "employee" AND contacts.contact=:id');
+    WHERE users.status LIKE "employee" AND contacts.contact=:id AND contacts.status="accepted');
     $contactsCount1->execute(array("id" => $userId));
     $contactsFetch1 = $contactsCount1->fetch();
     $contactsCount2 = $db->prepare('SELECT COUNT(*) AS contactsNb
@@ -315,7 +315,9 @@ function getGroups($id)
 }
 function getNotifs() {
     $db = dbConnect();
-    $req = $db->prepare("SELECT DISTINCT * FROM notifications WHERE user = ? AND `type` NOT LIKE 'message' AND `type` NOT LIKE 'groupMessage' ");
+    $req = $db->prepare("SELECT DISTINCT users.id AS contactId,notifications.* FROM users JOIN notifications
+    ON users.id = notifications.contact 
+     WHERE user = ? AND `type` NOT LIKE 'message' AND `type` NOT LIKE 'groupMessage' ");
     $req->execute(array($_SESSION['id']));
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
     return $req; 

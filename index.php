@@ -65,6 +65,12 @@ require_once('controller/deleteController.php');
             case 'notificationsPage':
                 showNotifs();
                 break;
+            case 'acceptContact':
+                acceptContact($_GET['contactId']);
+                break;
+            case 'refuseContact':
+                removeContact($_GET['contactId'],$_SESSION['id']);
+                break;
             case 'companyList':
                 showCompanies(htmlspecialchars($_SESSION['id']));
                 break;

@@ -2,9 +2,9 @@ function loadNotif() {
     setInterval(function(){
     $.ajax({
         url : "index.php?action=loadNotif",
-        dataType:"json",
-        success : function(json){
-            var notif = JSON.parse(json);
+        dataType:"html",
+        success : function(html){
+            var notif = JSON.parse(html);
             var content = notif.content;
             var url = notif.url;
             var icon = notif.icon;
@@ -36,7 +36,7 @@ function loadNotif() {
 		'</div>' +
         '<a href="{3}" target="{4}" data-notify="url"></a>' +
     '</div>'
-            });
+            });  
         }
     });
 },100)
@@ -49,7 +49,9 @@ function loadNotifNb() {
         url : "index.php?action=loadNotifNb",
         dataType:"html",
         success : function(html){
+            if (html>0) {
             $("#nbNotifs").text(html);
+            }
               }
     });
 },100)
