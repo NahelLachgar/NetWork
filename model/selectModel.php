@@ -226,12 +226,12 @@ function getContactsCount($userId)
     $db = dbConnect();
     $contactsCount1 = $db->prepare('SELECT COUNT(*) AS contactsNb FROM contacts 
     JOIN users ON contacts.user = users.id 
-    WHERE users.status LIKE "employee" AND contacts.contact=:id AND contacts.status="accepted');
+    WHERE users.status LIKE "employee" AND contacts.contact=:id AND contacts.status="accepted"');
     $contactsCount1->execute(array("id" => $userId));
     $contactsFetch1 = $contactsCount1->fetch();
     $contactsCount2 = $db->prepare('SELECT COUNT(*) AS contactsNb
     FROM contacts 
-    JOIN users ON contacts.contact = users.id WHERE users.status LIKE "employee" AND user=:id');
+    JOIN users ON contacts.contact = users.id WHERE users.status LIKE "employee" AND user=:id AND contacts.status="accepted"');
     $contactsCount2->execute(array("id" => $userId));
     $contactsFetch2 = $contactsCount2->fetch();
     $contactsCount = $contactsFetch1['contactsNb'] + $contactsFetch2['contactsNb'];

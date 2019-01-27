@@ -16,6 +16,11 @@ function removeContact($contactId, $userId)
     }
 }
 
+function deleteNotification($notifId) {
+    deleteNotif($notifId);
+    header('Location:index.php?action=notificationsPage');
+}
+
 function refuseContact($contactId) {
     refuseContactAdd($contactId);
     header('Location:index.php?action=notificationsPage');

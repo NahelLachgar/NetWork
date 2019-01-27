@@ -68,6 +68,9 @@ require_once('controller/deleteController.php');
             case 'acceptContact':
                 acceptContact($_GET['contactId']);
                 break;
+            case 'deleteNotif':
+                deleteNotification($_GET['notifId']);
+                break;
             case 'refuseContact':
             refuseContact($_GET['contactId']);
                 break;

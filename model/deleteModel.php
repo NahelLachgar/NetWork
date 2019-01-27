@@ -32,12 +32,16 @@ function refuseContactAdd($contactId) {
         $notif = addNotif($contactId,$content,$url,$icon,$type);
 }
 
-function deleteNotif($userId,$contactId,$type)
+function deleteNotif($notifId="",$userId="",$contactId="",$type="")
 {
     $db = dbConnect();
+    if (isset($notifId)) {
+        $req = $db->prepare('DELETE FROM notifications WHERE id = ?');
+        $req->execute(array($notifId)); 
+    } else {
     $req = $db->prepare('DELETE FROM notifications WHERE user = ? AND contact = ? AND `type` LIKE ?');
     $req->execute(array($userId,$contactId,$type));
-    return $req;
+    }
 }
 
 // SUPPRIMER DANS LA TABLE groupAdd
@@ -60,6 +64,10 @@ function removeFromGroup($contactId, $groupId) {
     $req->execute(array($contactId, $groupId));
     return $req;
 }
+
+
+
+
 
 //SUPPRIMER LES COMMENTAIRES
 function deleteAllComs($ID)
