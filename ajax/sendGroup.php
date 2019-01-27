@@ -19,8 +19,8 @@ $db = dbConnect();
     $type = "groupMessage";
     $members = selectContactGroup($groupId);
     for ($i=0;$i>count($members);$i++) {
-        $profile = getProfile($member);
-        $contactId = $profile['id'];
+        $userProfile = getProfile($members[$i]);
+        $contactId = $userProfile;
         $notif = addNotif($contactId,$content,$url,$icon,$type);
     }
 }
