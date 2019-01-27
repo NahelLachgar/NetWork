@@ -88,7 +88,7 @@ function addContact($contactId, $userId)
     $userProfile = getProfile($contactId);
     if ($userProfile['status']== "employee") {
 
-    $content = $profile['name'].' '.$profile['lastName'].' souhaite vous ajouter à ses contacts. Cliquez ici pour répondre.';
+    $content = $profile['name'].' '.$profile['lastName'].' souhaite vous ajouter à ses contacts.';
     $url = 'index.php?action=notificationsPage';
     $icon = $profile['photo'];
     $type = "contactAdd";

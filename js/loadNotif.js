@@ -4,7 +4,6 @@ function loadNotif() {
         url : "index.php?action=loadNotif",
         dataType:"json",
         success : function(json){
-            if (notif != null) {
             var notif = JSON.parse(json);
             var content = notif.content;
             var url = notif.url;
@@ -38,7 +37,6 @@ function loadNotif() {
         '<a href="{3}" target="{4}" data-notify="url"></a>' +
     '</div>'
             });
-        }  
         }
     });
 },100)
