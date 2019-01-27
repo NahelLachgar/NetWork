@@ -1,28 +1,29 @@
 $(document).ready(function(){
 	
-	function load() {
+	function loadGroup() {
 				setInterval(function(){
 				var lastId = $('#messages li:last').attr('id');
 				var groupId = $('#groupId').val();
 				$.ajax({
-					url : "ajax/loadGroup.php",
+					url : "index.php?action=loadGroup",
 					type : "POST",
 					data : "groupId=" + groupId + "&messageId=" + lastId,
 					dataType:"html",
 					success : function(html){
+						console.log(html);
 						$('.messages ul').append(html);
 					}
 				});
 			},100)
 	}
-			load();
+			loadGroup();
 
 	$('#send').click(function(e){
 			var message = $('#message').val();
 			var groupId = $('#groupId').val();
 			if ($.trim(message) != "") {			
 				$.ajax({
-				url : "ajax/sendGroup.php", // on donne l'URL du fichier de traitement
+				url : "index.php?action=sendGroup",
 				type : "POST", // la requête est de type POST
 				data : "message=" + message + "&groupId=" + groupId // et on envoie nos données
 				});
@@ -39,7 +40,7 @@ $(document).ready(function(){
 			var groupId = $('#groupId').val();
 			if ($.trim(message) != "") {			
 				$.ajax({
-				url : "ajax/sendGroup.php", // on donne l'URL du fichier de traitement
+				url : "index.php?action=sendGroup",
 				type : "POST", // la requête est de type POST
 				data : "message=" + message + "&groupId=" + groupId // et on envoie nos données
 				});

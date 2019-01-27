@@ -5,14 +5,14 @@ $messageId = (int) $_POST['messageId']; // on s'assure que c'est un nombre entie
 // on récupère les messages ayant un id plus grand que celui donné
 
 $db = dbConnect();
-$req = $db->prepare('SELECT DISTINCT * FROM groupAdd 
-WHERE  group = :groupId AND status = "message"
+$req = $db->prepare('SELECT DISTINCT * FROM groupAdd JOIN users 
+ON groupAdd.user = users.id
+WHERE groupAdd.group = :groupId AND groupAdd.status = "message"
 AND id > :id
 ORDER BY id ASC');
 $req->execute(array(
     'id' => $messageId,
-    'group' => $groupId,
-    'userId' => $_SESSION['id']
+    'groupId' => $groupId,
 ));
 
 
@@ -30,7 +30,7 @@ while($data = $req->fetch())
     $messages .= '<li id="'.$data["id"].'" class="'.$class.'">
     <img src="./img/profile/'.$profile["photo"].'" alt="">
 
-    <p>' . $data['content'] . '</p></li>';
+    <p>' . $data['message'] . '</p></li>';
 }
 echo $messages; // on retourne les messages à notre script JS
 }

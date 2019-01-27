@@ -86,7 +86,7 @@ else {
 				<?php else:?>
 				<img src="./img/profile/<?=$messagesFetch['photo']?>" alt="">
 				<?php endif?>
-					<p><strong><?=$messagesFetch['name'] ?></strong><br><?= $messagesFetch['message'] ?></p>
+					<p><strong><?=$messagesFetch['name'].' '.$messagesFetch['lastName'] ?></strong><br><?= $messagesFetch['message'] ?></p>
 				</li>
                     <?php endwhile ?>
 			</ul>
