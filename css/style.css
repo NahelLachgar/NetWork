@@ -698,10 +698,10 @@ cp-pen-styles > body {
 #frame .content .messages ul li {
   display: inline-block;
   clear: both;
-  float: left;
   margin: 15px 15px 5px 15px;
   width: calc(100% - 25px);
   font-size: 1.2em;
+  word-wrap: break-word;
 }
 #frame .content .messages ul li:nth-last-child(1) {
   margin-bottom: 20px;
