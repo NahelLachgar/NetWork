@@ -44,7 +44,7 @@ else {
 			</a>		
 		<?php endfor;	
 				 for ($i = 0; $i < count($groups); $i++) : ?>
-			<a class="contactLink" style="text-decoration:none;color:white" href='index.php?action=showGroupMessages&groupId=<?=$contactProfile[$i]['id']?>'>
+			<a class="contactLink" style="text-decoration:none;color:white" href='index.php?action=showGroupMessages&groupId=<?=$groups[$i]['id']?>'>
 
 				<li class="contact">
 					<div class="wrap">

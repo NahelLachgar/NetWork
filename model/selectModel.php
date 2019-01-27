@@ -325,7 +325,7 @@ function getNotifs() {
 function getGroupsName($contactId)
 {
     $db = dbConnect();
-    $req = $db->prepare("SELECT DISTINCT title,photo FROM groupAdd INNER JOIN groups ON groupAdd.group = groups.id WHERE groups.admin=? OR groupAdd.user = ? AND groupAdd.status LIKE 'member' ");
+    $req = $db->prepare("SELECT DISTINCT groups.* FROM groupAdd INNER JOIN groups ON groupAdd.group = groups.id WHERE groups.admin=? OR groupAdd.user = ? AND groupAdd.status LIKE 'member' ");
     $req->execute(array($_SESSION['id'], $contactId));
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
     return $req;
@@ -525,6 +525,8 @@ function checkActive($id)
     while ($data = $reponse->fetch()) {
         $active=$data['active'];
     }
+    if (isset($active)) {
     return $active;
+    }
 }
 ?>
