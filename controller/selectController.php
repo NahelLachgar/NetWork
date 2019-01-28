@@ -13,9 +13,13 @@ function home($userId,$errorExt) {
 	$profile = getProfile($userId);
     $contactsNb = getContactsCount($userId);
     
-        $contactsPosts = getContactsPosts($userId);
-
-   
+    $contactsPosts = getContactsPosts($userId);
+    /*if ($contactsPosts) {
+       /* for ($i=0;$i<count($contactsPosts);$i++) {
+            var_dump($contactPosts[$i]);*/
+         //$comments = getComments($publicationId);
+        //}
+//}
     if ($contactsNb>0) {
     $companiesSuggests = getCompanySuggests($userId);
     $employeesSuggests = getEmployeeSuggests($userId);
@@ -26,10 +30,6 @@ function home($userId,$errorExt) {
     $followedCompaniesNb = getFollowedCompaniesCount($userId);
     $status = checkStatus($userId);
     $state = checkActive($userId);
-    if(isset($_SESSION['publicationId'],$_SESSION['contactPostId'])){
-        $commentaires = getCommentsToPublications($_SESSION['publicationId'],$_SESSION['contactPostId']);
-        var_dump($commentaires);
-    }
     if($profile['status'] == "employee"){
         require_once('view/homeViewEmployee.php');
     }else{

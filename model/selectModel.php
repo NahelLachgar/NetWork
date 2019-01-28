@@ -75,7 +75,7 @@ function getContactsPosts($userId)
     $contacts = getContacts($userId);
         $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
         if (count($contactsFetch) > 1) {
-        $posts = $db->prepare('SELECT p.*,u.lastName AS lastName,u.name AS name, u.job AS job, u.company AS company, u.id AS contactId,u.photo AS photo FROM users u 
+        $posts = $db->prepare('SELECT p.id AS publicationId,p.*,u.lastName AS lastName,u.name AS name, u.job AS job, u.company AS company, u.id AS contactId,u.photo AS photo FROM users u 
             JOIN post ON u.id = post.user
             JOIN publications p ON post.publication = p.id
             WHERE post.user = ? OR post.user = ?  
@@ -500,11 +500,17 @@ function checkActive($id)
     }
 }
 //RECUPERE TOUS LES COMMENTAIRES D'UNE PUBLICATION	
-function getCommentsToPublications($publicationId){	
+function getComments($publicationId){	
     $db = dbConnect();	
-    $comments = $db->prepare("SELECT coms.content,coms.comDate,coms.user,publications.id,post.user as contactPost FROM coms JOIN comment ON coms.id = comment.com JOIN publications ON comment.publication=publications.id JOIN post ON publications.id=post.publication JOIN users ON post.user=users.id WHERE publications.id=?"); 	
+    $comments = $db->prepare("SELECT coms.content,coms.comDate,coms.user,publications.id,post.user as contactPost FROM coms 
+    JOIN comment ON coms.id = comment.com 
+    JOIN publications ON comment.publication=publications.id 
+    JOIN post ON publications.id=post.publication 
+    JOIN users ON post.user=users.id WHERE publications.id=?
+    ORDER BY comment.comDate DESC"); 	
     $comments->execute(array($publicationId));	
     $comments = $comments->fetchAll();	
+    var_dump($comments);
     return $comments;	
 }
 ?>
