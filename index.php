@@ -103,7 +103,7 @@ require_once('controller/deleteController.php');
                 removeContact(htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break; 
             case 'comment':
-                addcomment(htmlspecialchars($_POST['comment']),$_SESSION['id'],$_POST['postId']);
+                addcomment(htmlspecialchars($_POST['comment']),$_SESSION['id'],$_POST['postId'],$_POST['contactPostId']);
                 break; 
             case 'contactContacts':
                 showContacts($_SESSION['id'],$_POST['contactId']);
