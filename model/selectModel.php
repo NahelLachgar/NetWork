@@ -500,17 +500,21 @@ function checkActive($id)
     }
 }
 //RECUPERE TOUS LES COMMENTAIRES D'UNE PUBLICATION	
-function getComments($publicationId){	
+function getComments(){	
     $db = dbConnect();	
-    $comments = $db->prepare("SELECT coms.content,coms.comDate,coms.user,publications.id,post.user as contactPost FROM coms 
+   /* $comments = $db->query("SELECT coms.content,coms.comDate,coms.user,publications.id,post.user as contactPost FROM coms 
     JOIN comment ON coms.id = comment.com 
     JOIN publications ON comment.publication=publications.id 
     JOIN post ON publications.id=post.publication 
-    JOIN users ON post.user=users.id WHERE publications.id=?
-    ORDER BY comment.comDate DESC"); 	
-    $comments->execute(array($publicationId));	
-    $comments = $comments->fetchAll();	
-    var_dump($comments);
+    JOIN users ON post.user=users.id 
+    ORDER BY coms.comDate DESC"); 	*/
+
+    $comments = $db->prepare('SELECT p.id AS postId,users.*,coms.* FROM users 
+    JOIN coms ON users.id = coms.user
+    JOIN comment ON coms.id = comment.com
+    JOIN publications p ON p.id = comment.publication');
+    $comments -> execute();
+    $comments = $comments->fetchAll(PDO::FETCH_ASSOC);	
     return $comments;	
 }
 ?>
