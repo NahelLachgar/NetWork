@@ -27,7 +27,6 @@ ob_start();
                         <img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp<!-- src="https://picsum.photos/50/50" -->
 						<?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                         <div class="h7">
-                            <?= $profile['job'] . ' chez ' . $profile['company'] ?>
                         </div>
                     </div>
                     <ul class="list-group list-group-flush">
