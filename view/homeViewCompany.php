@@ -22,7 +22,12 @@ ob_start();
                 <div class="card">
                     <div class="card-body">
 <?php
-    echo "<div class='h5' style='color:#798081;'>";
+ if($_SESSION['state']=='activated') {  
+    echo "<div class='h5'>";    
+}   
+else {  
+    echo "<div class='h5' style='color:#798081;'>"; 
+}   
 ?>
                         <img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp<!-- src="https://picsum.photos/50/50" -->
 						<?= $profile['name'] . ' ' . $profile['lastName'] ?></div>

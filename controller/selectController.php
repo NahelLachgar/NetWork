@@ -311,6 +311,7 @@ function checkUserExists($email, $password){
 		if(password_verify($password, $user['password'])){
             $_SESSION['id'] = $user['id'];
             $_SESSION['status'] = $user['status'];
+            $_SESSION['state'] = $user['active'];
 			header('Location:index.php?action=home');
 		} else { 
 			$errors['wrongPassWord'] = "Les identifiants saisis sont incorrects.";
