@@ -5,7 +5,7 @@ require_once('controller/insertController.php');
 require_once('controller/selectController.php');
 require_once('controller/deleteController.php');
    if (isset($_GET['action'])){
-    if (!isset($_SESSION['id']) && $_GET['action'] !== "signInPage" && $_GET['action'] !== "signUpEmployee" && $_GET['action'] !== "signUpCompany") {
+    if (!isset($_SESSION['id']) && $_GET['action'] !== "signInPage" && $_GET['action'] !== "signUpEmployee" && $_GET['action'] !== "signUpCompany" && $_GET['action'] !== "checkUser") {
         header('Location:index.php?action=signInPage');
     }
         switch ($_GET['action']) {

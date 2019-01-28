@@ -24,7 +24,7 @@ ob_start();
                         <div class="h6 text-muted"><a href="index.php?action=updateProfile">Modifier le profil</a></div>
                     </li>
                     <li class="list-group-item">
-                        <div class="h6 text-muted"><a href="index.php?action=deleteView">Supprimer le compte</a></div>
+                        <div class="h6 text-muted"><a href="index.php?action=deleteView">Gérer le compte</a></div>
                     </li>
                     <li class="list-group-item">
                         <div class="h6 text-muted"><a href="index.php?action=disconnect">Déconnexion</a></div>

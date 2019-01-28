@@ -38,9 +38,9 @@ function addPost($content, $type, $userId)
 
 function addComment($content, $userId, $postId,$contactPostId)
 {
-    //$_SESSION['publicationId'] = $postId;
-    //$_SESSION['contactPostId'] = $contactPostId;
+    if (trim($content)!== "") {
     comment($content, $userId, $postId);
+    }
     header('Location:index.php?action=home');
 }
 

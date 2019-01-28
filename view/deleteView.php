@@ -1,6 +1,6 @@
 <?php
     //PAGE DE SUPPRESSION DE COMPTE
-    $title="Supprimer le compte";
+    $title="Gérer le compte";
     ob_start();
 ?>
 <!-- PROFIL-->
@@ -20,7 +20,9 @@ else if($_SESSION['state']=='disabled') {
                     <img class="rounded-circle" width="45"src="./img/profile/<?= $profile['photo'] ?>" alt="" />&nbsp&nbsp&nbsp
                     <?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                     <div class="h7">
+                        <?php if ($profile['status']=="employee"):?>
                         <?= $profile['job'] . ' chez ' . $profile['company'] ?>
+                        <?php endif ?>
                     </div>
                 </div>
                 <ul class="list-group list-group-flush">
@@ -37,7 +39,7 @@ else if($_SESSION['state']=='disabled') {
                         <div class="h6 text-muted"><a href="index.php?action=updateProfile">Modifier le profil</a></div>
                     </li>
                     <li class="list-group-item">
-                        <div class="h6 text-muted"><a href="index.php?action=deleteView">Supprimer le compte</a></div>
+                        <div class="h6 text-muted"><a href="index.php?action=deleteView">Gérer le compte</a></div>
                     </li>
                     <li class="list-group-item">
                         <div class="h6 text-muted"><a href="index.php?action=disconnect">Déconnexion</a></div>
