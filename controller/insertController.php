@@ -38,8 +38,8 @@ function addPost($content, $type, $userId)
 
 function addComment($content, $userId, $postId,$contactPostId)
 {
-    $_SESSION['publicationId'] = $postId;
-    $_SESSION['contactPostId'] = $contactPostId;
+    //$_SESSION['publicationId'] = $postId;
+    //$_SESSION['contactPostId'] = $contactPostId;
     comment($content, $userId, $postId);
     header('Location:index.php?action=home');
 }
