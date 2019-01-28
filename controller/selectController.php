@@ -14,12 +14,9 @@ function home($userId,$errorExt) {
     $contactsNb = getContactsCount($userId);
     
     $contactsPosts = getContactsPosts($userId);
-    /*if ($contactsPosts) {
-       /* for ($i=0;$i<count($contactsPosts);$i++) {
-            var_dump($contactPosts[$i]);*/
-         //$comments = getComments($publicationId);
-        //}
-//}
+    if ($contactsPosts) {
+        $comments = getComments();
+    }
     if ($contactsNb>0) {
     $companiesSuggests = getCompanySuggests($userId);
     $employeesSuggests = getEmployeeSuggests($userId);
@@ -104,7 +101,10 @@ function showGroupMessages ($userId,$groupId) {
 }
 function contactHome($id,$contactId,$token) {
 	$profile = getProfile($contactId);
-	$contactPosts = getUserPosts($contactId);
+    $contactPosts = getUserPosts($contactId);
+    if ($contactPosts) {
+        $comments = getComments();
+    }
 	$contactsNb = getContactsCount($contactId);
 	$followedCompaniesNb = getFollowedCompaniesCount($contactId);
     $status = checkStatus($id);

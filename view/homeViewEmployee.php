@@ -152,20 +152,25 @@ else {
                                     </div>
                                 </div> <!-- CARD BODY -->
                                 <!-- commentaires-->
+                               <?php for($j=0;$j<count($comments);$j++) :
+                                        if ($comments[$j]['postId'] == $contactsPosts[$i]['id']):
+                                    ?>
+
                                 <div class="card-footer">
-                                <?php if(!empty($commentaires) && ($commentaires[0]['id'] == $contactsPosts[$i]['id']) && ($commentaires[0]['contactPost'] == $contactsPosts[$i]['contactId'])):
-                                foreach($commentaires as $comment): ?>
                                 <p>
                                     <ul style="display:inline" class="list-group list-group-flush">
                                         <li style="list-style:none"> 
-                                            <!--<img class="rounded-circle" width="45px" src="./img/profile/" alt="photo de profil">-->
+                                            <img class="rounded-circle" width="45px" src="./img/profile/<?=$comments[$j]['photo'] ?>" alt="photo de profil">&nbsp <?=$comments[$j]['name']. ' '.$comments[$j]['lastName']?>
                                             <span class="h6 m-0"></span>
-                                            <li class="list-group-item"><?= $comment['content'] ?></li>
+                                            <li class="list-group-item"><?= $comments[$j]['content'] ?></li>
                                         </li>                      
                                 </ul>
                                 </p>
-                                <?php endforeach;
-                                endif; ?>
+                                </div>
+                                <?php 
+                                    endif;
+                                    endfor;
+                                ?>
                                 <!-- -->
                                 <form action="index.php?action=comment" method="post">
                                     <div class="input-group">
@@ -177,7 +182,6 @@ else {
                                             <i class="fa fa-comment"></i>
                                         </button>
                                 </form>
-                        </div>
                         </div>
                                 </div>
                             </div>
