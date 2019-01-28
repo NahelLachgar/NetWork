@@ -41,7 +41,6 @@ ob_start();
               <div class="col-md-3 mb-3">
                 <label for="admin">Administrateur:</label><br>
                 <select id="admin" class="form-control" name="newAdmin">
-                    <option value="<?= $_SESSION['id'] ?>" selected>Vous</option>
                     <?php foreach( $res as $member) :?>
                         <option value="<?=$member['id']?>"><?= $member['name']." ".$member['lastName'] ?> </option>
                     <?php endforeach; ?>

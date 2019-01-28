@@ -61,7 +61,7 @@ function updateStatutLastAdminGroup($status,$lAdmin,$groupId){
 
 function updateStatutNewAdminGroup($nAdmin,$groupId){
     $db = dbConnect();
-    $req = $db->prepare("UPDATE groupAdd SET status = NULL WHERE groupAdd.user = ? AND groupAdd.group = ? AND groupAdd.status NOT LIKE 'message';");
+    $req = $db->prepare("UPDATE groupAdd SET status = 'member' WHERE groupAdd.user = ? AND groupAdd.group = ? AND groupAdd.status NOT LIKE 'message';");
     $req->execute(array($nAdmin, $groupId));
 }
 
