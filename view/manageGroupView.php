@@ -32,8 +32,8 @@ ob_start();
                     });
                 // });
             </script>
-  </div>
-  <div class="row justify-content-center">
+        </div>
+            <div class="row justify-content-center">
               <div class="col-md-3 mb-3">
                 <label for="lastName">Nom du groupe</label>
                 <input type="text" class="form-control" id="groupName" name="groupName" value="<?= $group['title'] ?>">
@@ -146,6 +146,7 @@ ob_start();
         
             <div class="row">
                 <?php foreach ($contactProfile as $contact) :?>
+                    <?php if ($contact['status'] == "employee") : ?>
                     <div class="col-md-2 mb-3 card text-center" style="margin-right: 5px;margin-bottom: 5px;">
                         <img class="card-img-top rounded-circle" src="./img/profile/<?= $contact['photo'] ?>" alt="Card image cap">
                         <div class="card-body border-top">
@@ -167,6 +168,7 @@ ob_start();
                             </form>                       
                         </div>
                     </div>
+                    <?php endif ; ?>
                 <?php endforeach; ?>
             </div> 
 

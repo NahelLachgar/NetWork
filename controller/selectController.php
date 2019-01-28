@@ -241,6 +241,15 @@ function groupManage($groupId,$admin,$id) {
             $contactProfile[] = getProfile($contact[$i]['id']);
         }
     }
+    
+    for($i = 0; $i < count($contactProfile); $i++){
+            if($contactProfile[$i]['status'] == "company"){
+                unset($contactProfile[$i]); 
+                $contactProfile = array_values($contactProfile);
+            }
+            
+    }
+        
 
     require_once('./view/manageGroupView.php');
 }
