@@ -9,7 +9,14 @@ ob_start();
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-
+                    <?php	
+ if($_SESSION['state']=='activated') {	
+    echo "<div class='h5'>";	
+}	
+else {	
+    echo "<div class='h5' style='color:#798081;'>";	
+}	
+?>
                         <img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                         <?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                         <div class="h7">
@@ -39,7 +46,9 @@ ob_start();
                 </div>
             </div>
             <div class="col-md-6 gedf-main">
-
+            <?php	
+            if($_SESSION['state']=='activated') {	
+            ?>
             <!------------------->
         <div style="overflow: scroll; height:1000px" class="posts">
                 <!--- PUBLICATION-->
@@ -344,7 +353,12 @@ if (isset($employeesSuggests)) :
                             endif;
                             ?>
 <!-------------------------->
-
+<?php	
+ }	
+else {	
+    echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";	
+}	
+?>
 
     </div>
     <?php 
