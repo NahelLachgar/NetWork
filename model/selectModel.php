@@ -291,7 +291,7 @@ function getGroup($groupId)
 function getGroups($id)
 {
     $db = dbConnect();
-    $req = $db->prepare("SELECT DISTINCT groupadd.group,groups.* FROM groupadd INNER JOIN groups ON groupadd.group=groups.id WHERE groups.admin !=? AND groupadd.user = ?  AND groupadd.status = 'member';");
+    $req = $db->prepare("SELECT DISTINCT groupAdd.group,groups.* FROM groupAdd INNER JOIN groups ON groupAdd.group=groups.id WHERE groups.admin !=? AND groupAdd.user = ?  AND groupAdd.status = 'member';");
     $req->execute(array($id,$id));
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
     return $req;

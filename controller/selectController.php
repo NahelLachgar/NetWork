@@ -222,7 +222,7 @@ function groupManage($groupId,$admin,$id) {
     $contactProfile = [];
 
     if (!empty($members)){
-        if(count($res) != count($contact)){
+        if(count($res)-1 != count($contact)){
             foreach ($res as $member){
                 for($i = 0; $i < count($contact); $i++){
                     if($contact[$i]['id'] == $member['id']){
@@ -257,8 +257,10 @@ function getMembersToGroups($groupId,$id){
     for($i = 0; $i < count($members); $i++) {
         $memberProfile[] = getProfile($members[$i]['user']);
     }
-    foreach( $memberProfile as $member){
-        $res[] = $member;
+    if(!empty($memberProfile)){
+        foreach( $memberProfile as $member){
+            $res[] = $member;
+        }
     }
     $group = getGroup($groupId);
     $status = checkStatus($id);

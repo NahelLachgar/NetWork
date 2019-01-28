@@ -29,7 +29,7 @@ function refuseContact($contactId) {
 // SUPPRIMER UN GROUPE
 function deleteGroup($groupId)
 {
-    deleteGroupAdd($groupId);
+    deletegroupAdd($groupId);
     deleteGroups($groupId);
     header('Location:index.php?action=groups');
 }

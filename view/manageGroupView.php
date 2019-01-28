@@ -82,6 +82,25 @@ ob_start();
 
             <div class="row">
                 <?php foreach( $res as $member) :?>
+                <!-- ADMIN -->
+                    <?php if ($_SESSION['id'] == $group['admin'] && $member['id'] == $_SESSION['id'] ) :?>
+                        <div class="col-md-2 mb-3 card text-center" style="margin-right: 5px;margin-bottom: 5px;">
+                            <img class="card-img-top rounded-circle" src="./img/profile/<?= $member['photo'] ?>" alt="Card image cap">
+                            <div class="card-body border-top">
+                                <?php
+                                $stateSearch = checkActive($member['id']);
+                                if($stateSearch=='activated') {
+                                    echo '<h6 class="card-title text-center">'.$member['lastName']."<br>".$member['name']."</h6>";
+                                }
+                                else {
+                                    echo '<h6 class="card-title text-center" style="color:#798081">'.$member['lastName']."<br>".$member['name']."</h6>";
+                                }
+                                ?>
+                                <p class="card-text"><small class="text-muted">ADMIN</small></p>    
+                            </div>
+                        </div>
+                    <?php else : ?>
+                <!-- MEMBRE -->
                 <div class="col-md-2 mb-3 card text-center" style="margin-right: 5px;margin-bottom: 5px;">
                         <img class="card-img-top rounded-circle" src="./img/profile/<?= $member['photo'] ?>" alt="Card image cap">
                         <div class="card-body border-top">
@@ -102,7 +121,9 @@ ob_start();
                         </form>
                         </div>
                     </div>
+                    <?php endif ; ?>
                 <?php endforeach; ?>
+                
             </div> 
 
             <?php else :
