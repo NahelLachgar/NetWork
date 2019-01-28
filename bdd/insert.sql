@@ -21,11 +21,11 @@ USE NetWork;
 
 INSERT INTO `users` (`id`, `name`, `lastName`, `email`, `phone`, `photo`, `password`, `status`, `job`, `company`, `town`, `active`) VALUES
 (1, 'Nahel', 'Lachgar', 'nahellachgar@hotmail.fr', '0623221148', 'nahellachgar@hotmail.fr.png', '$2y$10$31qDNwnyDoLXXtMFehte3.hDIzjBREwmKzQdxBp/sR8D9Sh0OUBTy', 'employee', 'PDG', 'NetWork', 'Ivry', 'activated'),
-(2, 'Morgan', 'Mba', 'fred@gmail.com', '0612324561', 'fred@gmail.com.png', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'employee', 'Ingénieur', 'NetWork', 'Paris', 'activated'),
-(3, 'Google', NULL, 'admin@google.com', NULL, 'admin@google.com.png', '$2y$12$2XgUmKl7EX.QGn6f5hFiVuwhnqFGy/hYCIkbE90KYuKIhn40l.cjS', 'company', NULL, NULL, 'New York', 'activated'),
-(4, 'Kévin', 'Barao Da Silva', 'kevin@gmail.com', '0623457689', 'kevin@gmail.com.png', '$2y$10$bJqHYyDP34r96NwFBgqWZewI8JunHsTEVooGd3qiuGVvyEXD1i8hS', 'employee', 'Développeur', 'NetWork', 'Trappes', 'activated'),
-(5, 'A', 'A', 'a@gmail.com', '0611111111', 'NetWork.png', '$2y$12$ZaAnkJXDqHc5MSND2SwA0eFA9NU.iORdZKQleLKabjEASH95eLSCW', 'employee', 'A', 'A', 'Le Plessis-Bouchard', 'disabled'),
-(6, 'Amazon', NULL, 'admin@amazon.com', NULL, 'admin@amazon.com.png', '$2y$12$ZaAnkJXDqHc5MSND2SwA0eFA9NU.iORdZKQleLKabjEASH95eLSCW', 'company', NULL, NULL, 'Los Angeles', 'disabled'),
+(2, 'Morgan', 'Mba', 'fred@gmail.com', '0612324561', 'fred@gmail.com.png', '$2y$10$31qDNwnyDoLXXtMFehte3.hDIzjBREwmKzQdxBp/sR8D9Sh0OUBTy', 'employee', 'Ingénieur', 'NetWork', 'Paris', 'activated'),
+(3, 'Google', NULL, 'admin@google.com', NULL, 'admin@google.com.png', '$2y$10$31qDNwnyDoLXXtMFehte3.hDIzjBREwmKzQdxBp/sR8D9Sh0OUBTy', 'company', NULL, NULL, 'New York', 'activated'),
+(4, 'Kévin', 'Barao Da Silva', 'kevin@gmail.com', '0623457689', 'kevin@gmail.com.png', '$2y$10$31qDNwnyDoLXXtMFehte3.hDIzjBREwmKzQdxBp/sR8D9Sh0OUBTy', 'employee', 'Développeur', 'NetWork', 'Trappes', 'activated'),
+(5, 'A', 'A', 'a@gmail.com', '0611111111', 'NetWork.png', '$2y$10$31qDNwnyDoLXXtMFehte3.hDIzjBREwmKzQdxBp/sR8D9Sh0OUBTy', 'employee', 'A', 'A', 'Le Plessis-Bouchard', 'disabled'),
+(6, 'Amazon', NULL, 'admin@amazon.com', NULL, 'admin@amazon.com.png', '$2y$10$31qDNwnyDoLXXtMFehte3.hDIzjBREwmKzQdxBp/sR8D9Sh0OUBTy', 'company', NULL, NULL, 'Los Angeles', 'disabled'),
 (7, 'Clotilde', 'Charavit', 'ccharavit@intechinfo.fr', '0645672268', 'ccharavit@intechinfo.fr.jpg', '$2y$12$v6yL2/xTQrpmsjjYeJHcZeRa32kw2WWN05d5FREWfFY95FKDR5NRG', 'employee', 'Ingénieur', 'NetWork', 'Sceaux', 'activated');
 
 INSERT INTO `contacts` (`id`, `contact`, `user`,`status`) VALUES
