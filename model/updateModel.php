@@ -55,13 +55,13 @@ function updateGroups($name,$nAdmin,$lAdmin,$status,$groupId,$groupPhoto){
 
 function updateStatutLastAdminGroup($status,$lAdmin,$groupId){
     $db = dbConnect();
-    $req = $db->prepare("UPDATE groupadd SET status = ? WHERE groupadd.user = ? AND groupadd.group = ?");
+    $req = $db->prepare("UPDATE groupadd SET status = ? WHERE groupadd.user = ? AND groupadd.group = ? AND group.status NOT LIKE 'message'");
     $req->execute(array($status, $lAdmin, $groupId));
 }
 
 function updateStatutNewAdminGroup($nAdmin,$groupId){
     $db = dbConnect();
-    $req = $db->prepare("UPDATE groupadd SET status = NULL WHERE groupadd.user = ? AND groupadd.group = ?");
+    $req = $db->prepare("UPDATE groupadd SET status = NULL WHERE groupadd.user = ? AND groupadd.group = ? AND group.status NOT LIKE 'message'");
     $req->execute(array($nAdmin, $groupId));
 }
 

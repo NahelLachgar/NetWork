@@ -12,7 +12,6 @@ function getProfile($userId)
     $profileFetch = $profile->fetch();
     return $profileFetch;
 }
-
 //RÉCUPÉRATION DES CONTACTS DE L'UTILISATEUR
 function getContacts($userId)
 {
@@ -25,7 +24,6 @@ function getContacts($userId)
     ));
     return $contactsId;
 }
-
 // COMPTE LES ID DANS LA TABLE PUBLICATIONS
 function countPublications() {
     $db = dbConnect();
@@ -34,7 +32,6 @@ function countPublications() {
     $publication = $publications->fetch();
     return $publication;
 }
-
 //RÉCUPÈRE LES PUBLICATION D'UN SEUL UTILISATEUR
 function getUserPosts($contactId)
 {
@@ -47,7 +44,6 @@ function getUserPosts($contactId)
     $posts->execute(array($contactId));
     return $posts;
 }
-
 //RÉCUPÉRATION DES MESSAGES QU'A REÇUS OU ENVOYÉS L'UTILISATEUR
 function getMessages($userId, $contactId)
 {
@@ -61,11 +57,10 @@ function getMessages($userId, $contactId)
     ));
     return $messages;
 }
-
 function getGroupMessages($groupId)
 {
     $db = dbConnect();
-    $messages = $db->prepare('SELECT * FROM groupAdd JOIN users ON groupAdd.user = users.id
+    $messages = $db->prepare('SELECT groupAdd.id AS messageId,groupAdd.*,users.* FROM groupAdd JOIN users ON groupAdd.user = users.id
     WHERE groupAdd.`group` = :groupId AND groupAdd.`status`= "message"
     ORDER BY groupAdd.addDate ASC');
     $messages->execute(array(
@@ -73,7 +68,6 @@ function getGroupMessages($groupId)
     ));
     return $messages;
 }
-
 //RÉCUPÉRATION DES PUBLICATIONS DES CONTACTS ET ENTREPRISES SUIVIES PAR L'UTILISATEUR (FIL D'ACUTALITÉ)
 function getContactsPosts($userId)
 {
@@ -152,7 +146,6 @@ function getContactsPosts($userId)
     }
     return $contactsPosts;
 }
-
 //VÉRIFIE SI LES 2 UTILISATEURS SONT AMIS
 function checkContacts($userId,$contactId) {
 $db = dbConnect();
@@ -168,7 +161,6 @@ $req -> execute(array(
 $check = $req->fetch();
 return $check;
 }
-
 //SUGGESTIONS D'EMPLOYÉS POUR L'UTILISATEUR 
 function getEmployeeSuggests($userId)
 {
@@ -188,14 +180,12 @@ function getEmployeeSuggests($userId)
             $employeeSuggestsFetch = $employeeSuggests->fetchAll(PDO::FETCH_ASSOC);
             $employees += $employeeSuggestsFetch;
         }
-
         if (isset($employees)) {
             
             return $employees;
         }
     
 }
-
 //SUGGESTIONS D'ENTREPRISE POUR L'UTILISATEUR 
 function getCompanySuggests($userId)
 {
@@ -219,7 +209,6 @@ function getCompanySuggests($userId)
             return $companies;
         }
 }
-
 //NOMBRE DE CONTACTS
 function getContactsCount($userId)
 {
@@ -237,7 +226,6 @@ function getContactsCount($userId)
     $contactsCount = $contactsFetch1['contactsNb'] + $contactsFetch2['contactsNb'];
     return $contactsCount;
 }
-
 //NOMBRE D'ENTREPRISES SUIVIES
 function getFollowedCompaniesCount($userId)
 {
@@ -255,7 +243,6 @@ function getFollowedCompaniesCount($userId)
     $followedCompaniesCount = $followedCompaniesFetch1['companiesNb'] + $followedCompaniesFetch2['companiesNb'];
     return $followedCompaniesCount;
 }
-
  //RECHERCHE D'UN UTILISATEUR OU UNE ENTREPRISE AVEC SON NOM OU SON PRENOM
 function getSearch($userId, $name)
 {
@@ -266,7 +253,6 @@ function getSearch($userId, $name)
     $req = $req->fetchAll();
     return $req;
 }
-
 function getContactToUser($userId)
 {
     $db = dbConnect();
@@ -282,7 +268,6 @@ function getContactToUser($userId)
         return $array;
     }
 }
-
     //RECUPERATION DES INFOS DU PROFIL
 function getProfileUpdate($ids)
 {
@@ -292,7 +277,6 @@ function getProfileUpdate($ids)
     $post = $req->fetch();
     return $post;
 }
-
     //RECUPERE LES INFOS D'UN GROUPE
 function getGroup($groupId)
 {
@@ -303,7 +287,6 @@ function getGroup($groupId)
     $req = $req->fetch();
     return $req;
 }
-
 //SELECTIONNE LES GROUPES DONT L'UTILISATEUR FAIT PARTIE
 function getGroups($id)
 {
@@ -330,7 +313,6 @@ function getGroupsName($contactId)
     $req = $req->fetchAll(PDO::FETCH_ASSOC);
     return $req;
 }
-
 function getAdminGroup($contactId)
 {
     $db = dbConnect();
@@ -339,7 +321,6 @@ function getAdminGroup($contactId)
     $req = $req->fetchAll();
     return $req;
 }
-
 // DETECTION SI L'UTILISATEUR EXSITE
 function checkUser($email)
 {
@@ -353,7 +334,6 @@ function checkUser($email)
     // ON RETURN LE MOT DE PASSE
     return $fetchSelectUser;
 }
-
 //AFFICHER LES MEMBRES D"UN GROUPE
 function selectContactGroup($groupId)
 {
@@ -363,7 +343,6 @@ function selectContactGroup($groupId)
     $req = $req->fetchAll();
     return $req;
 }
-
 function checkStatus($ID)
 {
     $bdd = dbConnect();
@@ -371,7 +350,6 @@ function checkStatus($ID)
     $reponse = $bdd->prepare('SELECT status
                             FROM users
                             WHERE id=:ID');
-
     $reponse->execute(['ID' => $ID]);
     $a = false;
     while ($data = $reponse->fetch()) {
@@ -379,7 +357,6 @@ function checkStatus($ID)
     }
     return $a;
 }
-
 //AFFICHER EVENEMENTS AYANT POUR PARTICIPANT L'UTILISATEUR
 function selectMember($ID)
 {
@@ -388,7 +365,6 @@ function selectMember($ID)
     $reponse = $bdd->prepare('SELECT event, title
                             FROM events, participate
                             WHERE user=:ID AND event=events.id AND admin!=user');
-
     $reponse->execute(['ID' => $ID]);
     $a = false;
     $i = 0;
@@ -399,7 +375,6 @@ function selectMember($ID)
     }
     return $a;
 }
-
 //AFFICHER LES EVENEMENTS AYANT POUR ADMINISTRATEUR L'UTILISATEUR
 function selectAdmin($ID)
 {
@@ -418,7 +393,6 @@ function selectAdmin($ID)
     }
     return $b;
 }
-
 //AFFICHER LES INFORMATIONS DE L'EVENEMENT
 function infoEvent($id)
 {
@@ -436,7 +410,6 @@ function infoEvent($id)
     }
     return $a;
 }
-
 //AFFICHER LA LISTE DE CONTACTS D'UN UTILISATEUR NE PARTICIPANT PAS 
 function infoContact($ID, $id)
 {
@@ -466,7 +439,6 @@ function infoContact($ID, $id)
     }
     return $a;
 }
-
 //AFFICHER ADMINISTRATEUR
 function checkAdmin($id)
 {
@@ -491,7 +463,6 @@ function checkAdmin($id)
     }
     return $b;
 }
-
 //AFFICHER PARTICIPANTS
 function checkParticipate($id)
 {
@@ -512,7 +483,6 @@ function checkParticipate($id)
     }
     return $c;
 }
-
 //CHERCHER L'ETAT DU COMPTE DE L'UTILISATEUR
 function checkActive($id)
 {

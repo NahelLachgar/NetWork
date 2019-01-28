@@ -80,13 +80,17 @@ else {
 				$class = "replies";
 			}
 			?>
-				<li id="<?= $messagesFetch['id'] ?>" class=<?= $class ?>>
+				<li id="<?= $messagesFetch['messageId'] ?>" class=<?= $class ?>>
 				<?php if($messagesFetch['user']==$_SESSION['id']):?>
 					<img src="./img/profile/<?=$userProfile['photo']?>" alt="">
 				<?php else:?>
 				<img src="./img/profile/<?=$messagesFetch['photo']?>" alt="">
 				<?php endif?>
-					<p><strong><?=$messagesFetch['name'].' '.$messagesFetch['lastName'] ?></strong><br><?= $messagesFetch['message'] ?></p>
+				<?php if($messagesFetch['user']!==$_SESSION['id']):?>	
+					<p><strong style="color:#1e3799"><?=$messagesFetch['name'].' '.$messagesFetch['lastName'] ?></strong><br><?= $messagesFetch['message'] ?></p>
+				<?php else:?>
+				<p><?= $messagesFetch['message'] ?></p>
+				<?php endif?>
 				</li>
                     <?php endwhile ?>
 			</ul>

@@ -59,6 +59,9 @@ require_once('controller/deleteController.php');
             case 'loadGroup':
                   require('ajax/loadGroup.php');
                   break;
+            case 'sendGroup':
+                    require('ajax/sendGroup.php');
+                    break;
             case 'loadNotifNb':
                   require('ajax/loadNotifsNb.php');
                   break;
