@@ -159,7 +159,7 @@ else {
                                     <?php if ($comments[$j]['user'] == $_SESSION['id']):?>
                                     <form action="index.php?action=deleteCom" method="POST">
                                         <button type="submit" class="btn btn-link">
-                                        <input type="hidden" name="comId" value="<?= $comments[$j]['id']?>"
+                                        <input type="hidden" name="comId" value="<?= $comments[$j]['id']?>">
                                             <span><img width=15 src="img/icon/cross.svg"></span>
                                         </button>
                                     </form>
