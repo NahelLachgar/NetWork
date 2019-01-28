@@ -26,6 +26,11 @@ function refuseContact($contactId) {
     header('Location:index.php?action=notificationsPage');
 
 }
+
+function deleteCom($comId) {
+    deleteComment($comId);
+    header('Location:index.php?action=home');
+}
 // SUPPRIMER UN GROUPE
 function deleteGroup($groupId)
 {

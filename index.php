@@ -217,6 +217,9 @@ require_once('controller/deleteController.php');
             case 'loadNotif':
                 require_once('ajax/loadNotif.php');
                 break;
+            case 'deleteCom':
+                deleteCom($_POST['comId']);
+                break;
             default:
             $errorExt = "";
             home(htmlspecialchars($_SESSION['id']),$errorExt);
