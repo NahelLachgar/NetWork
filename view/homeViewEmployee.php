@@ -9,14 +9,7 @@ ob_start();
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-<?php
-if($_SESSION['state']=='activated') {
-    echo "<div class='h5'>";
-}
-else {
-    echo "<div class='h5' style='color:#798081;'>";
-}
-?>
+
                         <img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                         <?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                         <div class="h7">
@@ -46,9 +39,7 @@ else {
                 </div>
             </div>
             <div class="col-md-6 gedf-main">
-<?php
-if($_SESSION['state']=='activated') {
-?>
+
             <!------------------->
         <div style="overflow: scroll; height:1000px" class="posts">
                 <!--- PUBLICATION-->
@@ -153,27 +144,25 @@ if($_SESSION['state']=='activated') {
                                 </div> <!-- CARD BODY -->
                                 <!-- commentaires-->
                                 <div class="card-footer">
+                                <?php if(!empty($commentaires) && ($commentaires[0]['id'] == $contactsPosts[$i]['id']) && ($commentaires[0]['contactPost'] == $contactsPosts[$i]['contactId'])):
+                                foreach($commentaires as $comment): ?>
                                 <p>
                                     <ul style="display:inline" class="list-group list-group-flush">
                                         <li style="list-style:none"> 
-                                            <img class="rounded-circle" width="45px" src="./img/profile/<?= $profile['photo'] ?>" alt="photo de profil">
-                                            <span class="h6 m-0">Prénom Nom</span>
-                                            <li class="list-group-item">Commentaire</li>
-                                        </li> 
-                                </div>
-                                <div class="card-footer">
-                                    <li style="list-style:none"> 
-                                        <img class="rounded-circle" width="45px" src="./img/profile/<?= $profile['photo'] ?>" alt="photo de profil">
-                                        <span class="h6 m-0">Prénom Nom</span>
-                                        <li class="list-group-item">Commentaire</li>
-                                    </li> 
+                                            <!--<img class="rounded-circle" width="45px" src="./img/profile/" alt="photo de profil">-->
+                                            <span class="h6 m-0"></span>
+                                            <li class="list-group-item"><?= $comment['content'] ?></li>
+                                        </li>                      
                                 </ul>
                                 </p>
+                                <?php endforeach;
+                                endif; ?>
                                 <!-- -->
                                 <form action="index.php?action=comment" method="post">
                                     <div class="input-group">
                                         <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">
                                         <input type="hidden" name="postId" value="<?= $contactsPosts[$i]['id'] ?>">
+                                        <input type="hidden" name="contactPostId" value="<?= $contactsPosts[$i]['contactId'] ?>">
                                         <div class="input-group-append">
                                         <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
                                             <i class="fa fa-comment"></i>
@@ -356,12 +345,7 @@ if (isset($employeesSuggests)) :
                             ?>
 <!-------------------------->
 
-<?php
-}
-else {
-    echo "<br/><center>Votre compte est désactivé. Vous devez le réactiver pour pouvoir accéder à cette fonctionnalité.</center>";
-}
-?>
+
     </div>
     <?php 
     $content = ob_get_clean();
