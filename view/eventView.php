@@ -127,6 +127,7 @@
                                     </div>
                                 </div>
                             </form>";
+            echo "string";
     }
 ?>
                         <div class="col-md-4 order-md-2 mb-4">
