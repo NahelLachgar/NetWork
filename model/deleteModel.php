@@ -19,6 +19,14 @@ function unfollow($contactId, $userId)
         deleteNotif($_SESSION['id'],$contactId,"contactAdd");
     return $req;
 }
+function deleteComment($comId) {
+    $db = dbConnect();
+   $deleteComment = $db->prepare('DELETE FROM comment WHERE com=?');
+   $deleteComment ->execute(array($comId));
+
+   $deleteComs = $db->prepare('DELETE FROM coms WHERE id=?');
+   $deleteComs ->execute(array($comId));
+}
 
 function refuseContactAdd($contactId) {
     $db = dbConnect();

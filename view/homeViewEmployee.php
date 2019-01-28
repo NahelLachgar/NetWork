@@ -159,6 +159,14 @@ else {
                                 <div class="card-footer">
                                 <p>
                                     <ul style="display:inline" class="list-group list-group-flush">
+                                    <?php if ($comments[$j]['user'] == $_SESSION['id']):?>
+                                    <form action="index.php?action=deleteCom" method="POST">
+                                        <button type="submit" class="btn btn-link">
+                                        <input type="hidden" name="comId" value="<?= $comments[$j]['id']?>"
+                                            <span><img width=15 src="img/icon/cross.svg"></span>
+                                        </button>
+                                    </form>
+                                    <?php endif?>
                                         <li style="list-style:none"> 
                                             <img class="rounded-circle" width="45px" src="./img/profile/<?=$comments[$j]['photo'] ?>" alt="photo de profil">&nbsp <?=$comments[$j]['name']. ' '.$comments[$j]['lastName']?>
                                             <span class="h6 m-0"></span>
