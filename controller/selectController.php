@@ -75,39 +75,33 @@ function showMessages ($userId,$contactId) {
         $contactProfile[$i] = $profile;
     }
     $messages = getMessages($userId,$contactId);
-    $status = checkStatus($userId);
-    $state = checkActive($userId);
     require_once('./view/chatView.php');
     } else {
-        $status = checkStatus($userId); 
         $title="messages";
         $content = '<center>Vous n\'avez aucun contact.<br><a href="index.php?action=home">Retour</a></center>';
         require('view/template.php');
     }
 }
-
 function showGroupMessages ($userId,$groupId) {
+    $profile=getProfile($userId);
 	$groups = getGroupsName($userId);
 	$userProfile = getProfile($userId);
     $contacts = getContacts($userId);
     $contactsFetch = $contacts->fetchAll(PDO::FETCH_ASSOC);
     if ($contactsFetch) {
-    $receiverProfile = getProfile($_GET['contactId']);
+    $groupProfile = getGroup($_GET['groupId']);
 	for ($i=0;$i<count($contactsFetch);$i++) {
 		$profile = getProfile($contactsFetch[$i]['id']);
 		$contactProfile[$i] = $profile;
 	}
-	$messages = getGroupMessages($userId,$groupId);
-	$status = checkStatus($userId);
+    $messages = getGroupMessages($groupId);
 	require_once('./view/groupChatView.php');
 	} else {
-        $status = checkStatus($userId); 
         $title="messages";
         $content = '<center>Vous n\'avez aucun contact.<br><a href="index.php?action=home">Retour</a></center>';
         require('view/template.php');
 	}
 }
-
 function contactHome($id,$contactId,$token) {
 	$profile = getProfile($contactId);
 	$contactPosts = getUserPosts($contactId);
@@ -290,6 +284,11 @@ function showContacts($id){
     $status = checkStatus($id);
     $state = checkActive($id);
     require_once("./view/showContacts.php");
+}
+
+function showNotifs() {
+    $notifs = getNotifs();
+    require_once('view/notificationsView.php');
 }
 
 // CHECK SI LE COMPTE EXISTE
