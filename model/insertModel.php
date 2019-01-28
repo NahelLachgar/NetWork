@@ -43,7 +43,7 @@ function createGroup($nameGroup,$adminId,$groupPhoto){
     $req = $db->prepare('INSERT INTO groups(title,createDate,admin,photo) VALUES (?,NOW(),?,?)');
     $req->execute(array($nameGroup,$adminId,$groupPhoto));
     $lastId = $db->lastInsertId();
-    $insert = $db->prepare('INSERT INTO groupAdd(`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(),?,NULL,?)');
+    $insert = $db->prepare("INSERT INTO groupAdd(`message`, `addDate`, `user`, `status`, `group`) VALUES (NULL, NOW(),?,'member',?)");
     $insert->execute(array($adminId,$lastId));
     return $lastId;
 }

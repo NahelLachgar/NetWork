@@ -46,7 +46,7 @@ function deleteNotif($notifId="",$userId="",$contactId="",$type="")
 }
 
 // SUPPRIMER DANS LA TABLE groupAdd
-function deleteGroupAdd($groupId){
+function deletegroupAdd($groupId){
     $db = dbConnect();
     $req = $db->prepare("DELETE FROM groupAdd WHERE groupAdd.group = ?");
     $req->execute(array($groupId));
