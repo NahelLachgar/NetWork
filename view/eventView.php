@@ -85,7 +85,7 @@
                 <input type='hidden' name='id' value='".$id."'>
                 <div class='row justify-content-center'>
                     <div class='col-md-7'>
-                        <input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Supprimer l&apos;événement'>
+                        <input type='submit' class='btn btn-danger btn-lg btn-block' name='submit' value='Supprimer l&apos;événement'>
                     </div>
                 </div>
             </form>";
@@ -123,7 +123,7 @@
                                 <input type='hidden' name='role' value='participate'>
                                 <div class='row justify-content-center'>
                                     <div class='col-md-7'>
-                                        <input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Quitter l&apos;événement'>
+                                        <input type='submit' class='btn btn-danger btn-lg btn-block' name='submit' value='Quitter l&apos;événement'>
                                     </div>
                                 </div>
                             </form>";
@@ -164,7 +164,7 @@
                             <input type='hidden' name='role' value='admin'>
                             <div class='row justify-content-center'>
                                 <div class='col-md-7'>
-                                    <input type='submit' class='btn btn-primary btn-lg btn-block' name='submit' value='Enlever sa participation'>
+                                    <input type='submit' class='btn btn-danger btn-lg btn-block' name='submit' value='Enlever sa participation'>
                                 </div>
                             </div>
                         </form><br/>";
@@ -182,7 +182,7 @@
                                 <input type="hidden" name="action" value="showEvents">
                                 <div class="row justify-content-center">
                                     <div class="col-md-7">
-                                        <input type="submit" class='btn btn-primary btn-lg btn-block' name="submit" value="Retour">
+                                        <input type="submit" class="btn btn-secondary btn-lg btn-block" name="submit" value="Retour">
                                     </div>
                                 </div>
                             </form>

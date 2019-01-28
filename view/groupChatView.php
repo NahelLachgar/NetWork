@@ -66,7 +66,6 @@ else {
 		<img class="rounded-circle" width="45"src="./img/profile/<?= $groupProfile['photo'] ?>" alt="" />
 <?php
     echo "<p>".$groupProfile['title']."</p>";
-
 ?>
         </div>
         
