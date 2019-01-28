@@ -49,27 +49,28 @@ ob_start();
               <div class="py-12 text-center">
         <h4>Membre(s) du groupe</h4>
       </div>
-      <div class="row">
-        <!-- ADMIN -->
-        <div class="col-md-2 mb-3 card text-center" style="margin-right: 5px;margin-bottom: 5px;">
-            <img class="card-img-top rounded-circle" src="./img/profile/<?= $admin['photo'] ?>" alt="Card image cap">
-            <div class="card-body border-top">
-                <?php
-                $stateSearch = checkActive($admin['id']);
-                if($stateSearch=='activated') {
-                    echo '<h6 class="card-title text-center">'.$admin['lastName']."<br>".$admin['name']."</h6>";
-                }
-                else {
-                    echo '<h6 class="card-title text-center" style="color:#798081">'.$admin['lastName']."<br>".$admin['name']."</h6>";
-                }
-                ?>    
-                <p class="card-text"><small class="text-muted">ADMIN</small></p>
-            </div>
-        </div>
-            <!-- MEMBRE -->
-              <?php if(!empty($res)) : ?>
-         
+      <div class="row">        
+              <?php if(!empty($res)) : ?>       
                 <?php foreach( $res as $member) :?>
+                <!-- ADMIN -->
+                <?php if ($member['id'] == $admin['id']) :?>
+                <div class="col-md-2 mb-3 card text-center" style="margin-right: 5px;margin-bottom: 5px;">
+                    <img class="card-img-top rounded-circle" src="./img/profile/<?= $admin['photo'] ?>" alt="Card image cap">
+                    <div class="card-body border-top">
+                        <?php
+                        $stateSearch = checkActive($admin['id']);
+                        if($stateSearch=='activated') {
+                            echo '<h6 class="card-title text-center">'.$admin['lastName']."<br>".$admin['name']."</h6>";
+                        }
+                        else {
+                            echo '<h6 class="card-title text-center" style="color:#798081">'.$admin['lastName']."<br>".$admin['name']."</h6>";
+                        }
+                        ?>    
+                        <p class="card-text"><small class="text-muted">ADMIN</small></p>
+                    </div>
+                </div>
+                <?php else  : ?>
+            <!-- MEMBRE -->
                 <div class="col-md-2 mb-3 card text-center" style="margin-right: 5px;margin-bottom: 5px;">
                         <img class="card-img-top rounded-circle" src="./img/profile/<?= $member['photo'] ?>" alt="Card image cap">
                         <div class="card-body border-top">
@@ -84,6 +85,7 @@ ob_start();
                             ?>    
                         </div>
                     </div>
+                        <?php endif; ?>
                 <?php endforeach; ?>
             </div> 
 

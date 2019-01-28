@@ -42,7 +42,11 @@ ob_start();
                 <label for="admin">Administrateur:</label><br>
                 <select id="admin" class="form-control" name="newAdmin">
                     <?php foreach( $res as $member) :?>
-                        <option value="<?=$member['id']?>"><?= $member['name']." ".$member['lastName'] ?> </option>
+                        <?php if ($_SESSION['id'] == $group['admin'] && $member['id'] == $_SESSION['id'] ) :?>
+                            <option value="<?=$member['id']?>" selected>Vous</option>
+                        <?php else : ?>
+                            <option value="<?=$member['id']?>"><?= $member['name']." ".$member['lastName'] ?> </option>
+                        <?php endif;?>
                     <?php endforeach; ?>
                 </select>
               </div>
