@@ -56,7 +56,13 @@ function updateToProfile($id)
     $recup = getProfileUpdate($id);
     $status = checkStatus($id);
     $state = checkActive($id);
-    require_once('./view/profilUpdateView.php');
+
+    
+    if($_SESSION['status'] == 'employee'){
+        require_once('./view/profilUpdateView.php');
+    }else if($_SESSION['status'] == 'company'){
+        require_once('./view/profilUpdateCompanyView.php');
+    }
 }
 
 function showMessages ($userId,$contactId) {
