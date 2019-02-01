@@ -9,7 +9,7 @@ ob_start();
             echo " <center><div class='col align-self-end'><div class='card border-danger mb-6' style='max-width: 18rem;'>
             <div class='card-body text-danger'>
               <h5 class='card-title'>Oups!</h5>
-              <p class='card-text'>Vous n'avez aucune notif.</p>
+              <p class='card-text'>Vous n'avez aucune notification.</p>
             </div>
           </div></div></center>";
             ?>

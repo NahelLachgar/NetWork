@@ -69,11 +69,21 @@ ob_start();
 
                         </div>
                         <div class="card-body">
-                            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> <?= $postsFetch['postDate'] ?></div>
-                            <p class="card-text">
-                                <?= $postsFetch['content'] ?>
-                            </p>
-                        </div>
+                                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> <?= strftime("Le %d %b à %R", strtotime($postsFetch['postDate'])) ?></div>
+                                    <div class="card-text">
+                                        <?php if ($postsFetch['type'] == "text") : ?>
+                                            <?= $postsFetch['content'] ?>
+                                        <?php else : ?>
+                                            <div class="row justify-content-center">
+                                                <div>
+                                                    <div class="col-md-12">
+                                                    <img  width="100%" src="./img/posts/<?= $postsFetch['content'] ?>" alt="photo">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endif ?>
+                                    </div>
+                                </div> 
                         <div class="card-footer">
                         <form action="index.php?action=comment" method="post">
                             <div class="input-group">
