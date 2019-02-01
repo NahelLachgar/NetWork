@@ -10,6 +10,7 @@ function unfollow($contactId, $userId)
     $db = dbConnect();
     $req = $db->prepare('DELETE FROM contacts WHERE contact = ? AND user = ? OR contact = ? AND user = ?');
     $req->execute(array($contactId,$userId,$userId,$contactId));
+
     $profile = getProfile($_SESSION['id']);
         $content = $profile['name'].' '.$profile['lastName'].' vous a retiré de sa liste de contact.';
         $icon = $profile['photo'];
