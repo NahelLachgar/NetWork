@@ -105,7 +105,7 @@ else {
                         if ($contactsPosts > 1) {
                             for ($i = 0; $i < count($contactsPosts); $i++) :
                             ?>
-                            <div class="card gedf-card">
+                            <div id="<?=$contactsPosts['id']?>" class="card gedf-card">
                                 <div class="card-header">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex justify-content-between align-items-center">
