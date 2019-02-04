@@ -114,10 +114,11 @@ else {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script>
 $('.sent p').click(function(){
-	if ($('.deleteMessage').is(":visible")) {
-		$('.deleteMessage').hide();
+	var btn = $(this).siblings('.deleteMessage')
+	if (btn.is(":visible")) {
+		btn.hide();
 	} else {
-		$('.deleteMessage').show();
+		btn.show();
 	}
 });
 $(".deleteMessage").click(function(e){

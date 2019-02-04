@@ -110,7 +110,7 @@ else {
                                 <?php if ($contactsPosts[$i]['contactId'] == $_SESSION['id']):?>
                                     <input type="hidden" class="postId" name="comId" value="<?= $contactsPosts[$i]['id']?>">
 
-                                        <button  type="submit" class="deletePost btn btn-link">
+                                        <button type="submit" class="deletePost btn btn-link">
                                             <span><img width=15 src="img/icon/cross.svg"></span>
                                         </button>
                                    <?php endif?>

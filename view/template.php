@@ -25,21 +25,23 @@
 
     <div class="nav">
         <a id="buttonGroup" href="index.php?action=groups" class="groups"><img width="30px" src="img/icon/group.svg" alt="Groupe"></a>
-        
+        &nbsp        
 
 <?php
     if($_SESSION['status']=="employee") {
-        echo "<a id='buttonEvent' href='index.php?action=showEvents' class='home'><img width=30px src='img/icon/event.svg' alt='Photo de profil'></a>";
+        echo "<a id='buttonEvent' href='index.php?action=showEvents' class='home'><img width=30px src='img/icon/event.svg' alt='Photo de profil'></a>&nbsp";
     }
 ?>
         <a id="buttonMessages" href="index.php?action=showMessages">            
             <img width="30px" src="img/icon/message.svg"> 
         </a> 
+        &nbsp
 
         <a style="text-decoration:none" id="buttonNotifications" href="index.php?action=notificationsPage" class="notifications">
         <img width="30px" src="img/icon/notifications.svg" alt="notifications">
         <span id="nbNotifs" class="badge badge-danger"></span>
         </a>
+        &nbsp
            
         <form class="form-inline" action="index.php?action=search" method="POST">
             <div class="input-group">
