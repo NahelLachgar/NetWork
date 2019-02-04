@@ -92,6 +92,7 @@ else {
     echo "<input type='submit' class='btn btn-link' style='color:#798081;' value='".$result['name']." ".$result['lastName']."'>";
 }
 ?>
+                        </form></h5>
                         <p class="card-text"><?= $result['job'] . ' chez ' . $result['company'] ?></p>
                         <form action="index.php?action=addContact" method="POST">
                             <input type="hidden" name="contactId" value="<?=$result['contactId']?>">
