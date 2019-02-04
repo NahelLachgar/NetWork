@@ -161,8 +161,9 @@ else {
                                     <ul style="display:inline" class="list-group list-group-flush">
                                     <?php if ($comments[$j]['user'] == $_SESSION['id']):?>
                                     <form action="index.php?action=deleteCom" method="POST">
-                                        <button type="submit" class="btn btn-link">
-                                        <input type="hidden" name="comId" value="<?= $comments[$j]['id']?>">
+                                    <input type="hidden" class="comId" name="comId" value="<?= $comments[$j]['id']?>">
+
+                                        <button id="<?= $comments[$j]['id']?>" type="submit" class="deleteCom btn btn-link">
                                             <span><img width=15 src="img/icon/cross.svg"></span>
                                         </button>
                                     </form>
@@ -214,6 +215,20 @@ else {
 ?>
 
     </div>
+    <script>
+    $(document).ready(function(){
+        $(".deleteCom").click(function(e){
+            e.preventDefault();
+            comId = $(this).attr('id');
+          $(this).parents('.card-footer').hide();
+         $.ajax({
+				url : "index.php?action=deleteCom", // on donne l'URL du fichier de traitement
+				type : "POST", // la requête est de type POST
+				data : "comId=" + comId // et on envoie nos données
+				});
+  });
+});
+    </script>
     <?php 
     $content = ob_get_clean();
     require_once('view/template.php');
