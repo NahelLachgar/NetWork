@@ -29,7 +29,13 @@ function refuseContact($contactId) {
 
 function deleteCom($comId) {
     deleteComment($comId);
-    header('Location:index.php?action=home');
+}
+
+function deletePost($postId) {
+    deletePublication($postId);
+}
+function deleteMessage($messageId) {
+    deleteMsg($messageId);
 }
 // SUPPRIMER UN GROUPE
 function deleteGroup($groupId)

@@ -36,12 +36,9 @@ function addPost($content, $type, $userId)
     }
 }
 
-function addComment($content, $userId, $postId,$contactPostId)
+function addComment($content, $userId, $postId)
 {
-    if (trim($content)!== "") {
     comment($content, $userId, $postId);
-    }
-    header('Location:index.php?action=home&postId='.$_POST['postId']);
 }
 
 // CHECK LES INFOS D'INSCRIPTION

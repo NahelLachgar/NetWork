@@ -21,12 +21,39 @@ function unfollow($contactId, $userId)
     return $req;
 }
 function deleteComment($comId) {
-    $db = dbConnect();
+   $db = dbConnect();
    $deleteComment = $db->prepare('DELETE FROM comment WHERE com=?');
    $deleteComment ->execute(array($comId));
 
    $deleteComs = $db->prepare('DELETE FROM coms WHERE id=?');
    $deleteComs ->execute(array($comId));
+}
+
+function deletePublication($postId) {
+   $db = dbConnect();
+   $selectComs = $db->prepare('SELECT coms.id FROM coms JOIN comment ON coms.id = comment.com WHERE comment.publication =?');
+   $selectComs ->execute(array($postId));
+   while ($coms = $selectComs->fetch()) {
+       $deleteComment = $db->prepare('DELETE FROM comment WHERE com = ?');
+       $deleteComment->execute($coms['id']);
+
+       $deleteComment = $db->prepare('DELETE FROM coms WHERE id = ?');
+       $deleteComment->execute($coms['id']);
+
+   }
+   
+   $deletePost = $db->prepare('DELETE FROM post WHERE publication = ?');
+   $deletePost->execute(array($postId));
+
+   $deletePublication = $db->prepare('DELETE FROM post WHERE id = ?');
+   $deletePublication->execute(array($postId));
+
+}
+
+function deleteMsg ($messageId) {
+    $db = dbConnect();
+    $deleteMessage = $db->prepare('DELETE FROM privateMessages WHERE id = ?');
+    $deleteMessage->execute(array($messageId));
 }
 
 function refuseContactAdd($contactId) {

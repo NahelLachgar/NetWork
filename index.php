@@ -109,7 +109,7 @@ require_once('controller/deleteController.php');
                 removeContact(htmlspecialchars($_POST['contactId']),$_SESSION['id']);
                 break; 
             case 'comment':
-                addcomment(htmlspecialchars($_POST['comment']),$_SESSION['id'],$_POST['postId'],$_POST['contactPostId']);
+                addcomment(htmlspecialchars($_POST['comment']),$_SESSION['id'],$_POST['postId']);
                 break; 
             case 'contactContacts':
                 showContacts($_SESSION['id'],$_POST['contactId']);
@@ -219,6 +219,12 @@ require_once('controller/deleteController.php');
                 break;
             case 'deleteCom':
                 deleteCom($_POST['comId']);
+                break;
+            case 'deletePost':
+                deletePost($_POST['postId']);
+                break;
+            case 'deleteMessage':
+                deleteMessage($_POST['messageId']);
                 break;
             default:
             $errorExt = "";

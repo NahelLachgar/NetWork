@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	
+	
 	function load() {
 				setInterval(function(){
 				var lastId = $('#messages li:last').attr('id');

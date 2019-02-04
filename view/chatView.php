@@ -87,9 +87,12 @@ else {
 			?>
 				<li id="<?= $messagesFetch['id'] ?>" class=<?= $class ?>>
 				<?php if($messagesFetch['sender']==$_SESSION['id']):?>
-					<img src="./img/profile/<?=$userProfile['photo']?>" alt="">
+				<button class="deleteMessage btn btn-link" style="display:none">
+					<img width="25"  src="./img/icon/delete.svg" alt="">	
+				</button>
+					<img class="img" src="./img/profile/<?=$userProfile['photo']?>" alt="">
 				<?php else:?>
-				<img src="./img/profile/<?=$receiverProfile['photo']?>" alt="">
+				<img class="img" src="./img/profile/<?=$receiverProfile['photo']?>" alt="">
 				<?php endif?>
 					<p><?= $messagesFetch['content'] ?></p>
 				</li>
@@ -109,6 +112,25 @@ else {
 	</div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+$('.sent p').click(function(){
+	if ($('.deleteMessage').is(":visible")) {
+		$('.deleteMessage').hide();
+	} else {
+		$('.deleteMessage').show();
+	}
+});
+$(".deleteMessage").click(function(e){
+				e.preventDefault();
+				var messageId = $(this).parents('li').attr('id');
+				$(this).parents('li').hide();
+                $.ajax({
+                    url : "index.php?action=deleteMessage", // on donne l'URL du fichier de traitement
+                    type : "POST", // la requête est de type POST
+                    data : "messageId=" + messageId // et on envoie nos données
+                    }); 
+    });
+</script>
 <script src="js/chat.js"></script>
 <?php
 }

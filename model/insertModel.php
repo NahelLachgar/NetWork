@@ -21,7 +21,7 @@ function comment($content, $userId, $postId)
     $insertCom = $db->prepare('INSERT INTO coms (content,comDate,user) VALUES (:content,NOW(),:user)');
     $insertCom->execute(array(
         "content" => $content,
-        "user" => $userId
+        "user" => $_SESSION['id']
     ));
     $insertComment = $db->prepare('INSERT INTO comment (com,publication) VALUES (LAST_INSERT_ID(),?)');
     $insertComment->execute(array($postId));

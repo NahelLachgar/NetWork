@@ -107,6 +107,13 @@ else {
                             ?>
                             <div id="<?=$contactsPosts[$i]['id']?>" class="card gedf-card">
                                 <div class="card-header">
+                                <?php if ($contactsPosts[$i]['contactId'] == $_SESSION['id']):?>
+                                    <input type="hidden" class="postId" name="comId" value="<?= $contactsPosts[$i]['id']?>">
+
+                                        <button  type="submit" class="deletePost btn btn-link">
+                                            <span><img width=15 src="img/icon/cross.svg"></span>
+                                        </button>
+                                   <?php endif?>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <?php if ($contactsPosts[$i]['contactId'] !== $_SESSION['id']) : ?>
@@ -123,7 +130,11 @@ else {
                                                 <form action="index.php?action=profilePage" method="POST">
                                             <input type="hidden" name="contactId" value="<?= $contactsPosts[$i]['id'] ?>">
                                                     <input type="hidden" name="token" value="0">
-                                                    <div class="h5 m-0"><button style="color:black;font-size:1.1em;text-decoration:none" type="submit" class="btn btn-link"><?= $contactsPosts[$i]['name'] . ' ' . $contactsPosts[$i]['lastName'] ?></button></div>
+                                                    <div class="h5 m-0">
+                                                        <button style="color:black;font-size:1.1em;text-decoration:none" type="submit" class="btn btn-link">
+                                                            <?= $contactsPosts[$i]['name'] . ' ' . $contactsPosts[$i]['lastName'] ?>
+                                                        </button>
+                                                    </div>
                                                 </form>
                                             <?php else : ?>
                                                 <div class="h5 m-0"><?= $contactsPosts[$i]['name'] . ' ' . $contactsPosts[$i]['lastName'] ?></div>
@@ -153,21 +164,17 @@ else {
                                 </div> <!-- CARD BODY -->
                                 <!-- commentaires-->
                                <?php for($j=0;$j<count($comments);$j++) :
-                                        if ($comments[$j]['postId'] == $contactsPosts[$i]['id']):
-                                    ?>
-
+                                        if ($comments[$j]['postId'] == $contactsPosts[$i]['id']):?>
                                 <div class="card-footer">
                                 <p>
                                     <ul style="display:inline" class="list-group list-group-flush">
-                                    <?php if ($comments[$j]['user'] == $_SESSION['id']):?>
-                                    <form action="index.php?action=deleteCom" method="POST">
+                                    <?php if ($comments[$j]['user'] == $_SESSION['id']|| $contactsPosts[$i]['contactId'] == $_SESSION['id']):?>
                                     <input type="hidden" class="comId" name="comId" value="<?= $comments[$j]['id']?>">
 
-                                        <button id="<?= $comments[$j]['id']?>" type="submit" class="deleteCom btn btn-link">
+                                        <button type="submit" class="deleteCom btn btn-link">
                                             <span><img width=15 src="img/icon/cross.svg"></span>
                                         </button>
-                                    </form>
-                                    <?php endif?>
+                                  <?php endif?>
                                         <li style="list-style:none"> 
                                             <img class="rounded-circle" width="45px" src="./img/profile/<?=$comments[$j]['photo'] ?>" alt="photo de profil">&nbsp <?=$comments[$j]['name']. ' '.$comments[$j]['lastName']?>
                                             <span class="h6 m-0"></span>
@@ -183,11 +190,11 @@ else {
                                 <!-- -->
                                 <form action="index.php?action=comment" method="post">
                                     <div class="input-group">
-                                        <input type="text" name="comment" placeholder="Écrivez un commentaire" class="form-control"  aria-describedby="button-addon2">
+                                        <input type="text" name="comment" placeholder="Écrivez un commentaire" class="comment form-control"  aria-describedby="button-addon2">
                                         <input type="hidden" name="postId" value="<?= $contactsPosts[$i]['id'] ?>">
                                         <input type="hidden" name="contactPostId" value="<?= $contactsPosts[$i]['contactId'] ?>">
                                         <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="submit"  id="button-addon2">
+                                        <button class="btn btn-outline-primary" type="submit"  id="sendComment">
                                             <i class="fa fa-comment"></i>
                                         </button>
                                 </form>
@@ -219,14 +226,39 @@ else {
     $(document).ready(function(){
         $(".deleteCom").click(function(e){
             e.preventDefault();
-            comId = $(this).attr('id');
+            comId = $(this).siblings('.comId').val();
+            console.log(comId);
+            
           $(this).parents('.card-footer').hide();
          $.ajax({
 				url : "index.php?action=deleteCom", // on donne l'URL du fichier de traitement
 				type : "POST", // la requête est de type POST
 				data : "comId=" + comId // et on envoie nos données
 				});
-  });
+        });
+
+    $(".deletePost").click(function(e){
+                e.preventDefault();
+                postId = $(this).parents('.card').attr('id');
+                $(this).parents('.card').hide();
+                $.ajax({
+                    url : "index.php?action=deletePost", // on donne l'URL du fichier de traitement
+                    type : "POST", // la requête est de type POST
+                    data : "postId=" + postId // et on envoie nos données
+                    }); 
+    });
+
+    $("#sendComment").click(function(e){
+                e.preventDefault();
+            comment = $(this).parents('div').siblings('.comment').val();
+            postId = $(this).parents().eq(3).attr('id');
+                $.ajax({
+                    url : "index.php?action=comment", // on donne l'URL du fichier de traitement
+                    type : "POST", // la requête est de type POST
+                    data : "postId=" + postId + "comment=" + comment // et on envoie nos données
+                    });
+                comment.val("");
+    });
 });
     </script>
     <?php 
