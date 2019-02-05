@@ -104,7 +104,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NetWork`.`publications` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `content` VARCHAR(255) NULL,
+  `content` LONGTEXT NULL,
   `postDate` DATETIME NULL,
   `type` ENUM('text', 'image') NOT NULL,
   PRIMARY KEY (`id`),
@@ -179,7 +179,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `NetWork`.`coms` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `content` VARCHAR(255) NOT NULL,
+  `content` LONGTEXT NOT NULL,
   `comDate` DATETIME NOT NULL,
   `user` INT NOT NULL,
   PRIMARY KEY (`id`, `user`),

@@ -57,6 +57,7 @@
       <input type="email" id="inputEmail" class="form-control" name="email" placeholder="Adresse mail" require_onced autofocus>
       <label for="inputPassword" class="sr-only">Mot de passe</label>
       <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Mot de passe" require_onced>
+      <p></p>
     <button class="btn btn-lg btn-primary btn-block" name="SignUp" type="submit">Se connecter</button>
     Afficher le mot de passe <input type="checkbox" id="showPass"><br>
     <a href="index.php?action=signUpEmployee">Inscrivez-vous en tant que membre</a>
@@ -67,15 +68,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
   </body>
 </html>
-<script>
-var checkbox = $("#showPass");
-        var password = $("#inputPassword");
-        checkbox.click(function() {
-            if(checkbox.prop("checked")) {
-                password.prop("type", "text");
-            } else {
-                password.prop("type", "password");
-            }
-        });
-
-</script>
+<script src="js/showPassword.js"></script>

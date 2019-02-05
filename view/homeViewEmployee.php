@@ -176,9 +176,10 @@ else {
                                         </button>
                                   <?php endif?>
                                         <li style="list-style:none"> 
-                                            <img class="rounded-circle" width="45px" src="./img/profile/<?=$comments[$j]['photo'] ?>" alt="photo de profil">&nbsp <?=$comments[$j]['name']. ' '.$comments[$j]['lastName']?>
+                                            <img class="rounded-circle" width="45px" src="./img/profile/<?=$comments[$j]['photo'] ?>" alt="photo de profil">&nbsp 
+                                            <a href=""><?=$comments[$j]['name']. ' '.$comments[$j]['lastName']?></a>
                                             <span class="h6 m-0"></span>
-                                            <li class="list-group-item"><?= $comments[$j]['content'] ?></li>
+                                         <?= $comments[$j]['content'] ?>
                                         </li>                      
                                 </ul>
                                 </p>
@@ -188,16 +189,14 @@ else {
                                     endfor;
                                 ?>
                                 <!-- -->
-                                <form action="index.php?action=comment" method="post">
                                     <div class="input-group">
                                         <input type="text" name="comment" placeholder="Écrivez un commentaire" class="comment form-control"  aria-describedby="button-addon2">
                                         <input type="hidden" name="postId" value="<?= $contactsPosts[$i]['id'] ?>">
                                         <input type="hidden" name="contactPostId" value="<?= $contactsPosts[$i]['contactId'] ?>">
                                         <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="submit"  id="sendComment">
+                                        <button class="btn btn-outline-primary" id="sendComment">
                                             <i class="fa fa-comment"></i>
                                         </button>
-                                </form>
                         </div>
                                 </div>
                             </div>
@@ -249,15 +248,17 @@ else {
     });
 
     $("#sendComment").click(function(e){
-                e.preventDefault();
+            e.preventDefault();
             comment = $(this).parents('div').siblings('.comment').val();
-            postId = $(this).parents().eq(3).attr('id');
+            postId = $(this).parents().eq(2).attr('id');
+			if ($.trim(comment) != "") {			
                 $.ajax({
                     url : "index.php?action=comment", // on donne l'URL du fichier de traitement
                     type : "POST", // la requête est de type POST
-                    data : "postId=" + postId + "comment=" + comment // et on envoie nos données
+                    data : "postId=" + postId + "&comment=" + comment // et on envoie nos données
                     });
-                comment.val("");
+                    $(this).parents('div').siblings('.comment').val("");
+                }
     });
 });
     </script>
