@@ -28,7 +28,7 @@ ob_start();
             ?>
             <div class="card gedf-card">
                     <div class="card-body">
-                        <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                        <h5 class="card-title"><img class="rounded-circle" width="45" src="../img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                         <form action="index.php?action=profilePage" method="POST">
                             <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>"> 
                             <input type="hidden" name="token" value="0">
@@ -45,7 +45,7 @@ else {
                         <p class="card-text"><?= $result['job'] . ' chez ' . $result['company'] ?></p>
                         <form action="index.php?action=removeContact" method="POST">
                             <input type="hidden" name="contactId" value="<?=$result['contactId']?>">
-                            <button type="submit" class="btn btn-link"><img src="./img/icon/unfriend.png"></button> 
+                            <button type="submit" class="btn btn-link"><img src="../img/icon/unfriend.png"></button> 
                         </form>
                     </div>
             </div>
@@ -53,7 +53,7 @@ else {
             <?php else: ?>
             <div class="card gedf-card">
                     <div class="card-body">       
-                        <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                        <h5 class="card-title"><img class="rounded-circle" width="45" src="../img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                         <form action="index.php?action=profilePage" method="POST">
                             <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>">
                             <input type="hidden" name="token" value="0"> 
@@ -79,7 +79,7 @@ else {
                         ?>
                 <div class="card gedf-card">
                     <div class="card-body">
-                        <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                        <h5 class="card-title"><img class="rounded-circle" width="45" src="../img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                         <form action="index.php?action=profilePage" method="POST">
                             <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>">
                             <input type="hidden" name="token" value="1"> 
@@ -96,7 +96,7 @@ else {
                         <p class="card-text"><?= $result['job'] . ' chez ' . $result['company'] ?></p>
                         <form action="index.php?action=addContact" method="POST">
                             <input type="hidden" name="contactId" value="<?=$result['contactId']?>">
-                            <button type="submit" class="btn btn-link"><img src="./img/icon/users.png"></button>
+                            <button type="submit" class="btn btn-link"><img src="../img/icon/users.png"></button>
                         </form>
                     </div>
             </div>
@@ -107,7 +107,7 @@ else {
                     <div class="card-body">     
                     <form action="index.php?action=profilePage" method="POST">
 
-                        <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                        <h5 class="card-title"><img class="rounded-circle" width="45" src="../img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                             <input type="hidden" name="contactId" value="<?= $result['contactId'] ?>">
                             <input type="hidden" name="token" value="1">
 <?php

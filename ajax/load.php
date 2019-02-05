@@ -32,7 +32,7 @@ while($data = $req->fetch())
         $class="replies";
     }
     $messages .= '<li id="'.$data["id"].'" class="'.$class.'">
-    <img class="img" src="./img/profile/'.$profile["photo"].'" alt="">
+    <img class="img" src="../img/profile/'.$profile["photo"].'" alt="">
 
     <p>' . $data['content'] . '</p></li>';
 }

@@ -16,7 +16,7 @@ ob_start();
           <form enctype="multipart/form-data" action="index.php?action=updateGroup" method="POST">   
               <div class="row justify-content-center">
                   <div class="col-md-12-center">
-                      <img class="rounded-circle border border-dark shadow bg-white rounded" width="150" src="./img/groups/<?= $group['photo'] ?>" alt="Photo du groupe" id="photoUpdate">
+                      <img class="rounded-circle border border-dark shadow bg-white rounded" width="150" src="../img/groups/<?= $group['photo'] ?>" alt="Photo du groupe" id="photoUpdate">
                         <input style="display:none" type="file" class="form-control-file" name="photo" id="photoUpdateFile"> 
                   </div>
               </div>   
@@ -88,7 +88,7 @@ ob_start();
                 <!-- ADMIN -->
                     <?php if ($_SESSION['id'] == $group['admin'] && $member['id'] == $_SESSION['id'] ) :?>
                         <div class="col-md-2 mb-3 card text-center" style="margin-right: 5px;margin-bottom: 5px;">
-                            <img class="card-img-top rounded-circle" src="./img/profile/<?= $member['photo'] ?>" alt="Card image cap">
+                            <img class="card-img-top rounded-circle" src="../img/profile/<?= $member['photo'] ?>" alt="Card image cap">
                             <div class="card-body border-top">
                                 <?php
                                 $stateSearch = checkActive($member['id']);
@@ -105,7 +105,7 @@ ob_start();
                     <?php else : ?>
                 <!-- MEMBRE -->
                 <div class="col-md-2 mb-3 card text-center" style="margin-right: 5px;margin-bottom: 5px;">
-                        <img class="card-img-top rounded-circle" src="./img/profile/<?= $member['photo'] ?>" alt="Card image cap">
+                        <img class="card-img-top rounded-circle" src="../img/profile/<?= $member['photo'] ?>" alt="Card image cap">
                         <div class="card-body border-top">
                             <?php
                             $stateSearch = checkActive($member['id']);
@@ -148,7 +148,7 @@ ob_start();
                 <?php foreach ($contactProfile as $contact) :?>
                     <?php if ($contact['status'] == "employee") : ?>
                     <div class="col-md-2 mb-3 card text-center" style="margin-right: 5px;margin-bottom: 5px;">
-                        <img class="card-img-top rounded-circle" src="./img/profile/<?= $contact['photo'] ?>" alt="Card image cap">
+                        <img class="card-img-top rounded-circle" src="../img/profile/<?= $contact['photo'] ?>" alt="Card image cap">
                         <div class="card-body border-top">
                             <?php
                             $stateSearch = checkActive($contact['id']);

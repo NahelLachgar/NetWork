@@ -42,7 +42,7 @@
   <div class="container">
     <div class="row">
     <form class="form-signin" action="?action=checkUser" method="POST">
-      <img class="lg-4" src="./img/logo/logo.png" alt="" width="250" height="250">
+      <img class="lg-4" src="../img/logo/logo.png" alt="" width="250" height="250">
       <h1 class="h3 mb-3 font-weight-normal">Connectez-vous !</h1>
 
       <?php if(!empty($errors)) : ?>

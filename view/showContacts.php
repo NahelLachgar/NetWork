@@ -30,7 +30,7 @@ ob_start();
             <?php if ($result['status'] == 'employee') : ?>
             <div class="card gedf-card">
                         <div class="card-body">
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="../img/profile/<?= $result['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                             <form action="index.php?action=profilePage" method="POST">
                                 <input type="hidden" name="token" value="0">
                                 <input type="hidden" name="contactId" value="<?=$result['id'] ?>">

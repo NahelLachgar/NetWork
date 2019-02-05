@@ -25,13 +25,13 @@ while($data = $req->fetch())
     if ($data['user'] == $_SESSION['id']) {
         $class="sent";
         $messages .= '<li id="'.$data["messageId"].'" class="'.$class.'">
-    <img src="./img/profile/'.$profile["photo"].'" alt="">
+    <img src="../img/profile/'.$profile["photo"].'" alt="">
     
     <p>' . $data['message'] . '</p></li>';
     } else {
         $class="replies";
         $messages .= '<li id="'.$data["messageId"].'" class="'.$class.'">
-    <img src="./img/profile/'.$profile["photo"].'" alt="">
+    <img src="../img/profile/'.$profile["photo"].'" alt="">
     
     <p><strong style="color:#1e3799">'.$data["name"].' '.$data["lastName"] .'</strong><br>' . $data['message'] . '</p></li>';
     }

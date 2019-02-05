@@ -20,11 +20,11 @@
   
   <nav class="navbar navbar-light bg-bleu">
     <div class="home">
-        <a id="buttonHome" href="index.php?action=home" class="home"><img width="30px" src="img/icon/home.svg" alt="Photo de profil"></a>
+        <a id="buttonHome" href="index.php?action=home" class="home"><img width="30px" src="../img/icon/home.svg" alt="Photo de profil"></a>
     </div>
 
     <div class="nav">
-        <a id="buttonGroup" href="index.php?action=groups" class="groups"><img width="30px" src="img/icon/group.svg" alt="Groupe"></a>
+        <a id="buttonGroup" href="index.php?action=groups" class="groups"><img width="30px" src="../img/icon/group.svg" alt="Groupe"></a>
         &nbsp        
 
 <?php
@@ -33,12 +33,12 @@
     }
 ?>
         <a id="buttonMessages" href="index.php?action=showMessages">            
-            <img width="30px" src="img/icon/message.svg"> 
+            <img width="30px" src="../img/icon/message.svg"> 
         </a> 
         &nbsp
 
         <a style="text-decoration:none" id="buttonNotifications" href="index.php?action=notificationsPage" class="notifications">
-        <img width="30px" src="img/icon/notifications.svg" alt="notifications">
+        <img width="30px" src="../img/icon/notifications.svg" alt="notifications">
         <span id="nbNotifs" class="badge badge-danger"></span>
         </a>
         &nbsp

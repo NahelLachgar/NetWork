@@ -12,7 +12,7 @@ body {
   height: 1000px;
 }
 .carousel-prev-icon {
-  background-image: url("img/icon/next.svg");
+  background-image: url("../img/icon/next.svg");
 }
 .header {
   position: sticky;

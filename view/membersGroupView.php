@@ -13,7 +13,7 @@ ob_start();
         
               <div class="row justify-content-center">
                   <div class="col-md-12-center">
-                      <img class="rounded-circle" width="150" src="./img/groups/<?= $group['photo'] ?>" alt="Photo du groupe">
+                      <img class="rounded-circle" width="150" src="../img/groups/<?= $group['photo'] ?>" alt="Photo du groupe">
                   </div>
               </div>   
           </div>
@@ -55,7 +55,7 @@ ob_start();
                 <!-- ADMIN -->
                 <?php if ($member['id'] == $admin['id']) :?>
                 <div class="col-md-2 mb-3 card text-center" style="margin-right: 5px;margin-bottom: 5px;">
-                    <img class="card-img-top rounded-circle" src="./img/profile/<?= $admin['photo'] ?>" alt="Card image cap">
+                    <img class="card-img-top rounded-circle" src="../img/profile/<?= $admin['photo'] ?>" alt="Card image cap">
                     <div class="card-body border-top">
                         <?php
                         $stateSearch = checkActive($admin['id']);
@@ -72,7 +72,7 @@ ob_start();
                 <?php else  : ?>
             <!-- MEMBRE -->
                 <div class="col-md-2 mb-3 card text-center" style="margin-right: 5px;margin-bottom: 5px;">
-                        <img class="card-img-top rounded-circle" src="./img/profile/<?= $member['photo'] ?>" alt="Card image cap">
+                        <img class="card-img-top rounded-circle" src="../img/profile/<?= $member['photo'] ?>" alt="Card image cap">
                         <div class="card-body border-top">
                             <?php
                             $stateSearch = checkActive($member['id']);

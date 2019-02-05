@@ -11,7 +11,7 @@ if($_SESSION['state']=='activated') {
 	<div id="sidepanel">
 		<div id="profile">
 			<div class="wrap">
-				<img id="profile-img" src="./img/profile/<?= $userProfile['photo'] ?>" class="online rounded-circle" width="45" alt="" />
+				<img id="profile-img" src="../img/profile/<?= $userProfile['photo'] ?>" class="online rounded-circle" width="45" alt="" />
 				<p><?= $userProfile['name'] . ' ' . $userProfile['lastName'] ?></p>
 			</div>
 		</div>
@@ -27,7 +27,7 @@ if($_SESSION['state']=='activated') {
 				<li class="contact">
 					<div class="wrap">
 						<span class="contact-status online"></span>
-						<img class="rounded-circle" width="45"src="./img/profile/<?= $contactProfile[$i]['photo'] ?>" alt="" />
+						<img class="rounded-circle" width="45"src="../img/profile/<?= $contactProfile[$i]['photo'] ?>" alt="" />
 						<div class="meta">
 <?php
 $stateSearch = checkActive($contactProfile[$i]['id']);
@@ -49,7 +49,7 @@ else {
 				<li class="contact">
 					<div class="wrap">
 						<span class="contact-status online"></span>
-						<img class="rounded-circle" width="45"src="./img/groups/<?= $groups[$i]['photo'] ?>" alt="" />
+						<img class="rounded-circle" width="45"src="../img/groups/<?= $groups[$i]['photo'] ?>" alt="" />
 						<div class="meta">
 						<p class="name"><?= $groups[$i]['title']?></p>
 						</div>
@@ -63,7 +63,7 @@ else {
 	</div>
 	<div class="content">
 		<div class="contact-profile">
-		<img class="rounded-circle" width="45"src="./img/profile/<?= $receiverProfile['photo'] ?>" alt="" />
+		<img class="rounded-circle" width="45"src="../img/profile/<?= $receiverProfile['photo'] ?>" alt="" />
 <?php
 $stateSearch = checkActive($receiverProfile['id']);
 if($stateSearch=='activated') {
@@ -88,11 +88,11 @@ else {
 				<li id="<?= $messagesFetch['id'] ?>" class=<?= $class ?>>
 				<?php if($messagesFetch['sender']==$_SESSION['id']):?>
 				<button class="deleteMessage btn btn-link" style="display:none">
-					<img width="25"  src="./img/icon/delete.svg" alt="">	
+					<img width="25"  src="../img/icon/delete.svg" alt="">	
 				</button>
-					<img class="img" src="./img/profile/<?=$userProfile['photo']?>" alt="">
+					<img class="img" src="../img/profile/<?=$userProfile['photo']?>" alt="">
 				<?php else:?>
-				<img class="img" src="./img/profile/<?=$receiverProfile['photo']?>" alt="">
+				<img class="img" src="../img/profile/<?=$receiverProfile['photo']?>" alt="">
 				<?php endif?>
 					<p><?= $messagesFetch['content'] ?></p>
 				</li>

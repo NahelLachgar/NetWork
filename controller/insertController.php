@@ -21,7 +21,7 @@ function addPost($content, $type, $userId)
             // ON RAJOUTE UN . DEVANT L'EXTENSION 
             $ext = "." . $ext; 
             // ON MET LA PHOTO DANS UN DOSSIER IMG/POSTS
-            $path = "./img/posts/" . $content . $ext;
+            $path = "../img/posts/" . $content . $ext;
             move_uploaded_file($_FILES['photo']['tmp_name'], $path);
             $content = $content . $ext;
             post($content, $type, $userId);
@@ -86,7 +86,7 @@ function checkAddUser($firstName, $lastName, $email, $phone, $password, $confirm
    	// ON RAJOUTE UN . DEVANT L'EXTENSION 
             $ext = "." . $ext; 
 	// ON MET LA PHOTO DANS UN DOSSIER IMG
-            $path = "./img/profile/" . $email . $ext;
+            $path = "../img/profile/" . $email . $ext;
             move_uploaded_file($_FILES['photo']['tmp_name'], $path);
             $profilePhoto = $email . $ext;
     // SI L'UTILISATEUR N'A PAS CHOISI DE PHOTO DE PROFIL, ON LUI EN ATTRIBUT UNE DEJA EXISTANTE
@@ -118,7 +118,7 @@ function createGroups($groupName, $userId)
    // ON RAJOUTE UN . DEVANT L'EXTENSION 
         $ext = "." . $ext; 
     // ON MET LA PHOTO DANS UN DOSSIER IMG
-        $path = "./img/groups/" . $groupName . $ext;
+        $path = "../img/groups/" . $groupName . $ext;
         move_uploaded_file($_FILES['photo']['tmp_name'], $path);
         $groupPhoto = $groupName . $ext;
     // SI L'UTILISATEUR N'A PAS CHOISI DE PHOTO DE PROFIL, ON LUI EN ATTRIBUT UNE DEJA EXISTANTE

@@ -32,7 +32,7 @@ function validateProfile($lastname, $name, $email, $pass, $confirmPass, $phone, 
 			// ON RAJOUTE UN . DEVANT L'EXTENSION 
             $ext = "." . $ext; 
 			// ON MET LA PHOTO DANS UN DOSSIER IMG
-            $path = "./img/profile/" . $email . $ext;
+            $path = "../img/profile/" . $email . $ext;
             move_uploaded_file($_FILES['photo']['tmp_name'], $path);
             $profilePhoto = $email . $ext;
         }
@@ -55,7 +55,7 @@ function updateGroup($groupName,$newAdmin, $lastAdmin, $groupId)
         // ON RAJOUTE UN . DEVANT L'EXTENSION 
         $ext = "." . $ext; 
         // ON MET LA PHOTO DANS UN DOSSIER IMG
-        $path = "./img/groups/" . $groupName . $ext;
+        $path = "../img/groups/" . $groupName . $ext;
         move_uploaded_file($_FILES['photo']['tmp_name'], $path);
         $groupPhoto = $groupName . $ext;
 

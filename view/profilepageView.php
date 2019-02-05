@@ -8,7 +8,7 @@ ob_start();
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <div class="h5"><img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                        <div class="h5"><img class="rounded-circle" width="45" src="../img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
 						<?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                         <div class="h7">
                             <?= $profile['job'] . ' chez ' . $profile['company'] ?>
@@ -27,12 +27,12 @@ ob_start();
 
                          <form action="index.php?action=removeContact" method="POST">
                             <input type="hidden" name="contactId" value="<?=$profile['id']?>">
-                            <button type="submit" class="btn btn-link" ><img src="./img/icon/unfriend.png"></button>
+                            <button type="submit" class="btn btn-link" ><img src="../img/icon/unfriend.png"></button>
                          </form>
                             <?php elseif($pass == 1): ?>
                         <form action="index.php?action=addContact" method="POST" >
                             <input type="hidden" name="contactId" value="<?=$profile['id']?>">
-                            <button type="submit" class="btn btn-link" ><img src="./img/icon/users.png"></button>
+                            <button type="submit" class="btn btn-link" ><img src="../img/icon/users.png"></button>
                         </form>
                         <?php endif; ?>
                         </li>
@@ -56,7 +56,7 @@ ob_start();
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="./img/profile/<?= $postsFetch['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                                    <img class="rounded-circle" width="45" src="../img/profile/<?= $postsFetch['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                                     </div>
                                     <div class="ml-2">
                                         <div class="h5 m-0"><?= $postsFetch['name'] . ' ' . $postsFetch['lastName'] ?></div>
@@ -77,7 +77,7 @@ ob_start();
                                             <div class="row justify-content-center">
                                                 <div>
                                                     <div class="col-md-12">
-                                                    <img  width="100%" src="./img/posts/<?= $postsFetch['content'] ?>" alt="photo">
+                                                    <img  width="100%" src="../img/posts/<?= $postsFetch['content'] ?>" alt="photo">
                                                     </div>
                                                 </div>
                                             </div>

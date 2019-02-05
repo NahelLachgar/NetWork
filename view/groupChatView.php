@@ -11,7 +11,7 @@ if($_SESSION['state']=='activated') {
 	<div id="sidepanel">
 		<div id="profile">
 			<div class="wrap">
-				<img id="profile-img" src="./img/profile/<?= $userProfile['photo'] ?>" class="online rounded-circle" width="45" alt="" />
+				<img id="profile-img" src="../img/profile/<?= $userProfile['photo'] ?>" class="online rounded-circle" width="45" alt="" />
 				<p><?= $userProfile['name'] . ' ' . $userProfile['lastName'] ?></p>
 			</div>
 		</div>
@@ -27,7 +27,7 @@ if($_SESSION['state']=='activated') {
 				<li class="contact">
 					<div class="wrap">
 						<span class="contact-status online"></span>
-						<img class="rounded-circle" width="45"src="./img/profile/<?= $contactProfile[$i]['photo'] ?>" alt="" />
+						<img class="rounded-circle" width="45"src="../img/profile/<?= $contactProfile[$i]['photo'] ?>" alt="" />
 						<div class="meta">
 <?php
 $stateSearch = checkActive($contactProfile[$i]['id']);
@@ -49,7 +49,7 @@ else {
 				<li class="contact">
 					<div class="wrap">
 						<span class="contact-status online"></span>
-						<img class="rounded-circle" width="45"src="./img/groups/<?= $groups[$i]['photo'] ?>" alt="" />
+						<img class="rounded-circle" width="45"src="../img/groups/<?= $groups[$i]['photo'] ?>" alt="" />
 						<div class="meta">
 						<p class="name"><?= $groups[$i]['title']?></p>
 						</div>
@@ -63,7 +63,7 @@ else {
 	</div>
 	<div class="content">
 		<div class="contact-profile">
-		<img class="rounded-circle" width="45"src="./img/profile/<?= $groupProfile['photo'] ?>" alt="" />
+		<img class="rounded-circle" width="45"src="../img/profile/<?= $groupProfile['photo'] ?>" alt="" />
 <?php
     echo "<p>".$groupProfile['title']."</p>";
 ?>
@@ -81,9 +81,9 @@ else {
 			?>
 				<li id="<?= $messagesFetch['messageId'] ?>" class=<?= $class ?>>
 				<?php if($messagesFetch['user']==$_SESSION['id']):?>
-					<img src="./img/profile/<?=$userProfile['photo']?>" alt="">
+					<img src="../img/profile/<?=$userProfile['photo']?>" alt="">
 				<?php else:?>
-				<img src="./img/profile/<?=$messagesFetch['photo']?>" alt="">
+				<img src="../img/profile/<?=$messagesFetch['photo']?>" alt="">
 				<?php endif?>
 				<?php if($messagesFetch['user']!==$_SESSION['id']):?>	
 					<p><strong style="color:#1e3799"><?=$messagesFetch['name'].' '.$messagesFetch['lastName'] ?></strong><br><?= $messagesFetch['message'] ?></p>

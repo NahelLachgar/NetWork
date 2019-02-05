@@ -14,7 +14,7 @@ ob_start();
             <div class="card">
                 <div class="card-body">
                     <div class="h5">
-                    <img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                    <img class="rounded-circle" width="45" src="../img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                     <?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                     <div class="h7">
                         <?= $profile['job'] . ' chez ' . $profile['company'] ?>
@@ -57,7 +57,7 @@ if($_SESSION['state']=='activated') {
 
                 <?php foreach ($adminGroup as $groupAdmin) : ?>
                     <div class="card" style="width: 10rem; margin-right: 5px;margin-bottom: 5px;">
-                        <img class="card-img-top border-bottom" src="./img/groups/<?= $groupAdmin['photo'] ?>" alt="Card image cap">
+                        <img class="card-img-top border-bottom" src="../img/groups/<?= $groupAdmin['photo'] ?>" alt="Card image cap">
                         <div class="card-body">
                             <h6 class="card-title text-center"><?= $groupAdmin['title'] ?></h6>
                             <form method="POST" action="index.php?action=groupsManage">
@@ -74,7 +74,7 @@ if($_SESSION['state']=='activated') {
             foreach ($groups as $group) : ?>
 
                 <div class="card" style="width: 10rem; margin-right: 5px;margin-bottom: 5px;">
-                <img class="card-img-top border-bottom" src="./img/groups/<?= $group['photo'] ?>" alt="Photo du groupe">
+                <img class="card-img-top border-bottom" src="../img/groups/<?= $group['photo'] ?>" alt="Photo du groupe">
                     <div class="card-body">
                         <h6 class="card-title text-center"><?= $group['title'] ?></h6>
                         <form method="POST" action="index.php?action=getGroupId">
@@ -92,7 +92,7 @@ if($_SESSION['state']=='activated') {
                     
                 foreach ($groups as $group) : ?>
                     <div class="card" style="width: 10rem; margin-right: 5px;margin-bottom: 5px;">
-                    <img class="card-img-top border-bottom" src="./img/groups/<?= $group['photo'] ?>" alt="Card image cap">
+                    <img class="card-img-top border-bottom" src="../img/groups/<?= $group['photo'] ?>" alt="Card image cap">
                         <div class="card-body text-center">
                             <h6 class="card-title"><?= $group['title'] ?></h6>
                             <form method="POST" action="index.php?action=getGroupId">

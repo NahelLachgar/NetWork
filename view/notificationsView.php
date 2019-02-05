@@ -18,9 +18,9 @@ ob_start();
             foreach ($notifs as $notif) : ?>
 
             <div class="card gedf-card">
-                <a href="index.php?action=deleteNotif&notifId=<?= $notif['id'] ?>"><div><img width=25 src="img/icon/cross.svg"></div></a>
+                <a href="index.php?action=deleteNotif&notifId=<?= $notif['id'] ?>"><div><img width=25 src="../img/icon/cross.svg"></div></a>
                         <div class="card-body">
-                            <h5 class="card-title"><img class="rounded-circle" width="45" src="./img/profile/<?= $notif['icon'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                            <h5 class="card-title"><img class="rounded-circle" width="45" src="../img/profile/<?= $notif['icon'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                             <?= $notif['content']?>
                             <?php if($notif['type']== "contactAdd"):?>
                             <br><br>

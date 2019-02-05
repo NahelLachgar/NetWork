@@ -17,7 +17,7 @@ else {
     echo "<div class='h5' style='color:#798081;'>";	
 }	
 ?>
-                        <img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                        <img class="rounded-circle" width="45" src="../img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                         <?= $profile['name']?></div>
                     </div>
                     <ul class="list-group list-group-flush">
@@ -108,11 +108,11 @@ else {
                                         <div class="d-flex justify-content-between align-items-center">
                                             <?php if ($contactsPosts[$i]['contactId'] !== $_SESSION['id']) : ?>
                                                 <div class="mr-2">
-                                                    <img class="rounded-circle" width="45px" src="./img/profile/<?= $contactsPosts[$i]['photo'] ?>" alt="photo de profil">
+                                                    <img class="rounded-circle" width="45px" src="../img/profile/<?= $contactsPosts[$i]['photo'] ?>" alt="photo de profil">
                                                 </div>
                                             <?php else : ?>
                                                 <div class="mr-2">
-                                                    <img class="rounded-circle" width="45px" src="./img/profile/<?= $profile['photo'] ?>" alt="photo de profil">
+                                                    <img class="rounded-circle" width="45px" src="../img/profile/<?= $profile['photo'] ?>" alt="photo de profil">
                                                 </div>
                                             <?php endif ?>
                                             <div class="ml-2"> 
@@ -141,7 +141,7 @@ else {
                                             <div class="row justify-content-center">
                                                 <div>
                                                     <div class="col-md-12">
-                                                    <img  width="100%" src="./img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo">
+                                                    <img  width="100%" src="../img/posts/<?= $contactsPosts[$i]['content'] ?>" alt="photo">
                                                     </div>
                                                 </div>
                                             </div>
@@ -160,12 +160,12 @@ else {
                                     <form action="index.php?action=deleteCom" method="POST">
                                         <button type="submit" class="btn btn-link">
                                         <input type="hidden" name="comId" value="<?= $comments[$j]['id']?>">
-                                            <span><img width=15 src="img/icon/cross.svg"></span>
+                                            <span><img width=15 src="../img/icon/cross.svg"></span>
                                         </button>
                                     </form>
                                     <?php endif?>
                                         <li style="list-style:none"> 
-                                            <img class="rounded-circle" width="45px" src="./img/profile/<?=$comments[$j]['photo'] ?>" alt="photo de profil">&nbsp <?=$comments[$j]['name']. ' '.$comments[$j]['lastName']?>
+                                            <img class="rounded-circle" width="45px" src="../img/profile/<?=$comments[$j]['photo'] ?>" alt="photo de profil">&nbsp <?=$comments[$j]['name']. ' '.$comments[$j]['lastName']?>
                                             <span class="h6 m-0"></span>
                                             <li class="list-group-item"><?= $comments[$j]['content'] ?></li>
                                         </li>                      

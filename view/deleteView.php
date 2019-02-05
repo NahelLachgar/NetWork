@@ -17,7 +17,7 @@ else if($_SESSION['state']=='disabled') {
     echo "<div class='h5' style='color:#798081;'>";
 }
 ?>
-                    <img class="rounded-circle" width="45"src="./img/profile/<?= $profile['photo'] ?>" alt="" />&nbsp&nbsp&nbsp
+                    <img class="rounded-circle" width="45"src="../img/profile/<?= $profile['photo'] ?>" alt="" />&nbsp&nbsp&nbsp
                     <?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                     <div class="h7">
                         <?php if ($profile['status']=="employee"):?>

@@ -14,7 +14,7 @@ ob_start();
             <div class="card">
                 <div class="card-body">
                     <div class="h5">
-                    <img class="rounded-circle" width="45" src="./img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
+                    <img class="rounded-circle" width="45" src="../img/profile/<?= $profile['photo'] ?>" alt="Photo de profil">&nbsp&nbsp&nbsp
                     <?= $profile['name'] . ' ' . $profile['lastName'] ?></div>
                     <div class="h7">
                         <?= $profile['job'] . ' chez ' . $profile['company'] ?>
