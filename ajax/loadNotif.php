@@ -13,9 +13,11 @@ while($data = $req->fetch())
     $url = $data['url'];
     $content = $data['content'];
     $icon = "../img/profile/".$data['icon'];
-$seen = $db->prepare('UPDATE notifications SET `status` = "seen" WHERE id = ?');
-$seen->execute(array($data['id']));
-echo(json_encode(array("url"=>$url,"content"=>$content,"icon"=>$icon)));
-}
+    $seen = $db->prepare('UPDATE notifications SET `status` = "seen" WHERE id = ?');
+    $seen->execute(array($data['id']));
+    if ($data['content'] && !empty($data['content'])) {
+        echo(json_encode(array("url"=>$url,"content"=>$content,"icon"=>$icon)));
+    }
+}  
 
 ?>

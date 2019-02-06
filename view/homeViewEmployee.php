@@ -163,9 +163,9 @@ else {
                                     </div>
                                 </div> <!-- CARD BODY -->
                                 <!-- commentaires-->
+                                <div class="card-footer">
                                <?php for($j=0;$j<count($comments);$j++) :
                                         if ($comments[$j]['postId'] == $contactsPosts[$i]['id']):?>
-                                <div class="card-footer">
                                 <p>
                                     <ul style="display:inline" class="list-group list-group-flush">
                                     <?php if ($comments[$j]['user'] == $_SESSION['id']|| $contactsPosts[$i]['contactId'] == $_SESSION['id']):?>
@@ -178,16 +178,15 @@ else {
                                         <li style="list-style:none"> 
                                             <img class="rounded-circle" width="45px" src="../img/profile/<?=$comments[$j]['photo'] ?>" alt="photo de profil">&nbsp 
                                             <a href=""><?=$comments[$j]['name']. ' '.$comments[$j]['lastName']?></a>
-                                            <span class="h6 m-0"></span>
-                                         <?= $comments[$j]['content'] ?>
+                                         <span class="coms"><?= $comments[$j]['content'] ?></span>
                                         </li>                      
                                 </ul>
                                 </p>
-                                </div>
                                 <?php 
                                     endif;
                                     endfor;
                                 ?>
+                                </div>
                                 <!-- -->
                                     <div class="input-group">
                                         <input type="text" name="comment" placeholder="Écrivez un commentaire" class="comment form-control"  aria-describedby="button-addon2">
@@ -221,6 +220,10 @@ else {
 ?>
 
     </div>
+    <script type="text/javascript" src="https://unpkg.com/onscreen/dist/on-screen.umd.min.js"></script>
+    <script type="text/javascript">
+        var os = new OnScreen();
+    </script>
     <script>
     $(document).ready(function(){
         $(".deleteCom").click(function(e){
@@ -255,10 +258,17 @@ else {
                 $.ajax({
                     url : "index.php?action=comment", // on donne l'URL du fichier de traitement
                     type : "POST", // la requête est de type POST
-                    data : "postId=" + postId + "&comment=" + comment // et on envoie nos données
+                    data : "postId=" + postId + "&comment=" + comment, // et on envoie nos données
+                    dataType : "html",
+                    success : function(html){
+                        $("#51 .card-footer").append(html);
+                    }
                     });
                     $(this).parents('div').siblings('.comment').val("");
                 }
+
+
+
     });
 });
     </script>

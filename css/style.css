@@ -763,6 +763,15 @@ cp-pen-styles > body {
   max-width: 500px;
   line-height: 130%;
 }
+
+.coms {
+  background-color: white;
+  padding: 10px 15px;
+  border-radius: 20px; 
+  color: #2c3e50;
+  word-wrap: break-word;
+  display: inline-block;
+}
 @media screen and (min-width: 735px) {
   #frame .content .messages ul li p {
     max-width: 500px;
