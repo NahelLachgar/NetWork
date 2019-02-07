@@ -29,20 +29,20 @@ function comment($content, $userId, $postId)
     $insertComment->execute(array($postId));
     $profile = getProfile($_SESSION['id']);
      echo '<p>
-                                    <ul style="display:inline" class="list-group list-group-flush">
-                                    <input type="hidden" class="comId" name="comId" value="'. $comId.'">
+         <ul style="display:inline" class="list-group list-group-flush">
+       
+         <input type="hidden" class="comId" name="comId" value="'.$comId.'">
 
-                                        <button type="submit" class="deleteCom btn btn-link">
-                                            <span><img width=15 src="../img/icon/cross.svg"></span>
-                                        </button>
-                                        <li style="list-style:none"> 
-                                            <img class="rounded-circle" width="45px" src="../img/profile/'.$profile['photo'].'" alt="photo de profil">&nbsp 
-                                            <a href=""><'.$profile['name']. ' '.$profile['lastName'].'</a>
-                                            <span class="h6 m-0"></span>
-                                         '.$_POST['comment'] .'
-                                        </li>                      
-                                </ul>
-                                </p>';
+             <button type="submit" class="deleteCom btn btn-link">
+                 <span><img width=15 src="../img/icon/cross.svg"></span>
+             </button>
+             <li style="list-style:none"> 
+                 <img class="rounded-circle" width="45px" src="../img/profile/'.$profile['photo'].'" alt="photo de profil">&nbsp 
+                 <a href="">'.$profile['name']. ' '.$profile['lastName'].'</a>
+              <span class="coms">'.$_POST['comment'].'</span>
+             </li>                      
+     </ul>
+     </p>';
 }
 
 // AJOUTER L'UTILISATEUR DANS LA BDD
